@@ -29,6 +29,8 @@ class DanBooruPost {
         return true;
       case 'webm':
         return true;
+      case 'zip':
+        return true;
       default:
         return false;
     }
