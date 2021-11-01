@@ -1,7 +1,6 @@
 import 'dart:async';
 
-import 'package:booru_pocket_flutter/models/danbooru/danbooru_post.dart';
-import 'package:booru_pocket_flutter/models/shared/post.dart';
+import 'package:booru_pocket_flutter/models/api/post.dart';
 import 'package:dio/dio.dart';
 
 class DanbooruRespository {
@@ -19,6 +18,6 @@ class DanbooruRespository {
     // var json = jsonDecode(response.data);
     return List<Post>.from(response.data
         .where(((element) => element['id'] != null))
-        .map((element) => DanBooruPost.fromJson(element)));
+        .map((element) => Post.fromJson(element)));
   }
 }
