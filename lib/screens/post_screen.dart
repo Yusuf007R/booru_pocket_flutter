@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:booru_pocket_flutter/blocs/gallery_grid_bloc/gallery_grid_bloc.dart';
 import 'package:booru_pocket_flutter/widgets/gallery_grid.dart';
-import 'package:booru_pocket_flutter/widgets/home_nav_bar.dart';
+import 'package:booru_pocket_flutter/widgets/post_screen_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -43,10 +43,12 @@ class _PostScreenState extends State<PostScreen> {
               edgeOffset: 30,
               onRefresh: onRefresh,
               child: CustomScrollView(
+                keyboardDismissBehavior:
+                    ScrollViewKeyboardDismissBehavior.onDrag,
                 controller: _scrollController,
                 physics: const BouncingScrollPhysics(),
                 slivers: [
-                  const HomeNavBar(),
+                  const PostScreenNavBar(),
                   GalleryGrid(posts: state.posts),
                 ],
               ),
@@ -58,6 +60,7 @@ class _PostScreenState extends State<PostScreen> {
   }
 
   void onScroll() {
+    if (!_scrollController.hasClients) return;
     final ScrollPosition position = _scrollController.position;
     if (position.userScrollDirection == ScrollDirection.reverse &&
         floatingButtonVisibility) {
