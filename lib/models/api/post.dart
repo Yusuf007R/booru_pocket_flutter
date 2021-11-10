@@ -1,4 +1,6 @@
-class Post {
+import 'package:equatable/equatable.dart';
+
+class Post extends Equatable {
   final int id;
   final List<String> tags;
   final String artistTag;
@@ -16,7 +18,7 @@ class Post {
   final DateTime updatedAt;
   final String? video;
 
-  Post(
+  const Post(
       {required this.id,
       required this.tags,
       required this.artistTag,
@@ -70,7 +72,22 @@ class Post {
   }
 
   @override
-  String toString() {
-    return "($id,$lowQuality,$highQuality, $isVideo)";
-  }
+  List<Object?> get props => [
+        id,
+        tags,
+        artistTag,
+        rating,
+        source,
+        maxQuality,
+        highQuality,
+        lowQuality,
+        isVideo,
+        imageWidth,
+        imageHeight,
+        score,
+        favoriteCount,
+        createdAt,
+        updatedAt,
+        video
+      ];
 }

@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:booru_pocket_flutter/blocs/post_screen_nav_bar/post_screen_nav_bar_bloc.dart';
 import 'package:booru_pocket_flutter/models/api/autocomplete.dart';
+import 'package:booru_pocket_flutter/router/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -27,11 +29,12 @@ class _PostScreenNavBarState extends State<PostScreenNavBar> {
   @override
   void dispose() {
     _focusNode
-      ..dispose()
-      ..removeListener(_focusListener);
+      ..removeListener(_focusListener)
+      ..dispose();
     _textController
-      ..dispose()
-      ..removeListener(_onTextChange);
+      ..removeListener(_onTextChange)
+      ..dispose();
+
     super.dispose();
   }
 
@@ -70,31 +73,28 @@ class _PostScreenNavBarState extends State<PostScreenNavBar> {
         child: Stack(
           fit: StackFit.expand,
           children: [
-            AutoCompleteTextField(
-              focus: _focusNode,
-              controller: _textController,
-            ),
+            SearchInput(focusNode: _focusNode, textController: _textController),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Padding(
+                Padding(
                   child: InkWell(
-                    child: Icon(
+                    onTap: () {
+                      AutoRouter.of(context).push(
+                        const PostRoute(),
+                      );
+                    },
+                    child: const Icon(
                       Icons.menu,
                       size: 28,
                     ),
                   ),
-                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                 ),
                 Padding(
                   child: GestureDetector(
                     onTap: () {
                       Feedback.forTap(context);
-                      if (_textController.text.isNotEmpty) {
-                        _textController.clear();
-                        return;
-                      }
-                      _focusNode.unfocus();
                     },
                     child: AnimatedRotation(
                       turns: isFieldFocused ? (1.0 / 8.0) : 1.0,
@@ -129,18 +129,88 @@ class _PostScreenNavBarState extends State<PostScreenNavBar> {
   }
 }
 
-class AutoCompleteTextField extends StatelessWidget {
-  const AutoCompleteTextField({
-    Key? key,
-    required this.focus,
-    required this.controller,
-  }) : super(key: key);
+class SearchInput extends StatefulWidget {
+  const SearchInput(
+      {Key? key, required this.textController, required this.focusNode})
+      : super(key: key);
+  final FocusNode focusNode;
+  final TextEditingController textController;
 
-  final TextEditingController controller;
-  final FocusNode focus;
+  @override
+  _SearchInputState createState() => _SearchInputState();
+}
+
+class _SearchInputState extends State<SearchInput> {
+  late final OverlayEntry _overlayEntry;
+  final GlobalKey _widgetKey = GlobalKey();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance?.addPostFrameCallback((_) async {
+      _overlayEntry = _createOverlayEntry();
+    });
+    widget.focusNode.addListener(() {
+      if (widget.focusNode.hasFocus && !_overlayEntry.mounted) {
+        Overlay.of(context)?.insert(_overlayEntry);
+      } else {
+        _overlayEntry.remove();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _overlayEntry
+      ..remove()
+      ..dispose();
+  }
+
+  OverlayEntry _createOverlayEntry() {
+    final RenderBox renderBox =
+        _widgetKey.currentContext?.findRenderObject() as RenderBox;
+    var size = renderBox.size;
+    var offset = renderBox.localToGlobal(Offset.zero);
+
+    return OverlayEntry(
+        builder: (context) =>
+            BlocBuilder<PostScreenNavBarBloc, PostScreenNavBarState>(
+              builder: (context, state) {
+                return Positioned(
+                  left: offset.dx,
+                  top: offset.dy + size.height,
+                  width: size.width,
+                  child: Material(
+                    color: Colors.grey.shade300,
+                    borderRadius: BorderRadius.circular(10),
+                    child: MediaQuery.removePadding(
+                      context: context,
+                      removeTop: true,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: state.autoCompletes.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          final AutoComplete option =
+                              state.autoCompletes.elementAt(index);
+                          return ListTile(
+                            enableFeedback: true,
+                            onTap: () => onOptionTap(option),
+                            title: Text(
+                              option.value,
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ));
+  }
 
   void onOptionTap(AutoComplete option) {
-    final String prev = controller.text;
+    final String prev = widget.textController.text;
     int lastIndex = prev.lastIndexOf(' ');
     String newText;
     if (lastIndex > 1) {
@@ -148,70 +218,29 @@ class AutoCompleteTextField extends StatelessWidget {
     } else {
       newText = '${option.value} ';
     }
-    controller.value = controller.value.copyWith(
+    widget.textController.value = widget.textController.value.copyWith(
       text: newText,
       selection: TextSelection(
-          baseOffset: newText.length, extentOffset: newText.length),
+        baseOffset: newText.length,
+        extentOffset: newText.length,
+      ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocSelector<PostScreenNavBarBloc, PostScreenNavBarState,
-        List<AutoComplete>>(
-      selector: (state) => state.autoCompletes,
-      builder: (context, state) {
-        return RawAutocomplete<AutoComplete>(
-          textEditingController: controller,
-          focusNode: focus,
-          fieldViewBuilder:
-              (context, textEditingController, focusNode, onFieldSubmitted) =>
-                  TextField(
-            controller: textEditingController,
-            focusNode: focusNode,
-            onSubmitted: (_) {
-              context.read<PostScreenNavBarBloc>().add(TextFieldSubmited());
-            },
-            decoration: const InputDecoration(
-              enabledBorder: InputBorder.none,
-              focusedBorder: InputBorder.none,
-              contentPadding: EdgeInsets.symmetric(horizontal: 40),
-            ),
-          ),
-          optionsBuilder: (_) => state,
-          optionsViewBuilder: (context, _, __) {
-            return Align(
-              key: ValueKey(state),
-              alignment: Alignment.topLeft,
-              child: Material(
-                color: Colors.grey.shade300,
-                borderRadius: BorderRadius.circular(10),
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.95,
-                  child: MediaQuery.removePadding(
-                    context: context,
-                    removeTop: true,
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: state.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        final AutoComplete option = state.elementAt(index);
-                        return ListTile(
-                          enableFeedback: true,
-                          onTap: () => onOptionTap(option),
-                          title: Text(
-                            option.value,
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                ),
-              ),
-            );
-          },
-        );
+    return TextFormField(
+      key: _widgetKey,
+      controller: widget.textController,
+      focusNode: widget.focusNode,
+      onFieldSubmitted: (_) {
+        context.read<PostScreenNavBarBloc>().add(TextFieldSubmited());
       },
+      decoration: const InputDecoration(
+        enabledBorder: InputBorder.none,
+        focusedBorder: InputBorder.none,
+        contentPadding: EdgeInsets.symmetric(horizontal: 40),
+      ),
     );
   }
 }

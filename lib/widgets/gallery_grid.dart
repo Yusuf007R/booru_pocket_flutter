@@ -4,26 +4,24 @@ import 'package:flutter/material.dart';
 import 'package:waterfall_flow/waterfall_flow.dart';
 
 class GalleryGrid extends StatelessWidget {
-  const GalleryGrid({
-    Key? key,
-    required this.posts,
-  }) : super(key: key);
+  const GalleryGrid({Key? key, required this.posts}) : super(key: key);
 
-  final List<Post> posts;
   final int columns = 2;
+  final List<Post> posts;
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width / columns;
     return SliverWaterfallFlow(
       gridDelegate: SliverWaterfallFlowDelegateWithFixedCrossAxisCount(
-        mainAxisSpacing: 4.0,
-        crossAxisSpacing: 4.0,
         crossAxisCount: columns,
       ),
       delegate: SliverChildBuilderDelegate(
         (context, index) {
-          return GalleryGridItem(width: width, post: posts[index]);
+          return GalleryGridItem(
+            width: width,
+            index: index,
+          );
         },
         childCount: posts.length,
         addAutomaticKeepAlives: false,
@@ -31,8 +29,6 @@ class GalleryGrid extends StatelessWidget {
     );
   }
 }
-
-
 
 // class GalleryGrid extends StatelessWidget {
 //   const GalleryGrid({
@@ -55,6 +51,7 @@ class GalleryGrid extends StatelessWidget {
 //       itemCount: posts.length,
 //       itemBuilder: (context, index) {
 //         return GalleryGridItem(
+//           index: index,
 //           width: width,
 //           post: posts[index],
 //         );

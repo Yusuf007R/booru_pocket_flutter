@@ -19,13 +19,15 @@ class _PostScreenState extends State<PostScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<GalleryGridBlocBloc>().add(PostsFetched());
+    context.read<GalleryGridBloc>().add(PostsFetched());
     _scrollController.addListener(onScroll);
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<GalleryGridBlocBloc, GalleryGridBlocState>(
+    return BlocBuilder<GalleryGridBloc, GalleryGridState>(
+      buildWhen: (previous, current) =>
+          previous.posts.length != current.posts.length,
       builder: (context, state) {
         return Scaffold(
           floatingActionButton: floatingButtonVisibility
@@ -49,7 +51,9 @@ class _PostScreenState extends State<PostScreen> {
                 physics: const BouncingScrollPhysics(),
                 slivers: [
                   const PostScreenNavBar(),
-                  GalleryGrid(posts: state.posts),
+                  GalleryGrid(
+                    posts: state.posts,
+                  ),
                 ],
               ),
             ),
@@ -80,12 +84,12 @@ class _PostScreenState extends State<PostScreen> {
         position.extentBefore != 0 || position.extentAfter != 0;
 
     if (!isScreenFilled || (isNotAtStart && isAtOrNearEdge)) {
-      context.read<GalleryGridBlocBloc>().add(PostsFetched());
+      context.read<GalleryGridBloc>().add(PostsFetched());
     }
   }
 
-  Future<GalleryGridBlocState> onRefresh() {
-    GalleryGridBlocBloc bloc = context.read<GalleryGridBlocBloc>();
+  Future<GalleryGridState> onRefresh() {
+    GalleryGridBloc bloc = context.read<GalleryGridBloc>();
     bloc.add(PostsRefreshed());
     return bloc.stream.firstWhere((element) => !element.refreshing);
   }
