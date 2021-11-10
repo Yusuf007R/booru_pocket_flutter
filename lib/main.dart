@@ -1,36 +1,32 @@
-import 'package:booru_pocket_flutter/blocs/gallery_grid_bloc/gallery_grid_bloc.dart';
-import 'package:booru_pocket_flutter/blocs/post_screen_nav_bar/post_screen_nav_bar_bloc.dart';
-import 'package:booru_pocket_flutter/repositories/danbooru.dart';
-import 'package:booru_pocket_flutter/screens/post_screen.dart';
+import 'package:booru_pocket_flutter/router/router.gr.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
+class Person extends Equatable {
+  const Person(this.name);
+
+  final String name;
+
+  @override
+  List<Object> get props => [name];
+}
 
 void main() {
-  runApp(const MyApp());
+  EquatableConfig.stringify = true;
+  runApp(
+    MyApp(),
+  );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
 
+  final _appRouter = AppRouter();
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: RepositoryProvider(
-      create: (context) => DanbooruRespository(),
-      child: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (context) => GalleryGridBlocBloc(
-                repository:
-                    RepositoryProvider.of<DanbooruRespository>(context)),
-          ),
-          BlocProvider(
-            create: (context) => PostScreenNavBarBloc(
-                galleryGridBloc: BlocProvider.of<GalleryGridBlocBloc>(context)),
-          ),
-        ],
-        child: const PostScreen(),
-      ),
-    ));
+    return MaterialApp.router(
+      routerDelegate: _appRouter.delegate(),
+      routeInformationParser: _appRouter.defaultRouteParser(),
+    );
   }
 }

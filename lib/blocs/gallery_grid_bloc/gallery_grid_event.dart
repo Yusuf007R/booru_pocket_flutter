@@ -1,13 +1,18 @@
 part of 'gallery_grid_bloc.dart';
 
 @immutable
-abstract class GalleryGridBlocEvent {}
+abstract class GalleryGridEvent {}
 
-class PostsFetched extends GalleryGridBlocEvent {}
+class PostsFetched extends GalleryGridEvent {}
 
-class PostsRefreshed extends GalleryGridBlocEvent {}
+class PostsRefreshed extends GalleryGridEvent {}
 
-class TagsUpdated extends GalleryGridBlocEvent {
-  final String tags;
-  TagsUpdated({required this.tags});
+class GalleryTypeChanged extends GalleryGridEvent {
+  final GalleryType queryType;
+  GalleryTypeChanged({required this.queryType});
+}
+
+class ParamsUpdated extends GalleryGridEvent {
+  final QueryParams params;
+  ParamsUpdated({required this.params});
 }

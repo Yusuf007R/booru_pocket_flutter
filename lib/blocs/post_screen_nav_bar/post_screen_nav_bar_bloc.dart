@@ -12,9 +12,13 @@ part 'post_screen_nav_bar_state.dart';
 
 class PostScreenNavBarBloc
     extends Bloc<PostScreenNavBarEvent, PostScreenNavBarState> {
-  final GalleryGridBlocBloc galleryGridBloc;
-  PostScreenNavBarBloc({required this.galleryGridBloc})
+  final GalleryGridBloc galleryGridBloc;
+  final DanbooruRepository repository;
+
+  PostScreenNavBarBloc(
+      {required this.galleryGridBloc, required this.repository})
       : super(PostScreenNavBarState(textFieldValue: '')) {
+    galleryGridBloc.add(GalleryTypeChanged(queryType: GalleryType.post));
     on<AutocompleteFetched>((event, emit) async {
       final String query = event.query;
       String queryCopy = query;
@@ -23,7 +27,8 @@ class PostScreenNavBarBloc
         queryCopy = queryCopy.substring(firstIndex, queryCopy.length).trim();
       }
       List<AutoComplete> autoCompletes =
-          await state.respository.getAutoComplete(queryCopy);
+          await repository.getAutoComplete(queryCopy);
+
       emit(state.copyWith(autoCompletes: autoCompletes));
     });
     on<AutocompletesCleared>((event, emit) {
@@ -48,7 +53,9 @@ class PostScreenNavBarBloc
       }
       final String nextFieldValue = transition.nextState.textFieldValue;
       add(AutocompleteFetched(query: nextFieldValue));
-      galleryGridBloc.add(TagsUpdated(tags: nextFieldValue));
+      galleryGridBloc.add(ParamsUpdated(
+          params:
+              galleryGridBloc.state.params.copyWith(postTags: nextFieldValue)));
     }
   }
 
