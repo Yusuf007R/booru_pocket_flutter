@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:booru_pocket_flutter/blocs/gallery_grid_bloc/gallery_grid_bloc.dart';
 import 'package:booru_pocket_flutter/models/api/autocomplete.dart';
 import 'package:booru_pocket_flutter/repositories/danbooru.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
 
@@ -35,7 +36,6 @@ class PostScreenNavBarBloc
       emit(state.copyWith(autoCompletes: []));
     });
     on<TextFieldUpdated>((event, emit) {
-      if (state.textFieldValue == event.value) return;
       emit(state.copyWith(textFieldValue: event.value));
     });
     on<TextFieldSubmited>((event, emit) {
@@ -47,16 +47,17 @@ class PostScreenNavBarBloc
   void onTransition(
       Transition<PostScreenNavBarEvent, PostScreenNavBarState> transition) {
     super.onTransition(transition);
-    if (transition.event is TextFieldUpdated) {
-      if (transition.currentState.textFieldValue.isEmpty) {
-        return add(AutocompletesCleared());
-      }
-      final String nextFieldValue = transition.nextState.textFieldValue;
-      add(AutocompleteFetched(query: nextFieldValue));
-      galleryGridBloc.add(ParamsUpdated(
-          params:
-              galleryGridBloc.state.params.copyWith(postTags: nextFieldValue)));
+    if (transition.event is! TextFieldUpdated) return;
+    if (transition.currentState.textFieldValue.isEmpty) {
+      return add(AutocompletesCleared());
     }
+    final String nextFieldValue = transition.nextState.textFieldValue;
+    add(AutocompleteFetched(query: nextFieldValue));
+    galleryGridBloc.add(
+      ParamsUpdated(
+        params: galleryGridBloc.state.params.copyWith(postTags: nextFieldValue),
+      ),
+    );
   }
 
   @override

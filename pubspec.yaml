@@ -42,7 +42,6 @@ dependencies:
   photo_view: ^0.13.0
   auto_route: ^3.0.4
   equatable: ^2.0.0
-  uuid: ^3.0.5
 
 
 
