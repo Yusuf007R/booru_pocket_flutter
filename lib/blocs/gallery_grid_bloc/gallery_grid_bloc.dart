@@ -6,7 +6,6 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:uuid/uuid.dart';
 
 part 'gallery_grid_event.dart';
 part 'gallery_grid_state.dart';
@@ -14,7 +13,7 @@ part 'gallery_grid_state.dart';
 class GalleryGridBloc extends Bloc<GalleryGridEvent, GalleryGridState> {
   final DanbooruRepository repository;
   GalleryGridBloc({required this.repository})
-      : super(GalleryGridState(uniqueKey: const Uuid().v4())) {
+      : super(GalleryGridState(uniqueKey: UniqueKey().toString())) {
     on<PostsFetched>((event, emit) async {
       if (state.loading) return;
       emit(state.copyWith(loading: true));
@@ -54,6 +53,10 @@ class GalleryGridBloc extends Bloc<GalleryGridEvent, GalleryGridState> {
 
     on<GalleryTypeChanged>((event, emit) {
       emit(state.copyWith(queryType: event.queryType));
+    });
+
+    on<CurrentDetailIndexChanged>((event, emit) {
+      emit(state.copyWith(currentDetailIndex: event.currentDetailIndex));
     });
   }
 }

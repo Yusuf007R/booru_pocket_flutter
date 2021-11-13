@@ -10,6 +10,7 @@ class QueryParams extends Equatable {
   final String? recommendTags;
   final String? recommendPost;
   final String? recommendUser;
+  
 
   const QueryParams({
     this.page = 1,

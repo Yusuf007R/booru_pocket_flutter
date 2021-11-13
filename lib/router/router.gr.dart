@@ -40,8 +40,7 @@ class AppRouter extends _i6.RootStackRouter {
       final args = routeData.argsAs<PostDetailRouteArgs>();
       return _i6.CustomPage<dynamic>(
           routeData: routeData,
-          child: _i4.PostDetailScreen(
-              key: args.key, bloc: args.bloc, initialIndex: args.initialIndex),
+          child: _i4.PostDetailScreen(key: args.key, bloc: args.bloc),
           transitionsBuilder: _i6.TransitionsBuilders.fadeIn,
           opaque: true,
           barrierDismissible: false);
@@ -114,27 +113,20 @@ class PostRoute extends _i6.PageRouteInfo<void> {
 
 /// generated route for [_i4.PostDetailScreen]
 class PostDetailRoute extends _i6.PageRouteInfo<PostDetailRouteArgs> {
-  PostDetailRoute(
-      {_i7.Key? key,
-      required _i8.GalleryGridBloc bloc,
-      required int initialIndex})
+  PostDetailRoute({_i7.Key? key, required _i8.GalleryGridBloc bloc})
       : super(name,
             path: 'post-detail-screen',
-            args: PostDetailRouteArgs(
-                key: key, bloc: bloc, initialIndex: initialIndex));
+            args: PostDetailRouteArgs(key: key, bloc: bloc));
 
   static const String name = 'PostDetailRoute';
 }
 
 class PostDetailRouteArgs {
-  const PostDetailRouteArgs(
-      {this.key, required this.bloc, required this.initialIndex});
+  const PostDetailRouteArgs({this.key, required this.bloc});
 
   final _i7.Key? key;
 
   final _i8.GalleryGridBloc bloc;
-
-  final int initialIndex;
 }
 
 /// generated route for [_i3.PostRouteWrapper]

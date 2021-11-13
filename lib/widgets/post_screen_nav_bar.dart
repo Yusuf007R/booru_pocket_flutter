@@ -78,16 +78,13 @@ class _PostScreenNavBarState extends State<PostScreenNavBar> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  child: InkWell(
+                  child: GestureDetector(
                     onTap: () {
-                      AutoRouter.of(context).push(
-                        const PostRoute(),
-                      );
+                      Feedback.forTap(context);
+                      AutoRouter.of(context).push(const PostRoute());
                     },
-                    child: const Icon(
-                      Icons.menu,
-                      size: 28,
-                    ),
+                    child:
+                        const Icon(Icons.menu, size: 28, color: Colors.black),
                   ),
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                 ),
@@ -103,6 +100,7 @@ class _PostScreenNavBarState extends State<PostScreenNavBar> {
                       child: const Icon(
                         Icons.add,
                         size: 28,
+                        color: Colors.black,
                       ),
                     ),
                   ),
@@ -141,30 +139,34 @@ class SearchInput extends StatefulWidget {
 }
 
 class _SearchInputState extends State<SearchInput> {
-  late final OverlayEntry _overlayEntry;
+  OverlayEntry? _overlayEntry;
   final GlobalKey _widgetKey = GlobalKey();
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) async {
-      _overlayEntry = _createOverlayEntry();
-    });
-    widget.focusNode.addListener(() {
-      if (widget.focusNode.hasFocus && !_overlayEntry.mounted) {
-        Overlay.of(context)?.insert(_overlayEntry);
-      } else {
-        _overlayEntry.remove();
-      }
-    });
+    widget.focusNode.addListener(_focusListener);
   }
 
   @override
   void dispose() {
     super.dispose();
-    _overlayEntry
-      ..remove()
-      ..dispose();
+    widget.focusNode.removeListener(_focusListener);
+    if (_overlayEntry != null) {
+      _overlayEntry!.dispose();
+      if (_overlayEntry!.mounted) _overlayEntry!.remove();
+    }
+  }
+
+  void _focusListener() {
+    if (widget.focusNode.hasFocus) {
+      _overlayEntry ??= _createOverlayEntry();
+      Overlay.of(context)?.insert(_overlayEntry!);
+    } else {
+      if (_overlayEntry != null) {
+        if (_overlayEntry!.mounted) _overlayEntry!.remove();
+      }
+    }
   }
 
   OverlayEntry _createOverlayEntry() {
@@ -172,7 +174,6 @@ class _SearchInputState extends State<SearchInput> {
         _widgetKey.currentContext?.findRenderObject() as RenderBox;
     var size = renderBox.size;
     var offset = renderBox.localToGlobal(Offset.zero);
-
     return OverlayEntry(
         builder: (context) =>
             BlocBuilder<PostScreenNavBarBloc, PostScreenNavBarState>(
@@ -198,6 +199,9 @@ class _SearchInputState extends State<SearchInput> {
                             onTap: () => onOptionTap(option),
                             title: Text(
                               option.value,
+                              style: const TextStyle(
+                                color: Colors.black,
+                              ),
                             ),
                           );
                         },
@@ -236,6 +240,9 @@ class _SearchInputState extends State<SearchInput> {
       onFieldSubmitted: (_) {
         context.read<PostScreenNavBarBloc>().add(TextFieldSubmited());
       },
+      style: const TextStyle(
+        color: Colors.black,
+      ),
       decoration: const InputDecoration(
         enabledBorder: InputBorder.none,
         focusedBorder: InputBorder.none,

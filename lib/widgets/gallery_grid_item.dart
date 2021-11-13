@@ -43,19 +43,21 @@ class _GalleryGridItemState extends State<GalleryGridItem> {
               setState(() {
                 shouldClearMemory = false;
               });
+              GalleryGridBloc bloc = BlocProvider.of<GalleryGridBloc>(context);
+              bloc.add(
+                  CurrentDetailIndexChanged(currentDetailIndex: widget.index));
               AutoRouter.of(context).push(
                 PostDetailRoute(
-                  bloc: BlocProvider.of<GalleryGridBloc>(context),
-                  initialIndex: widget.index,
+                  bloc: bloc,
                 ),
               );
             },
             child: Hero(
               tag: "${state.uniqueKey}-${post.id}",
               child: Padding(
-                padding: const EdgeInsets.all(2.5),
+                padding: const EdgeInsets.all(5),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(10),
                   child: ExtendedImage.network(
                     post.highQuality,
                     fit: BoxFit.cover,

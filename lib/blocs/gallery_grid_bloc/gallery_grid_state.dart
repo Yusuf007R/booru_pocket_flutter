@@ -16,6 +16,7 @@ class GalleryGridState extends GalleryGridBaseState {
   final String uniqueKey;
   final GalleryType queryType;
   final QueryParams params;
+  final int currentDetailIndex;
 
   const GalleryGridState({
     this.posts = const [],
@@ -23,6 +24,7 @@ class GalleryGridState extends GalleryGridBaseState {
     this.loading = false,
     this.queryType = GalleryType.post,
     this.params = const QueryParams(),
+    this.currentDetailIndex = 1,
     required this.uniqueKey,
   });
 
@@ -34,17 +36,27 @@ class GalleryGridState extends GalleryGridBaseState {
       String? tags,
       GalleryType? queryType,
       QueryParams? params,
+      int? currentDetailIndex,
       String? uniqueKey}) {
     return GalleryGridState(
-        posts: posts ?? this.posts,
-        refreshing: refreshing ?? this.refreshing,
-        loading: loading ?? this.loading,
-        queryType: queryType ?? this.queryType,
-        params: params ?? this.params,
-        uniqueKey: uniqueKey ?? this.uniqueKey);
+      posts: posts ?? this.posts,
+      refreshing: refreshing ?? this.refreshing,
+      loading: loading ?? this.loading,
+      queryType: queryType ?? this.queryType,
+      params: params ?? this.params,
+      uniqueKey: uniqueKey ?? this.uniqueKey,
+      currentDetailIndex: currentDetailIndex ?? this.currentDetailIndex,
+    );
   }
 
   @override
-  List<Object> get props =>
-      [posts, loading, refreshing, uniqueKey, queryType, params];
+  List<Object> get props => [
+        posts,
+        loading,
+        refreshing,
+        uniqueKey,
+        queryType,
+        params,
+        currentDetailIndex
+      ];
 }
