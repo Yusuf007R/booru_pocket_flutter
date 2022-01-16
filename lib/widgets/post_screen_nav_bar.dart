@@ -1,10 +1,11 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:booru_pocket_flutter/blocs/post_screen_nav_bar/post_screen_nav_bar_bloc.dart';
-import 'package:booru_pocket_flutter/models/api/autocomplete.dart';
-import 'package:booru_pocket_flutter/router/router.gr.dart';
+import 'package:booru_pocket_flutter/blocs/post_screen_nav_bar/post_screen_nav_bar_cubit.dart';
+import 'package:booru_pocket_flutter/blocs/query_params_cubit/query_params_cubit.dart';
+import 'package:booru_pocket_flutter/models/api/autocomplete/autocomplete.dart';
+import 'package:booru_pocket_flutter/models/api/queryparams/queryparams.dart';
+
+import 'package:booru_pocket_flutter/widgets/nav_bar_skeleton.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/services.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PostScreenNavBar extends StatefulWidget {
@@ -16,13 +17,20 @@ class PostScreenNavBar extends StatefulWidget {
 
 class _PostScreenNavBarState extends State<PostScreenNavBar> {
   final FocusNode _focusNode = FocusNode();
-  final TextEditingController _textController = TextEditingController();
+  late final TextEditingController _textController;
   bool isFieldFocused = false;
 
   @override
   void initState() {
-    _focusNode.addListener(_focusListener);
-    _textController.addListener(_onTextChange);
+    var params = context.read<QueryParamsCubit>().state.queryParams;
+    if (params is PostParams) {
+      _textController = TextEditingController(
+        text: params.tags,
+      );
+      _focusNode.addListener(_focusListener);
+      _textController.addListener(_onTextChange);
+    }
+
     super.initState();
   }
 
@@ -62,67 +70,46 @@ class _PostScreenNavBarState extends State<PostScreenNavBar> {
     }
     //make autocomplete request
     context
-        .read<PostScreenNavBarBloc>()
-        .add(TextFieldUpdated(value: _textController.text));
+        .read<PostScreenNavbarCubit>()
+        .onTextFieldUpdated(_textController.text);
   }
 
   @override
   Widget build(BuildContext context) {
-    return SliverAppBar(
-      title: Container(
-        child: Stack(
-          fit: StackFit.expand,
-          children: [
-            SearchInput(focusNode: _focusNode, textController: _textController),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  child: GestureDetector(
-                    onTap: () {
-                      Feedback.forTap(context);
-                      AutoRouter.of(context).push(const PostRoute());
-                    },
-                    child:
-                        const Icon(Icons.menu, size: 28, color: Colors.black),
-                  ),
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                ),
-                Padding(
-                  child: GestureDetector(
-                    onTap: () {
-                      Feedback.forTap(context);
-                    },
-                    child: AnimatedRotation(
-                      turns: isFieldFocused ? (1.0 / 8.0) : 1.0,
-                      duration: const Duration(milliseconds: 250),
-                      curve: Curves.ease,
-                      child: const Icon(
-                        Icons.add,
-                        size: 28,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                ),
-              ],
+    return NavBarSkeleton(
+      leftSideWidgets: [
+        Padding(
+          child: GestureDetector(
+            onTap: () {
+              Feedback.forTap(context);
+            },
+            child: const Icon(Icons.menu, size: 28, color: Colors.black),
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+        ),
+      ],
+      rightSideWidgets: [
+        Padding(
+          child: GestureDetector(
+            onTap: () {
+              Feedback.forTap(context);
+            },
+            child: AnimatedRotation(
+              turns: isFieldFocused ? (1.0 / 8.0) : 1.0,
+              duration: const Duration(milliseconds: 250),
+              curve: Curves.ease,
+              child: const Icon(
+                Icons.add,
+                size: 28,
+                color: Colors.black,
+              ),
             ),
-          ],
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
         ),
-        width: MediaQuery.of(context).size.width * 0.95,
-        height: 45,
-        decoration: BoxDecoration(
-          color: const Color(0xFFadb8b5),
-          borderRadius: BorderRadius.circular(8),
-        ),
-      ),
-      floating: true,
-      titleSpacing: 0,
-      centerTitle: true,
-      backgroundColor: Colors.transparent,
-      shadowColor: Colors.transparent,
-      expandedHeight: 45,
+      ],
+      backgroundWidget:
+          SearchInput(focusNode: _focusNode, textController: _textController),
     );
   }
 }
@@ -176,7 +163,7 @@ class _SearchInputState extends State<SearchInput> {
     var offset = renderBox.localToGlobal(Offset.zero);
     return OverlayEntry(
         builder: (context) =>
-            BlocBuilder<PostScreenNavBarBloc, PostScreenNavBarState>(
+            BlocBuilder<PostScreenNavbarCubit, PostScreenNavBarState>(
               builder: (context, state) {
                 return Positioned(
                   left: offset.dx,
@@ -238,12 +225,13 @@ class _SearchInputState extends State<SearchInput> {
       controller: widget.textController,
       focusNode: widget.focusNode,
       onFieldSubmitted: (_) {
-        context.read<PostScreenNavBarBloc>().add(TextFieldSubmited());
+        context.read<PostScreenNavbarCubit>().onTextFieldSubmitted();
       },
       style: const TextStyle(
         color: Colors.black,
       ),
       decoration: const InputDecoration(
+        hintText: 'Search for tags...',
         enabledBorder: InputBorder.none,
         focusedBorder: InputBorder.none,
         contentPadding: EdgeInsets.symmetric(horizontal: 40),

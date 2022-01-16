@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:booru_pocket_flutter/blocs/gallery_grid_bloc/gallery_grid_bloc.dart';
-import 'package:booru_pocket_flutter/models/api/post.dart';
+import 'package:booru_pocket_flutter/models/api/post/post.dart';
 import 'package:booru_pocket_flutter/router/router.gr.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
@@ -26,8 +26,7 @@ class _GalleryGridItemState extends State<GalleryGridItem> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<GalleryGridBloc, GalleryGridState>(
-      buildWhen: (previous, current) =>
-          previous.posts.length != current.posts.length,
+      buildWhen: (previous, current) => previous.uniqueKey != current.uniqueKey,
       builder: (context, state) {
         Post post = state.posts[widget.index];
         double aspectRatio = post.imageWidth / post.imageHeight;
@@ -48,6 +47,7 @@ class _GalleryGridItemState extends State<GalleryGridItem> {
                   CurrentDetailIndexChanged(currentDetailIndex: widget.index));
               AutoRouter.of(context).push(
                 PostDetailRoute(
+                  initialIndex: widget.index,
                   bloc: bloc,
                 ),
               );

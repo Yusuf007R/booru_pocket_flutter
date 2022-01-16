@@ -1,4 +1,4 @@
-import 'package:booru_pocket_flutter/models/api/post.dart';
+import 'package:booru_pocket_flutter/models/api/post/post.dart';
 import 'package:booru_pocket_flutter/widgets/gallery_grid_item.dart';
 import 'package:flutter/material.dart';
 import 'package:waterfall_flow/waterfall_flow.dart';

@@ -7,11 +7,6 @@ class PostsFetched extends GalleryGridEvent {}
 
 class PostsRefreshed extends GalleryGridEvent {}
 
-class GalleryTypeChanged extends GalleryGridEvent {
-  final GalleryType queryType;
-  GalleryTypeChanged({required this.queryType});
-}
-
 class ParamsUpdated extends GalleryGridEvent {
   final QueryParams params;
   ParamsUpdated({required this.params});

@@ -1,21 +1,13 @@
-part of 'post_screen_nav_bar_bloc.dart';
+part of 'post_screen_nav_bar_cubit.dart';
 
-class PostScreenNavBarState extends Equatable {
-  final List<AutoComplete> autoCompletes;
-  final String textFieldValue;
+@freezed
+class PostScreenNavBarState with _$PostScreenNavBarState {
+  factory PostScreenNavBarState({
+    @Default([]) List<AutoComplete> autoCompletes,
+    @Default(QueryParams.post(page: 1, limit: 50, tags: ''))
+        QueryParams queryParams,
+  }) = _PostScreenNavBarState;
 
-  const PostScreenNavBarState({
-    this.autoCompletes = const [],
-    required this.textFieldValue,
-  });
-
-  PostScreenNavBarState copyWith(
-      {List<AutoComplete>? autoCompletes, String? textFieldValue}) {
-    return PostScreenNavBarState(
-        autoCompletes: autoCompletes ?? this.autoCompletes,
-        textFieldValue: textFieldValue ?? this.textFieldValue);
-  }
-
-  @override
-  List<Object?> get props => [autoCompletes, textFieldValue];
+  factory PostScreenNavBarState.fromJson(Map<String, dynamic> json) =>
+      _$PostScreenNavBarStateFromJson(json);
 }

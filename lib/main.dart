@@ -2,15 +2,6 @@ import 'package:booru_pocket_flutter/router/router.gr.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
-class Person extends Equatable {
-  const Person(this.name);
-
-  final String name;
-
-  @override
-  List<Object> get props => [name];
-}
-
 void main() {
   EquatableConfig.stringify = true;
   runApp(
@@ -25,7 +16,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      theme: ThemeData.dark(),
+      theme: ThemeData(
+        colorScheme: const ColorScheme.highContrastDark(
+          primary: Colors.purple,
+          secondary: Colors.pink,
+        ),
+      ),
       routerDelegate: _appRouter.delegate(),
       routeInformationParser: _appRouter.defaultRouteParser(),
     );

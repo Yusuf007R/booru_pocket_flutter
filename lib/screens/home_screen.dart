@@ -20,9 +20,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return AutoTabsScaffold(
-      routes: const [
+      routes: [
         PostRouteHomePage(),
-        PostRouteHomePage(),
+        const PopularRouteHomePage(),
         PostRouteHomePage(),
       ],
       bottomNavigationBuilder: (_, tabsRouter) {
@@ -38,10 +38,10 @@ class _HomeScreenState extends State<HomeScreen> {
               icon: Icon(Icons.local_fire_department),
               label: 'Popular',
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.recommend),
-              label: 'Recommended',
-            ),
+            // BottomNavigationBarItem(
+            //   icon: Icon(Icons.recommend),
+            //   label: 'Recommended',
+            // ),
           ],
         );
       },

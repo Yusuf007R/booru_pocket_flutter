@@ -2,37 +2,36 @@ import 'dart:async';
 
 import 'package:booru_pocket_flutter/blocs/gallery_grid_bloc/gallery_grid_bloc.dart';
 import 'package:booru_pocket_flutter/widgets/gallery_grid.dart';
-import 'package:booru_pocket_flutter/widgets/post_screen_nav_bar.dart';
+import 'package:booru_pocket_flutter/widgets/popular_screen_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class PostScreen extends StatefulWidget {
-  const PostScreen({Key? key}) : super(key: key);
+class PopularScreen extends StatefulWidget {
+  const PopularScreen({Key? key}) : super(key: key);
   @override
-  State<PostScreen> createState() => _PostScreenState();
+  State<PopularScreen> createState() => _PopularScreenState();
 }
 
-class _PostScreenState extends State<PostScreen> {
+class _PopularScreenState extends State<PopularScreen> {
   final ScrollController _scrollController = ScrollController();
   bool floatingButtonVisibility = false;
   @override
   void initState() {
     super.initState();
     _scrollController.addListener(onScroll);
-
-    BlocProvider.of<GalleryGridBloc>(context).add(PostsRefreshed());
+    context.read<GalleryGridBloc>().add(PostsRefreshed());
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<GalleryGridBloc, GalleryGridState>(
-      // buildWhen: (previous, current) => previous.uniqueKey != current.uniqueKey,
+      buildWhen: (previous, current) =>
+          previous.posts.length != current.posts.length,
       builder: (context, state) {
         return Scaffold(
           floatingActionButton: floatingButtonVisibility
               ? FloatingActionButton(
-                  heroTag: '${state.uniqueKey}-floating-button',
                   child: const Icon(Icons.arrow_upward_rounded),
                   onPressed: () {
                     _scrollController.animateTo(0,
@@ -51,7 +50,7 @@ class _PostScreenState extends State<PostScreen> {
                 controller: _scrollController,
                 physics: const BouncingScrollPhysics(),
                 slivers: [
-                  const PostScreenNavBar(),
+                  const PopularScreenNavBar(),
                   GalleryGrid(
                     posts: state.posts,
                   ),
