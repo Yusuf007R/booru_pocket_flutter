@@ -74,7 +74,7 @@ class AppRouter extends _i8.RootStackRouter {
       return _i8.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i7.PopularScreen());
     },
-    PostScreenInternal.name: (routeData) {
+    PostScreenPushed.name: (routeData) {
       return _i8.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i6.PostScreen());
     }
@@ -106,7 +106,7 @@ class AppRouter extends _i8.RootStackRouter {
               path: 'post-route-wrapper',
               parent: MainRoute.name,
               children: [
-                _i8.RouteConfig(PostScreenInternal.name,
+                _i8.RouteConfig(PostScreenPushed.name,
                     path: '', parent: PostRoute.name)
               ]),
           _i8.RouteConfig(PostDetailRoute.name,
@@ -251,8 +251,8 @@ class PopularScreenHomePageInternal extends _i8.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i6.PostScreen]
-class PostScreenInternal extends _i8.PageRouteInfo<void> {
-  const PostScreenInternal() : super(PostScreenInternal.name, path: '');
+class PostScreenPushed extends _i8.PageRouteInfo<void> {
+  const PostScreenPushed() : super(PostScreenPushed.name, path: '');
 
-  static const String name = 'PostScreenInternal';
+  static const String name = 'PostScreenPushed';
 }

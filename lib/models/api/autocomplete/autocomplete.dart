@@ -11,7 +11,7 @@ class AutoComplete with _$AutoComplete {
   factory AutoComplete({
     required String label,
     required String value,
-    @JsonKey(name: 'post_count') required int postCount,
+    @JsonKey(name: 'post_count') @Default(0) int postCount,
   }) = _AutoComplete;
 
   factory AutoComplete.fromJson(Map<String, dynamic> json) =>

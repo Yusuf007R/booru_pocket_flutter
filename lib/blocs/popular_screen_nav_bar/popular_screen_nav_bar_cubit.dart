@@ -21,7 +21,7 @@ class PopularScreenNavbarCubit extends Cubit<PopularScreenNavBarState> {
         );
 
   void setDate(DateTime date) {
-    var params = queryParamsCubit.state.queryParams;
+    final params = queryParamsCubit.state.queryParams;
     if (params is PopularParams) {
       queryParamsCubit.updateQueryParams(
         params.copyWith(date: date),
@@ -31,7 +31,7 @@ class PopularScreenNavbarCubit extends Cubit<PopularScreenNavBarState> {
   }
 
   void setScale(ScaleType scale) {
-    var params = queryParamsCubit.state.queryParams;
+    final params = queryParamsCubit.state.queryParams;
     if (params is PopularParams) {
       queryParamsCubit.updateQueryParams(
         params.copyWith(scale: scale),

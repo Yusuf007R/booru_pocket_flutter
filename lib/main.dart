@@ -1,9 +1,7 @@
 import 'package:booru_pocket_flutter/router/router.gr.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  EquatableConfig.stringify = true;
   runApp(
     MyApp(),
   );

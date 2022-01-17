@@ -10,7 +10,7 @@ _$_AutoComplete _$$_AutoCompleteFromJson(Map<String, dynamic> json) =>
     _$_AutoComplete(
       label: json['label'] as String,
       value: json['value'] as String,
-      postCount: json['post_count'] as int,
+      postCount: json['post_count'] as int? ?? 0,
     );
 
 Map<String, dynamic> _$$_AutoCompleteToJson(_$_AutoComplete instance) =>

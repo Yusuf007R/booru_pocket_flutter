@@ -16,12 +16,10 @@ part 'post_screen_nav_bar_cubit.freezed.dart';
 
 class PostScreenNavbarCubit extends Cubit<PostScreenNavBarState> {
   final DanbooruRepository repository;
-  final String defaultTextValue;
   final QueryParamsCubit queryParamsCubit;
   final GalleryGridBloc galleryGridBloc;
   PostScreenNavbarCubit(
       {required this.repository,
-      required this.defaultTextValue,
       required this.queryParamsCubit,
       required this.galleryGridBloc})
       : super(
@@ -29,8 +27,9 @@ class PostScreenNavbarCubit extends Cubit<PostScreenNavBarState> {
         );
 
   void onTextFieldUpdated(String value) {
-    var params = queryParamsCubit.state.queryParams;
+    final params = queryParamsCubit.state.queryParams;
     if (params is PostParams) {
+      if (params.tags == value) return;
       queryParamsCubit.updateQueryParams(params.copyWith(tags: value));
       if (value.isEmpty) return clearAutoComplete();
       fetchAutoComplete(value);
@@ -49,7 +48,7 @@ class PostScreenNavbarCubit extends Cubit<PostScreenNavBarState> {
     }
     List<AutoComplete> autoCompletes =
         await repository.getAutoComplete(queryCopy);
-    var params = queryParamsCubit.state.queryParams;
+    final params = queryParamsCubit.state.queryParams;
     if (params is PostParams) {
       if (params.tags.isEmpty) return clearAutoComplete();
       emit(state.copyWith(autoCompletes: autoCompletes));

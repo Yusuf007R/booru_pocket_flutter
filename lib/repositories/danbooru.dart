@@ -9,8 +9,10 @@ class DanbooruRepository {
   Dio dio = Dio(BaseOptions(baseUrl: 'https://safebooru.donmai.us'));
 
   Future<List<Post>> getPosts(PostParams params) async {
-    Response response =
-        await dio.get('/posts.json', queryParameters: params.toJson());
+    Response response = await dio.get(
+      '/posts.json',
+      queryParameters: params.toJson(),
+    );
     return List<Post>.from(response.data
         .where(((element) => element['id'] != null))
         .map((element) => Post.fromJson(element)));

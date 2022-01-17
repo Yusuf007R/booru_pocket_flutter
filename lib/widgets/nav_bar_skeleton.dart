@@ -52,6 +52,7 @@ class NavBarSkeleton extends StatelessWidget {
       backgroundColor: Colors.transparent,
       shadowColor: Colors.transparent,
       expandedHeight: 45,
+      elevation: 0,
     );
   }
 }

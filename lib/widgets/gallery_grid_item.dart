@@ -22,11 +22,9 @@ class GalleryGridItem extends StatefulWidget {
 }
 
 class _GalleryGridItemState extends State<GalleryGridItem> {
-  bool shouldClearMemory = true;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<GalleryGridBloc, GalleryGridState>(
-      buildWhen: (previous, current) => previous.uniqueKey != current.uniqueKey,
       builder: (context, state) {
         Post post = state.posts[widget.index];
         double aspectRatio = post.imageWidth / post.imageHeight;
@@ -39,9 +37,7 @@ class _GalleryGridItemState extends State<GalleryGridItem> {
           child: GestureDetector(
             onTap: () {
               Feedback.forTap(context);
-              setState(() {
-                shouldClearMemory = false;
-              });
+
               GalleryGridBloc bloc = BlocProvider.of<GalleryGridBloc>(context);
               bloc.add(
                   CurrentDetailIndexChanged(currentDetailIndex: widget.index));
@@ -62,7 +58,6 @@ class _GalleryGridItemState extends State<GalleryGridItem> {
                     post.highQuality,
                     fit: BoxFit.cover,
                     cache: true,
-                    clearMemoryCacheWhenDispose: shouldClearMemory,
                     loadStateChanged: (ExtendedImageState state) {
                       switch (state.extendedImageLoadState) {
                         case LoadState.loading:

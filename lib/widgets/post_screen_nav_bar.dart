@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:booru_pocket_flutter/blocs/post_screen_nav_bar/post_screen_nav_bar_cubit.dart';
 import 'package:booru_pocket_flutter/blocs/query_params_cubit/query_params_cubit.dart';
 import 'package:booru_pocket_flutter/models/api/autocomplete/autocomplete.dart';
 import 'package:booru_pocket_flutter/models/api/queryparams/queryparams.dart';
-
+import 'package:booru_pocket_flutter/router/router.gr.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:booru_pocket_flutter/widgets/nav_bar_skeleton.dart';
 import 'package:flutter/material.dart';
 
@@ -19,10 +22,11 @@ class _PostScreenNavBarState extends State<PostScreenNavBar> {
   final FocusNode _focusNode = FocusNode();
   late final TextEditingController _textController;
   bool isFieldFocused = false;
+  Timer? _debounce;
 
   @override
   void initState() {
-    var params = context.read<QueryParamsCubit>().state.queryParams;
+    final params = context.read<QueryParamsCubit>().state.queryParams;
     if (params is PostParams) {
       _textController = TextEditingController(
         text: params.tags,
@@ -59,7 +63,8 @@ class _PostScreenNavBarState extends State<PostScreenNavBar> {
   }
 
   void _onTextChange() {
-    //trim first space
+    var navBarCubit = context.read<PostScreenNavbarCubit>();
+
     final String text = _textController.text.trimLeft();
     if (_textController.text != text) {
       _textController.value = _textController.value.copyWith(
@@ -68,22 +73,36 @@ class _PostScreenNavBarState extends State<PostScreenNavBar> {
             TextSelection(baseOffset: text.length, extentOffset: text.length),
       );
     }
-    //make autocomplete request
-    context
-        .read<PostScreenNavbarCubit>()
-        .onTextFieldUpdated(_textController.text);
+
+    if (_debounce != null) {
+      _debounce?.cancel();
+    }
+    _debounce = Timer(
+      const Duration(milliseconds: 150),
+      () {
+        navBarCubit.onTextFieldUpdated(_textController.text);
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    final bool isPushedScreen =
+        AutoRouter.of(context).routeData.name == 'PostRoute';
     return NavBarSkeleton(
       leftSideWidgets: [
         Padding(
           child: GestureDetector(
             onTap: () {
               Feedback.forTap(context);
+              if (isPushedScreen) {
+                AutoRouter.of(context).pop();
+                return;
+              }
+              context.read<ScaffoldState>().openDrawer();
             },
-            child: const Icon(Icons.menu, size: 28, color: Colors.black),
+            child: Icon(isPushedScreen ? Icons.arrow_back : Icons.menu,
+                size: 28, color: Colors.black),
           ),
           padding: const EdgeInsets.symmetric(horizontal: 10),
         ),
@@ -93,10 +112,15 @@ class _PostScreenNavBarState extends State<PostScreenNavBar> {
           child: GestureDetector(
             onTap: () {
               Feedback.forTap(context);
+              if (_textController.text.isNotEmpty) {
+                _textController.clear();
+                return;
+              }
+              _focusNode.unfocus();
             },
             child: AnimatedRotation(
-              turns: isFieldFocused ? (1.0 / 8.0) : 1.0,
-              duration: const Duration(milliseconds: 250),
+              turns: isFieldFocused ? (1.0 / 8.0) : 0,
+              duration: const Duration(milliseconds: 150),
               curve: Curves.ease,
               child: const Icon(
                 Icons.add,
@@ -159,8 +183,8 @@ class _SearchInputState extends State<SearchInput> {
   OverlayEntry _createOverlayEntry() {
     final RenderBox renderBox =
         _widgetKey.currentContext?.findRenderObject() as RenderBox;
-    var size = renderBox.size;
-    var offset = renderBox.localToGlobal(Offset.zero);
+    final size = renderBox.size;
+    final offset = renderBox.localToGlobal(Offset.zero);
     return OverlayEntry(
         builder: (context) =>
             BlocBuilder<PostScreenNavbarCubit, PostScreenNavBarState>(

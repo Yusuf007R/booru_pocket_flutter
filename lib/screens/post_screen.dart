@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PostScreen extends StatefulWidget {
   const PostScreen({Key? key}) : super(key: key);
+
   @override
   State<PostScreen> createState() => _PostScreenState();
 }
@@ -20,14 +21,12 @@ class _PostScreenState extends State<PostScreen> {
   void initState() {
     super.initState();
     _scrollController.addListener(onScroll);
-
     BlocProvider.of<GalleryGridBloc>(context).add(PostsRefreshed());
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<GalleryGridBloc, GalleryGridState>(
-      // buildWhen: (previous, current) => previous.uniqueKey != current.uniqueKey,
       builder: (context, state) {
         return Scaffold(
           floatingActionButton: floatingButtonVisibility

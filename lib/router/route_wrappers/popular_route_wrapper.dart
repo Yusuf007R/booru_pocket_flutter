@@ -12,32 +12,29 @@ class PopularRouteWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider(
-      create: (context) => DanbooruRepository(),
-      child: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            lazy: false,
-            create: (context) => QueryParamsCubit(
-              queryParams: QueryParams.popular(
-                date: DateTime.now(),
-              ),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          lazy: false,
+          create: (context) => QueryParamsCubit(
+            queryParams: QueryParams.popular(
+              date: DateTime.now(),
             ),
           ),
-          BlocProvider(
-            create: (context) => GalleryGridBloc(
-              repository: RepositoryProvider.of<DanbooruRepository>(context),
+        ),
+        BlocProvider(
+          create: (context) => GalleryGridBloc(
+            repository: RepositoryProvider.of<DanbooruRepository>(context),
+            queryParamsCubit: BlocProvider.of<QueryParamsCubit>(context),
+          ),
+        ),
+        BlocProvider(
+          create: (context) => PopularScreenNavbarCubit(
               queryParamsCubit: BlocProvider.of<QueryParamsCubit>(context),
-            ),
-          ),
-          BlocProvider(
-            create: (context) => PopularScreenNavbarCubit(
-                queryParamsCubit: BlocProvider.of<QueryParamsCubit>(context),
-                galleryGridBloc: BlocProvider.of<GalleryGridBloc>(context)),
-          ),
-        ],
-        child: const AutoRouter(),
-      ),
+              galleryGridBloc: BlocProvider.of<GalleryGridBloc>(context)),
+        ),
+      ],
+      child: const AutoRouter(),
     );
   }
 }

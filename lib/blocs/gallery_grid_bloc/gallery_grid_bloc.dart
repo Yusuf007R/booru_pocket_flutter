@@ -27,10 +27,8 @@ class GalleryGridBloc extends Bloc<GalleryGridEvent, GalleryGridState> {
       if (state.loading) return;
       emit(state.copyWith(loading: true));
       List<Post> posts = await _fetchPosts();
-
       GalleryGridState stateCopy = state.copyWith(
         posts: [...state.posts, ...posts],
-        uniqueKey: UniqueKey().toString(),
         loading: false,
       );
       queryParamsCubit.incrementPage();
@@ -46,7 +44,6 @@ class GalleryGridBloc extends Bloc<GalleryGridEvent, GalleryGridState> {
       List<Post> posts = await _fetchPosts();
       GalleryGridState stateCopy = state.copyWith(
         posts: posts,
-        uniqueKey: UniqueKey().toString(),
         refreshing: false,
       );
       queryParamsCubit.incrementPage();
@@ -59,7 +56,7 @@ class GalleryGridBloc extends Bloc<GalleryGridEvent, GalleryGridState> {
   }
 
   _fetchPosts() async {
-    var queryParams = queryParamsCubit.state.queryParams;
+    final queryParams = queryParamsCubit.state.queryParams;
 
     return queryParams.map(
         post: (params) async {

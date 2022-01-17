@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:booru_pocket_flutter/router/router.gr.dart';
+import 'package:booru_pocket_flutter/widgets/drawer_content.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
@@ -25,25 +27,33 @@ class _HomeScreenState extends State<HomeScreen> {
         const PopularRouteHomePage(),
         PostRouteHomePage(),
       ],
-      bottomNavigationBuilder: (_, tabsRouter) {
-        return BottomNavigationBar(
-          currentIndex: tabsRouter.activeIndex,
-          onTap: tabsRouter.setActiveIndex,
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.collections),
-              label: 'Posts',
+      builder: (context, child, animation) {
+        final tabsRouter = AutoTabsRouter.of(context);
+        return Scaffold(
+            drawer: const CustomDrawer(),
+            body: FadeTransition(
+              opacity: animation,
+              child: Provider(
+                create: (context) => Scaffold.of(context),
+                child: child,
+              ),
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.local_fire_department),
-              label: 'Popular',
-            ),
-            // BottomNavigationBarItem(
-            //   icon: Icon(Icons.recommend),
-            //   label: 'Recommended',
-            // ),
-          ],
-        );
+            bottomNavigationBar: BottomNavigationBar(
+              currentIndex: tabsRouter.activeIndex,
+              onTap: (index) {
+                tabsRouter.setActiveIndex(index);
+              },
+              items: const [
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.collections),
+                  label: 'Posts',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.local_fire_department),
+                  label: 'Popular',
+                ),
+              ],
+            ));
       },
     );
   }

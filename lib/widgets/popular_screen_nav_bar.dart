@@ -26,6 +26,7 @@ class PopularScreenNavBarStateWidget extends State<PopularScreenNavBar> {
               child: GestureDetector(
                 onTap: () {
                   Feedback.forTap(context);
+                  context.read<ScaffoldState>().openDrawer();
                 },
                 child: const Icon(MdiIcons.menu, size: 28, color: Colors.black),
               ),
@@ -37,7 +38,7 @@ class PopularScreenNavBarStateWidget extends State<PopularScreenNavBar> {
               child: GestureDetector(
                 onTap: () async {
                   Feedback.forTap(context);
-                  var queryParams =
+                  final queryParams =
                       context.read<QueryParamsCubit>().state.queryParams;
                   if (queryParams is PopularParams) {
                     final DateTime? date = await showDatePicker(

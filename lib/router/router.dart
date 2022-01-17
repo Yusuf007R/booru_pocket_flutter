@@ -51,7 +51,7 @@ import 'package:booru_pocket_flutter/screens/post_screen.dart';
             AutoRoute(
               initial: true,
               page: PostScreen,
-              name: 'PostScreenInternal',
+              name: 'PostScreenPushed',
             )
           ],
         ),

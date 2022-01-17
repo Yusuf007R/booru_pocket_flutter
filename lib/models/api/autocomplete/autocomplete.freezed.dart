@@ -25,7 +25,7 @@ class _$AutoCompleteTearOff {
   _AutoComplete call(
       {required String label,
       required String value,
-      @JsonKey(name: 'post_count') required int postCount}) {
+      @JsonKey(name: 'post_count') int postCount = 0}) {
     return _AutoComplete(
       label: label,
       value: value,
@@ -144,7 +144,7 @@ class _$_AutoComplete extends _AutoComplete {
   _$_AutoComplete(
       {required this.label,
       required this.value,
-      @JsonKey(name: 'post_count') required this.postCount})
+      @JsonKey(name: 'post_count') this.postCount = 0})
       : super._();
 
   factory _$_AutoComplete.fromJson(Map<String, dynamic> json) =>
@@ -195,7 +195,7 @@ abstract class _AutoComplete extends AutoComplete {
   factory _AutoComplete(
       {required String label,
       required String value,
-      @JsonKey(name: 'post_count') required int postCount}) = _$_AutoComplete;
+      @JsonKey(name: 'post_count') int postCount}) = _$_AutoComplete;
   _AutoComplete._() : super._();
 
   factory _AutoComplete.fromJson(Map<String, dynamic> json) =
