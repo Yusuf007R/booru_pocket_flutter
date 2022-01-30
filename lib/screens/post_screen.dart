@@ -7,8 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+enum PostScreenType { user, gallery, favorites }
+
 class PostScreen extends StatefulWidget {
-  const PostScreen({Key? key}) : super(key: key);
+  const PostScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<PostScreen> createState() => _PostScreenState();
@@ -17,6 +21,7 @@ class PostScreen extends StatefulWidget {
 class _PostScreenState extends State<PostScreen> {
   final ScrollController _scrollController = ScrollController();
   bool floatingButtonVisibility = false;
+
   @override
   void initState() {
     super.initState();
@@ -63,7 +68,7 @@ class _PostScreenState extends State<PostScreen> {
     );
   }
 
-  void onScroll() {
+  void onScroll() async {
     if (!_scrollController.hasClients) return;
     final ScrollPosition position = _scrollController.position;
     if (position.userScrollDirection == ScrollDirection.reverse &&

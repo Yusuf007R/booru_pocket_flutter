@@ -11,7 +11,8 @@ class Post with _$Post {
 
   factory Post({
     required int id,
-    @JsonKey(name: 'tag_string') required String tagString,
+    @JsonKey(name: 'tag_string', fromJson: _fromJson)
+        required List<String> tags,
     @JsonKey(name: 'tag_string_artist') required String artistTag,
     String? rating,
     required String source,
@@ -47,7 +48,11 @@ class Post with _$Post {
 
   String get lowQuality => previewFileUrl;
 
-  List<String> get tags => tagString.split(' ');
-
   factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
+}
+
+List<String> _fromJson(
+  String tags,
+) {
+  return tags.split(' ');
 }

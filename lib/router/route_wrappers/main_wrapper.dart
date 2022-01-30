@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:booru_pocket_flutter/repositories/danbooru.dart';
+import 'package:booru_pocket_flutter/blocs/danbooru_auth_cubit/danbooru_auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -10,10 +10,7 @@ class MainWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     return HeroControllerScope(
       controller: HeroController(),
-      child: RepositoryProvider(
-        create: (context) => DanbooruRepository(),
-        child: const AutoRouter(),
-      ),
+      child: const AutoRouter(),
     );
   }
 }

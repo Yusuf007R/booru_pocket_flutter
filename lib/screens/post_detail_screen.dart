@@ -33,6 +33,9 @@ class PostDetailScreen extends StatelessWidget {
           (previous.currentDetailIndex != current.currentDetailIndex),
       builder: (context, state) {
         return PhotoViewGallery.builder(
+          loadingBuilder: (context, event) => const Center(
+            child: CircularProgressIndicator(),
+          ),
           pageController: PageController(initialPage: initialIndex),
           itemCount: state.posts.length,
           onPageChanged: (index) =>

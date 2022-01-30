@@ -33,7 +33,7 @@ QueryParams _$QueryParamsFromJson(Map<String, dynamic> json) {
 class _$QueryParamsTearOff {
   const _$QueryParamsTearOff();
 
-  PostParams post({int page = 1, int limit = 50, String tags = ''}) {
+  PostParams post({int page = 1, int limit = 500, String tags = ''}) {
     return PostParams(
       page: page,
       limit: limit,
@@ -233,7 +233,7 @@ class _$PostParamsCopyWithImpl<$Res> extends _$QueryParamsCopyWithImpl<$Res>
 @JsonSerializable()
 class _$PostParams implements PostParams {
   const _$PostParams(
-      {this.page = 1, this.limit = 50, this.tags = '', String? $type})
+      {this.page = 1, this.limit = 500, this.tags = '', String? $type})
       : $type = $type ?? 'post';
 
   factory _$PostParams.fromJson(Map<String, dynamic> json) =>

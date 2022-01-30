@@ -1,7 +1,11 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:booru_pocket_flutter/blocs/danbooru_auth_cubit/danbooru_auth_cubit.dart';
 import 'package:booru_pocket_flutter/router/router.gr.dart';
+import 'package:booru_pocket_flutter/screens/post_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({
@@ -10,7 +14,7 @@ class CustomDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).viewPadding.top;
+    final height = MediaQuery.of(context).viewPadding.top;
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.65,
       child: Drawer(
@@ -58,12 +62,16 @@ class DrawerBottomList extends StatelessWidget {
           thickness: 1,
         ),
         DrawerTile(
-          icon: MdiIcons.github,
-          text: 'Github',
-          onTap: () {
-            print('pressed');
-          },
-        ),
+            icon: MdiIcons.github,
+            text: 'Github',
+            onTap: () async {
+              String url = 'https://github.com/Yusuf007R/booru_pocket_flutter';
+              if (await canLaunch(url)) {
+                await launch(url);
+              } else {
+                print('Could not launch $url');
+              }
+            }),
         DrawerTile(
           icon: Icons.settings,
           text: 'Settings',
@@ -102,17 +110,14 @@ class DrawerTopList extends StatelessWidget {
               icon: MdiIcons.accountCircle,
               text: 'Account',
               onTap: () {
-                print('pressed');
+                AutoRouter.of(context).push(const UserProfileRoute());
               },
             ),
             DrawerTile(
-              icon: MdiIcons.heart,
-              text: 'Favorites',
-              onTap: () {
-                context.router
-                    .push(PostRoute(inputTextValue: 'ordfav:Yusuf-chan'));
-              },
-            ),
+                icon: MdiIcons.heart,
+                text: 'Favorites',
+                onTap: () => AutoRouter.of(context)
+                    .push(PostRoute(postScreenType: PostScreenType.favorites))),
             DrawerTile(
               icon: MdiIcons.formatListBulleted,
               text: 'Saved Posts',

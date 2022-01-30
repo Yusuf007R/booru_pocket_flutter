@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:booru_pocket_flutter/router/router.gr.dart';
 import 'package:booru_pocket_flutter/widgets/drawer_content.dart';
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -25,7 +26,8 @@ class _HomeScreenState extends State<HomeScreen> {
       routes: [
         PostRouteHomePage(),
         const PopularRouteHomePage(),
-        PostRouteHomePage(),
+        PostRouteHomePage(inputTextValue: 'order:rank'),
+        PostRouteHomePage(inputTextValue: 'order:rank'),
       ],
       builder: (context, child, animation) {
         final tabsRouter = AutoTabsRouter.of(context);
@@ -39,18 +41,27 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             bottomNavigationBar: BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
               currentIndex: tabsRouter.activeIndex,
               onTap: (index) {
                 tabsRouter.setActiveIndex(index);
               },
               items: const [
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.collections),
+                  icon: Icon(Icons.image),
                   label: 'Posts',
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.local_fire_department),
+                  icon: Icon(Icons.star),
                   label: 'Popular',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.local_fire_department),
+                  label: 'Hot',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.collections_bookmark),
+                  label: 'Pools',
                 ),
               ],
             ));

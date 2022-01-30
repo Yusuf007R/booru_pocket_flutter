@@ -8,7 +8,7 @@ part of 'queryparams.dart';
 
 _$PostParams _$$PostParamsFromJson(Map<String, dynamic> json) => _$PostParams(
       page: json['page'] as int? ?? 1,
-      limit: json['limit'] as int? ?? 50,
+      limit: json['limit'] as int? ?? 500,
       tags: json['tags'] as String? ?? '',
       $type: json['runtimeType'] as String?,
     );

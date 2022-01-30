@@ -24,7 +24,6 @@ class PopularRouteWrapper extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => GalleryGridBloc(
-            repository: RepositoryProvider.of<DanbooruRepository>(context),
             queryParamsCubit: BlocProvider.of<QueryParamsCubit>(context),
           ),
         ),

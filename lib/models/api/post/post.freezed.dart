@@ -24,24 +24,35 @@ class _$PostTearOff {
 
   _Post call(
       {required int id,
-      @JsonKey(name: 'tag_string') required String tagString,
-      @JsonKey(name: 'tag_string_artist') required String artistTag,
+      @JsonKey(name: 'tag_string', fromJson: _fromJson)
+          required List<String> tags,
+      @JsonKey(name: 'tag_string_artist')
+          required String artistTag,
       String? rating,
       required String source,
-      @JsonKey(name: 'preview_file_url') required String previewFileUrl,
-      @JsonKey(name: 'large_file_url') required String largeFileUrl,
-      @JsonKey(name: 'file_url') required String fileUrl,
-      @JsonKey(name: 'file_ext') required String fileExt,
-      @JsonKey(name: 'image_width') required int imageWidth,
-      @JsonKey(name: 'image_height') required int imageHeight,
+      @JsonKey(name: 'preview_file_url')
+          required String previewFileUrl,
+      @JsonKey(name: 'large_file_url')
+          required String largeFileUrl,
+      @JsonKey(name: 'file_url')
+          required String fileUrl,
+      @JsonKey(name: 'file_ext')
+          required String fileExt,
+      @JsonKey(name: 'image_width')
+          required int imageWidth,
+      @JsonKey(name: 'image_height')
+          required int imageHeight,
       required int score,
-      @JsonKey(name: 'fav_count') required int favoriteCount,
-      @JsonKey(name: 'created_at') required DateTime createdAt,
-      @JsonKey(name: 'updated_at') required DateTime updatedAt,
+      @JsonKey(name: 'fav_count')
+          required int favoriteCount,
+      @JsonKey(name: 'created_at')
+          required DateTime createdAt,
+      @JsonKey(name: 'updated_at')
+          required DateTime updatedAt,
       String? video}) {
     return _Post(
       id: id,
-      tagString: tagString,
+      tags: tags,
       artistTag: artistTag,
       rating: rating,
       source: source,
@@ -70,8 +81,8 @@ const $Post = _$PostTearOff();
 /// @nodoc
 mixin _$Post {
   int get id => throw _privateConstructorUsedError;
-  @JsonKey(name: 'tag_string')
-  String get tagString => throw _privateConstructorUsedError;
+  @JsonKey(name: 'tag_string', fromJson: _fromJson)
+  List<String> get tags => throw _privateConstructorUsedError;
   @JsonKey(name: 'tag_string_artist')
   String get artistTag => throw _privateConstructorUsedError;
   String? get rating => throw _privateConstructorUsedError;
@@ -108,7 +119,7 @@ abstract class $PostCopyWith<$Res> {
       _$PostCopyWithImpl<$Res>;
   $Res call(
       {int id,
-      @JsonKey(name: 'tag_string') String tagString,
+      @JsonKey(name: 'tag_string', fromJson: _fromJson) List<String> tags,
       @JsonKey(name: 'tag_string_artist') String artistTag,
       String? rating,
       String source,
@@ -136,7 +147,7 @@ class _$PostCopyWithImpl<$Res> implements $PostCopyWith<$Res> {
   @override
   $Res call({
     Object? id = freezed,
-    Object? tagString = freezed,
+    Object? tags = freezed,
     Object? artistTag = freezed,
     Object? rating = freezed,
     Object? source = freezed,
@@ -157,10 +168,10 @@ class _$PostCopyWithImpl<$Res> implements $PostCopyWith<$Res> {
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      tagString: tagString == freezed
-          ? _value.tagString
-          : tagString // ignore: cast_nullable_to_non_nullable
-              as String,
+      tags: tags == freezed
+          ? _value.tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       artistTag: artistTag == freezed
           ? _value.artistTag
           : artistTag // ignore: cast_nullable_to_non_nullable
@@ -228,7 +239,7 @@ abstract class _$PostCopyWith<$Res> implements $PostCopyWith<$Res> {
   @override
   $Res call(
       {int id,
-      @JsonKey(name: 'tag_string') String tagString,
+      @JsonKey(name: 'tag_string', fromJson: _fromJson) List<String> tags,
       @JsonKey(name: 'tag_string_artist') String artistTag,
       String? rating,
       String source,
@@ -257,7 +268,7 @@ class __$PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? tagString = freezed,
+    Object? tags = freezed,
     Object? artistTag = freezed,
     Object? rating = freezed,
     Object? source = freezed,
@@ -278,10 +289,10 @@ class __$PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      tagString: tagString == freezed
-          ? _value.tagString
-          : tagString // ignore: cast_nullable_to_non_nullable
-              as String,
+      tags: tags == freezed
+          ? _value.tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       artistTag: artistTag == freezed
           ? _value.artistTag
           : artistTag // ignore: cast_nullable_to_non_nullable
@@ -347,7 +358,7 @@ class __$PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res>
 class _$_Post extends _Post {
   _$_Post(
       {required this.id,
-      @JsonKey(name: 'tag_string') required this.tagString,
+      @JsonKey(name: 'tag_string', fromJson: _fromJson) required this.tags,
       @JsonKey(name: 'tag_string_artist') required this.artistTag,
       this.rating,
       required this.source,
@@ -369,8 +380,8 @@ class _$_Post extends _Post {
   @override
   final int id;
   @override
-  @JsonKey(name: 'tag_string')
-  final String tagString;
+  @JsonKey(name: 'tag_string', fromJson: _fromJson)
+  final List<String> tags;
   @override
   @JsonKey(name: 'tag_string_artist')
   final String artistTag;
@@ -412,7 +423,7 @@ class _$_Post extends _Post {
 
   @override
   String toString() {
-    return 'Post(id: $id, tagString: $tagString, artistTag: $artistTag, rating: $rating, source: $source, previewFileUrl: $previewFileUrl, largeFileUrl: $largeFileUrl, fileUrl: $fileUrl, fileExt: $fileExt, imageWidth: $imageWidth, imageHeight: $imageHeight, score: $score, favoriteCount: $favoriteCount, createdAt: $createdAt, updatedAt: $updatedAt, video: $video)';
+    return 'Post(id: $id, tags: $tags, artistTag: $artistTag, rating: $rating, source: $source, previewFileUrl: $previewFileUrl, largeFileUrl: $largeFileUrl, fileUrl: $fileUrl, fileExt: $fileExt, imageWidth: $imageWidth, imageHeight: $imageHeight, score: $score, favoriteCount: $favoriteCount, createdAt: $createdAt, updatedAt: $updatedAt, video: $video)';
   }
 
   @override
@@ -421,7 +432,7 @@ class _$_Post extends _Post {
         (other.runtimeType == runtimeType &&
             other is _Post &&
             const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.tagString, tagString) &&
+            const DeepCollectionEquality().equals(other.tags, tags) &&
             const DeepCollectionEquality().equals(other.artistTag, artistTag) &&
             const DeepCollectionEquality().equals(other.rating, rating) &&
             const DeepCollectionEquality().equals(other.source, source) &&
@@ -447,7 +458,7 @@ class _$_Post extends _Post {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(tagString),
+      const DeepCollectionEquality().hash(tags),
       const DeepCollectionEquality().hash(artistTag),
       const DeepCollectionEquality().hash(rating),
       const DeepCollectionEquality().hash(source),
@@ -477,20 +488,31 @@ class _$_Post extends _Post {
 abstract class _Post extends Post {
   factory _Post(
       {required int id,
-      @JsonKey(name: 'tag_string') required String tagString,
-      @JsonKey(name: 'tag_string_artist') required String artistTag,
+      @JsonKey(name: 'tag_string', fromJson: _fromJson)
+          required List<String> tags,
+      @JsonKey(name: 'tag_string_artist')
+          required String artistTag,
       String? rating,
       required String source,
-      @JsonKey(name: 'preview_file_url') required String previewFileUrl,
-      @JsonKey(name: 'large_file_url') required String largeFileUrl,
-      @JsonKey(name: 'file_url') required String fileUrl,
-      @JsonKey(name: 'file_ext') required String fileExt,
-      @JsonKey(name: 'image_width') required int imageWidth,
-      @JsonKey(name: 'image_height') required int imageHeight,
+      @JsonKey(name: 'preview_file_url')
+          required String previewFileUrl,
+      @JsonKey(name: 'large_file_url')
+          required String largeFileUrl,
+      @JsonKey(name: 'file_url')
+          required String fileUrl,
+      @JsonKey(name: 'file_ext')
+          required String fileExt,
+      @JsonKey(name: 'image_width')
+          required int imageWidth,
+      @JsonKey(name: 'image_height')
+          required int imageHeight,
       required int score,
-      @JsonKey(name: 'fav_count') required int favoriteCount,
-      @JsonKey(name: 'created_at') required DateTime createdAt,
-      @JsonKey(name: 'updated_at') required DateTime updatedAt,
+      @JsonKey(name: 'fav_count')
+          required int favoriteCount,
+      @JsonKey(name: 'created_at')
+          required DateTime createdAt,
+      @JsonKey(name: 'updated_at')
+          required DateTime updatedAt,
       String? video}) = _$_Post;
   _Post._() : super._();
 
@@ -499,8 +521,8 @@ abstract class _Post extends Post {
   @override
   int get id;
   @override
-  @JsonKey(name: 'tag_string')
-  String get tagString;
+  @JsonKey(name: 'tag_string', fromJson: _fromJson)
+  List<String> get tags;
   @override
   @JsonKey(name: 'tag_string_artist')
   String get artistTag;

@@ -63,7 +63,7 @@ class _PostScreenNavBarState extends State<PostScreenNavBar> {
   }
 
   void _onTextChange() {
-    var navBarCubit = context.read<PostScreenNavbarCubit>();
+    final navBarCubit = context.read<PostScreenNavbarCubit>();
 
     final String text = _textController.text.trimLeft();
     if (_textController.text != text) {

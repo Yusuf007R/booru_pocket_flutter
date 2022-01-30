@@ -1,27 +1,37 @@
+import 'package:booru_pocket_flutter/blocs/danbooru_auth_cubit/danbooru_auth_cubit.dart';
+
 import 'package:booru_pocket_flutter/router/router.gr.dart';
+import 'package:booru_pocket_flutter/services/locator_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
+  setupLocator();
   runApp(
-    MyApp(),
+    const MyApp(),
   );
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
-  final _appRouter = AppRouter();
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      theme: ThemeData(
-        colorScheme: const ColorScheme.highContrastDark(
-          primary: Colors.purple,
-          secondary: Colors.pink,
+    final router = locator<AppRouter>();
+    return BlocProvider(
+      lazy: false,
+      create: (context) => DanbooruAuthCubit()..loadAuth(),
+      child: MaterialApp.router(
+        theme: ThemeData(
+          primaryColor: Colors.purple.shade500,
+          colorScheme: ColorScheme.dark(
+            primary: Colors.purple.shade500,
+            secondary: Colors.pink,
+          ),
         ),
+        routerDelegate: router.delegate(),
+        routeInformationParser: router.defaultRouteParser(),
       ),
-      routerDelegate: _appRouter.delegate(),
-      routeInformationParser: _appRouter.defaultRouteParser(),
     );
   }
 }

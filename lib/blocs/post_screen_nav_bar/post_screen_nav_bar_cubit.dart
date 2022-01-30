@@ -6,6 +6,7 @@ import 'package:booru_pocket_flutter/blocs/query_params_cubit/query_params_cubit
 import 'package:booru_pocket_flutter/models/api/autocomplete/autocomplete.dart';
 import 'package:booru_pocket_flutter/models/api/queryparams/queryparams.dart';
 import 'package:booru_pocket_flutter/repositories/danbooru.dart';
+import 'package:booru_pocket_flutter/services/locator_service.dart';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -15,13 +16,11 @@ part 'post_screen_nav_bar_cubit.g.dart';
 part 'post_screen_nav_bar_cubit.freezed.dart';
 
 class PostScreenNavbarCubit extends Cubit<PostScreenNavBarState> {
-  final DanbooruRepository repository;
+  final DanbooruRepository repository = locator<DanbooruRepository>();
   final QueryParamsCubit queryParamsCubit;
   final GalleryGridBloc galleryGridBloc;
   PostScreenNavbarCubit(
-      {required this.repository,
-      required this.queryParamsCubit,
-      required this.galleryGridBloc})
+      {required this.queryParamsCubit, required this.galleryGridBloc})
       : super(
           PostScreenNavBarState(),
         );

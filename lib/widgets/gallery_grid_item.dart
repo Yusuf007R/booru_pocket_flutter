@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:booru_pocket_flutter/blocs/gallery_grid_bloc/gallery_grid_bloc.dart';
 import 'package:booru_pocket_flutter/models/api/post/post.dart';
@@ -31,14 +33,14 @@ class _GalleryGridItemState extends State<GalleryGridItem> {
         double height = widget.width / aspectRatio;
         final Color baseColor = Colors.grey.shade400;
         final Color highlightColor = Colors.grey.shade100;
+        // if (post.tags.contains('1girl')) return const SizedBox();
         return SizedBox(
           height: height,
           width: widget.width,
           child: GestureDetector(
             onTap: () {
               Feedback.forTap(context);
-
-              GalleryGridBloc bloc = BlocProvider.of<GalleryGridBloc>(context);
+              final bloc = BlocProvider.of<GalleryGridBloc>(context);
               bloc.add(
                   CurrentDetailIndexChanged(currentDetailIndex: widget.index));
               AutoRouter.of(context).push(

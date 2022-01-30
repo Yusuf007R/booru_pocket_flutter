@@ -8,7 +8,7 @@ part of 'post.dart';
 
 _$_Post _$$_PostFromJson(Map<String, dynamic> json) => _$_Post(
       id: json['id'] as int,
-      tagString: json['tag_string'] as String,
+      tags: _fromJson(json['tag_string'] as String),
       artistTag: json['tag_string_artist'] as String,
       rating: json['rating'] as String?,
       source: json['source'] as String,
@@ -27,7 +27,7 @@ _$_Post _$$_PostFromJson(Map<String, dynamic> json) => _$_Post(
 
 Map<String, dynamic> _$$_PostToJson(_$_Post instance) => <String, dynamic>{
       'id': instance.id,
-      'tag_string': instance.tagString,
+      'tag_string': instance.tags,
       'tag_string_artist': instance.artistTag,
       'rating': instance.rating,
       'source': instance.source,
