@@ -32,11 +32,9 @@ class CustomDrawer extends StatelessWidget {
                 ),
               ),
             ),
-            const Divider(
-              color: Colors.white,
-              thickness: 1,
-            ),
+            const Divider(),
             const DrawerTopList(),
+            const Divider(),
             const DrawerBottomList(),
           ],
         ),
@@ -57,10 +55,6 @@ class DrawerBottomList extends StatelessWidget {
       shrinkWrap: true,
       physics: const BouncingScrollPhysics(),
       children: [
-        const Divider(
-          color: Colors.white,
-          thickness: 1,
-        ),
         DrawerTile(
             icon: MdiIcons.github,
             text: 'Github',

@@ -53,7 +53,8 @@ class _PostScreenState extends State<PostScreen> {
                 keyboardDismissBehavior:
                     ScrollViewKeyboardDismissBehavior.onDrag,
                 controller: _scrollController,
-                physics: const BouncingScrollPhysics(),
+                physics: const NoImplicitScrollPhysics(
+                    parent: BouncingScrollPhysics()),
                 slivers: [
                   const PostScreenNavBar(),
                   GalleryGrid(
@@ -105,5 +106,18 @@ class _PostScreenState extends State<PostScreen> {
       ..removeListener(onScroll)
       ..dispose();
     super.dispose();
+  }
+}
+
+class NoImplicitScrollPhysics extends AlwaysScrollableScrollPhysics {
+  const NoImplicitScrollPhysics({required ScrollPhysics parent})
+      : super(parent: parent);
+
+  @override
+  bool get allowImplicitScrolling => false;
+
+  @override
+  NoImplicitScrollPhysics applyTo(ScrollPhysics? ancestor) {
+    return NoImplicitScrollPhysics(parent: buildParent(ancestor)!);
   }
 }
