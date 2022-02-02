@@ -22,7 +22,7 @@ class CustomDrawer extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Padding(
-              padding: EdgeInsets.only(top: height + 12, left: 15, bottom: 12),
+              padding: EdgeInsets.only(top: height + 12, left: 20, bottom: 12),
               child: const Text(
                 'BooruPOCKET',
                 style: TextStyle(
@@ -154,7 +154,7 @@ class DrawerTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      contentPadding: const EdgeInsets.only(left: 12, bottom: 4),
+      contentPadding: const EdgeInsets.only(left: 15, bottom: 4),
       dense: true,
       title: Row(
         children: [

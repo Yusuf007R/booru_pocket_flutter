@@ -4,12 +4,12 @@ import 'package:booru_pocket_flutter/blocs/post_screen_nav_bar/post_screen_nav_b
 import 'package:booru_pocket_flutter/blocs/query_params_cubit/query_params_cubit.dart';
 import 'package:booru_pocket_flutter/models/api/autocomplete/autocomplete.dart';
 import 'package:booru_pocket_flutter/models/api/queryparams/queryparams.dart';
-import 'package:booru_pocket_flutter/router/router.gr.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:booru_pocket_flutter/widgets/nav_bar_skeleton.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class PostScreenNavBar extends StatefulWidget {
   const PostScreenNavBar({Key? key}) : super(key: key);
@@ -101,8 +101,11 @@ class _PostScreenNavBarState extends State<PostScreenNavBar> {
               }
               context.read<ScaffoldState>().openDrawer();
             },
-            child: Icon(isPushedScreen ? Icons.arrow_back : Icons.menu,
-                size: 28, color: Colors.black),
+            child: Icon(
+              isPushedScreen ? Icons.arrow_back : MdiIcons.menu,
+              size: 28,
+              color: Colors.white,
+            ),
           ),
           padding: const EdgeInsets.symmetric(horizontal: 10),
         ),
@@ -125,7 +128,7 @@ class _PostScreenNavBarState extends State<PostScreenNavBar> {
               child: const Icon(
                 Icons.add,
                 size: 28,
-                color: Colors.black,
+                // color: Colors.white,
               ),
             ),
           ),
@@ -252,10 +255,15 @@ class _SearchInputState extends State<SearchInput> {
         context.read<PostScreenNavbarCubit>().onTextFieldSubmitted();
       },
       style: const TextStyle(
-        color: Colors.black,
+        color: Colors.white,
       ),
+      cursorColor: Colors.white,
       decoration: const InputDecoration(
         hintText: 'Search for tags...',
+        hintStyle: TextStyle(
+          color: Colors.white,
+          fontSize: 16,
+        ),
         enabledBorder: InputBorder.none,
         focusedBorder: InputBorder.none,
         contentPadding: EdgeInsets.symmetric(horizontal: 40),

@@ -39,9 +39,9 @@ class _$PostTearOff {
       @JsonKey(name: 'file_ext')
           required String fileExt,
       @JsonKey(name: 'image_width')
-          required int imageWidth,
+          required double imageWidth,
       @JsonKey(name: 'image_height')
-          required int imageHeight,
+          required double imageHeight,
       required int score,
       @JsonKey(name: 'fav_count')
           required int favoriteCount,
@@ -96,9 +96,9 @@ mixin _$Post {
   @JsonKey(name: 'file_ext')
   String get fileExt => throw _privateConstructorUsedError;
   @JsonKey(name: 'image_width')
-  int get imageWidth => throw _privateConstructorUsedError;
+  double get imageWidth => throw _privateConstructorUsedError;
   @JsonKey(name: 'image_height')
-  int get imageHeight => throw _privateConstructorUsedError;
+  double get imageHeight => throw _privateConstructorUsedError;
   int get score => throw _privateConstructorUsedError;
   @JsonKey(name: 'fav_count')
   int get favoriteCount => throw _privateConstructorUsedError;
@@ -127,8 +127,8 @@ abstract class $PostCopyWith<$Res> {
       @JsonKey(name: 'large_file_url') String largeFileUrl,
       @JsonKey(name: 'file_url') String fileUrl,
       @JsonKey(name: 'file_ext') String fileExt,
-      @JsonKey(name: 'image_width') int imageWidth,
-      @JsonKey(name: 'image_height') int imageHeight,
+      @JsonKey(name: 'image_width') double imageWidth,
+      @JsonKey(name: 'image_height') double imageHeight,
       int score,
       @JsonKey(name: 'fav_count') int favoriteCount,
       @JsonKey(name: 'created_at') DateTime createdAt,
@@ -203,11 +203,11 @@ class _$PostCopyWithImpl<$Res> implements $PostCopyWith<$Res> {
       imageWidth: imageWidth == freezed
           ? _value.imageWidth
           : imageWidth // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       imageHeight: imageHeight == freezed
           ? _value.imageHeight
           : imageHeight // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       score: score == freezed
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
@@ -247,8 +247,8 @@ abstract class _$PostCopyWith<$Res> implements $PostCopyWith<$Res> {
       @JsonKey(name: 'large_file_url') String largeFileUrl,
       @JsonKey(name: 'file_url') String fileUrl,
       @JsonKey(name: 'file_ext') String fileExt,
-      @JsonKey(name: 'image_width') int imageWidth,
-      @JsonKey(name: 'image_height') int imageHeight,
+      @JsonKey(name: 'image_width') double imageWidth,
+      @JsonKey(name: 'image_height') double imageHeight,
       int score,
       @JsonKey(name: 'fav_count') int favoriteCount,
       @JsonKey(name: 'created_at') DateTime createdAt,
@@ -324,11 +324,11 @@ class __$PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res>
       imageWidth: imageWidth == freezed
           ? _value.imageWidth
           : imageWidth // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       imageHeight: imageHeight == freezed
           ? _value.imageHeight
           : imageHeight // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       score: score == freezed
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
@@ -403,10 +403,10 @@ class _$_Post extends _Post {
   final String fileExt;
   @override
   @JsonKey(name: 'image_width')
-  final int imageWidth;
+  final double imageWidth;
   @override
   @JsonKey(name: 'image_height')
-  final int imageHeight;
+  final double imageHeight;
   @override
   final int score;
   @override
@@ -503,9 +503,9 @@ abstract class _Post extends Post {
       @JsonKey(name: 'file_ext')
           required String fileExt,
       @JsonKey(name: 'image_width')
-          required int imageWidth,
+          required double imageWidth,
       @JsonKey(name: 'image_height')
-          required int imageHeight,
+          required double imageHeight,
       required int score,
       @JsonKey(name: 'fav_count')
           required int favoriteCount,
@@ -544,10 +544,10 @@ abstract class _Post extends Post {
   String get fileExt;
   @override
   @JsonKey(name: 'image_width')
-  int get imageWidth;
+  double get imageWidth;
   @override
   @JsonKey(name: 'image_height')
-  int get imageHeight;
+  double get imageHeight;
   @override
   int get score;
   @override

@@ -415,6 +415,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.0"
+  interactiveviewer_gallery:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "1f2962f7a6756f34a6ca48f4fe0cdf547bf0037e"
+      url: "https://github.com/Yusuf007R/interactiveviewer_gallery"
+    source: git
+    version: "0.6.0"
   io:
     dependency: transitive
     description:
@@ -555,13 +564,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.5"
-  photo_view:
-    dependency: "direct main"
-    description:
-      name: photo_view
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.13.0"
   platform:
     dependency: transitive
     description:

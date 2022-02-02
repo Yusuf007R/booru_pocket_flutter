@@ -42,7 +42,7 @@ class NavBarSkeleton extends StatelessWidget {
         width: MediaQuery.of(context).size.width * 0.95,
         height: 45,
         decoration: BoxDecoration(
-          color: const Color(0xFFadb8b5),
+          color: const Color(0xFF6C3FC7),
           borderRadius: BorderRadius.circular(8),
         ),
       ),

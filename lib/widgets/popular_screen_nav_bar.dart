@@ -28,9 +28,19 @@ class PopularScreenNavBarStateWidget extends State<PopularScreenNavBar> {
                   Feedback.forTap(context);
                   context.read<ScaffoldState>().openDrawer();
                 },
-                child: const Icon(MdiIcons.menu, size: 28, color: Colors.black),
+                child: const Icon(MdiIcons.menu, size: 28, color: Colors.white),
               ),
               padding: const EdgeInsets.only(left: 10),
+            ),
+            const Padding(
+              child: Text(
+                'Popular',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                ),
+              ),
+              padding: EdgeInsets.only(top: 4, left: 3),
             ),
           ],
           rightSideWidgets: [
@@ -50,7 +60,7 @@ class PopularScreenNavBarStateWidget extends State<PopularScreenNavBar> {
                     context.read<PopularScreenNavbarCubit>().setDate(date);
                   }
                 },
-                child: const Icon(Icons.today, size: 28, color: Colors.black),
+                child: const Icon(Icons.today, size: 28, color: Colors.white),
               ),
               padding: const EdgeInsets.only(right: 5),
             ),
@@ -69,7 +79,7 @@ class PopularScreenNavBarStateWidget extends State<PopularScreenNavBar> {
                   );
                   context.read<PopularScreenNavbarCubit>().setScale(scale);
                 },
-                child: const Icon(Icons.list, size: 28, color: Colors.black),
+                child: const Icon(Icons.list, size: 28, color: Colors.white),
                 itemBuilder: (context) => [
                   const PopupMenuItem(
                     value: 'day',

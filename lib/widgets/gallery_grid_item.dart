@@ -33,6 +33,7 @@ class _GalleryGridItemState extends State<GalleryGridItem> {
         double height = widget.width / aspectRatio;
         final Color baseColor = Colors.grey.shade400;
         final Color highlightColor = Colors.grey.shade100;
+
         // if (post.tags.contains('1girl')) return const SizedBox();
         return SizedBox(
           height: height,
@@ -43,6 +44,7 @@ class _GalleryGridItemState extends State<GalleryGridItem> {
               final bloc = BlocProvider.of<GalleryGridBloc>(context);
               bloc.add(
                   CurrentDetailIndexChanged(currentDetailIndex: widget.index));
+
               AutoRouter.of(context).push(
                 PostDetailRoute(
                   initialIndex: widget.index,
@@ -57,7 +59,7 @@ class _GalleryGridItemState extends State<GalleryGridItem> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: ExtendedImage.network(
-                    post.highQuality,
+                    post.lowQuality,
                     fit: BoxFit.cover,
                     cache: true,
                     loadStateChanged: (ExtendedImageState state) {
