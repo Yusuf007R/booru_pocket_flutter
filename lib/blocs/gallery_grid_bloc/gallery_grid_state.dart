@@ -9,7 +9,6 @@ class GalleryGridState with _$GalleryGridState {
     @Default(false) bool loading,
     @Default(false) bool refreshing,
     required String uniqueKey,
-    @Default(1) int currentDetailIndex,
   }) = _GalleryGridState;
 
   factory GalleryGridState.fromJson(Map<String, dynamic> json) =>

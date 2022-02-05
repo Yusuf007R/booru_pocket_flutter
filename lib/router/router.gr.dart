@@ -66,7 +66,9 @@ class AppRouter extends _i10.RootStackRouter {
       return _i10.CustomPage<dynamic>(
           routeData: routeData,
           child: _i6.PostDetailScreen(
-              key: args.key, initialIndex: args.initialIndex, bloc: args.bloc),
+              key: args.key,
+              galleryGridBloc: args.galleryGridBloc,
+              initialIndex: args.initialIndex),
           transitionsBuilder: _i10.TransitionsBuilders.fadeIn,
           opaque: true,
           barrierDismissible: false);
@@ -220,29 +222,31 @@ class UserProfileRoute extends _i10.PageRouteInfo<void> {
 class PostDetailRoute extends _i10.PageRouteInfo<PostDetailRouteArgs> {
   PostDetailRoute(
       {_i11.Key? key,
-      required int initialIndex,
-      required _i13.GalleryGridBloc bloc})
+      required _i13.GalleryGridBloc galleryGridBloc,
+      required int initialIndex})
       : super(PostDetailRoute.name,
             path: 'post-detail-screen',
             args: PostDetailRouteArgs(
-                key: key, initialIndex: initialIndex, bloc: bloc));
+                key: key,
+                galleryGridBloc: galleryGridBloc,
+                initialIndex: initialIndex));
 
   static const String name = 'PostDetailRoute';
 }
 
 class PostDetailRouteArgs {
   const PostDetailRouteArgs(
-      {this.key, required this.initialIndex, required this.bloc});
+      {this.key, required this.galleryGridBloc, required this.initialIndex});
 
   final _i11.Key? key;
 
-  final int initialIndex;
+  final _i13.GalleryGridBloc galleryGridBloc;
 
-  final _i13.GalleryGridBloc bloc;
+  final int initialIndex;
 
   @override
   String toString() {
-    return 'PostDetailRouteArgs{key: $key, initialIndex: $initialIndex, bloc: $bloc}';
+    return 'PostDetailRouteArgs{key: $key, galleryGridBloc: $galleryGridBloc, initialIndex: $initialIndex}';
   }
 }
 

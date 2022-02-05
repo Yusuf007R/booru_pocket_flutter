@@ -1,4 +1,3 @@
-import 'package:auto_route/annotations.dart';
 import 'package:bloc/bloc.dart';
 import 'package:booru_pocket_flutter/blocs/query_params_cubit/query_params_cubit.dart';
 import 'package:booru_pocket_flutter/services/locator_service.dart';
@@ -29,7 +28,6 @@ class GalleryGridBloc extends Bloc<GalleryGridEvent, GalleryGridState> {
         ) {
     on<PostsFetched>((event, emit) async {
       if (state.loading) return;
-      print('fetching ${queryParamsCubit.state.queryParams.page}');
       emit(state.copyWith(loading: true));
       List<Post> posts = await _fetchPosts();
       GalleryGridState stateCopy = state.copyWith(
@@ -54,10 +52,6 @@ class GalleryGridBloc extends Bloc<GalleryGridEvent, GalleryGridState> {
       );
       if (!queryParamsCubit.isClosed) queryParamsCubit.incrementPage();
       emit(stateCopy);
-    });
-
-    on<CurrentDetailIndexChanged>((event, emit) {
-      emit(state.copyWith(currentDetailIndex: event.currentDetailIndex));
     });
   }
 

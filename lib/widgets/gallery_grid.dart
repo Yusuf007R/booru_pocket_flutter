@@ -2,7 +2,6 @@ import 'package:booru_pocket_flutter/models/api/post/post.dart';
 import 'package:booru_pocket_flutter/widgets/gallery_grid_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:waterfall_flow/waterfall_flow.dart';
 
 // class GalleryGrid extends StatelessWidget {
 //   const GalleryGrid({Key? key, required this.posts}) : super(key: key);

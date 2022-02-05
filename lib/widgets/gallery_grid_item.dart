@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:booru_pocket_flutter/blocs/gallery_grid_bloc/gallery_grid_bloc.dart';
 import 'package:booru_pocket_flutter/models/api/post/post.dart';
@@ -42,13 +40,11 @@ class _GalleryGridItemState extends State<GalleryGridItem> {
             onTap: () {
               Feedback.forTap(context);
               final bloc = BlocProvider.of<GalleryGridBloc>(context);
-              bloc.add(
-                  CurrentDetailIndexChanged(currentDetailIndex: widget.index));
 
               AutoRouter.of(context).push(
                 PostDetailRoute(
                   initialIndex: widget.index,
-                  bloc: bloc,
+                  galleryGridBloc: bloc,
                 ),
               );
             },
@@ -59,7 +55,7 @@ class _GalleryGridItemState extends State<GalleryGridItem> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: ExtendedImage.network(
-                    post.lowQuality,
+                    post.highQuality,
                     fit: BoxFit.cover,
                     cache: true,
                     loadStateChanged: (ExtendedImageState state) {

@@ -1,41 +1,60 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:booru_pocket_flutter/blocs/gallery_grid_bloc/gallery_grid_bloc.dart';
+import 'package:booru_pocket_flutter/blocs/post_detail_screen_cubit/post_detail_screen_cubit_cubit.dart';
+import 'package:booru_pocket_flutter/widgets/post_detail_menu.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:interactiveviewer_gallery/interactiveviewer_gallery.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-class PostDetailScreen extends StatefulWidget {
-  const PostDetailScreen({
-    Key? key,
-    required this.initialIndex,
-    required this.bloc,
-  }) : super(key: key);
-  final GalleryGridBloc bloc;
+class PostDetailScreen extends StatelessWidget {
+  const PostDetailScreen(
+      {Key? key, required this.galleryGridBloc, required this.initialIndex})
+      : super(key: key);
+
   final int initialIndex;
-
+  final GalleryGridBloc galleryGridBloc;
   @override
-  State<PostDetailScreen> createState() => _PostDetailScreenState();
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          lazy: false,
+          create: (context) =>
+              PostDetailScreenCubitCubit(initialIndex: initialIndex),
+        ),
+        BlocProvider.value(
+          value: galleryGridBloc,
+        ),
+      ],
+      child: const _PostDetailScreen(),
+    );
+  }
 }
 
-class _PostDetailScreenState extends State<PostDetailScreen> {
-  bool willPop = false;
-  Map<int, bool> maxQuality = {};
+class _PostDetailScreen extends StatefulWidget {
+  const _PostDetailScreen({Key? key}) : super(key: key);
 
-  bool loading = false;
+  @override
+  State<_PostDetailScreen> createState() => _PostDetailScreenState();
+}
+
+class _PostDetailScreenState extends State<_PostDetailScreen> {
+  late final PostDetailScreenCubitCubit detailCubit;
+  late final int initialIndex;
+
+  @override
+  void initState() {
+    super.initState();
+    detailCubit = context.read<PostDetailScreenCubitCubit>();
+  }
 
   Widget? loadStateChanged(ExtendedImageState state) {
     switch (state.extendedImageLoadState) {
       case LoadState.loading:
-        WidgetsBinding.instance?.addPostFrameCallback((_) => setState(() {
-              loading = true;
-            }));
+        detailCubit.setLoading(true);
         return const SizedBox();
       case LoadState.completed:
-        WidgetsBinding.instance?.addPostFrameCallback((_) => setState(() {
-              loading = false;
-            }));
+        detailCubit.setLoading(false);
         return null;
       default:
         return const SizedBox();
@@ -44,126 +63,72 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<GalleryGridBloc, GalleryGridState>(
-      bloc: widget.bloc,
-      buildWhen: (previous, current) =>
-          (previous.posts.length != current.posts.length) ||
-          (previous.currentDetailIndex != current.currentDetailIndex),
-      builder: (context, blocState) {
-        final currentPost = blocState.posts[blocState.currentDetailIndex];
-        return WillPopScope(
-          onWillPop: () async {
-            setState(() {
-              willPop = true;
-            });
-            return true;
-          },
-          child: Scaffold(
-            backgroundColor: Colors.black,
-            extendBody: true,
-            extendBodyBehindAppBar: true,
-            appBar: AppBar(
-              shadowColor: Colors.transparent,
-              title: Text("Post #${currentPost.id}"),
-              backgroundColor: Colors.black.withOpacity(0.4),
-              leading: IconButton(
-                  onPressed: () => {
-                        AutoRouter.of(context).pop(),
-                      },
-                  icon: const Icon(Icons.arrow_back)),
-              actions: [
-                IconButton(
-                    onPressed: () => {},
-                    icon: const Icon(
-                      Icons.more_vert,
-                      color: Colors.white,
-                    ))
-              ],
-            ),
-            bottomNavigationBar: Padding(
-              padding: const EdgeInsets.only(bottom: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  IconButton(
-                      icon: const Icon(
-                        Icons.info_outline,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {}),
-                  IconButton(
-                      icon: const Icon(
-                        Icons.save_outlined,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {}),
-                  IconButton(
-                      icon: Icon(
-                        maxQuality[blocState.currentDetailIndex] == true
-                            ? Icons.high_quality
-                            : Icons.high_quality_outlined,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          maxQuality[blocState.currentDetailIndex] == true
-                              ? maxQuality[blocState.currentDetailIndex] = false
-                              : maxQuality[blocState.currentDetailIndex] = true;
-                        });
-                      }),
-                  IconButton(
-                      icon: const Icon(
-                        MdiIcons.heartOutline,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {}),
-                ],
-              ),
-            ),
-            body: Stack(
-              children: [
-                InteractiveviewerGallery(
-                  disableDismissable: true,
-                  sources: blocState.posts,
-                  doubleTapScale: 0.3,
-                  initIndex: widget.initialIndex,
-                  maxScale: 8.0,
-                  itemBuilder: (context, index, isFocus) {
-                    final post = blocState.posts[index];
-                    final isMaxQuality = maxQuality[index] ?? false;
-                    final tag =
-                        isFocus ? post.id.toString() : UniqueKey().toString();
-                    return Hero(
-                      tag: '${blocState.uniqueKey}-$tag',
-                      child: Stack(
-                        alignment: Alignment.center,
-                        fit: StackFit.expand,
-                        children: [
-                          ExtendedImage.network(
-                            post.highQuality,
-                            loadStateChanged: loadStateChanged,
-                          ),
-                          if (isFocus && isMaxQuality && !willPop)
-                            ExtendedImage.network(
-                              post.maxQuality,
-                              loadStateChanged: loadStateChanged,
+    return BlocBuilder<PostDetailScreenCubitCubit, PostDetailScreenCubitState>(
+      builder: (context, state) {
+        return BlocBuilder<GalleryGridBloc, GalleryGridState>(
+          buildWhen: (previous, current) =>
+              (previous.posts.length != current.posts.length),
+          builder: (context, gridBlocState) {
+            return WillPopScope(
+              onWillPop: () async {
+                detailCubit.willPop();
+                return true;
+              },
+              child: Scaffold(
+                backgroundColor: Colors.black,
+                extendBody: true,
+                extendBodyBehindAppBar: true,
+                appBar: const PostDetailAppBar(),
+                bottomNavigationBar: const PostDetailBottomBar(),
+                body: Stack(
+                  children: [
+                    GestureDetector(
+                      onTap: () => detailCubit.toggleShowMenu(),
+                      child: InteractiveviewerGallery(
+                        disableDismissable: true,
+                        sources: gridBlocState.posts,
+                        doubleTapScale: 0.3,
+                        initIndex: state.currentPostIndex,
+                        maxScale: 8.0,
+                        itemBuilder: (context, index, isFocus) {
+                          final post = gridBlocState.posts[index];
+                          final isMaxQuality = state.maxQuality[index] ?? false;
+                          final tag = index == state.currentPostIndex
+                              ? "${gridBlocState.uniqueKey}-${post.id}"
+                              : UniqueKey().toString();
+                          return Hero(
+                            tag: tag,
+                            child: Stack(
+                              alignment: Alignment.center,
+                              fit: StackFit.expand,
+                              children: [
+                                ExtendedImage.network(
+                                  post.highQuality,
+                                  loadStateChanged: loadStateChanged,
+                                ),
+                                if (isFocus && isMaxQuality && !state.willPop)
+                                  ExtendedImage.network(
+                                    post.maxQuality,
+                                    loadStateChanged: loadStateChanged,
+                                  ),
+                              ],
                             ),
-                        ],
+                          );
+                        },
+                        onPageChanged: (int pageIndex) {
+                          detailCubit.setCurrentPostIndex(pageIndex);
+                        },
                       ),
-                    );
-                  },
-                  onPageChanged: (int pageIndex) {
-                    widget.bloc.add(CurrentDetailIndexChanged(
-                        currentDetailIndex: pageIndex));
-                  },
+                    ),
+                    if (state.loading)
+                      const Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                  ],
                 ),
-                if (loading)
-                  const Center(
-                    child: CircularProgressIndicator(),
-                  ),
-              ],
-            ),
-          ),
+              ),
+            );
+          },
         );
       },
     );

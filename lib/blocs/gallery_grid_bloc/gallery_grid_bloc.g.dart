@@ -15,7 +15,6 @@ _$_GalleryGridState _$$_GalleryGridStateFromJson(Map<String, dynamic> json) =>
       loading: json['loading'] as bool? ?? false,
       refreshing: json['refreshing'] as bool? ?? false,
       uniqueKey: json['uniqueKey'] as String,
-      currentDetailIndex: json['currentDetailIndex'] as int? ?? 1,
     );
 
 Map<String, dynamic> _$$_GalleryGridStateToJson(_$_GalleryGridState instance) =>
@@ -24,5 +23,4 @@ Map<String, dynamic> _$$_GalleryGridStateToJson(_$_GalleryGridState instance) =>
       'loading': instance.loading,
       'refreshing': instance.refreshing,
       'uniqueKey': instance.uniqueKey,
-      'currentDetailIndex': instance.currentDetailIndex,
     };

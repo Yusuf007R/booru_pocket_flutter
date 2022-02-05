@@ -5,10 +5,15 @@ import 'package:booru_pocket_flutter/models/api/autocomplete/autocomplete.dart';
 import 'package:booru_pocket_flutter/models/api/post/post.dart';
 import 'package:booru_pocket_flutter/models/api/queryparams/queryparams.dart';
 import 'package:booru_pocket_flutter/models/api/user/user.dart';
+import 'package:booru_pocket_flutter/utils/compute_json_decode.dart';
 import 'package:dio/dio.dart';
 
 class DanbooruRepository {
   Dio dio = Dio(BaseOptions(baseUrl: 'https://safebooru.donmai.us'));
+
+  DanbooruRepository() {
+    (dio.transformer as DefaultTransformer).jsonDecodeCallback = parseJson;
+  }
 
   Future<List<Post>> getPosts(PostParams params) async {
     Response response = await dio.get(
