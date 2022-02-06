@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:booru_pocket_flutter/models/api/post/post.dart';
 import 'package:booru_pocket_flutter/models/api/queryparams/queryparams.dart';
 import 'package:booru_pocket_flutter/repositories/danbooru.dart';
-import 'package:bloc_concurrency/bloc_concurrency.dart';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -27,29 +26,22 @@ class GalleryGridBloc extends Bloc<GalleryGridEvent, GalleryGridState> {
           ),
         ) {
     on<PostsFetched>((event, emit) async {
-      if (state.loading) return;
-      emit(state.copyWith(loading: true));
+      if (state.gridStatus == GridStatus.fetching) return;
+      emit(state.copyWith(gridStatus: GridStatus.fetching));
       List<Post> posts = await _fetchPosts();
       GalleryGridState stateCopy = state.copyWith(
-        posts: [...state.posts, ...posts],
-        loading: false,
-      );
+          posts: [...state.posts, ...posts], gridStatus: GridStatus.idle);
       if (!queryParamsCubit.isClosed) queryParamsCubit.incrementPage();
       emit(stateCopy);
-    }, transformer: droppable());
+    });
 
     on<PostsRefreshed>((event, emit) async {
-      if (state.refreshing) return;
-      emit(state.copyWith(
-        posts: const [],
-        refreshing: true,
-      ));
+      if (state.gridStatus == GridStatus.refreshing) return;
+      emit(state.copyWith(posts: const [], gridStatus: GridStatus.refreshing));
       queryParamsCubit.resetPage();
       List<Post> posts = await _fetchPosts();
-      GalleryGridState stateCopy = state.copyWith(
-        posts: posts,
-        refreshing: false,
-      );
+      GalleryGridState stateCopy =
+          state.copyWith(posts: posts, gridStatus: GridStatus.idle);
       if (!queryParamsCubit.isClosed) queryParamsCubit.incrementPage();
       emit(stateCopy);
     });

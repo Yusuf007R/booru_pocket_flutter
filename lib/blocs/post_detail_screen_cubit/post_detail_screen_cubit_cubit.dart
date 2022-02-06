@@ -23,4 +23,16 @@ class PostDetailScreenCubitCubit extends Cubit<PostDetailScreenCubitState> {
         state.maxQuality[state.currentPostIndex] == true ? false : true;
     emit(state.copyWith(maxQuality: newMap));
   }
+
+  void clearSelectedTags() => emit(state.copyWith(selectedTags: []));
+
+  void addTag(String tag) {
+    emit(state.copyWith(selectedTags: [...state.selectedTags, tag]));
+  }
+
+  void removeTag(String tag) {
+    emit(state.copyWith(
+        selectedTags:
+            state.selectedTags.where((element) => element != tag).toList()));
+  }
 }

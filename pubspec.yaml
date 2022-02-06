@@ -42,7 +42,6 @@ dependencies:
   json_annotation: ^4.4.0
   auto_route: ^3.2.1
   provider: ^6.0.2
-  bloc_concurrency: ^0.2.0
   url_launcher: ^6.0.18
   flutter_secure_storage: ^5.0.2
   get_it: ^7.2.0
@@ -55,6 +54,8 @@ dependencies:
   hydrated_bloc: ^8.0.0
   path_provider: ^2.0.8
   share_plus: ^3.0.4
+  flutter_speed_dial: ^5.0.0+1
+  fluttertoast: ^8.0.8
 
 dev_dependencies:
   flutter_test:

@@ -9,6 +9,7 @@ import 'package:dio/dio.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:share_plus/share_plus.dart';
@@ -74,11 +75,20 @@ class ImageDownloaderService {
     final file = File('$path/post-${post.id}.${post.fileExt}');
     final notifyService = locator<NotificationService>();
     try {
+      Fluttertoast.showToast(
+        msg: "Download started",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
       notifyService.showProgressDownloadNotify(post.id);
       final bytes = await getImageData(post.maxQuality);
       if (bytes == null) return null;
       await file.writeAsBytes(bytes);
       notifyService.showDownloadCompletedNotify(post.id, post.highQuality);
+
       return file;
     } catch (e) {
       return null;

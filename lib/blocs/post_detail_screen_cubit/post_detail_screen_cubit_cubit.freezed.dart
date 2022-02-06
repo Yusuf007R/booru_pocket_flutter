@@ -22,12 +22,14 @@ class _$PostDetailScreenCubitStateTearOff {
       {bool willPop = false,
       Map<int, bool> maxQuality = const {},
       bool loading = false,
+      List<String> selectedTags = const [],
       required int currentPostIndex,
       bool showMenu = true}) {
     return _PostDetailScreenCubitState(
       willPop: willPop,
       maxQuality: maxQuality,
       loading: loading,
+      selectedTags: selectedTags,
       currentPostIndex: currentPostIndex,
       showMenu: showMenu,
     );
@@ -42,6 +44,7 @@ mixin _$PostDetailScreenCubitState {
   bool get willPop => throw _privateConstructorUsedError;
   Map<int, bool> get maxQuality => throw _privateConstructorUsedError;
   bool get loading => throw _privateConstructorUsedError;
+  List<String> get selectedTags => throw _privateConstructorUsedError;
   int get currentPostIndex => throw _privateConstructorUsedError;
   bool get showMenu => throw _privateConstructorUsedError;
 
@@ -59,6 +62,7 @@ abstract class $PostDetailScreenCubitStateCopyWith<$Res> {
       {bool willPop,
       Map<int, bool> maxQuality,
       bool loading,
+      List<String> selectedTags,
       int currentPostIndex,
       bool showMenu});
 }
@@ -77,6 +81,7 @@ class _$PostDetailScreenCubitStateCopyWithImpl<$Res>
     Object? willPop = freezed,
     Object? maxQuality = freezed,
     Object? loading = freezed,
+    Object? selectedTags = freezed,
     Object? currentPostIndex = freezed,
     Object? showMenu = freezed,
   }) {
@@ -93,6 +98,10 @@ class _$PostDetailScreenCubitStateCopyWithImpl<$Res>
           ? _value.loading
           : loading // ignore: cast_nullable_to_non_nullable
               as bool,
+      selectedTags: selectedTags == freezed
+          ? _value.selectedTags
+          : selectedTags // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       currentPostIndex: currentPostIndex == freezed
           ? _value.currentPostIndex
           : currentPostIndex // ignore: cast_nullable_to_non_nullable
@@ -117,6 +126,7 @@ abstract class _$PostDetailScreenCubitStateCopyWith<$Res>
       {bool willPop,
       Map<int, bool> maxQuality,
       bool loading,
+      List<String> selectedTags,
       int currentPostIndex,
       bool showMenu});
 }
@@ -138,6 +148,7 @@ class __$PostDetailScreenCubitStateCopyWithImpl<$Res>
     Object? willPop = freezed,
     Object? maxQuality = freezed,
     Object? loading = freezed,
+    Object? selectedTags = freezed,
     Object? currentPostIndex = freezed,
     Object? showMenu = freezed,
   }) {
@@ -154,6 +165,10 @@ class __$PostDetailScreenCubitStateCopyWithImpl<$Res>
           ? _value.loading
           : loading // ignore: cast_nullable_to_non_nullable
               as bool,
+      selectedTags: selectedTags == freezed
+          ? _value.selectedTags
+          : selectedTags // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       currentPostIndex: currentPostIndex == freezed
           ? _value.currentPostIndex
           : currentPostIndex // ignore: cast_nullable_to_non_nullable
@@ -173,6 +188,7 @@ class _$_PostDetailScreenCubitState implements _PostDetailScreenCubitState {
       {this.willPop = false,
       this.maxQuality = const {},
       this.loading = false,
+      this.selectedTags = const [],
       required this.currentPostIndex,
       this.showMenu = true});
 
@@ -185,6 +201,9 @@ class _$_PostDetailScreenCubitState implements _PostDetailScreenCubitState {
   @JsonKey()
   @override
   final bool loading;
+  @JsonKey()
+  @override
+  final List<String> selectedTags;
   @override
   final int currentPostIndex;
   @JsonKey()
@@ -193,7 +212,7 @@ class _$_PostDetailScreenCubitState implements _PostDetailScreenCubitState {
 
   @override
   String toString() {
-    return 'PostDetailScreenCubitState(willPop: $willPop, maxQuality: $maxQuality, loading: $loading, currentPostIndex: $currentPostIndex, showMenu: $showMenu)';
+    return 'PostDetailScreenCubitState(willPop: $willPop, maxQuality: $maxQuality, loading: $loading, selectedTags: $selectedTags, currentPostIndex: $currentPostIndex, showMenu: $showMenu)';
   }
 
   @override
@@ -206,6 +225,8 @@ class _$_PostDetailScreenCubitState implements _PostDetailScreenCubitState {
                 .equals(other.maxQuality, maxQuality) &&
             const DeepCollectionEquality().equals(other.loading, loading) &&
             const DeepCollectionEquality()
+                .equals(other.selectedTags, selectedTags) &&
+            const DeepCollectionEquality()
                 .equals(other.currentPostIndex, currentPostIndex) &&
             const DeepCollectionEquality().equals(other.showMenu, showMenu));
   }
@@ -216,6 +237,7 @@ class _$_PostDetailScreenCubitState implements _PostDetailScreenCubitState {
       const DeepCollectionEquality().hash(willPop),
       const DeepCollectionEquality().hash(maxQuality),
       const DeepCollectionEquality().hash(loading),
+      const DeepCollectionEquality().hash(selectedTags),
       const DeepCollectionEquality().hash(currentPostIndex),
       const DeepCollectionEquality().hash(showMenu));
 
@@ -232,6 +254,7 @@ abstract class _PostDetailScreenCubitState
       {bool willPop,
       Map<int, bool> maxQuality,
       bool loading,
+      List<String> selectedTags,
       required int currentPostIndex,
       bool showMenu}) = _$_PostDetailScreenCubitState;
 
@@ -241,6 +264,8 @@ abstract class _PostDetailScreenCubitState
   Map<int, bool> get maxQuality;
   @override
   bool get loading;
+  @override
+  List<String> get selectedTags;
   @override
   int get currentPostIndex;
   @override

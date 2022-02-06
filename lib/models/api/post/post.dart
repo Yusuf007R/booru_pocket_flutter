@@ -5,16 +5,23 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'post.freezed.dart';
 part 'post.g.dart';
 
+enum PostRating { safe, questionable, explicit, unknown }
+
 @freezed
 class Post with _$Post {
   const Post._();
 
   factory Post({
     required int id,
-    @JsonKey(name: 'tag_string', fromJson: _fromJson)
+    @JsonKey(name: 'tag_string_general', fromJson: _tagsArrayFromJson)
         required List<String> tags,
-    @JsonKey(name: 'tag_string_artist') required String artistTag,
-    String? rating,
+    @JsonKey(name: 'tag_string_artist', fromJson: _tagsArrayFromJson)
+        required List<String> artistTag,
+    @JsonKey(name: 'tag_string_character', fromJson: _tagsArrayFromJson)
+        required List<String> characterTag,
+    @JsonKey(name: 'tag_string_copyright', fromJson: _tagsArrayFromJson)
+        required List<String> seriesTag,
+    @JsonKey(fromJson: _ratingFromJson) required PostRating rating,
     required String source,
     @JsonKey(name: 'preview_file_url') required String previewFileUrl,
     @JsonKey(name: 'large_file_url') required String largeFileUrl,
@@ -22,8 +29,10 @@ class Post with _$Post {
     @JsonKey(name: 'file_ext') required String fileExt,
     @JsonKey(name: 'image_width') required double imageWidth,
     @JsonKey(name: 'image_height') required double imageHeight,
+    @JsonKey(name: 'file_size') required double size,
     required int score,
     @JsonKey(name: 'fav_count') required int favoriteCount,
+    @JsonKey(name: 'uploader_id') required int uploaderId,
     @JsonKey(name: 'created_at') required DateTime createdAt,
     @JsonKey(name: 'updated_at') required DateTime updatedAt,
     String? video,
@@ -51,8 +60,23 @@ class Post with _$Post {
   factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
 }
 
-List<String> _fromJson(
+List<String> _tagsArrayFromJson(
   String tags,
 ) {
   return tags.split(' ');
+}
+
+PostRating _ratingFromJson(
+  String rating,
+) {
+  switch (rating) {
+    case 's':
+      return PostRating.safe;
+    case 'q':
+      return PostRating.questionable;
+    case 'e':
+      return PostRating.explicit;
+    default:
+      return PostRating.unknown;
+  }
 }

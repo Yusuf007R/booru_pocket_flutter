@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 class NotificationService {
   late final String donwloadChannelKey;
   NotificationService() {
-    donwloadChannelKey = 'download_channeltest1';
+    donwloadChannelKey = 'download_channeltest3';
     AwesomeNotifications().initialize(
         null,
         [
           NotificationChannel(
-            importance: NotificationImportance.Max,
+            importance: NotificationImportance.Default,
             channelGroupKey: '$donwloadChannelKey-group',
             channelKey: donwloadChannelKey,
             channelName: 'Download Channel',

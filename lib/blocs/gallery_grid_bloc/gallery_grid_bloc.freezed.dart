@@ -24,13 +24,11 @@ class _$GalleryGridStateTearOff {
 
   _GalleryGridState call(
       {List<Post> posts = const [],
-      bool loading = false,
-      bool refreshing = false,
+      GridStatus gridStatus = GridStatus.idle,
       required String uniqueKey}) {
     return _GalleryGridState(
       posts: posts,
-      loading: loading,
-      refreshing: refreshing,
+      gridStatus: gridStatus,
       uniqueKey: uniqueKey,
     );
   }
@@ -46,8 +44,7 @@ const $GalleryGridState = _$GalleryGridStateTearOff();
 /// @nodoc
 mixin _$GalleryGridState {
   List<Post> get posts => throw _privateConstructorUsedError;
-  bool get loading => throw _privateConstructorUsedError;
-  bool get refreshing => throw _privateConstructorUsedError;
+  GridStatus get gridStatus => throw _privateConstructorUsedError;
   String get uniqueKey => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -61,8 +58,7 @@ abstract class $GalleryGridStateCopyWith<$Res> {
   factory $GalleryGridStateCopyWith(
           GalleryGridState value, $Res Function(GalleryGridState) then) =
       _$GalleryGridStateCopyWithImpl<$Res>;
-  $Res call(
-      {List<Post> posts, bool loading, bool refreshing, String uniqueKey});
+  $Res call({List<Post> posts, GridStatus gridStatus, String uniqueKey});
 }
 
 /// @nodoc
@@ -77,8 +73,7 @@ class _$GalleryGridStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? posts = freezed,
-    Object? loading = freezed,
-    Object? refreshing = freezed,
+    Object? gridStatus = freezed,
     Object? uniqueKey = freezed,
   }) {
     return _then(_value.copyWith(
@@ -86,14 +81,10 @@ class _$GalleryGridStateCopyWithImpl<$Res>
           ? _value.posts
           : posts // ignore: cast_nullable_to_non_nullable
               as List<Post>,
-      loading: loading == freezed
-          ? _value.loading
-          : loading // ignore: cast_nullable_to_non_nullable
-              as bool,
-      refreshing: refreshing == freezed
-          ? _value.refreshing
-          : refreshing // ignore: cast_nullable_to_non_nullable
-              as bool,
+      gridStatus: gridStatus == freezed
+          ? _value.gridStatus
+          : gridStatus // ignore: cast_nullable_to_non_nullable
+              as GridStatus,
       uniqueKey: uniqueKey == freezed
           ? _value.uniqueKey
           : uniqueKey // ignore: cast_nullable_to_non_nullable
@@ -109,8 +100,7 @@ abstract class _$GalleryGridStateCopyWith<$Res>
           _GalleryGridState value, $Res Function(_GalleryGridState) then) =
       __$GalleryGridStateCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {List<Post> posts, bool loading, bool refreshing, String uniqueKey});
+  $Res call({List<Post> posts, GridStatus gridStatus, String uniqueKey});
 }
 
 /// @nodoc
@@ -127,8 +117,7 @@ class __$GalleryGridStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? posts = freezed,
-    Object? loading = freezed,
-    Object? refreshing = freezed,
+    Object? gridStatus = freezed,
     Object? uniqueKey = freezed,
   }) {
     return _then(_GalleryGridState(
@@ -136,14 +125,10 @@ class __$GalleryGridStateCopyWithImpl<$Res>
           ? _value.posts
           : posts // ignore: cast_nullable_to_non_nullable
               as List<Post>,
-      loading: loading == freezed
-          ? _value.loading
-          : loading // ignore: cast_nullable_to_non_nullable
-              as bool,
-      refreshing: refreshing == freezed
-          ? _value.refreshing
-          : refreshing // ignore: cast_nullable_to_non_nullable
-              as bool,
+      gridStatus: gridStatus == freezed
+          ? _value.gridStatus
+          : gridStatus // ignore: cast_nullable_to_non_nullable
+              as GridStatus,
       uniqueKey: uniqueKey == freezed
           ? _value.uniqueKey
           : uniqueKey // ignore: cast_nullable_to_non_nullable
@@ -157,8 +142,7 @@ class __$GalleryGridStateCopyWithImpl<$Res>
 class _$_GalleryGridState implements _GalleryGridState {
   _$_GalleryGridState(
       {this.posts = const [],
-      this.loading = false,
-      this.refreshing = false,
+      this.gridStatus = GridStatus.idle,
       required this.uniqueKey});
 
   factory _$_GalleryGridState.fromJson(Map<String, dynamic> json) =>
@@ -169,16 +153,13 @@ class _$_GalleryGridState implements _GalleryGridState {
   final List<Post> posts;
   @JsonKey()
   @override
-  final bool loading;
-  @JsonKey()
-  @override
-  final bool refreshing;
+  final GridStatus gridStatus;
   @override
   final String uniqueKey;
 
   @override
   String toString() {
-    return 'GalleryGridState(posts: $posts, loading: $loading, refreshing: $refreshing, uniqueKey: $uniqueKey)';
+    return 'GalleryGridState(posts: $posts, gridStatus: $gridStatus, uniqueKey: $uniqueKey)';
   }
 
   @override
@@ -187,9 +168,8 @@ class _$_GalleryGridState implements _GalleryGridState {
         (other.runtimeType == runtimeType &&
             other is _GalleryGridState &&
             const DeepCollectionEquality().equals(other.posts, posts) &&
-            const DeepCollectionEquality().equals(other.loading, loading) &&
             const DeepCollectionEquality()
-                .equals(other.refreshing, refreshing) &&
+                .equals(other.gridStatus, gridStatus) &&
             const DeepCollectionEquality().equals(other.uniqueKey, uniqueKey));
   }
 
@@ -197,8 +177,7 @@ class _$_GalleryGridState implements _GalleryGridState {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(posts),
-      const DeepCollectionEquality().hash(loading),
-      const DeepCollectionEquality().hash(refreshing),
+      const DeepCollectionEquality().hash(gridStatus),
       const DeepCollectionEquality().hash(uniqueKey));
 
   @JsonKey(ignore: true)
@@ -215,8 +194,7 @@ class _$_GalleryGridState implements _GalleryGridState {
 abstract class _GalleryGridState implements GalleryGridState {
   factory _GalleryGridState(
       {List<Post> posts,
-      bool loading,
-      bool refreshing,
+      GridStatus gridStatus,
       required String uniqueKey}) = _$_GalleryGridState;
 
   factory _GalleryGridState.fromJson(Map<String, dynamic> json) =
@@ -225,9 +203,7 @@ abstract class _GalleryGridState implements GalleryGridState {
   @override
   List<Post> get posts;
   @override
-  bool get loading;
-  @override
-  bool get refreshing;
+  GridStatus get gridStatus;
   @override
   String get uniqueKey;
   @override

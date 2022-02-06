@@ -12,15 +12,21 @@ _$_GalleryGridState _$$_GalleryGridStateFromJson(Map<String, dynamic> json) =>
               ?.map((e) => Post.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
-      loading: json['loading'] as bool? ?? false,
-      refreshing: json['refreshing'] as bool? ?? false,
+      gridStatus:
+          $enumDecodeNullable(_$GridStatusEnumMap, json['gridStatus']) ??
+              GridStatus.idle,
       uniqueKey: json['uniqueKey'] as String,
     );
 
 Map<String, dynamic> _$$_GalleryGridStateToJson(_$_GalleryGridState instance) =>
     <String, dynamic>{
       'posts': instance.posts,
-      'loading': instance.loading,
-      'refreshing': instance.refreshing,
+      'gridStatus': _$GridStatusEnumMap[instance.gridStatus],
       'uniqueKey': instance.uniqueKey,
     };
+
+const _$GridStatusEnumMap = {
+  GridStatus.refreshing: 'refreshing',
+  GridStatus.idle: 'idle',
+  GridStatus.fetching: 'fetching',
+};

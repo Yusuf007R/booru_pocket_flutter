@@ -18,7 +18,6 @@ class PostDetailScreen extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          lazy: false,
           create: (context) =>
               PostDetailScreenCubitCubit(initialIndex: initialIndex),
         ),

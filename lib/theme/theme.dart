@@ -10,6 +10,7 @@ ThemeData lightThemeData = ThemeData.light().copyWith(
   iconTheme: const IconThemeData(
     color: Colors.black,
   ),
+  brightness: Brightness.light,
   colorScheme: const ColorScheme.light(
     primary: Color(0xFF6C3FC7),
     secondary: Color(0xFFBF87F3),
@@ -28,8 +29,9 @@ ThemeData darkThemeData = ThemeData.dark().copyWith(
   iconTheme: const IconThemeData(
     color: Colors.white70,
   ),
+  brightness: Brightness.dark,
   primaryColor: const Color(0xFF6C3FC7),
-  colorScheme: const ColorScheme.light(
+  colorScheme: const ColorScheme.dark(
     primary: Color(0xFF6C3FC7),
     secondary: Color(0xFFBF87F3),
   ),

@@ -1,13 +1,12 @@
 part of 'gallery_grid_bloc.dart';
 
-enum NavBarStatus { fetching, idle }
+enum GridStatus { refreshing, idle, fetching }
 
 @freezed
 class GalleryGridState with _$GalleryGridState {
   factory GalleryGridState({
     @Default([]) List<Post> posts,
-    @Default(false) bool loading,
-    @Default(false) bool refreshing,
+    @Default(GridStatus.idle) GridStatus gridStatus,
     required String uniqueKey,
   }) = _GalleryGridState;
 

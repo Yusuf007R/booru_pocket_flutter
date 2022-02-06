@@ -1,13 +1,17 @@
 import 'dart:async';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:booru_pocket_flutter/blocs/gallery_grid_bloc/gallery_grid_bloc.dart';
+import 'package:booru_pocket_flutter/router/router.gr.dart';
 import 'package:booru_pocket_flutter/widgets/gallery_grid.dart';
+import 'package:booru_pocket_flutter/widgets/popular_screen_nav_bar.dart';
 import 'package:booru_pocket_flutter/widgets/post_screen_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
-enum PostScreenType { user, gallery, favorites }
+enum PostScreenType { user, gallery, favorites, popular }
 
 class PostScreen extends StatefulWidget {
   const PostScreen({
@@ -26,25 +30,40 @@ class _PostScreenState extends State<PostScreen> {
   void initState() {
     super.initState();
     _scrollController.addListener(onScroll);
-    BlocProvider.of<GalleryGridBloc>(context).add(PostsRefreshed());
+    BlocProvider.of<GalleryGridBloc>(context).add(PostsFetched());
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<GalleryGridBloc, GalleryGridState>(
       builder: (context, state) {
+        final isPopularScreen =
+            context.read<PostScreenType>() == PostScreenType.popular;
+
         return Scaffold(
-          floatingActionButton: floatingButtonVisibility
-              ? FloatingActionButton(
-                  heroTag: '${state.uniqueKey}-floating-button',
-                  child: const Icon(Icons.arrow_upward_rounded),
-                  onPressed: () {
-                    _scrollController.animateTo(0,
-                        duration: const Duration(milliseconds: 300),
-                        curve: Curves.ease);
-                  },
-                )
-              : null,
+          floatingActionButton: SpeedDial(
+            icon: Icons.menu,
+            visible: floatingButtonVisibility,
+            children: [
+              SpeedDialChild(
+                  child: const Icon(Icons.arrow_upward),
+                  label: 'Scroll to top',
+                  onTap: () {
+                    _scrollController.animateTo(
+                      0,
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeInOut,
+                    );
+                  }),
+              SpeedDialChild(
+                child: const Icon(Icons.search),
+                label: 'Go home',
+                onTap: () {
+                  AutoRouter.of(context).navigate(const HomeRoute());
+                },
+              ),
+            ],
+          ),
           body: Scrollbar(
             child: RefreshIndicator(
               edgeOffset: 30,
@@ -53,13 +72,16 @@ class _PostScreenState extends State<PostScreen> {
                 keyboardDismissBehavior:
                     ScrollViewKeyboardDismissBehavior.onDrag,
                 controller: _scrollController,
-                physics: const NoImplicitScrollPhysics(
-                    parent: BouncingScrollPhysics()),
+                physics: state.posts.isEmpty
+                    ? const NeverScrollableScrollPhysics()
+                    : const NoImplicitScrollPhysics(
+                        parent: BouncingScrollPhysics(),
+                      ),
                 slivers: [
-                  const PostScreenNavBar(),
-                  GalleryGrid(
-                    posts: state.posts,
-                  ),
+                  isPopularScreen
+                      ? const PopularScreenNavBar()
+                      : const PostScreenNavBar(),
+                  const GalleryGrid(),
                 ],
               ),
             ),
@@ -97,7 +119,8 @@ class _PostScreenState extends State<PostScreen> {
   Future<GalleryGridState> onRefresh() {
     GalleryGridBloc bloc = context.read<GalleryGridBloc>();
     bloc.add(PostsRefreshed());
-    return bloc.stream.firstWhere((element) => !element.refreshing);
+    return bloc.stream
+        .firstWhere((element) => element.gridStatus != GridStatus.refreshing);
   }
 
   @override

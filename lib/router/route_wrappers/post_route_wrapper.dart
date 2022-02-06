@@ -9,6 +9,9 @@ import 'package:booru_pocket_flutter/screens/post_screen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
+
+import '../../blocs/popular_screen_nav_bar/popular_screen_nav_bar_cubit.dart';
 
 class PostRouteWrapper extends StatelessWidget {
   final String inputTextValue;
@@ -35,26 +38,38 @@ class PostRouteWrapper extends StatelessWidget {
         query = 'user:${user.name}';
       }
     }
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          lazy: false,
-          create: (context) => QueryParamsCubit(
-            queryParams: QueryParams.post(tags: query ?? inputTextValue),
+    return Provider(
+      create: (_) => postScreenType,
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => QueryParamsCubit(
+              queryParams: postScreenType == PostScreenType.popular
+                  ? QueryParams.popular(
+                      date: DateTime.now(),
+                    )
+                  : QueryParams.post(tags: query ?? inputTextValue),
+            ),
           ),
-        ),
-        BlocProvider(
-          create: (context) => GalleryGridBloc(
-              queryParamsCubit: BlocProvider.of<QueryParamsCubit>(context)),
-        ),
-        BlocProvider(
-          lazy: false,
-          create: (context) => PostScreenNavbarCubit(
-              queryParamsCubit: BlocProvider.of<QueryParamsCubit>(context),
-              galleryGridBloc: BlocProvider.of<GalleryGridBloc>(context)),
-        ),
-      ],
-      child: const AutoRouter(),
+          BlocProvider(
+            create: (context) => GalleryGridBloc(
+                queryParamsCubit: BlocProvider.of<QueryParamsCubit>(context)),
+          ),
+          if (postScreenType == PostScreenType.popular)
+            BlocProvider(
+              create: (context) => PopularScreenNavbarCubit(
+                  queryParamsCubit: BlocProvider.of<QueryParamsCubit>(context),
+                  galleryGridBloc: BlocProvider.of<GalleryGridBloc>(context)),
+            ),
+          if (postScreenType != PostScreenType.popular)
+            BlocProvider(
+              create: (context) => PostScreenNavbarCubit(
+                  queryParamsCubit: BlocProvider.of<QueryParamsCubit>(context),
+                  galleryGridBloc: BlocProvider.of<GalleryGridBloc>(context)),
+            ),
+        ],
+        child: const AutoRouter(),
+      ),
     );
   }
 }
