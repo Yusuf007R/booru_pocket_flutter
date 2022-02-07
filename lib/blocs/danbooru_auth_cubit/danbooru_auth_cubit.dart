@@ -46,8 +46,13 @@ class DanbooruAuthCubit extends Cubit<DanbooruAuthState> {
   }
 
   void logout() async {
-    emit(state.copyWith(user: const UserNoAuthenticated()));
+    emit(const DanbooruAuthState());
     await storage.delete(key: 'auth');
+  }
+
+  void refreshUser() async {
+    final user = await repository.getUserProfile();
+    emit(state.copyWith(user: user));
   }
 
   void loadAuth() async {
@@ -61,5 +66,19 @@ class DanbooruAuthCubit extends Cubit<DanbooruAuthState> {
       final apiKey = parts[1];
       setAuth(username, apiKey, isAuthLoad: true);
     }
+  }
+
+  void getFavorites() async {
+    final user = state.user;
+    if (user is UserAuthenticated) {
+      final page = (user.favoriteCount / 1000).ceil();
+      final favorites = await repository.getFavorites(user.name, page);
+      setFavorites(favorites);
+    }
+  }
+
+  void setFavorites(List<int> favorites) {
+    favorites.sort(((a, b) => a.compareTo(b)));
+    emit(state.copyWith(favoritePostIds: favorites));
   }
 }

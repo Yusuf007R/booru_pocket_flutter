@@ -183,7 +183,7 @@ class PostDetailBottomSheetAppBar extends StatelessWidget {
       alignment: Alignment.centerLeft,
       child: Text(
         text,
-        style: const TextStyle(fontSize: 20),
+        style: const TextStyle(fontSize: 20, color: Colors.white),
       ),
     );
   }

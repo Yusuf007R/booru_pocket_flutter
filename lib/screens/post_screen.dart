@@ -56,7 +56,7 @@ class _PostScreenState extends State<PostScreen> {
                     );
                   }),
               SpeedDialChild(
-                child: const Icon(Icons.search),
+                child: const Icon(Icons.home),
                 label: 'Go home',
                 onTap: () {
                   AutoRouter.of(context).navigate(const HomeRoute());

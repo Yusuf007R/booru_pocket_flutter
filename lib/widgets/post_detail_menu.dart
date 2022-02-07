@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:booru_pocket_flutter/blocs/danbooru_auth_cubit/danbooru_auth_cubit.dart';
 import 'package:booru_pocket_flutter/blocs/gallery_grid_bloc/gallery_grid_bloc.dart';
 import 'package:booru_pocket_flutter/blocs/post_detail_screen_cubit/post_detail_screen_cubit_cubit.dart';
 import 'package:booru_pocket_flutter/models/api/post/post.dart';
@@ -9,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:collection/collection.dart';
 
 class PostDetailAppBar extends StatelessWidget with PreferredSizeWidget {
   const PostDetailAppBar({
@@ -29,6 +31,9 @@ class PostDetailAppBar extends StatelessWidget with PreferredSizeWidget {
             return Visibility(
               visible: state.showMenu,
               child: AppBar(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
                 shadowColor: Colors.black.withOpacity(0.3),
                 title: Text("Post #${post.id}"),
                 backgroundColor: Colors.transparent,
@@ -91,26 +96,12 @@ class PostDetailAppBar extends StatelessWidget with PreferredSizeWidget {
     required IconData icon,
   }) {
     return PopupMenuItem(
-      padding: EdgeInsets.zero,
       onTap: onTap,
+      padding: const EdgeInsets.all(0),
       child: ListTile(
-        contentPadding: const EdgeInsets.symmetric(horizontal: 6, vertical: 0),
-        title: Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(right: 5, left: 8),
-              child: Icon(
-                icon,
-                size: 24,
-                color: Colors.white,
-              ),
-            ),
-            Text(
-              text,
-              style: const TextStyle(fontSize: 14),
-            ),
-          ],
-        ),
+        minLeadingWidth: 0,
+        leading: Icon(icon),
+        title: Text(text, style: const TextStyle(fontSize: 15)),
       ),
     );
   }
@@ -121,87 +112,109 @@ class PostDetailBottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PostDetailScreenCubitCubit, PostDetailScreenCubitState>(
-      builder: (context, state) {
-        final maxQuality = state.maxQuality[state.currentPostIndex];
-        final post =
-            context.read<GalleryGridBloc>().state.posts[state.currentPostIndex];
+    return BlocBuilder<DanbooruAuthCubit, DanbooruAuthState>(
+      buildWhen: (previous, current) {
+        return previous.favoritePostIds.hashCode !=
+            current.favoritePostIds.hashCode;
+      },
+      builder: (context, authState) {
+        final favoritePostIds = authState.favoritePostIds;
 
-        return Visibility(
-          visible: state.showMenu,
-          child: Padding(
-            padding: const EdgeInsets.only(bottom: 10),
-            child: Material(
-              color: Colors.transparent,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  IconButton(
-                      tooltip: 'Toggle quality',
-                      icon: Icon(
-                        maxQuality == true
-                            ? Icons.high_quality
-                            : Icons.high_quality_outlined,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {
-                        context
-                            .read<PostDetailScreenCubitCubit>()
-                            .toggleMaxQuality(state.currentPostIndex);
-                      }),
-                  IconButton(
-                      tooltip: 'Show info',
-                      icon: const Icon(
-                        Icons.info_outline,
-                        color: Colors.white,
-                      ),
-                      onPressed: () async {
-                        showModalBottomSheet(
-                          context: context,
-                          isScrollControlled: true,
-                          backgroundColor: Colors.transparent,
-                          builder: (context) {
-                            return InfoBottomSheet(
-                              post: post,
+        return BlocBuilder<PostDetailScreenCubitCubit,
+            PostDetailScreenCubitState>(
+          builder: (context, state) {
+            final maxQuality = state.maxQuality[state.currentPostIndex];
+            final post = context
+                .read<GalleryGridBloc>()
+                .state
+                .posts[state.currentPostIndex];
+            print('test');
+            final isFavorite = favoritePostIds.binarySearch(
+                    post.id, (a, b) => a.compareTo(b)) >
+                0;
+
+            return Visibility(
+              visible: state.showMenu,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: Material(
+                  color: Colors.transparent,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      IconButton(
+                          tooltip: 'Toggle quality',
+                          icon: Icon(
+                            maxQuality == true
+                                ? Icons.high_quality
+                                : Icons.high_quality_outlined,
+                            color: Colors.white,
+                          ),
+                          onPressed: () {
+                            context
+                                .read<PostDetailScreenCubitCubit>()
+                                .toggleMaxQuality(state.currentPostIndex);
+                          }),
+                      IconButton(
+                          tooltip: 'Show info',
+                          icon: const Icon(
+                            Icons.info_outline,
+                            color: Colors.white,
+                          ),
+                          onPressed: () async {
+                            showModalBottomSheet(
+                              context: context,
+                              isScrollControlled: true,
+                              backgroundColor: Colors.transparent,
+                              builder: (context) {
+                                return InfoBottomSheet(
+                                  post: post,
+                                );
+                              },
                             );
-                          },
-                        );
-                      }),
-                  IconButton(
-                      tooltip: 'Show tags',
-                      icon: const Icon(
-                        MdiIcons.tag,
-                        color: Colors.white,
+                          }),
+                      IconButton(
+                          tooltip: 'Show tags',
+                          icon: const Icon(
+                            MdiIcons.tag,
+                            color: Colors.white,
+                          ),
+                          onPressed: () async {
+                            final detailCubit =
+                                context.read<PostDetailScreenCubitCubit>();
+                            showModalBottomSheet(
+                                context: context,
+                                isScrollControlled: true,
+                                backgroundColor: Colors.transparent,
+                                builder: (context) {
+                                  return BlocProvider.value(
+                                    value: detailCubit,
+                                    child: TagBottomSheet(post: post),
+                                  );
+                                }).whenComplete(() async {
+                              await Future.delayed(
+                                  const Duration(milliseconds: 20));
+                              detailCubit.clearSelectedTags();
+                            });
+                          }),
+                      IconButton(
+                        tooltip: 'Add to favorites',
+                        icon: Icon(
+                          isFavorite ? MdiIcons.heart : MdiIcons.heartOutline,
+                          color: isFavorite ? Colors.pink : Colors.white,
+                        ),
+                        onPressed: () {
+                          context
+                              .read<PostDetailScreenCubitCubit>()
+                              .setFavorite(post.id, isFavorite);
+                        },
                       ),
-                      onPressed: () async {
-                        final detailCubit =
-                            context.read<PostDetailScreenCubitCubit>();
-                        showModalBottomSheet(
-                            context: context,
-                            isScrollControlled: true,
-                            backgroundColor: Colors.transparent,
-                            builder: (context) {
-                              return BlocProvider.value(
-                                value: detailCubit,
-                                child: TagBottomSheet(post: post),
-                              );
-                            }).whenComplete(() async {
-                          await Future.delayed(
-                              const Duration(milliseconds: 20));
-                          detailCubit.clearSelectedTags();
-                        });
-                      }),
-                  IconButton(
-                      tooltip: 'Add to favorites',
-                      icon: const Icon(
-                        MdiIcons.heartOutline,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {}),
-                ],
+                    ],
+                  ),
+                ),
               ),
-            ),
-          ),
+            );
+          },
         );
       },
     );

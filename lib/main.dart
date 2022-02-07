@@ -1,5 +1,6 @@
 import 'package:booru_pocket_flutter/blocs/danbooru_auth_cubit/danbooru_auth_cubit.dart';
 import 'package:booru_pocket_flutter/blocs/settings_cubit/settings_cubit.dart';
+import 'package:booru_pocket_flutter/models/api/user/user.dart';
 
 import 'package:booru_pocket_flutter/router/router.gr.dart';
 import 'package:booru_pocket_flutter/services/context_service.dart';
@@ -56,12 +57,21 @@ class _MyAppState extends State<MyApp> {
         )
       ],
       child: Builder(
-        builder: (context) => MaterialApp.router(
-          theme: lightThemeData,
-          darkTheme: darkThemeData,
-          themeMode: context.read<SettingsCubit>().state.themeMode,
-          routerDelegate: router.delegate(),
-          routeInformationParser: router.defaultRouteParser(),
+        builder: (context) =>
+            BlocListener<DanbooruAuthCubit, DanbooruAuthState>(
+          listener: (context, state) {
+            final user = state.user;
+            if (state.favoritePostIds.isEmpty && user is UserAuthenticated) {
+              context.read<DanbooruAuthCubit>().getFavorites();
+            }
+          },
+          child: MaterialApp.router(
+            theme: lightThemeData,
+            darkTheme: darkThemeData,
+            themeMode: context.read<SettingsCubit>().state.themeMode,
+            routerDelegate: router.delegate(),
+            routeInformationParser: router.defaultRouteParser(),
+          ),
         ),
       ),
     );

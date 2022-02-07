@@ -38,12 +38,20 @@ class _$UserTearOff {
   UserAuthenticated authenticated(
       {required int id,
       required String name,
+      required int level,
       @JsonKey(name: 'blacklisted_tags', fromJson: _fromJson)
-          required List<String> blackListedTags}) {
+          required List<String> blackListedTags,
+      @JsonKey(name: 'favorite_count')
+          required int favoriteCount,
+      @JsonKey(name: 'tag_query_limit')
+          required int tagLimit}) {
     return UserAuthenticated(
       id: id,
       name: name,
+      level: level,
       blackListedTags: blackListedTags,
+      favoriteCount: favoriteCount,
+      tagLimit: tagLimit,
     );
   }
 
@@ -63,8 +71,13 @@ mixin _$User {
     required TResult Function(
             int id,
             String name,
+            int level,
             @JsonKey(name: 'blacklisted_tags', fromJson: _fromJson)
-                List<String> blackListedTags)
+                List<String> blackListedTags,
+            @JsonKey(name: 'favorite_count')
+                int favoriteCount,
+            @JsonKey(name: 'tag_query_limit')
+                int tagLimit)
         authenticated,
   }) =>
       throw _privateConstructorUsedError;
@@ -74,8 +87,13 @@ mixin _$User {
     TResult Function(
             int id,
             String name,
+            int level,
             @JsonKey(name: 'blacklisted_tags', fromJson: _fromJson)
-                List<String> blackListedTags)?
+                List<String> blackListedTags,
+            @JsonKey(name: 'favorite_count')
+                int favoriteCount,
+            @JsonKey(name: 'tag_query_limit')
+                int tagLimit)?
         authenticated,
   }) =>
       throw _privateConstructorUsedError;
@@ -85,8 +103,13 @@ mixin _$User {
     TResult Function(
             int id,
             String name,
+            int level,
             @JsonKey(name: 'blacklisted_tags', fromJson: _fromJson)
-                List<String> blackListedTags)?
+                List<String> blackListedTags,
+            @JsonKey(name: 'favorite_count')
+                int favoriteCount,
+            @JsonKey(name: 'tag_query_limit')
+                int tagLimit)?
         authenticated,
     required TResult orElse(),
   }) =>
@@ -180,8 +203,13 @@ class _$UserNoAuthenticated extends UserNoAuthenticated {
     required TResult Function(
             int id,
             String name,
+            int level,
             @JsonKey(name: 'blacklisted_tags', fromJson: _fromJson)
-                List<String> blackListedTags)
+                List<String> blackListedTags,
+            @JsonKey(name: 'favorite_count')
+                int favoriteCount,
+            @JsonKey(name: 'tag_query_limit')
+                int tagLimit)
         authenticated,
   }) {
     return noAuthenticated();
@@ -194,8 +222,13 @@ class _$UserNoAuthenticated extends UserNoAuthenticated {
     TResult Function(
             int id,
             String name,
+            int level,
             @JsonKey(name: 'blacklisted_tags', fromJson: _fromJson)
-                List<String> blackListedTags)?
+                List<String> blackListedTags,
+            @JsonKey(name: 'favorite_count')
+                int favoriteCount,
+            @JsonKey(name: 'tag_query_limit')
+                int tagLimit)?
         authenticated,
   }) {
     return noAuthenticated?.call();
@@ -208,8 +241,13 @@ class _$UserNoAuthenticated extends UserNoAuthenticated {
     TResult Function(
             int id,
             String name,
+            int level,
             @JsonKey(name: 'blacklisted_tags', fromJson: _fromJson)
-                List<String> blackListedTags)?
+                List<String> blackListedTags,
+            @JsonKey(name: 'favorite_count')
+                int favoriteCount,
+            @JsonKey(name: 'tag_query_limit')
+                int tagLimit)?
         authenticated,
     required TResult orElse(),
   }) {
@@ -272,8 +310,13 @@ abstract class $UserAuthenticatedCopyWith<$Res> {
   $Res call(
       {int id,
       String name,
+      int level,
       @JsonKey(name: 'blacklisted_tags', fromJson: _fromJson)
-          List<String> blackListedTags});
+          List<String> blackListedTags,
+      @JsonKey(name: 'favorite_count')
+          int favoriteCount,
+      @JsonKey(name: 'tag_query_limit')
+          int tagLimit});
 }
 
 /// @nodoc
@@ -290,7 +333,10 @@ class _$UserAuthenticatedCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
+    Object? level = freezed,
     Object? blackListedTags = freezed,
+    Object? favoriteCount = freezed,
+    Object? tagLimit = freezed,
   }) {
     return _then(UserAuthenticated(
       id: id == freezed
@@ -301,10 +347,22 @@ class _$UserAuthenticatedCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      level: level == freezed
+          ? _value.level
+          : level // ignore: cast_nullable_to_non_nullable
+              as int,
       blackListedTags: blackListedTags == freezed
           ? _value.blackListedTags
           : blackListedTags // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      favoriteCount: favoriteCount == freezed
+          ? _value.favoriteCount
+          : favoriteCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      tagLimit: tagLimit == freezed
+          ? _value.tagLimit
+          : tagLimit // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -315,8 +373,13 @@ class _$UserAuthenticated extends UserAuthenticated {
   const _$UserAuthenticated(
       {required this.id,
       required this.name,
+      required this.level,
       @JsonKey(name: 'blacklisted_tags', fromJson: _fromJson)
           required this.blackListedTags,
+      @JsonKey(name: 'favorite_count')
+          required this.favoriteCount,
+      @JsonKey(name: 'tag_query_limit')
+          required this.tagLimit,
       String? $type})
       : $type = $type ?? 'authenticated',
         super._();
@@ -329,15 +392,23 @@ class _$UserAuthenticated extends UserAuthenticated {
   @override
   final String name;
   @override
+  final int level;
+  @override
   @JsonKey(name: 'blacklisted_tags', fromJson: _fromJson)
   final List<String> blackListedTags;
+  @override
+  @JsonKey(name: 'favorite_count')
+  final int favoriteCount;
+  @override
+  @JsonKey(name: 'tag_query_limit')
+  final int tagLimit;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'User.authenticated(id: $id, name: $name, blackListedTags: $blackListedTags)';
+    return 'User.authenticated(id: $id, name: $name, level: $level, blackListedTags: $blackListedTags, favoriteCount: $favoriteCount, tagLimit: $tagLimit)';
   }
 
   @override
@@ -347,8 +418,12 @@ class _$UserAuthenticated extends UserAuthenticated {
             other is UserAuthenticated &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality().equals(other.level, level) &&
             const DeepCollectionEquality()
-                .equals(other.blackListedTags, blackListedTags));
+                .equals(other.blackListedTags, blackListedTags) &&
+            const DeepCollectionEquality()
+                .equals(other.favoriteCount, favoriteCount) &&
+            const DeepCollectionEquality().equals(other.tagLimit, tagLimit));
   }
 
   @override
@@ -356,7 +431,10 @@ class _$UserAuthenticated extends UserAuthenticated {
       runtimeType,
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(blackListedTags));
+      const DeepCollectionEquality().hash(level),
+      const DeepCollectionEquality().hash(blackListedTags),
+      const DeepCollectionEquality().hash(favoriteCount),
+      const DeepCollectionEquality().hash(tagLimit));
 
   @JsonKey(ignore: true)
   @override
@@ -370,11 +448,17 @@ class _$UserAuthenticated extends UserAuthenticated {
     required TResult Function(
             int id,
             String name,
+            int level,
             @JsonKey(name: 'blacklisted_tags', fromJson: _fromJson)
-                List<String> blackListedTags)
+                List<String> blackListedTags,
+            @JsonKey(name: 'favorite_count')
+                int favoriteCount,
+            @JsonKey(name: 'tag_query_limit')
+                int tagLimit)
         authenticated,
   }) {
-    return authenticated(id, name, blackListedTags);
+    return authenticated(
+        id, name, level, blackListedTags, favoriteCount, tagLimit);
   }
 
   @override
@@ -384,11 +468,17 @@ class _$UserAuthenticated extends UserAuthenticated {
     TResult Function(
             int id,
             String name,
+            int level,
             @JsonKey(name: 'blacklisted_tags', fromJson: _fromJson)
-                List<String> blackListedTags)?
+                List<String> blackListedTags,
+            @JsonKey(name: 'favorite_count')
+                int favoriteCount,
+            @JsonKey(name: 'tag_query_limit')
+                int tagLimit)?
         authenticated,
   }) {
-    return authenticated?.call(id, name, blackListedTags);
+    return authenticated?.call(
+        id, name, level, blackListedTags, favoriteCount, tagLimit);
   }
 
   @override
@@ -398,13 +488,19 @@ class _$UserAuthenticated extends UserAuthenticated {
     TResult Function(
             int id,
             String name,
+            int level,
             @JsonKey(name: 'blacklisted_tags', fromJson: _fromJson)
-                List<String> blackListedTags)?
+                List<String> blackListedTags,
+            @JsonKey(name: 'favorite_count')
+                int favoriteCount,
+            @JsonKey(name: 'tag_query_limit')
+                int tagLimit)?
         authenticated,
     required TResult orElse(),
   }) {
     if (authenticated != null) {
-      return authenticated(id, name, blackListedTags);
+      return authenticated(
+          id, name, level, blackListedTags, favoriteCount, tagLimit);
     }
     return orElse();
   }
@@ -450,8 +546,13 @@ abstract class UserAuthenticated extends User {
   const factory UserAuthenticated(
       {required int id,
       required String name,
+      required int level,
       @JsonKey(name: 'blacklisted_tags', fromJson: _fromJson)
-          required List<String> blackListedTags}) = _$UserAuthenticated;
+          required List<String> blackListedTags,
+      @JsonKey(name: 'favorite_count')
+          required int favoriteCount,
+      @JsonKey(name: 'tag_query_limit')
+          required int tagLimit}) = _$UserAuthenticated;
   const UserAuthenticated._() : super._();
 
   factory UserAuthenticated.fromJson(Map<String, dynamic> json) =
@@ -459,8 +560,13 @@ abstract class UserAuthenticated extends User {
 
   int get id;
   String get name;
+  int get level;
   @JsonKey(name: 'blacklisted_tags', fromJson: _fromJson)
   List<String> get blackListedTags;
+  @JsonKey(name: 'favorite_count')
+  int get favoriteCount;
+  @JsonKey(name: 'tag_query_limit')
+  int get tagLimit;
   @JsonKey(ignore: true)
   $UserAuthenticatedCopyWith<UserAuthenticated> get copyWith =>
       throw _privateConstructorUsedError;

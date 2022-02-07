@@ -1,3 +1,4 @@
+import 'package:booru_pocket_flutter/blocs/danbooru_auth_cubit/danbooru_auth_cubit.dart';
 import 'package:booru_pocket_flutter/blocs/gallery_grid_bloc/gallery_grid_bloc.dart';
 import 'package:booru_pocket_flutter/blocs/post_detail_screen_cubit/post_detail_screen_cubit_cubit.dart';
 import 'package:booru_pocket_flutter/widgets/post_detail_menu.dart';
@@ -18,8 +19,10 @@ class PostDetailScreen extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) =>
-              PostDetailScreenCubitCubit(initialIndex: initialIndex),
+          create: (context) => PostDetailScreenCubitCubit(
+            initialIndex: initialIndex,
+            danbooruAuthCubit: context.read<DanbooruAuthCubit>(),
+          ),
         ),
         BlocProvider.value(
           value: galleryGridBloc,

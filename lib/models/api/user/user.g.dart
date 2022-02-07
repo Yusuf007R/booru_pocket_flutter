@@ -22,7 +22,10 @@ _$UserAuthenticated _$$UserAuthenticatedFromJson(Map<String, dynamic> json) =>
     _$UserAuthenticated(
       id: json['id'] as int,
       name: json['name'] as String,
+      level: json['level'] as int,
       blackListedTags: _fromJson(json['blacklisted_tags'] as String),
+      favoriteCount: json['favorite_count'] as int,
+      tagLimit: json['tag_query_limit'] as int,
       $type: json['runtimeType'] as String?,
     );
 
@@ -30,6 +33,9 @@ Map<String, dynamic> _$$UserAuthenticatedToJson(_$UserAuthenticated instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
+      'level': instance.level,
       'blacklisted_tags': instance.blackListedTags,
+      'favorite_count': instance.favoriteCount,
+      'tag_query_limit': instance.tagLimit,
       'runtimeType': instance.$type,
     };

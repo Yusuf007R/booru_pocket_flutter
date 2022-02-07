@@ -6,13 +6,14 @@ import 'package:booru_pocket_flutter/models/api/post/post.dart';
 import 'package:booru_pocket_flutter/models/api/queryparams/queryparams.dart';
 import 'package:booru_pocket_flutter/models/api/user/user.dart';
 import 'package:booru_pocket_flutter/utils/compute_json_decode.dart';
+import 'package:booru_pocket_flutter/utils/transform_favorite_response.dart';
 import 'package:dio/dio.dart';
 
 class DanbooruRepository {
-  Dio dio = Dio(BaseOptions(baseUrl: 'https://safebooru.donmai.us'));
+  Dio dio = Dio(BaseOptions(baseUrl: 'https://safebooru.donmai.us/'));
 
   DanbooruRepository() {
-    (dio.transformer as DefaultTransformer).jsonDecodeCallback = parseJson;
+    dio.transformer = MyTransformer();
   }
 
   Future<List<Post>> getPosts(PostParams params) async {
@@ -63,5 +64,36 @@ class DanbooruRepository {
       dio.options.headers.remove('Authorization');
       rethrow;
     }
+  }
+
+  Future<List<int>> getFavorites(String username, int pages) async {
+    final responses = await Future.wait(List.filled(pages, (int index) => index)
+        .map((value) => dio.get('/favorites.json', queryParameters: {
+              'search[user_name]': username,
+              'commit': 'Search',
+              'limit': 1000,
+              'page': value,
+            })));
+
+    return await transformFavoriteResponse(responses);
+  }
+
+  Future<bool> deleteFavorite(int postId) async {
+    final form = FormData();
+    form.fields.add(const MapEntry(
+      '_method',
+      'delete',
+    ));
+    await dio.post('/favorites/$postId.json', data: form);
+    return false;
+  }
+
+  Future<bool> addFavorite(
+    int postId,
+  ) async {
+    await dio.post('/favorites.json', queryParameters: {
+      'post_id': postId,
+    });
+    return true;
   }
 }

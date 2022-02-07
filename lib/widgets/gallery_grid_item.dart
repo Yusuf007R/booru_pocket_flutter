@@ -31,8 +31,6 @@ class _GalleryGridItemState extends State<GalleryGridItem> {
         double height = widget.width / aspectRatio;
         final Color baseColor = Colors.grey.shade400;
         final Color highlightColor = Colors.grey.shade100;
-
-        // if (post.tags.contains('1girl')) return const SizedBox();
         return SizedBox(
           height: height,
           width: widget.width,
