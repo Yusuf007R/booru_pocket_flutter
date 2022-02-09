@@ -17,7 +17,7 @@ class SettingsScreen extends StatelessWidget {
 
         return Scaffold(
           appBar: AppBar(
-            title: const Text('Danbooru Log in'),
+            title: const Text('Settings'),
             leading: IconButton(
                 onPressed: () => {
                       AutoRouter.of(context).pop(),
