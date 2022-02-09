@@ -1,5 +1,6 @@
 // ignore_for_file: invalid_annotation_target
 
+import 'package:booru_pocket_flutter/blocs/settings_cubit/settings_cubit.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'post.freezed.dart';
@@ -56,6 +57,19 @@ class Post with _$Post {
   String get highQuality => isVideo ? previewFileUrl : largeFileUrl;
 
   String get lowQuality => previewFileUrl;
+
+  String getImage(ImageQuality quality) {
+    switch (quality) {
+      case ImageQuality.high:
+        return highQuality;
+      case ImageQuality.low:
+        return lowQuality;
+      case ImageQuality.max:
+        return maxQuality;
+      default:
+        return lowQuality;
+    }
+  }
 
   factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
 }

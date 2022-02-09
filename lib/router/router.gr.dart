@@ -14,14 +14,14 @@ import 'package:auto_route/auto_route.dart' as _i8;
 import 'package:flutter/material.dart' as _i9;
 
 import '../blocs/gallery_grid_bloc/gallery_grid_bloc.dart' as _i11;
-import '../screens/home_screen.dart' as _i2;
-import '../screens/login_screen.dart' as _i4;
+import '../screens/home_screen.dart' as _i1;
+import '../screens/login_screen.dart' as _i3;
 import '../screens/post_detail_screen.dart' as _i6;
 import '../screens/post_screen.dart' as _i7;
+import '../screens/settings_screen.dart' as _i4;
 import '../screens/user_profile_screen.dart' as _i5;
 import 'guards/auth_guard.dart' as _i10;
-import 'route_wrappers/main_wrapper.dart' as _i1;
-import 'route_wrappers/post_route_wrapper.dart' as _i3;
+import 'route_wrappers/post_route_wrapper.dart' as _i2;
 
 class AppRouter extends _i8.RootStackRouter {
   AppRouter(
@@ -33,27 +33,27 @@ class AppRouter extends _i8.RootStackRouter {
 
   @override
   final Map<String, _i8.PageFactory> pagesMap = {
-    MainRoute.name: (routeData) {
-      return _i8.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i1.MainWrapper());
-    },
     HomeRoute.name: (routeData) {
       return _i8.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i2.HomeScreen());
+          routeData: routeData, child: const _i1.HomeScreen());
     },
     PostRoute.name: (routeData) {
       final args =
           routeData.argsAs<PostRouteArgs>(orElse: () => const PostRouteArgs());
       return _i8.MaterialPageX<dynamic>(
           routeData: routeData,
-          child: _i3.PostRouteWrapper(
+          child: _i2.PostRouteWrapper(
               key: args.key,
               inputTextValue: args.inputTextValue,
               postScreenType: args.postScreenType));
     },
     LoginRoute.name: (routeData) {
       return _i8.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i4.LoginScreen());
+          routeData: routeData, child: const _i3.LoginScreen());
+    },
+    SettingsRoute.name: (routeData) {
+      return _i8.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i4.SettingsScreen());
     },
     UserProfileRoute.name: (routeData) {
       return _i8.MaterialPageX<dynamic>(
@@ -76,7 +76,7 @@ class AppRouter extends _i8.RootStackRouter {
           orElse: () => const PostRouteHomePageArgs());
       return _i8.MaterialPageX<dynamic>(
           routeData: routeData,
-          child: _i3.PostRouteWrapper(
+          child: _i2.PostRouteWrapper(
               key: args.key,
               inputTextValue: args.inputTextValue,
               postScreenType: args.postScreenType));
@@ -93,61 +93,40 @@ class AppRouter extends _i8.RootStackRouter {
 
   @override
   List<_i8.RouteConfig> get routes => [
-        _i8.RouteConfig(MainRoute.name, path: '/', children: [
-          _i8.RouteConfig(HomeRoute.name,
+        _i8.RouteConfig(HomeRoute.name, path: '/', children: [
+          _i8.RouteConfig(PostRouteHomePage.name,
               path: '',
-              parent: MainRoute.name,
+              parent: HomeRoute.name,
               children: [
-                _i8.RouteConfig(PostRouteHomePage.name,
-                    path: '',
-                    parent: HomeRoute.name,
-                    children: [
-                      _i8.RouteConfig(PostScreenHomePageInternal.name,
-                          path: '', parent: PostRouteHomePage.name)
-                    ])
-              ]),
-          _i8.RouteConfig(PostRoute.name,
-              path: 'post-route-wrapper',
-              parent: MainRoute.name,
-              guards: [
-                authGuard
-              ],
-              children: [
-                _i8.RouteConfig(PostScreenPushed.name,
-                    path: '', parent: PostRoute.name)
-              ]),
-          _i8.RouteConfig(LoginRoute.name,
-              path: 'login-screen', parent: MainRoute.name),
-          _i8.RouteConfig(UserProfileRoute.name,
-              path: 'user-profile-screen',
-              parent: MainRoute.name,
-              guards: [authGuard]),
-          _i8.RouteConfig(PostDetailRoute.name,
-              path: 'post-detail-screen', parent: MainRoute.name)
-        ])
+                _i8.RouteConfig(PostScreenHomePageInternal.name,
+                    path: '', parent: PostRouteHomePage.name)
+              ])
+        ]),
+        _i8.RouteConfig(PostRoute.name, path: '/post-route-wrapper', guards: [
+          authGuard
+        ], children: [
+          _i8.RouteConfig(PostScreenPushed.name,
+              path: '', parent: PostRoute.name)
+        ]),
+        _i8.RouteConfig(LoginRoute.name, path: '/login-screen'),
+        _i8.RouteConfig(SettingsRoute.name, path: '/settings-screen'),
+        _i8.RouteConfig(UserProfileRoute.name,
+            path: '/user-profile-screen', guards: [authGuard]),
+        _i8.RouteConfig(PostDetailRoute.name, path: '/post-detail-screen')
       ];
 }
 
 /// generated route for
-/// [_i1.MainWrapper]
-class MainRoute extends _i8.PageRouteInfo<void> {
-  const MainRoute({List<_i8.PageRouteInfo>? children})
-      : super(MainRoute.name, path: '/', initialChildren: children);
-
-  static const String name = 'MainRoute';
-}
-
-/// generated route for
-/// [_i2.HomeScreen]
+/// [_i1.HomeScreen]
 class HomeRoute extends _i8.PageRouteInfo<void> {
   const HomeRoute({List<_i8.PageRouteInfo>? children})
-      : super(HomeRoute.name, path: '', initialChildren: children);
+      : super(HomeRoute.name, path: '/', initialChildren: children);
 
   static const String name = 'HomeRoute';
 }
 
 /// generated route for
-/// [_i3.PostRouteWrapper]
+/// [_i2.PostRouteWrapper]
 class PostRoute extends _i8.PageRouteInfo<PostRouteArgs> {
   PostRoute(
       {_i9.Key? key,
@@ -155,7 +134,7 @@ class PostRoute extends _i8.PageRouteInfo<PostRouteArgs> {
       _i7.PostScreenType postScreenType = _i7.PostScreenType.gallery,
       List<_i8.PageRouteInfo>? children})
       : super(PostRoute.name,
-            path: 'post-route-wrapper',
+            path: '/post-route-wrapper',
             args: PostRouteArgs(
                 key: key,
                 inputTextValue: inputTextValue,
@@ -184,18 +163,26 @@ class PostRouteArgs {
 }
 
 /// generated route for
-/// [_i4.LoginScreen]
+/// [_i3.LoginScreen]
 class LoginRoute extends _i8.PageRouteInfo<void> {
-  const LoginRoute() : super(LoginRoute.name, path: 'login-screen');
+  const LoginRoute() : super(LoginRoute.name, path: '/login-screen');
 
   static const String name = 'LoginRoute';
+}
+
+/// generated route for
+/// [_i4.SettingsScreen]
+class SettingsRoute extends _i8.PageRouteInfo<void> {
+  const SettingsRoute() : super(SettingsRoute.name, path: '/settings-screen');
+
+  static const String name = 'SettingsRoute';
 }
 
 /// generated route for
 /// [_i5.UserProfileScreen]
 class UserProfileRoute extends _i8.PageRouteInfo<void> {
   const UserProfileRoute()
-      : super(UserProfileRoute.name, path: 'user-profile-screen');
+      : super(UserProfileRoute.name, path: '/user-profile-screen');
 
   static const String name = 'UserProfileRoute';
 }
@@ -208,7 +195,7 @@ class PostDetailRoute extends _i8.PageRouteInfo<PostDetailRouteArgs> {
       required _i11.GalleryGridBloc galleryGridBloc,
       required int initialIndex})
       : super(PostDetailRoute.name,
-            path: 'post-detail-screen',
+            path: '/post-detail-screen',
             args: PostDetailRouteArgs(
                 key: key,
                 galleryGridBloc: galleryGridBloc,
@@ -234,7 +221,7 @@ class PostDetailRouteArgs {
 }
 
 /// generated route for
-/// [_i3.PostRouteWrapper]
+/// [_i2.PostRouteWrapper]
 class PostRouteHomePage extends _i8.PageRouteInfo<PostRouteHomePageArgs> {
   PostRouteHomePage(
       {_i9.Key? key,

@@ -68,7 +68,7 @@ class DrawerBottomList extends StatelessWidget {
           icon: Icons.settings,
           text: 'Settings',
           onTap: () {
-            print('pressed');
+            AutoRouter.of(context).push(const SettingsRoute());
           },
         ),
         DrawerTile(

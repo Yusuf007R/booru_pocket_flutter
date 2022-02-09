@@ -1,19 +1,38 @@
+import 'package:booru_pocket_flutter/theme/theme_constants.dart';
 import 'package:flutter/material.dart';
+
+final switchThumbState = MaterialStateProperty.resolveWith((states) {
+  if (states.contains(MaterialState.selected)) return primaryColor;
+  return Colors.grey.shade300;
+});
 
 ThemeData lightThemeData = ThemeData.light().copyWith(
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
     unselectedItemColor: Colors.grey.shade700,
     backgroundColor: Colors.grey.shade200,
   ),
+  appBarTheme: const AppBarTheme(
+    color: primaryColor,
+    titleSpacing: 0,
+    titleTextStyle: TextStyle(
+      color: Colors.white,
+      fontSize: 20,
+      fontWeight: FontWeight.w600,
+    ),
+  ),
+  switchTheme: SwitchThemeData(
+    thumbColor: switchThumbState,
+    trackColor: MaterialStateProperty.all(secondaryColor),
+  ),
   scaffoldBackgroundColor: Colors.grey.shade200,
-  primaryColor: const Color(0xFF6C3FC7),
+  primaryColor: primaryColor,
   iconTheme: const IconThemeData(
     color: Colors.black,
   ),
   brightness: Brightness.light,
   colorScheme: const ColorScheme.light(
-    primary: Color(0xFF6C3FC7),
-    secondary: Color(0xFFBF87F3),
+    primary: primaryColor,
+    secondary: secondaryColor,
   ),
   dividerTheme: DividerThemeData(
     color: Colors.grey.shade500,
@@ -29,11 +48,24 @@ ThemeData darkThemeData = ThemeData.dark().copyWith(
   iconTheme: const IconThemeData(
     color: Colors.white70,
   ),
+  appBarTheme: const AppBarTheme(
+    color: primaryColor,
+    titleSpacing: 0,
+    titleTextStyle: TextStyle(
+      color: Colors.white,
+      fontSize: 20,
+      fontWeight: FontWeight.w600,
+    ),
+  ),
+  switchTheme: SwitchThemeData(
+    thumbColor: switchThumbState,
+    trackColor: MaterialStateProperty.all(secondaryColor),
+  ),
   brightness: Brightness.dark,
-  primaryColor: const Color(0xFF6C3FC7),
+  primaryColor: primaryColor,
   colorScheme: const ColorScheme.dark(
-    primary: Color(0xFF6C3FC7),
-    secondary: Color(0xFFBF87F3),
+    primary: primaryColor,
+    secondary: secondaryColor,
   ),
   dividerTheme: DividerThemeData(
     color: Colors.grey.shade500,

@@ -34,7 +34,8 @@ class PostDetailAppBar extends StatelessWidget with PreferredSizeWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
-                shadowColor: Colors.black.withOpacity(0.3),
+                shadowColor: Colors.black.withOpacity(0.5),
+                elevation: 4,
                 title: Text("Post #${post.id}"),
                 backgroundColor: Colors.transparent,
                 leading: IconButton(
@@ -128,17 +129,17 @@ class PostDetailBottomBar extends StatelessWidget {
                 .read<GalleryGridBloc>()
                 .state
                 .posts[state.currentPostIndex];
-            print('test');
             final isFavorite = favoritePostIds.binarySearch(
                     post.id, (a, b) => a.compareTo(b)) >
                 0;
-
             return Visibility(
               visible: state.showMenu,
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 10),
-                child: Material(
-                  color: Colors.transparent,
+              child: Material(
+                color: Colors.transparent,
+                shadowColor: Colors.black.withOpacity(0.5),
+                elevation: 4,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -193,7 +194,8 @@ class PostDetailBottomBar extends StatelessWidget {
                                   );
                                 }).whenComplete(() async {
                               await Future.delayed(
-                                  const Duration(milliseconds: 20));
+                                const Duration(milliseconds: 20),
+                              );
                               detailCubit.clearSelectedTags();
                             });
                           }),
@@ -201,7 +203,7 @@ class PostDetailBottomBar extends StatelessWidget {
                         tooltip: 'Add to favorites',
                         icon: Icon(
                           isFavorite ? MdiIcons.heart : MdiIcons.heartOutline,
-                          color: isFavorite ? Colors.pink : Colors.white,
+                          color: isFavorite ? Colors.pinkAccent : Colors.white,
                         ),
                         onPressed: () {
                           context

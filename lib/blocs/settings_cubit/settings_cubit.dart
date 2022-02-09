@@ -10,7 +10,9 @@ part 'settings_cubit.g.dart';
 class SettingsCubit extends HydratedCubit<SettingsState> {
   SettingsCubit() : super(const SettingsState());
 
-  void setThemeMode(ThemeMode mode) => emit(state.copyWith(themeMode: mode));
+  void setThemeMode(ThemeMode mode) {
+    emit(state.copyWith(themeMode: mode));
+  }
 
   void setDefaultPath(String? path) =>
       emit(state.copyWith(defaultDownloadPath: path));
@@ -21,6 +23,34 @@ class SettingsCubit extends HydratedCubit<SettingsState> {
     setDefaultPath(selectedDirectory);
     return selectedDirectory;
   }
+
+  void setGridImageQuality(ImageQuality quality) => emit(
+        state.copyWith(gridImageQuality: quality),
+      );
+
+  void setDownloadQuality(ImageQuality quality) => emit(
+        state.copyWith(downloadQuality: quality),
+      );
+
+  void setDetailPageQuality(ImageQuality quality) => emit(
+        state.copyWith(detailPageQuality: quality),
+      );
+
+  void toggleGridRoundedCorners() => emit(
+        state.copyWith(gridRoundedCorners: !state.gridRoundedCorners),
+      );
+
+  void toggleSafeMode() => emit(
+        state.copyWith(safeMode: !state.safeMode),
+      );
+
+  void setGridType(GridType type) => emit(state.copyWith(gridType: type));
+
+  void setGridColumns(int columns) =>
+      emit(state.copyWith(gridColumns: columns));
+
+  void setPageLimit(int pageLimit) =>
+      emit(state.copyWith(pageLimit: pageLimit));
 
   @override
   SettingsState fromJson(Map<String, dynamic> json) =>

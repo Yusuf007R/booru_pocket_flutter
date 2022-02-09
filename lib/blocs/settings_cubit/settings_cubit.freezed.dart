@@ -24,10 +24,26 @@ class _$SettingsStateTearOff {
 
   _SettingsState call(
       {ThemeMode themeMode = ThemeMode.system,
-      String? defaultDownloadPath = null}) {
+      String? defaultDownloadPath = null,
+      bool gridRoundedCorners = true,
+      bool safeMode = true,
+      ImageQuality gridImageQuality = ImageQuality.high,
+      ImageQuality downloadQuality = ImageQuality.max,
+      ImageQuality detailPageQuality = ImageQuality.high,
+      GridType gridType = GridType.waterFall,
+      int gridColumns = 2,
+      int pageLimit = 20}) {
     return _SettingsState(
       themeMode: themeMode,
       defaultDownloadPath: defaultDownloadPath,
+      gridRoundedCorners: gridRoundedCorners,
+      safeMode: safeMode,
+      gridImageQuality: gridImageQuality,
+      downloadQuality: downloadQuality,
+      detailPageQuality: detailPageQuality,
+      gridType: gridType,
+      gridColumns: gridColumns,
+      pageLimit: pageLimit,
     );
   }
 
@@ -43,6 +59,14 @@ const $SettingsState = _$SettingsStateTearOff();
 mixin _$SettingsState {
   ThemeMode get themeMode => throw _privateConstructorUsedError;
   String? get defaultDownloadPath => throw _privateConstructorUsedError;
+  bool get gridRoundedCorners => throw _privateConstructorUsedError;
+  bool get safeMode => throw _privateConstructorUsedError;
+  ImageQuality get gridImageQuality => throw _privateConstructorUsedError;
+  ImageQuality get downloadQuality => throw _privateConstructorUsedError;
+  ImageQuality get detailPageQuality => throw _privateConstructorUsedError;
+  GridType get gridType => throw _privateConstructorUsedError;
+  int get gridColumns => throw _privateConstructorUsedError;
+  int get pageLimit => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -55,7 +79,17 @@ abstract class $SettingsStateCopyWith<$Res> {
   factory $SettingsStateCopyWith(
           SettingsState value, $Res Function(SettingsState) then) =
       _$SettingsStateCopyWithImpl<$Res>;
-  $Res call({ThemeMode themeMode, String? defaultDownloadPath});
+  $Res call(
+      {ThemeMode themeMode,
+      String? defaultDownloadPath,
+      bool gridRoundedCorners,
+      bool safeMode,
+      ImageQuality gridImageQuality,
+      ImageQuality downloadQuality,
+      ImageQuality detailPageQuality,
+      GridType gridType,
+      int gridColumns,
+      int pageLimit});
 }
 
 /// @nodoc
@@ -71,6 +105,14 @@ class _$SettingsStateCopyWithImpl<$Res>
   $Res call({
     Object? themeMode = freezed,
     Object? defaultDownloadPath = freezed,
+    Object? gridRoundedCorners = freezed,
+    Object? safeMode = freezed,
+    Object? gridImageQuality = freezed,
+    Object? downloadQuality = freezed,
+    Object? detailPageQuality = freezed,
+    Object? gridType = freezed,
+    Object? gridColumns = freezed,
+    Object? pageLimit = freezed,
   }) {
     return _then(_value.copyWith(
       themeMode: themeMode == freezed
@@ -81,6 +123,38 @@ class _$SettingsStateCopyWithImpl<$Res>
           ? _value.defaultDownloadPath
           : defaultDownloadPath // ignore: cast_nullable_to_non_nullable
               as String?,
+      gridRoundedCorners: gridRoundedCorners == freezed
+          ? _value.gridRoundedCorners
+          : gridRoundedCorners // ignore: cast_nullable_to_non_nullable
+              as bool,
+      safeMode: safeMode == freezed
+          ? _value.safeMode
+          : safeMode // ignore: cast_nullable_to_non_nullable
+              as bool,
+      gridImageQuality: gridImageQuality == freezed
+          ? _value.gridImageQuality
+          : gridImageQuality // ignore: cast_nullable_to_non_nullable
+              as ImageQuality,
+      downloadQuality: downloadQuality == freezed
+          ? _value.downloadQuality
+          : downloadQuality // ignore: cast_nullable_to_non_nullable
+              as ImageQuality,
+      detailPageQuality: detailPageQuality == freezed
+          ? _value.detailPageQuality
+          : detailPageQuality // ignore: cast_nullable_to_non_nullable
+              as ImageQuality,
+      gridType: gridType == freezed
+          ? _value.gridType
+          : gridType // ignore: cast_nullable_to_non_nullable
+              as GridType,
+      gridColumns: gridColumns == freezed
+          ? _value.gridColumns
+          : gridColumns // ignore: cast_nullable_to_non_nullable
+              as int,
+      pageLimit: pageLimit == freezed
+          ? _value.pageLimit
+          : pageLimit // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -92,7 +166,17 @@ abstract class _$SettingsStateCopyWith<$Res>
           _SettingsState value, $Res Function(_SettingsState) then) =
       __$SettingsStateCopyWithImpl<$Res>;
   @override
-  $Res call({ThemeMode themeMode, String? defaultDownloadPath});
+  $Res call(
+      {ThemeMode themeMode,
+      String? defaultDownloadPath,
+      bool gridRoundedCorners,
+      bool safeMode,
+      ImageQuality gridImageQuality,
+      ImageQuality downloadQuality,
+      ImageQuality detailPageQuality,
+      GridType gridType,
+      int gridColumns,
+      int pageLimit});
 }
 
 /// @nodoc
@@ -110,6 +194,14 @@ class __$SettingsStateCopyWithImpl<$Res>
   $Res call({
     Object? themeMode = freezed,
     Object? defaultDownloadPath = freezed,
+    Object? gridRoundedCorners = freezed,
+    Object? safeMode = freezed,
+    Object? gridImageQuality = freezed,
+    Object? downloadQuality = freezed,
+    Object? detailPageQuality = freezed,
+    Object? gridType = freezed,
+    Object? gridColumns = freezed,
+    Object? pageLimit = freezed,
   }) {
     return _then(_SettingsState(
       themeMode: themeMode == freezed
@@ -120,6 +212,38 @@ class __$SettingsStateCopyWithImpl<$Res>
           ? _value.defaultDownloadPath
           : defaultDownloadPath // ignore: cast_nullable_to_non_nullable
               as String?,
+      gridRoundedCorners: gridRoundedCorners == freezed
+          ? _value.gridRoundedCorners
+          : gridRoundedCorners // ignore: cast_nullable_to_non_nullable
+              as bool,
+      safeMode: safeMode == freezed
+          ? _value.safeMode
+          : safeMode // ignore: cast_nullable_to_non_nullable
+              as bool,
+      gridImageQuality: gridImageQuality == freezed
+          ? _value.gridImageQuality
+          : gridImageQuality // ignore: cast_nullable_to_non_nullable
+              as ImageQuality,
+      downloadQuality: downloadQuality == freezed
+          ? _value.downloadQuality
+          : downloadQuality // ignore: cast_nullable_to_non_nullable
+              as ImageQuality,
+      detailPageQuality: detailPageQuality == freezed
+          ? _value.detailPageQuality
+          : detailPageQuality // ignore: cast_nullable_to_non_nullable
+              as ImageQuality,
+      gridType: gridType == freezed
+          ? _value.gridType
+          : gridType // ignore: cast_nullable_to_non_nullable
+              as GridType,
+      gridColumns: gridColumns == freezed
+          ? _value.gridColumns
+          : gridColumns // ignore: cast_nullable_to_non_nullable
+              as int,
+      pageLimit: pageLimit == freezed
+          ? _value.pageLimit
+          : pageLimit // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -128,7 +252,16 @@ class __$SettingsStateCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_SettingsState implements _SettingsState {
   const _$_SettingsState(
-      {this.themeMode = ThemeMode.system, this.defaultDownloadPath = null});
+      {this.themeMode = ThemeMode.system,
+      this.defaultDownloadPath = null,
+      this.gridRoundedCorners = true,
+      this.safeMode = true,
+      this.gridImageQuality = ImageQuality.high,
+      this.downloadQuality = ImageQuality.max,
+      this.detailPageQuality = ImageQuality.high,
+      this.gridType = GridType.waterFall,
+      this.gridColumns = 2,
+      this.pageLimit = 20});
 
   factory _$_SettingsState.fromJson(Map<String, dynamic> json) =>
       _$$_SettingsStateFromJson(json);
@@ -139,10 +272,34 @@ class _$_SettingsState implements _SettingsState {
   @JsonKey()
   @override
   final String? defaultDownloadPath;
+  @JsonKey()
+  @override
+  final bool gridRoundedCorners;
+  @JsonKey()
+  @override
+  final bool safeMode;
+  @JsonKey()
+  @override
+  final ImageQuality gridImageQuality;
+  @JsonKey()
+  @override
+  final ImageQuality downloadQuality;
+  @JsonKey()
+  @override
+  final ImageQuality detailPageQuality;
+  @JsonKey()
+  @override
+  final GridType gridType;
+  @JsonKey()
+  @override
+  final int gridColumns;
+  @JsonKey()
+  @override
+  final int pageLimit;
 
   @override
   String toString() {
-    return 'SettingsState(themeMode: $themeMode, defaultDownloadPath: $defaultDownloadPath)';
+    return 'SettingsState(themeMode: $themeMode, defaultDownloadPath: $defaultDownloadPath, gridRoundedCorners: $gridRoundedCorners, safeMode: $safeMode, gridImageQuality: $gridImageQuality, downloadQuality: $downloadQuality, detailPageQuality: $detailPageQuality, gridType: $gridType, gridColumns: $gridColumns, pageLimit: $pageLimit)';
   }
 
   @override
@@ -152,14 +309,35 @@ class _$_SettingsState implements _SettingsState {
             other is _SettingsState &&
             const DeepCollectionEquality().equals(other.themeMode, themeMode) &&
             const DeepCollectionEquality()
-                .equals(other.defaultDownloadPath, defaultDownloadPath));
+                .equals(other.defaultDownloadPath, defaultDownloadPath) &&
+            const DeepCollectionEquality()
+                .equals(other.gridRoundedCorners, gridRoundedCorners) &&
+            const DeepCollectionEquality().equals(other.safeMode, safeMode) &&
+            const DeepCollectionEquality()
+                .equals(other.gridImageQuality, gridImageQuality) &&
+            const DeepCollectionEquality()
+                .equals(other.downloadQuality, downloadQuality) &&
+            const DeepCollectionEquality()
+                .equals(other.detailPageQuality, detailPageQuality) &&
+            const DeepCollectionEquality().equals(other.gridType, gridType) &&
+            const DeepCollectionEquality()
+                .equals(other.gridColumns, gridColumns) &&
+            const DeepCollectionEquality().equals(other.pageLimit, pageLimit));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(themeMode),
-      const DeepCollectionEquality().hash(defaultDownloadPath));
+      const DeepCollectionEquality().hash(defaultDownloadPath),
+      const DeepCollectionEquality().hash(gridRoundedCorners),
+      const DeepCollectionEquality().hash(safeMode),
+      const DeepCollectionEquality().hash(gridImageQuality),
+      const DeepCollectionEquality().hash(downloadQuality),
+      const DeepCollectionEquality().hash(detailPageQuality),
+      const DeepCollectionEquality().hash(gridType),
+      const DeepCollectionEquality().hash(gridColumns),
+      const DeepCollectionEquality().hash(pageLimit));
 
   @JsonKey(ignore: true)
   @override
@@ -174,7 +352,16 @@ class _$_SettingsState implements _SettingsState {
 
 abstract class _SettingsState implements SettingsState {
   const factory _SettingsState(
-      {ThemeMode themeMode, String? defaultDownloadPath}) = _$_SettingsState;
+      {ThemeMode themeMode,
+      String? defaultDownloadPath,
+      bool gridRoundedCorners,
+      bool safeMode,
+      ImageQuality gridImageQuality,
+      ImageQuality downloadQuality,
+      ImageQuality detailPageQuality,
+      GridType gridType,
+      int gridColumns,
+      int pageLimit}) = _$_SettingsState;
 
   factory _SettingsState.fromJson(Map<String, dynamic> json) =
       _$_SettingsState.fromJson;
@@ -183,6 +370,22 @@ abstract class _SettingsState implements SettingsState {
   ThemeMode get themeMode;
   @override
   String? get defaultDownloadPath;
+  @override
+  bool get gridRoundedCorners;
+  @override
+  bool get safeMode;
+  @override
+  ImageQuality get gridImageQuality;
+  @override
+  ImageQuality get downloadQuality;
+  @override
+  ImageQuality get detailPageQuality;
+  @override
+  GridType get gridType;
+  @override
+  int get gridColumns;
+  @override
+  int get pageLimit;
   @override
   @JsonKey(ignore: true)
   _$SettingsStateCopyWith<_SettingsState> get copyWith =>

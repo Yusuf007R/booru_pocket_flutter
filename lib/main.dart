@@ -65,12 +65,16 @@ class _MyAppState extends State<MyApp> {
               context.read<DanbooruAuthCubit>().getFavorites();
             }
           },
-          child: MaterialApp.router(
-            theme: lightThemeData,
-            darkTheme: darkThemeData,
-            themeMode: context.read<SettingsCubit>().state.themeMode,
-            routerDelegate: router.delegate(),
-            routeInformationParser: router.defaultRouteParser(),
+          child: BlocBuilder<SettingsCubit, SettingsState>(
+            builder: (context, settingsState) {
+              return MaterialApp.router(
+                theme: lightThemeData,
+                darkTheme: darkThemeData,
+                themeMode: settingsState.themeMode,
+                routerDelegate: router.delegate(),
+                routeInformationParser: router.defaultRouteParser(),
+              );
+            },
           ),
         ),
       ),
