@@ -1,10 +1,12 @@
 import 'package:bloc/bloc.dart';
+import 'package:booru_pocket_flutter/blocs/danbooru_auth_cubit/danbooru_auth_cubit.dart';
 import 'package:booru_pocket_flutter/blocs/query_params_cubit/query_params_cubit.dart';
+import 'package:booru_pocket_flutter/models/api/user/user.dart';
 import 'package:booru_pocket_flutter/services/locator_service.dart';
+import 'package:booru_pocket_flutter/services/context_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:booru_pocket_flutter/models/api/post/post.dart';
-import 'package:booru_pocket_flutter/models/api/queryparams/queryparams.dart';
 import 'package:booru_pocket_flutter/repositories/danbooru.dart';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -18,8 +20,10 @@ part 'gallery_grid_bloc.g.dart';
 class GalleryGridBloc extends Bloc<GalleryGridEvent, GalleryGridState> {
   final DanbooruRepository repository = locator<DanbooruRepository>();
   final QueryParamsCubit queryParamsCubit;
+  final DanbooruAuthCubit danbooruAuthCubit;
 
-  GalleryGridBloc({required this.queryParamsCubit})
+  GalleryGridBloc(
+      {required this.queryParamsCubit, required this.danbooruAuthCubit})
       : super(
           GalleryGridState(
             uniqueKey: UniqueKey().toString(),
@@ -27,7 +31,14 @@ class GalleryGridBloc extends Bloc<GalleryGridEvent, GalleryGridState> {
         ) {
     on<PostsFetched>((event, emit) async {
       if (state.gridStatus == GridStatus.fetching) return;
+
       emit(state.copyWith(gridStatus: GridStatus.fetching));
+      await verifyUser();
+      if (event.shouldReset) {
+        queryParamsCubit.resetPage();
+        emit(state.copyWith(posts: const []));
+      }
+      print('fetching ${queryParamsCubit.state.queryParams.page}');
       List<Post> posts = await _fetchPosts();
       GalleryGridState stateCopy = state.copyWith(
           posts: [...state.posts, ...posts], gridStatus: GridStatus.idle);
@@ -37,7 +48,9 @@ class GalleryGridBloc extends Bloc<GalleryGridEvent, GalleryGridState> {
 
     on<PostsRefreshed>((event, emit) async {
       if (state.gridStatus == GridStatus.refreshing) return;
-      emit(state.copyWith(posts: const [], gridStatus: GridStatus.refreshing));
+      emit(state.copyWith(gridStatus: GridStatus.refreshing));
+      await verifyUser();
+      emit(state.copyWith(posts: const []));
       queryParamsCubit.resetPage();
       List<Post> posts = await _fetchPosts();
       GalleryGridState stateCopy =
@@ -45,6 +58,13 @@ class GalleryGridBloc extends Bloc<GalleryGridEvent, GalleryGridState> {
       if (!queryParamsCubit.isClosed) queryParamsCubit.incrementPage();
       emit(stateCopy);
     });
+  }
+
+  Future<void> verifyUser() async {
+    if (danbooruAuthCubit.state.user is UserAuthenticating) {
+      await danbooruAuthCubit.stream
+          .firstWhere((state) => state.user is! UserAuthenticating);
+    }
   }
 
   _fetchPosts() async {

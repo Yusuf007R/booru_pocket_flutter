@@ -7,6 +7,6 @@ class DanbooruAuthState with _$DanbooruAuthState {
     String? usernameErrorMsg,
     String? apiKeyErrorMsg,
     @Default([]) List<int> favoritePostIds,
-    @Default(User.noAuthenticated()) User user,
+    @Default(User.authenticating()) User user,
   }) = _DanbooruAuthState;
 }

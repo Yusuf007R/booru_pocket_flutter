@@ -18,6 +18,8 @@ User _$UserFromJson(Map<String, dynamic> json) {
   switch (json['runtimeType']) {
     case 'noAuthenticated':
       return UserNoAuthenticated.fromJson(json);
+    case 'authenticating':
+      return UserAuthenticating.fromJson(json);
     case 'authenticated':
       return UserAuthenticated.fromJson(json);
 
@@ -33,6 +35,10 @@ class _$UserTearOff {
 
   UserNoAuthenticated noAuthenticated() {
     return const UserNoAuthenticated();
+  }
+
+  UserAuthenticating authenticating() {
+    return const UserAuthenticating();
   }
 
   UserAuthenticated authenticated(
@@ -68,6 +74,7 @@ mixin _$User {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() noAuthenticated,
+    required TResult Function() authenticating,
     required TResult Function(
             int id,
             String name,
@@ -84,6 +91,7 @@ mixin _$User {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? noAuthenticated,
+    TResult Function()? authenticating,
     TResult Function(
             int id,
             String name,
@@ -100,6 +108,7 @@ mixin _$User {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? noAuthenticated,
+    TResult Function()? authenticating,
     TResult Function(
             int id,
             String name,
@@ -117,18 +126,21 @@ mixin _$User {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(UserNoAuthenticated value) noAuthenticated,
+    required TResult Function(UserAuthenticating value) authenticating,
     required TResult Function(UserAuthenticated value) authenticated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(UserNoAuthenticated value)? noAuthenticated,
+    TResult Function(UserAuthenticating value)? authenticating,
     TResult Function(UserAuthenticated value)? authenticated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(UserNoAuthenticated value)? noAuthenticated,
+    TResult Function(UserAuthenticating value)? authenticating,
     TResult Function(UserAuthenticated value)? authenticated,
     required TResult orElse(),
   }) =>
@@ -200,6 +212,7 @@ class _$UserNoAuthenticated extends UserNoAuthenticated {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() noAuthenticated,
+    required TResult Function() authenticating,
     required TResult Function(
             int id,
             String name,
@@ -219,6 +232,7 @@ class _$UserNoAuthenticated extends UserNoAuthenticated {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? noAuthenticated,
+    TResult Function()? authenticating,
     TResult Function(
             int id,
             String name,
@@ -238,6 +252,7 @@ class _$UserNoAuthenticated extends UserNoAuthenticated {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? noAuthenticated,
+    TResult Function()? authenticating,
     TResult Function(
             int id,
             String name,
@@ -261,6 +276,7 @@ class _$UserNoAuthenticated extends UserNoAuthenticated {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(UserNoAuthenticated value) noAuthenticated,
+    required TResult Function(UserAuthenticating value) authenticating,
     required TResult Function(UserAuthenticated value) authenticated,
   }) {
     return noAuthenticated(this);
@@ -270,6 +286,7 @@ class _$UserNoAuthenticated extends UserNoAuthenticated {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(UserNoAuthenticated value)? noAuthenticated,
+    TResult Function(UserAuthenticating value)? authenticating,
     TResult Function(UserAuthenticated value)? authenticated,
   }) {
     return noAuthenticated?.call(this);
@@ -279,6 +296,7 @@ class _$UserNoAuthenticated extends UserNoAuthenticated {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(UserNoAuthenticated value)? noAuthenticated,
+    TResult Function(UserAuthenticating value)? authenticating,
     TResult Function(UserAuthenticated value)? authenticated,
     required TResult orElse(),
   }) {
@@ -300,6 +318,163 @@ abstract class UserNoAuthenticated extends User {
 
   factory UserNoAuthenticated.fromJson(Map<String, dynamic> json) =
       _$UserNoAuthenticated.fromJson;
+}
+
+/// @nodoc
+abstract class $UserAuthenticatingCopyWith<$Res> {
+  factory $UserAuthenticatingCopyWith(
+          UserAuthenticating value, $Res Function(UserAuthenticating) then) =
+      _$UserAuthenticatingCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$UserAuthenticatingCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
+    implements $UserAuthenticatingCopyWith<$Res> {
+  _$UserAuthenticatingCopyWithImpl(
+      UserAuthenticating _value, $Res Function(UserAuthenticating) _then)
+      : super(_value, (v) => _then(v as UserAuthenticating));
+
+  @override
+  UserAuthenticating get _value => super._value as UserAuthenticating;
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$UserAuthenticating extends UserAuthenticating {
+  const _$UserAuthenticating({String? $type})
+      : $type = $type ?? 'authenticating',
+        super._();
+
+  factory _$UserAuthenticating.fromJson(Map<String, dynamic> json) =>
+      _$$UserAuthenticatingFromJson(json);
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
+
+  @override
+  String toString() {
+    return 'User.authenticating()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is UserAuthenticating);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() noAuthenticated,
+    required TResult Function() authenticating,
+    required TResult Function(
+            int id,
+            String name,
+            int level,
+            @JsonKey(name: 'blacklisted_tags', fromJson: _fromJson)
+                List<String> blackListedTags,
+            @JsonKey(name: 'favorite_count')
+                int favoriteCount,
+            @JsonKey(name: 'tag_query_limit')
+                int tagLimit)
+        authenticated,
+  }) {
+    return authenticating();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? noAuthenticated,
+    TResult Function()? authenticating,
+    TResult Function(
+            int id,
+            String name,
+            int level,
+            @JsonKey(name: 'blacklisted_tags', fromJson: _fromJson)
+                List<String> blackListedTags,
+            @JsonKey(name: 'favorite_count')
+                int favoriteCount,
+            @JsonKey(name: 'tag_query_limit')
+                int tagLimit)?
+        authenticated,
+  }) {
+    return authenticating?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? noAuthenticated,
+    TResult Function()? authenticating,
+    TResult Function(
+            int id,
+            String name,
+            int level,
+            @JsonKey(name: 'blacklisted_tags', fromJson: _fromJson)
+                List<String> blackListedTags,
+            @JsonKey(name: 'favorite_count')
+                int favoriteCount,
+            @JsonKey(name: 'tag_query_limit')
+                int tagLimit)?
+        authenticated,
+    required TResult orElse(),
+  }) {
+    if (authenticating != null) {
+      return authenticating();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(UserNoAuthenticated value) noAuthenticated,
+    required TResult Function(UserAuthenticating value) authenticating,
+    required TResult Function(UserAuthenticated value) authenticated,
+  }) {
+    return authenticating(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(UserNoAuthenticated value)? noAuthenticated,
+    TResult Function(UserAuthenticating value)? authenticating,
+    TResult Function(UserAuthenticated value)? authenticated,
+  }) {
+    return authenticating?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(UserNoAuthenticated value)? noAuthenticated,
+    TResult Function(UserAuthenticating value)? authenticating,
+    TResult Function(UserAuthenticated value)? authenticated,
+    required TResult orElse(),
+  }) {
+    if (authenticating != null) {
+      return authenticating(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$UserAuthenticatingToJson(this);
+  }
+}
+
+abstract class UserAuthenticating extends User {
+  const factory UserAuthenticating() = _$UserAuthenticating;
+  const UserAuthenticating._() : super._();
+
+  factory UserAuthenticating.fromJson(Map<String, dynamic> json) =
+      _$UserAuthenticating.fromJson;
 }
 
 /// @nodoc
@@ -445,6 +620,7 @@ class _$UserAuthenticated extends UserAuthenticated {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() noAuthenticated,
+    required TResult Function() authenticating,
     required TResult Function(
             int id,
             String name,
@@ -465,6 +641,7 @@ class _$UserAuthenticated extends UserAuthenticated {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? noAuthenticated,
+    TResult Function()? authenticating,
     TResult Function(
             int id,
             String name,
@@ -485,6 +662,7 @@ class _$UserAuthenticated extends UserAuthenticated {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? noAuthenticated,
+    TResult Function()? authenticating,
     TResult Function(
             int id,
             String name,
@@ -509,6 +687,7 @@ class _$UserAuthenticated extends UserAuthenticated {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(UserNoAuthenticated value) noAuthenticated,
+    required TResult Function(UserAuthenticating value) authenticating,
     required TResult Function(UserAuthenticated value) authenticated,
   }) {
     return authenticated(this);
@@ -518,6 +697,7 @@ class _$UserAuthenticated extends UserAuthenticated {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(UserNoAuthenticated value)? noAuthenticated,
+    TResult Function(UserAuthenticating value)? authenticating,
     TResult Function(UserAuthenticated value)? authenticated,
   }) {
     return authenticated?.call(this);
@@ -527,6 +707,7 @@ class _$UserAuthenticated extends UserAuthenticated {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(UserNoAuthenticated value)? noAuthenticated,
+    TResult Function(UserAuthenticating value)? authenticating,
     TResult Function(UserAuthenticated value)? authenticated,
     required TResult orElse(),
   }) {

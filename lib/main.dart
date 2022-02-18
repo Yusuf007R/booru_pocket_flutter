@@ -59,6 +59,7 @@ class _MyAppState extends State<MyApp> {
       child: Builder(
         builder: (context) =>
             BlocListener<DanbooruAuthCubit, DanbooruAuthState>(
+          listenWhen: (previous, current) => previous.user != current.user,
           listener: (context, state) {
             final user = state.user;
             if (state.favoritePostIds.isEmpty && user is UserAuthenticated) {

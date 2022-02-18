@@ -18,7 +18,10 @@ class DanbooruAuthCubit extends Cubit<DanbooruAuthState> {
   void setAuth(String username, String apiKey,
       {bool isAuthLoad = false}) async {
     emit(state.copyWith(
-        errorMsg: '', usernameErrorMsg: null, apiKeyErrorMsg: null));
+      errorMsg: '',
+      usernameErrorMsg: null,
+      apiKeyErrorMsg: null,
+    ));
     if (username.isEmpty) {
       emit(state.copyWith(usernameErrorMsg: 'Username cannot be empty'));
     }
@@ -39,14 +42,16 @@ class DanbooruAuthCubit extends Cubit<DanbooruAuthState> {
     } catch (e) {
       if (!isAuthLoad) {
         emit(
-          state.copyWith(errorMsg: 'Invalid username or API key'),
+          state.copyWith(
+              errorMsg: 'Invalid username or API key',
+              user: const UserNoAuthenticated()),
         );
       }
     }
   }
 
   void logout() async {
-    emit(const DanbooruAuthState());
+    emit(const DanbooruAuthState(user: User.noAuthenticated()));
     await storage.delete(key: 'auth');
   }
 
@@ -60,7 +65,6 @@ class DanbooruAuthCubit extends Cubit<DanbooruAuthState> {
     if (auth == null) {
       emit(state.copyWith(user: const UserNoAuthenticated()));
     } else {
-      emit(state.copyWith(user: const UserNoAuthenticated()));
       final parts = auth.split(':');
       final username = parts[0];
       final apiKey = parts[1];

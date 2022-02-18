@@ -33,16 +33,19 @@ class _GalleryGridItemState extends State<GalleryGridItem> {
         if (previous.gridImageQuality != current.gridImageQuality) {
           return true;
         }
+        if (previous.gridType != current.gridType) {
+          return true;
+        }
         return false;
       },
       builder: (context, settingState) {
         return BlocBuilder<GalleryGridBloc, GalleryGridState>(
-          buildWhen: (previous, current) =>
-              previous.posts[widget.index] != current.posts[widget.index],
           builder: (context, state) {
             Post post = state.posts[widget.index];
             double aspectRatio = post.imageWidth / post.imageHeight;
-            double height = widget.width / aspectRatio;
+            double height = settingState.gridType == GridType.square
+                ? widget.width
+                : widget.width / aspectRatio;
             final Color baseColor = Colors.grey.shade400;
             final Color highlightColor = Colors.grey.shade100;
             return SizedBox(

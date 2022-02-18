@@ -26,7 +26,6 @@ class _HomeScreenState extends State<HomeScreen> {
       routes: [
         PostRouteHomePage(),
         PostRouteHomePage(postScreenType: PostScreenType.popular),
-        // const PopularRouteHomePage(),
         PostRouteHomePage(inputTextValue: 'order:rank'),
         PostRouteHomePage(inputTextValue: 'order:rank'),
       ],

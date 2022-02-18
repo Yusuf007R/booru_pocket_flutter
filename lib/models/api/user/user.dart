@@ -9,6 +9,8 @@ class User with _$User {
 
   const factory User.noAuthenticated() = UserNoAuthenticated;
 
+  const factory User.authenticating() = UserAuthenticating;
+
   const factory User.authenticated({
     required int id,
     required String name,

@@ -30,7 +30,7 @@ class _PostScreenState extends State<PostScreen> {
   void initState() {
     super.initState();
     _scrollController.addListener(onScroll);
-    BlocProvider.of<GalleryGridBloc>(context).add(PostsFetched());
+    context.read<GalleryGridBloc>().add(PostsFetched());
   }
 
   @override

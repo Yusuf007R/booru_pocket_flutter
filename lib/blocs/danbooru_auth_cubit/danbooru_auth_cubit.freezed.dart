@@ -23,7 +23,7 @@ class _$DanbooruAuthStateTearOff {
       String? usernameErrorMsg,
       String? apiKeyErrorMsg,
       List<int> favoritePostIds = const [],
-      User user = const User.noAuthenticated()}) {
+      User user = const User.authenticating()}) {
     return _DanbooruAuthState(
       errorMsg: errorMsg,
       usernameErrorMsg: usernameErrorMsg,
@@ -184,7 +184,7 @@ class _$_DanbooruAuthState implements _DanbooruAuthState {
       this.usernameErrorMsg,
       this.apiKeyErrorMsg,
       this.favoritePostIds = const [],
-      this.user = const User.noAuthenticated()});
+      this.user = const User.authenticating()});
 
   @JsonKey()
   @override

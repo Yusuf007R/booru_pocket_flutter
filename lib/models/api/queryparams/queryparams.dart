@@ -9,7 +9,7 @@ part 'queryparams.g.dart';
 class QueryParams with _$QueryParams {
   const factory QueryParams.post({
     @Default(1) int page,
-    @Default(500) int limit,
+    @Default(50) int limit,
     @Default('') String tags,
   }) = PostParams;
 

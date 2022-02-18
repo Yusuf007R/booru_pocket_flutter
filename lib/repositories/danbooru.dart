@@ -11,7 +11,7 @@ import 'package:dio/dio.dart';
 
 class DanbooruRepository {
   Dio dio = Dio(BaseOptions(baseUrl: 'https://safebooru.donmai.us/'));
-
+  bool safeMode = true;
   DanbooruRepository() {
     dio.transformer = MyTransformer();
   }
@@ -53,19 +53,6 @@ class DanbooruRepository {
         response.data.map((element) => AutoComplete.fromJson(element)));
   }
 
-  Future<User> setBasicAuthHeader(String username, String password) async {
-    Codec<String, String> stringToBase64 = utf8.fuse(base64);
-    String enconded = stringToBase64.encode('$username:$password');
-    dio.options.headers['Authorization'] = 'Basic $enconded';
-
-    try {
-      return await getUserProfile();
-    } catch (e) {
-      dio.options.headers.remove('Authorization');
-      rethrow;
-    }
-  }
-
   Future<List<int>> getFavorites(String username, int pages) async {
     final responses = await Future.wait(List.filled(pages, (int index) => index)
         .map((value) => dio.get('/favorites.json', queryParameters: {
@@ -95,5 +82,25 @@ class DanbooruRepository {
       'post_id': postId,
     });
     return true;
+  }
+
+  Future<User> setBasicAuthHeader(String username, String password) async {
+    Codec<String, String> stringToBase64 = utf8.fuse(base64);
+    String enconded = stringToBase64.encode('$username:$password');
+    dio.options.headers['Authorization'] = 'Basic $enconded';
+
+    try {
+      return await getUserProfile();
+    } catch (e) {
+      dio.options.headers.remove('Authorization');
+      rethrow;
+    }
+  }
+
+  void toggleSafeMode() async {
+    safeMode = !safeMode;
+    dio.options.baseUrl = safeMode
+        ? 'https://safebooru.donmai.us/'
+        : 'https://danbooru.donmai.us/';
   }
 }

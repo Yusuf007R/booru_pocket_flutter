@@ -3,11 +3,9 @@ part of 'gallery_grid_bloc.dart';
 @immutable
 abstract class GalleryGridEvent {}
 
-class PostsFetched extends GalleryGridEvent {}
+class PostsFetched extends GalleryGridEvent {
+  final bool shouldReset;
+  PostsFetched({this.shouldReset = false});
+}
 
 class PostsRefreshed extends GalleryGridEvent {}
-
-class ParamsUpdated extends GalleryGridEvent {
-  final QueryParams params;
-  ParamsUpdated({required this.params});
-}

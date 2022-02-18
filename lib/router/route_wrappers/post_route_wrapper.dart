@@ -3,9 +3,12 @@ import 'package:booru_pocket_flutter/blocs/danbooru_auth_cubit/danbooru_auth_cub
 import 'package:booru_pocket_flutter/blocs/gallery_grid_bloc/gallery_grid_bloc.dart';
 import 'package:booru_pocket_flutter/blocs/post_screen_nav_bar/post_screen_nav_bar_cubit.dart';
 import 'package:booru_pocket_flutter/blocs/query_params_cubit/query_params_cubit.dart';
+import 'package:booru_pocket_flutter/blocs/settings_cubit/settings_cubit.dart';
 import 'package:booru_pocket_flutter/models/api/queryparams/queryparams.dart';
 import 'package:booru_pocket_flutter/models/api/user/user.dart';
+import 'package:booru_pocket_flutter/repositories/danbooru.dart';
 import 'package:booru_pocket_flutter/screens/post_screen.dart';
+import 'package:booru_pocket_flutter/services/locator_service.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -53,7 +56,9 @@ class PostRouteWrapper extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => GalleryGridBloc(
-                queryParamsCubit: BlocProvider.of<QueryParamsCubit>(context)),
+              danbooruAuthCubit: BlocProvider.of<DanbooruAuthCubit>(context),
+              queryParamsCubit: BlocProvider.of<QueryParamsCubit>(context),
+            ),
           ),
           if (postScreenType == PostScreenType.popular)
             BlocProvider(
@@ -68,7 +73,31 @@ class PostRouteWrapper extends StatelessWidget {
                   galleryGridBloc: BlocProvider.of<GalleryGridBloc>(context)),
             ),
         ],
-        child: const AutoRouter(),
+        child: BlocBuilder<SettingsCubit, SettingsState>(
+          buildWhen: (previous, current) =>
+              previous.pageLimit != current.pageLimit ||
+              previous.safeMode != current.safeMode,
+          builder: (context, state) {
+            GalleryGridBloc galleryGridBloc = context.read<GalleryGridBloc>();
+            QueryParamsCubit queryParamsCubit =
+                context.read<QueryParamsCubit>();
+            DanbooruRepository danbooruRepository =
+                locator<DanbooruRepository>();
+            bool shouldfetch = false;
+            if (queryParamsCubit.state.queryParams.limit != state.pageLimit) {
+              queryParamsCubit.updateLimit(state.pageLimit);
+              shouldfetch = true;
+            }
+            if (danbooruRepository.safeMode != state.safeMode) {
+              danbooruRepository.toggleSafeMode();
+              shouldfetch = true;
+            }
+            if (shouldfetch) {
+              galleryGridBloc.add(PostsFetched(shouldReset: true));
+            }
+            return const AutoRouter();
+          },
+        ),
       ),
     );
   }

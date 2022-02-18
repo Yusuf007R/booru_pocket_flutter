@@ -18,6 +18,17 @@ Map<String, dynamic> _$$UserNoAuthenticatedToJson(
       'runtimeType': instance.$type,
     };
 
+_$UserAuthenticating _$$UserAuthenticatingFromJson(Map<String, dynamic> json) =>
+    _$UserAuthenticating(
+      $type: json['runtimeType'] as String?,
+    );
+
+Map<String, dynamic> _$$UserAuthenticatingToJson(
+        _$UserAuthenticating instance) =>
+    <String, dynamic>{
+      'runtimeType': instance.$type,
+    };
+
 _$UserAuthenticated _$$UserAuthenticatedFromJson(Map<String, dynamic> json) =>
     _$UserAuthenticated(
       id: json['id'] as int,

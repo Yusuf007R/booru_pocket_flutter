@@ -27,7 +27,7 @@ class PopularScreenNavbarCubit extends Cubit<PopularScreenNavBarState> {
         params.copyWith(date: date),
       );
     }
-    galleryGridBloc.add(PostsRefreshed());
+    galleryGridBloc.add(PostsFetched(shouldReset: true));
   }
 
   void setScale(ScaleType scale) {
@@ -37,6 +37,6 @@ class PopularScreenNavbarCubit extends Cubit<PopularScreenNavBarState> {
         params.copyWith(scale: scale),
       );
     }
-    galleryGridBloc.add(PostsRefreshed());
+    galleryGridBloc.add(PostsFetched(shouldReset: true));
   }
 }
