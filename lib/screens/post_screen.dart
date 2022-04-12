@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:provider/provider.dart';
 
 enum PostScreenType { user, gallery, favorites, popular }
 
@@ -24,13 +25,15 @@ class PostScreen extends StatefulWidget {
 
 class _PostScreenState extends State<PostScreen> {
   final ScrollController _scrollController = ScrollController();
-  bool floatingButtonVisibility = false;
+  late ValueNotifier<bool> visible;
 
   @override
   void initState() {
     super.initState();
+
     _scrollController.addListener(onScroll);
     context.read<GalleryGridBloc>().add(PostsFetched());
+    visible = context.read<ValueNotifier<bool>>();
   }
 
   @override
@@ -41,28 +44,33 @@ class _PostScreenState extends State<PostScreen> {
             context.read<PostScreenType>() == PostScreenType.popular;
 
         return Scaffold(
-          floatingActionButton: SpeedDial(
-            icon: Icons.menu,
-            visible: floatingButtonVisibility,
-            children: [
-              SpeedDialChild(
-                  child: const Icon(Icons.arrow_upward),
-                  label: 'Scroll to top',
-                  onTap: () {
-                    _scrollController.animateTo(
-                      0,
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.easeInOut,
-                    );
-                  }),
-              SpeedDialChild(
-                child: const Icon(Icons.home),
-                label: 'Go home',
-                onTap: () {
-                  AutoRouter.of(context).navigate(const HomeRoute());
-                },
-              ),
-            ],
+          floatingActionButton: ValueListenableBuilder(
+            valueListenable: Provider.of<ValueNotifier<bool>>(context),
+            builder: (context, bool value, child) {
+              return SpeedDial(
+                icon: Icons.menu,
+                visible: value,
+                children: [
+                  SpeedDialChild(
+                      child: const Icon(Icons.arrow_upward),
+                      label: 'Scroll to top',
+                      onTap: () {
+                        _scrollController.animateTo(
+                          0,
+                          duration: const Duration(milliseconds: 300),
+                          curve: Curves.easeInOut,
+                        );
+                      }),
+                  SpeedDialChild(
+                    child: const Icon(Icons.home),
+                    label: 'Go home',
+                    onTap: () {
+                      AutoRouter.of(context).navigate(const HomeRoute());
+                    },
+                  ),
+                ],
+              );
+            },
           ),
           body: Scrollbar(
             child: RefreshIndicator(
@@ -93,17 +101,14 @@ class _PostScreenState extends State<PostScreen> {
 
   void onScroll() async {
     if (!_scrollController.hasClients) return;
+
     final ScrollPosition position = _scrollController.position;
     if (position.userScrollDirection == ScrollDirection.reverse &&
-        floatingButtonVisibility) {
-      setState(() {
-        floatingButtonVisibility = false;
-      });
+        visible.value) {
+      visible.value = false;
     } else if (position.userScrollDirection == ScrollDirection.forward &&
-        !floatingButtonVisibility) {
-      setState(() {
-        floatingButtonVisibility = true;
-      });
+        !visible.value) {
+      visible.value = true;
     }
     final bool isNotAtStart = position.pixels > 0;
     final bool isAtOrNearEdge =
@@ -128,6 +133,7 @@ class _PostScreenState extends State<PostScreen> {
     _scrollController
       ..removeListener(onScroll)
       ..dispose();
+
     super.dispose();
   }
 }

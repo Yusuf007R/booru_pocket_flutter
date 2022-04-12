@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   setupLocator();
@@ -53,29 +54,31 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider(
           create: (context) => SettingsCubit(),
-          lazy: false,
-        )
+        ),
       ],
-      child: Builder(
-        builder: (context) =>
-            BlocListener<DanbooruAuthCubit, DanbooruAuthState>(
-          listenWhen: (previous, current) => previous.user != current.user,
-          listener: (context, state) {
-            final user = state.user;
-            if (state.favoritePostIds.isEmpty && user is UserAuthenticated) {
-              context.read<DanbooruAuthCubit>().getFavorites();
-            }
-          },
-          child: BlocBuilder<SettingsCubit, SettingsState>(
-            builder: (context, settingsState) {
-              return MaterialApp.router(
-                theme: lightThemeData,
-                darkTheme: darkThemeData,
-                themeMode: settingsState.themeMode,
-                routerDelegate: router.delegate(),
-                routeInformationParser: router.defaultRouteParser(),
-              );
+      child: ListenableProvider(
+        create: (context) => ValueNotifier(true),
+        child: Builder(
+          builder: (context) =>
+              BlocListener<DanbooruAuthCubit, DanbooruAuthState>(
+            listenWhen: (previous, current) => previous.user != current.user,
+            listener: (context, state) {
+              final user = state.user;
+              if (state.favoritePostIds.isEmpty && user is UserAuthenticated) {
+                context.read<DanbooruAuthCubit>().getFavorites();
+              }
             },
+            child: BlocBuilder<SettingsCubit, SettingsState>(
+              builder: (context, settingsState) {
+                return MaterialApp.router(
+                  theme: lightThemeData,
+                  darkTheme: darkThemeData,
+                  themeMode: settingsState.themeMode,
+                  routerDelegate: router.delegate(),
+                  routeInformationParser: router.defaultRouteParser(),
+                );
+              },
+            ),
           ),
         ),
       ),

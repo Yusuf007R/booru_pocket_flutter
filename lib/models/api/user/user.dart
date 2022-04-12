@@ -18,7 +18,7 @@ class User with _$User {
     @JsonKey(name: 'blacklisted_tags', fromJson: _fromJson)
         required List<String> blackListedTags,
     @JsonKey(name: 'favorite_count') required int favoriteCount,
-    @JsonKey(name: 'tag_query_limit') required int tagLimit,
+    @JsonKey(name: 'tag_query_limit', defaultValue: 2) required int tagLimit,
   }) = UserAuthenticated;
 
   factory User.fromJson(Map<String, dynamic> json) =>

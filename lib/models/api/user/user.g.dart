@@ -36,7 +36,7 @@ _$UserAuthenticated _$$UserAuthenticatedFromJson(Map<String, dynamic> json) =>
       level: json['level'] as int,
       blackListedTags: _fromJson(json['blacklisted_tags'] as String),
       favoriteCount: json['favorite_count'] as int,
-      tagLimit: json['tag_query_limit'] as int,
+      tagLimit: json['tag_query_limit'] as int? ?? 2,
       $type: json['runtimeType'] as String?,
     );
 

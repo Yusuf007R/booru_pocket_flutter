@@ -49,7 +49,7 @@ class _$UserTearOff {
           required List<String> blackListedTags,
       @JsonKey(name: 'favorite_count')
           required int favoriteCount,
-      @JsonKey(name: 'tag_query_limit')
+      @JsonKey(name: 'tag_query_limit', defaultValue: 2)
           required int tagLimit}) {
     return UserAuthenticated(
       id: id,
@@ -83,7 +83,7 @@ mixin _$User {
                 List<String> blackListedTags,
             @JsonKey(name: 'favorite_count')
                 int favoriteCount,
-            @JsonKey(name: 'tag_query_limit')
+            @JsonKey(name: 'tag_query_limit', defaultValue: 2)
                 int tagLimit)
         authenticated,
   }) =>
@@ -100,7 +100,7 @@ mixin _$User {
                 List<String> blackListedTags,
             @JsonKey(name: 'favorite_count')
                 int favoriteCount,
-            @JsonKey(name: 'tag_query_limit')
+            @JsonKey(name: 'tag_query_limit', defaultValue: 2)
                 int tagLimit)?
         authenticated,
   }) =>
@@ -117,7 +117,7 @@ mixin _$User {
                 List<String> blackListedTags,
             @JsonKey(name: 'favorite_count')
                 int favoriteCount,
-            @JsonKey(name: 'tag_query_limit')
+            @JsonKey(name: 'tag_query_limit', defaultValue: 2)
                 int tagLimit)?
         authenticated,
     required TResult orElse(),
@@ -221,7 +221,7 @@ class _$UserNoAuthenticated extends UserNoAuthenticated {
                 List<String> blackListedTags,
             @JsonKey(name: 'favorite_count')
                 int favoriteCount,
-            @JsonKey(name: 'tag_query_limit')
+            @JsonKey(name: 'tag_query_limit', defaultValue: 2)
                 int tagLimit)
         authenticated,
   }) {
@@ -241,7 +241,7 @@ class _$UserNoAuthenticated extends UserNoAuthenticated {
                 List<String> blackListedTags,
             @JsonKey(name: 'favorite_count')
                 int favoriteCount,
-            @JsonKey(name: 'tag_query_limit')
+            @JsonKey(name: 'tag_query_limit', defaultValue: 2)
                 int tagLimit)?
         authenticated,
   }) {
@@ -261,7 +261,7 @@ class _$UserNoAuthenticated extends UserNoAuthenticated {
                 List<String> blackListedTags,
             @JsonKey(name: 'favorite_count')
                 int favoriteCount,
-            @JsonKey(name: 'tag_query_limit')
+            @JsonKey(name: 'tag_query_limit', defaultValue: 2)
                 int tagLimit)?
         authenticated,
     required TResult orElse(),
@@ -378,7 +378,7 @@ class _$UserAuthenticating extends UserAuthenticating {
                 List<String> blackListedTags,
             @JsonKey(name: 'favorite_count')
                 int favoriteCount,
-            @JsonKey(name: 'tag_query_limit')
+            @JsonKey(name: 'tag_query_limit', defaultValue: 2)
                 int tagLimit)
         authenticated,
   }) {
@@ -398,7 +398,7 @@ class _$UserAuthenticating extends UserAuthenticating {
                 List<String> blackListedTags,
             @JsonKey(name: 'favorite_count')
                 int favoriteCount,
-            @JsonKey(name: 'tag_query_limit')
+            @JsonKey(name: 'tag_query_limit', defaultValue: 2)
                 int tagLimit)?
         authenticated,
   }) {
@@ -418,7 +418,7 @@ class _$UserAuthenticating extends UserAuthenticating {
                 List<String> blackListedTags,
             @JsonKey(name: 'favorite_count')
                 int favoriteCount,
-            @JsonKey(name: 'tag_query_limit')
+            @JsonKey(name: 'tag_query_limit', defaultValue: 2)
                 int tagLimit)?
         authenticated,
     required TResult orElse(),
@@ -490,7 +490,7 @@ abstract class $UserAuthenticatedCopyWith<$Res> {
           List<String> blackListedTags,
       @JsonKey(name: 'favorite_count')
           int favoriteCount,
-      @JsonKey(name: 'tag_query_limit')
+      @JsonKey(name: 'tag_query_limit', defaultValue: 2)
           int tagLimit});
 }
 
@@ -553,7 +553,7 @@ class _$UserAuthenticated extends UserAuthenticated {
           required this.blackListedTags,
       @JsonKey(name: 'favorite_count')
           required this.favoriteCount,
-      @JsonKey(name: 'tag_query_limit')
+      @JsonKey(name: 'tag_query_limit', defaultValue: 2)
           required this.tagLimit,
       String? $type})
       : $type = $type ?? 'authenticated',
@@ -575,7 +575,7 @@ class _$UserAuthenticated extends UserAuthenticated {
   @JsonKey(name: 'favorite_count')
   final int favoriteCount;
   @override
-  @JsonKey(name: 'tag_query_limit')
+  @JsonKey(name: 'tag_query_limit', defaultValue: 2)
   final int tagLimit;
 
   @JsonKey(name: 'runtimeType')
@@ -629,7 +629,7 @@ class _$UserAuthenticated extends UserAuthenticated {
                 List<String> blackListedTags,
             @JsonKey(name: 'favorite_count')
                 int favoriteCount,
-            @JsonKey(name: 'tag_query_limit')
+            @JsonKey(name: 'tag_query_limit', defaultValue: 2)
                 int tagLimit)
         authenticated,
   }) {
@@ -650,7 +650,7 @@ class _$UserAuthenticated extends UserAuthenticated {
                 List<String> blackListedTags,
             @JsonKey(name: 'favorite_count')
                 int favoriteCount,
-            @JsonKey(name: 'tag_query_limit')
+            @JsonKey(name: 'tag_query_limit', defaultValue: 2)
                 int tagLimit)?
         authenticated,
   }) {
@@ -671,7 +671,7 @@ class _$UserAuthenticated extends UserAuthenticated {
                 List<String> blackListedTags,
             @JsonKey(name: 'favorite_count')
                 int favoriteCount,
-            @JsonKey(name: 'tag_query_limit')
+            @JsonKey(name: 'tag_query_limit', defaultValue: 2)
                 int tagLimit)?
         authenticated,
     required TResult orElse(),
@@ -732,7 +732,7 @@ abstract class UserAuthenticated extends User {
           required List<String> blackListedTags,
       @JsonKey(name: 'favorite_count')
           required int favoriteCount,
-      @JsonKey(name: 'tag_query_limit')
+      @JsonKey(name: 'tag_query_limit', defaultValue: 2)
           required int tagLimit}) = _$UserAuthenticated;
   const UserAuthenticated._() : super._();
 
@@ -746,7 +746,7 @@ abstract class UserAuthenticated extends User {
   List<String> get blackListedTags;
   @JsonKey(name: 'favorite_count')
   int get favoriteCount;
-  @JsonKey(name: 'tag_query_limit')
+  @JsonKey(name: 'tag_query_limit', defaultValue: 2)
   int get tagLimit;
   @JsonKey(ignore: true)
   $UserAuthenticatedCopyWith<UserAuthenticated> get copyWith =>

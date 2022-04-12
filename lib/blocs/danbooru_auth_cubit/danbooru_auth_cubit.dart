@@ -40,6 +40,7 @@ class DanbooruAuthCubit extends Cubit<DanbooruAuthState> {
         locator<AppRouter>().replace(const UserProfileRoute());
       }
     } catch (e) {
+      print(e);
       if (!isAuthLoad) {
         emit(
           state.copyWith(
