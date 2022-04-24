@@ -8,6 +8,7 @@ class GalleryGridState with _$GalleryGridState {
     @Default([]) List<Post> posts,
     @Default(GridStatus.idle) GridStatus gridStatus,
     required String uniqueKey,
+    @Default([]) List<int> selectedPosts,
   }) = _GalleryGridState;
 
   factory GalleryGridState.fromJson(Map<String, dynamic> json) =>

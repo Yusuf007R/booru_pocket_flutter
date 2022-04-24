@@ -41,20 +41,36 @@ class _GalleryGridItemState extends State<GalleryGridItem> {
       builder: (context, settingState) {
         return BlocBuilder<GalleryGridBloc, GalleryGridState>(
           builder: (context, state) {
+            final bloc = BlocProvider.of<GalleryGridBloc>(context);
             Post post = state.posts[widget.index];
             double aspectRatio = post.imageWidth / post.imageHeight;
             double height = settingState.gridType == GridType.square
                 ? widget.width
                 : widget.width / aspectRatio;
+            bool isSelected = state.selectedPosts.contains(post.id);
+
             final Color baseColor = Colors.grey.shade400;
             final Color highlightColor = Colors.grey.shade100;
+
             return SizedBox(
               height: height,
               width: widget.width,
               child: GestureDetector(
+                onLongPress: () {
+                  Feedback.forTap(context);
+                  Feedback.forLongPress(context);
+
+                  bloc.add(PostSelectedToggled(postId: post.id));
+                  return;
+                },
                 onTap: () {
                   Feedback.forTap(context);
-                  final bloc = BlocProvider.of<GalleryGridBloc>(context);
+                  if (state.selectedPosts.isNotEmpty) {
+                    Feedback.forLongPress(context);
+                    bloc.add(PostSelectedToggled(postId: post.id));
+                    return;
+                  }
+
                   AutoRouter.of(context).push(
                     PostDetailRoute(
                       initialIndex: widget.index,
@@ -69,44 +85,52 @@ class _GalleryGridItemState extends State<GalleryGridItem> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(
                           settingState.gridRoundedCorners ? 10 : 0),
-                      child: ExtendedImage.network(
-                        post.getImage(settingState.gridImageQuality),
-                        fit: BoxFit.cover,
-                        cache: true,
-                        loadStateChanged: (ExtendedImageState state) {
-                          switch (state.extendedImageLoadState) {
-                            case LoadState.loading:
-                              return Shimmer(
-                                gradient: LinearGradient(
-                                  begin: Alignment.centerLeft,
-                                  end: Alignment.centerRight,
-                                  colors: <Color>[
-                                    baseColor,
-                                    baseColor,
-                                    highlightColor,
-                                    baseColor,
-                                    baseColor
-                                  ],
-                                  stops: const <double>[
-                                    0.0,
-                                    0.35,
-                                    0.5,
-                                    0.65,
-                                    1.0,
-                                  ],
-                                ),
-                                child: Container(
-                                  height: height,
-                                  width: widget.width,
-                                  color: Colors.black,
-                                ),
-                              );
-                            case LoadState.completed:
-                              return null;
-                            case LoadState.failed:
-                              return const Icon(Icons.error);
-                          }
-                        },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Theme.of(context).primaryColor,
+                            width: isSelected ? 6 : 0,
+                          ),
+                        ),
+                        child: ExtendedImage.network(
+                          post.getImage(settingState.gridImageQuality),
+                          fit: BoxFit.cover,
+                          cache: true,
+                          loadStateChanged: (ExtendedImageState state) {
+                            switch (state.extendedImageLoadState) {
+                              case LoadState.loading:
+                                return Shimmer(
+                                  gradient: LinearGradient(
+                                    begin: Alignment.centerLeft,
+                                    end: Alignment.centerRight,
+                                    colors: <Color>[
+                                      baseColor,
+                                      baseColor,
+                                      highlightColor,
+                                      baseColor,
+                                      baseColor
+                                    ],
+                                    stops: const <double>[
+                                      0.0,
+                                      0.35,
+                                      0.5,
+                                      0.65,
+                                      1.0,
+                                    ],
+                                  ),
+                                  child: Container(
+                                    height: height,
+                                    width: widget.width,
+                                    color: Colors.black,
+                                  ),
+                                );
+                              case LoadState.completed:
+                                return null;
+                              case LoadState.failed:
+                                return const Icon(Icons.error);
+                            }
+                          },
+                        ),
                       ),
                     ),
                   ),

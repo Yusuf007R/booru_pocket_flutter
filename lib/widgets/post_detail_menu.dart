@@ -54,8 +54,8 @@ class PostDetailAppBar extends StatelessWidget with PreferredSizeWidget {
                         icon: Icons.save_alt_outlined,
                         text: "Save",
                         onTap: () {
-                          locator<ImageDownloaderService>().downloadImage(
-                            post,
+                          locator<ImageDownloaderService>().downloadImages(
+                            [post],
                           );
                         },
                       ),
@@ -64,7 +64,7 @@ class PostDetailAppBar extends StatelessWidget with PreferredSizeWidget {
                         text: 'Share',
                         onTap: () {
                           locator<ImageDownloaderService>().downloadShareImage(
-                            post,
+                            [post],
                           );
                         },
                       ),
@@ -215,8 +215,8 @@ class PostDetailBottomBar extends StatelessWidget {
                             ),
                             onPressed: () {
                               context
-                                  .read<PostDetailScreenCubitCubit>()
-                                  .setFavorite(post.id, isFavorite);
+                                  .read<GalleryGridBloc>()
+                                  .add(PostLiked(postId: post.id));
                             },
                           ),
                         ],

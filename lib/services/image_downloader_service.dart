@@ -34,14 +34,27 @@ class ImageDownloaderService {
     }
   }
 
-  Future<bool> downloadShareImage(Post post, {String? text}) async {
-    final tempDir = await getTemporaryDirectory();
-    final file = File('${tempDir.path}/${post.id}.jpg');
-    final image = await getImageData(post.highQuality);
-    if (image == null) return false;
-    await file.writeAsBytes(image);
-    await Share.shareFiles([file.path], text: text ?? 'Post: ${post.id}');
-    await file.delete(recursive: true);
+  Future<List<File>> getImagesToTemp(List<Post> posts) async {
+    final files = await Future.wait(posts.map((post) async {
+      final tempDir = await getTemporaryDirectory();
+      final file = File('${tempDir.path}/${post.id}-temp.jpg');
+      final image = await getImageData(post.highQuality);
+      if (image == null) return null;
+      await file.writeAsBytes(image);
+
+      return file;
+    }));
+
+    return files.whereType<File>().toList();
+  }
+
+  Future<bool> downloadShareImage(List<Post> posts, {String? text}) async {
+    final files = await getImagesToTemp(posts);
+    await Share.shareFiles(files.map((e) => e.path).toList(),
+        text: text ?? (posts.length == 1 ? 'Post: ${posts[0].id}' : ''));
+    for (var element in files) {
+      await element.delete(recursive: true);
+    }
     return true;
   }
 
@@ -57,9 +70,9 @@ class ImageDownloaderService {
     }
   }
 
-  Future<File?> downloadImage(Post post) async {
+  Future<List<File?>> downloadImages(List<Post> posts) async {
     final status = await requestPermission();
-    if (!status) return null;
+    if (!status) return [null];
     String path;
     final settingsPath = settingsCubit.state.defaultDownloadPath;
     if (settingsPath != null) {
@@ -69,29 +82,37 @@ class ImageDownloaderService {
       if (tempPath != null) {
         path = tempPath;
       } else {
-        return null;
+        return [null];
       }
     }
-    final file = File('$path/post-${post.id}.${post.fileExt}');
-    final notifyService = locator<NotificationService>();
-    try {
-      Fluttertoast.showToast(
-        msg: "Download started",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
-        timeInSecForIosWeb: 1,
-        textColor: Colors.white,
-        fontSize: 16.0,
-      );
-      notifyService.showProgressDownloadNotify(post.id);
-      final bytes = await getImageData(post.maxQuality);
-      if (bytes == null) return null;
-      await file.writeAsBytes(bytes);
-      notifyService.showDownloadCompletedNotify(post.id, post.highQuality);
-
-      return file;
-    } catch (e) {
-      return null;
+    List<File?> files = [];
+    Fluttertoast.showToast(
+      msg: "Download started",
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.CENTER,
+      timeInSecForIosWeb: 1,
+      textColor: Colors.white,
+      fontSize: 16.0,
+    );
+    for (var post in posts) {
+      final file = File('$path/post-${post.id}.${post.fileExt}');
+      final notifyService = locator<NotificationService>();
+      try {
+        notifyService.showProgressDownloadNotify(post.id);
+        final bytes = await getImageData(post.maxQuality);
+        if (bytes == null) {
+          files.add(null);
+          continue;
+        }
+        await file.writeAsBytes(bytes);
+        notifyService.showDownloadCompletedNotify(post.id, post.highQuality);
+        files.add(file);
+        continue;
+      } catch (e) {
+        files.add(null);
+        continue;
+      }
     }
+    return files;
   }
 }

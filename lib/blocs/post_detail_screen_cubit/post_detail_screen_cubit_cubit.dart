@@ -37,50 +37,14 @@ class PostDetailScreenCubitCubit extends Cubit<PostDetailScreenCubitState> {
 
   void clearSelectedTags() => emit(state.copyWith(selectedTags: []));
 
-  void addTag(String tag) {
+  void toggleSelectedtag(String tag) {
+    final isSelected = state.selectedTags.contains(tag);
+    if (isSelected) {
+      emit(state.copyWith(
+          selectedTags:
+              state.selectedTags.where((element) => element != tag).toList()));
+      return;
+    }
     emit(state.copyWith(selectedTags: [...state.selectedTags, tag]));
-  }
-
-  void removeTag(String tag) {
-    emit(state.copyWith(
-        selectedTags:
-            state.selectedTags.where((element) => element != tag).toList()));
-  }
-
-  Future<bool> setFavorite(int postId, bool isFavorite) async {
-    final user = danbooruAuthCubit.state.user;
-    if (user is UserNoAuthenticated) {
-      locator<AppRouter>().navigate(const LoginRoute());
-      return false;
-    }
-    final favoritesId = List<int>.from(danbooruAuthCubit.state.favoritePostIds);
-
-    if (isFavorite) {
-      try {
-        favoritesId.remove(postId);
-        danbooruAuthCubit.setFavorites(favoritesId);
-        await repository.deleteFavorite(postId);
-        return true;
-      } on DioError catch (e) {
-        print(e);
-        if (e.response?.data?.message == 'That record was not found.') {
-          return true;
-        }
-        favoritesId.add(postId);
-        danbooruAuthCubit.setFavorites(favoritesId);
-        return false;
-      }
-    }
-    try {
-      favoritesId.add(postId);
-      danbooruAuthCubit.setFavorites(favoritesId);
-      await repository.addFavorite(postId);
-      return true;
-    } catch (e) {
-      print(e);
-      favoritesId.remove(postId);
-      danbooruAuthCubit.setFavorites(favoritesId);
-      return false;
-    }
   }
 }

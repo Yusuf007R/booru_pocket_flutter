@@ -113,7 +113,7 @@ class TagBottomSheet extends StatelessWidget {
                 bottom: 15,
                 right: 15,
                 child: SpeedDial(
-                  icon: Icons.menu,
+                  icon: Icons.menu_rounded,
                   visible: state.selectedTags.isNotEmpty,
                   children: [
                     SpeedDialChild(

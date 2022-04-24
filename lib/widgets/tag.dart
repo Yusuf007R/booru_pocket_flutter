@@ -48,14 +48,13 @@ class Tag extends StatelessWidget {
             height: 28,
             child: ElevatedButton(
               onLongPress: () {
-                if (clicked) return detailCubit.removeTag(tag);
-                return detailCubit.addTag(tag);
+                detailCubit.toggleSelectedtag(tag);
               },
               onPressed: () {
                 if (state.selectedTags.isNotEmpty) {
                   Feedback.forLongPress(context);
-                  if (clicked) return detailCubit.removeTag(tag);
-                  return detailCubit.addTag(tag);
+                  detailCubit.toggleSelectedtag(tag);
+                  return;
                 }
                 AutoRouter.of(context).push(PostRoute(inputTextValue: tag));
               },

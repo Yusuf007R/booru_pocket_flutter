@@ -16,6 +16,10 @@ _$_GalleryGridState _$$_GalleryGridStateFromJson(Map<String, dynamic> json) =>
           $enumDecodeNullable(_$GridStatusEnumMap, json['gridStatus']) ??
               GridStatus.idle,
       uniqueKey: json['uniqueKey'] as String,
+      selectedPosts: (json['selectedPosts'] as List<dynamic>?)
+              ?.map((e) => e as int)
+              .toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$$_GalleryGridStateToJson(_$_GalleryGridState instance) =>
@@ -23,6 +27,7 @@ Map<String, dynamic> _$$_GalleryGridStateToJson(_$_GalleryGridState instance) =>
       'posts': instance.posts,
       'gridStatus': _$GridStatusEnumMap[instance.gridStatus],
       'uniqueKey': instance.uniqueKey,
+      'selectedPosts': instance.selectedPosts,
     };
 
 const _$GridStatusEnumMap = {

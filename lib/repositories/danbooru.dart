@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:booru_pocket_flutter/models/api/autocomplete/autocomplete.dart';
 import 'package:booru_pocket_flutter/models/api/post/post.dart';
@@ -71,23 +72,29 @@ class DanbooruRepository {
       '_method',
       'delete',
     ));
-    await dio.post('/favorites/$postId.json', data: form);
+    await dio.post(
+      '/favorites/$postId.json',
+      data: form,
+    );
     return false;
   }
 
   Future<bool> addFavorite(
     int postId,
   ) async {
-    await dio.post('/favorites.json', queryParameters: {
-      'post_id': postId,
-    });
+    await dio.post(
+      '/favorites.json',
+      queryParameters: {
+        'post_id': postId,
+      },
+    );
     return true;
   }
 
   Future<User> setBasicAuthHeader(String username, String password) async {
     Codec<String, String> stringToBase64 = utf8.fuse(base64);
     String enconded = stringToBase64.encode('$username:$password');
-    dio.options.headers['Authorization'] = 'Basic $enconded';
+    dio.options.headers[HttpHeaders.authorizationHeader] = 'Basic $enconded';
 
     try {
       return await getUserProfile();
