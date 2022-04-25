@@ -7,6 +7,7 @@ import 'package:booru_pocket_flutter/services/context_service.dart';
 import 'package:booru_pocket_flutter/services/locator_service.dart';
 import 'package:booru_pocket_flutter/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
@@ -16,6 +17,12 @@ void main() async {
   setupLocator();
 
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    systemNavigationBarColor: Colors.transparent,
+  ));
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge,
+      overlays: [SystemUiOverlay.top]);
+
   final storage = await HydratedStorage.build(
     storageDirectory: await getTemporaryDirectory(),
   );

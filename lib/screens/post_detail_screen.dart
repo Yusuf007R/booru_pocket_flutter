@@ -5,6 +5,7 @@ import 'package:booru_pocket_flutter/blocs/settings_cubit/settings_cubit.dart';
 import 'package:booru_pocket_flutter/widgets/post_detail_menu.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:interactiveviewer_gallery/interactiveviewer_gallery.dart';
 
@@ -51,6 +52,13 @@ class _PostDetailScreenState extends State<_PostDetailScreen> {
     detailCubit = context.read<PostDetailScreenCubitCubit>();
   }
 
+  @override
+  void dispose() {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge,
+        overlays: SystemUiOverlay.values);
+    super.dispose();
+  }
+
   Widget? loadStateChanged(ExtendedImageState state) {
     switch (state.extendedImageLoadState) {
       case LoadState.loading:
@@ -71,6 +79,13 @@ class _PostDetailScreenState extends State<_PostDetailScreen> {
         return BlocBuilder<PostDetailScreenCubitCubit,
             PostDetailScreenCubitState>(
           builder: (context, state) {
+            if (state.showMenu) {
+              SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge,
+                  overlays: SystemUiOverlay.values);
+            } else {
+              SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+                  overlays: []);
+            }
             return BlocBuilder<GalleryGridBloc, GalleryGridState>(
               buildWhen: (previous, current) =>
                   (previous.posts.length != current.posts.length),

@@ -32,11 +32,8 @@ class PostDetailAppBar extends StatelessWidget with PreferredSizeWidget {
             return Visibility(
               visible: state.showMenu,
               child: AppBar(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                shadowColor: Colors.black.withOpacity(0.5),
-                elevation: 4,
+                elevation: 20,
+                shadowColor: Colors.black.withOpacity(0.35),
                 title: Text("Post #${post.id}"),
                 backgroundColor: Colors.transparent,
                 leading: IconButton(
@@ -137,89 +134,94 @@ class PostDetailBottomBar extends StatelessWidget {
                     0;
                 return Visibility(
                   visible: state.showMenu,
-                  child: Material(
-                    color: Colors.transparent,
-                    shadowColor: Colors.black.withOpacity(0.5),
-                    elevation: 4,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          if (settingsState.detailPageQuality !=
-                              ImageQuality.max)
+                  child: SafeArea(
+                    child: Material(
+                      color: Colors.transparent,
+                      elevation: 20,
+                      shadowColor: Colors.black.withOpacity(0.35),
+                      child: Container(
+                        margin: const EdgeInsets.only(top: 15),
+                        padding: const EdgeInsets.symmetric(vertical: 5),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            if (settingsState.detailPageQuality !=
+                                ImageQuality.max)
+                              IconButton(
+                                  tooltip: 'Toggle quality',
+                                  icon: Icon(
+                                    maxQuality == true
+                                        ? Icons.high_quality
+                                        : Icons.high_quality_outlined,
+                                    color: Colors.white,
+                                  ),
+                                  onPressed: () {
+                                    context
+                                        .read<PostDetailScreenCubitCubit>()
+                                        .toggleMaxQuality(
+                                            state.currentPostIndex);
+                                  }),
                             IconButton(
-                                tooltip: 'Toggle quality',
-                                icon: Icon(
-                                  maxQuality == true
-                                      ? Icons.high_quality
-                                      : Icons.high_quality_outlined,
+                                tooltip: 'Show info',
+                                icon: const Icon(
+                                  Icons.info_outline,
                                   color: Colors.white,
                                 ),
-                                onPressed: () {
-                                  context
-                                      .read<PostDetailScreenCubitCubit>()
-                                      .toggleMaxQuality(state.currentPostIndex);
-                                }),
-                          IconButton(
-                              tooltip: 'Show info',
-                              icon: const Icon(
-                                Icons.info_outline,
-                                color: Colors.white,
-                              ),
-                              onPressed: () async {
-                                showModalBottomSheet(
-                                  context: context,
-                                  isScrollControlled: true,
-                                  backgroundColor: Colors.transparent,
-                                  builder: (context) {
-                                    return InfoBottomSheet(
-                                      post: post,
-                                    );
-                                  },
-                                );
-                              }),
-                          IconButton(
-                              tooltip: 'Show tags',
-                              icon: const Icon(
-                                MdiIcons.tag,
-                                color: Colors.white,
-                              ),
-                              onPressed: () async {
-                                final detailCubit =
-                                    context.read<PostDetailScreenCubitCubit>();
-                                showModalBottomSheet(
+                                onPressed: () async {
+                                  showModalBottomSheet(
                                     context: context,
                                     isScrollControlled: true,
                                     backgroundColor: Colors.transparent,
                                     builder: (context) {
-                                      return BlocProvider.value(
-                                        value: detailCubit,
-                                        child: TagBottomSheet(post: post),
+                                      return InfoBottomSheet(
+                                        post: post,
                                       );
-                                    }).whenComplete(() async {
-                                  await Future.delayed(
-                                    const Duration(milliseconds: 20),
+                                    },
                                   );
-                                  detailCubit.clearSelectedTags();
-                                });
-                              }),
-                          IconButton(
-                            tooltip: 'Add to favorites',
-                            icon: Icon(
-                              isFavorite
-                                  ? MdiIcons.heart
-                                  : MdiIcons.heartOutline,
-                              color:
-                                  isFavorite ? Colors.pinkAccent : Colors.white,
+                                }),
+                            IconButton(
+                                tooltip: 'Show tags',
+                                icon: const Icon(
+                                  MdiIcons.tag,
+                                  color: Colors.white,
+                                ),
+                                onPressed: () async {
+                                  final detailCubit = context
+                                      .read<PostDetailScreenCubitCubit>();
+                                  showModalBottomSheet(
+                                      context: context,
+                                      isScrollControlled: true,
+                                      backgroundColor: Colors.transparent,
+                                      builder: (context) {
+                                        return BlocProvider.value(
+                                          value: detailCubit,
+                                          child: TagBottomSheet(post: post),
+                                        );
+                                      }).whenComplete(() async {
+                                    await Future.delayed(
+                                      const Duration(milliseconds: 20),
+                                    );
+                                    detailCubit.clearSelectedTags();
+                                  });
+                                }),
+                            IconButton(
+                              tooltip: 'Add to favorites',
+                              icon: Icon(
+                                isFavorite
+                                    ? MdiIcons.heart
+                                    : MdiIcons.heartOutline,
+                                color: isFavorite
+                                    ? Colors.pinkAccent
+                                    : Colors.white,
+                              ),
+                              onPressed: () {
+                                context
+                                    .read<GalleryGridBloc>()
+                                    .add(PostLiked(postId: post.id));
+                              },
                             ),
-                            onPressed: () {
-                              context
-                                  .read<GalleryGridBloc>()
-                                  .add(PostLiked(postId: post.id));
-                            },
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
