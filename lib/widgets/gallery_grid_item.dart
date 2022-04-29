@@ -85,52 +85,87 @@ class _GalleryGridItemState extends State<GalleryGridItem> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(
                           settingState.gridRoundedCorners ? 10 : 0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Theme.of(context).primaryColor,
-                            width: isSelected ? 6 : 0,
+                      child: Stack(
+                        fit: StackFit.expand,
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Theme.of(context).primaryColor,
+                                width: isSelected ? 6 : 0,
+                              ),
+                            ),
+                            child: ExtendedImage.network(
+                              post.getImage(settingState.gridImageQuality),
+                              fit: BoxFit.cover,
+                              cache: true,
+                              loadStateChanged: (ExtendedImageState state) {
+                                switch (state.extendedImageLoadState) {
+                                  case LoadState.loading:
+                                    return Shimmer(
+                                      gradient: LinearGradient(
+                                        begin: Alignment.centerLeft,
+                                        end: Alignment.centerRight,
+                                        colors: <Color>[
+                                          baseColor,
+                                          baseColor,
+                                          highlightColor,
+                                          baseColor,
+                                          baseColor
+                                        ],
+                                        stops: const <double>[
+                                          0.0,
+                                          0.35,
+                                          0.5,
+                                          0.65,
+                                          1.0,
+                                        ],
+                                      ),
+                                      child: Container(
+                                        height: height,
+                                        width: widget.width,
+                                        color: Colors.black,
+                                      ),
+                                    );
+                                  case LoadState.completed:
+                                    return null;
+                                  case LoadState.failed:
+                                    return const Icon(Icons.error);
+                                }
+                              },
+                            ),
                           ),
-                        ),
-                        child: ExtendedImage.network(
-                          post.getImage(settingState.gridImageQuality),
-                          fit: BoxFit.cover,
-                          cache: true,
-                          loadStateChanged: (ExtendedImageState state) {
-                            switch (state.extendedImageLoadState) {
-                              case LoadState.loading:
-                                return Shimmer(
-                                  gradient: LinearGradient(
-                                    begin: Alignment.centerLeft,
-                                    end: Alignment.centerRight,
-                                    colors: <Color>[
-                                      baseColor,
-                                      baseColor,
-                                      highlightColor,
-                                      baseColor,
-                                      baseColor
-                                    ],
-                                    stops: const <double>[
-                                      0.0,
-                                      0.35,
-                                      0.5,
-                                      0.65,
-                                      1.0,
-                                    ],
-                                  ),
-                                  child: Container(
-                                    height: height,
-                                    width: widget.width,
-                                    color: Colors.black,
-                                  ),
-                                );
-                              case LoadState.completed:
-                                return null;
-                              case LoadState.failed:
-                                return const Icon(Icons.error);
-                            }
-                          },
-                        ),
+                          Positioned(
+                            bottom: 0,
+                            right: 0,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.black.withOpacity(0.6),
+                                borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(5),
+                                ),
+                              ),
+                              padding: const EdgeInsets.all(1),
+                              child: Center(
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      post.isVideo
+                                          ? Icons.play_arrow_rounded
+                                          : Icons.image,
+                                      size: 18,
+                                    ),
+                                    if (post.haveAudio)
+                                      const Icon(
+                                        Icons.volume_up,
+                                        size: 15,
+                                      ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
                       ),
                     ),
                   ),

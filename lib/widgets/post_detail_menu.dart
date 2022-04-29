@@ -30,7 +30,7 @@ class PostDetailAppBar extends StatelessWidget with PreferredSizeWidget {
           builder: (context, state) {
             final Post post = galleryState.posts[state.currentPostIndex];
             return Visibility(
-              visible: state.showMenu,
+              visible: post.isVideo || state.showMenu,
               child: AppBar(
                 elevation: 20,
                 shadowColor: Colors.black.withOpacity(0.35),
@@ -133,7 +133,7 @@ class PostDetailBottomBar extends StatelessWidget {
                         post.id, (a, b) => a.compareTo(b)) >
                     0;
                 return Visibility(
-                  visible: state.showMenu,
+                  visible: post.isVideo || state.showMenu,
                   child: SafeArea(
                     child: Material(
                       color: Colors.transparent,

@@ -58,6 +58,8 @@ class _$PostTearOff {
           required DateTime createdAt,
       @JsonKey(name: 'updated_at')
           required DateTime updatedAt,
+      @JsonKey(name: 'tag_string_meta', fromJson: _tagsArrayFromJson)
+          required List<String> meta,
       String? video}) {
     return _Post(
       id: id,
@@ -79,6 +81,7 @@ class _$PostTearOff {
       uploaderId: uploaderId,
       createdAt: createdAt,
       updatedAt: updatedAt,
+      meta: meta,
       video: video,
     );
   }
@@ -128,6 +131,8 @@ mixin _$Post {
   DateTime get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'updated_at')
   DateTime get updatedAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'tag_string_meta', fromJson: _tagsArrayFromJson)
+  List<String> get meta => throw _privateConstructorUsedError;
   String? get video => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -175,6 +180,8 @@ abstract class $PostCopyWith<$Res> {
           DateTime createdAt,
       @JsonKey(name: 'updated_at')
           DateTime updatedAt,
+      @JsonKey(name: 'tag_string_meta', fromJson: _tagsArrayFromJson)
+          List<String> meta,
       String? video});
 }
 
@@ -207,6 +214,7 @@ class _$PostCopyWithImpl<$Res> implements $PostCopyWith<$Res> {
     Object? uploaderId = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
+    Object? meta = freezed,
     Object? video = freezed,
   }) {
     return _then(_value.copyWith(
@@ -286,6 +294,10 @@ class _$PostCopyWithImpl<$Res> implements $PostCopyWith<$Res> {
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      meta: meta == freezed
+          ? _value.meta
+          : meta // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       video: video == freezed
           ? _value.video
           : video // ignore: cast_nullable_to_non_nullable
@@ -335,6 +347,8 @@ abstract class _$PostCopyWith<$Res> implements $PostCopyWith<$Res> {
           DateTime createdAt,
       @JsonKey(name: 'updated_at')
           DateTime updatedAt,
+      @JsonKey(name: 'tag_string_meta', fromJson: _tagsArrayFromJson)
+          List<String> meta,
       String? video});
 }
 
@@ -368,6 +382,7 @@ class __$PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res>
     Object? uploaderId = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
+    Object? meta = freezed,
     Object? video = freezed,
   }) {
     return _then(_Post(
@@ -447,6 +462,10 @@ class __$PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      meta: meta == freezed
+          ? _value.meta
+          : meta // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       video: video == freezed
           ? _value.video
           : video // ignore: cast_nullable_to_non_nullable
@@ -494,6 +513,8 @@ class _$_Post extends _Post {
           required this.createdAt,
       @JsonKey(name: 'updated_at')
           required this.updatedAt,
+      @JsonKey(name: 'tag_string_meta', fromJson: _tagsArrayFromJson)
+          required this.meta,
       this.video})
       : super._();
 
@@ -554,11 +575,14 @@ class _$_Post extends _Post {
   @JsonKey(name: 'updated_at')
   final DateTime updatedAt;
   @override
+  @JsonKey(name: 'tag_string_meta', fromJson: _tagsArrayFromJson)
+  final List<String> meta;
+  @override
   final String? video;
 
   @override
   String toString() {
-    return 'Post(id: $id, tags: $tags, artistTag: $artistTag, characterTag: $characterTag, seriesTag: $seriesTag, rating: $rating, source: $source, previewFileUrl: $previewFileUrl, largeFileUrl: $largeFileUrl, fileUrl: $fileUrl, fileExt: $fileExt, imageWidth: $imageWidth, imageHeight: $imageHeight, size: $size, score: $score, favoriteCount: $favoriteCount, uploaderId: $uploaderId, createdAt: $createdAt, updatedAt: $updatedAt, video: $video)';
+    return 'Post(id: $id, tags: $tags, artistTag: $artistTag, characterTag: $characterTag, seriesTag: $seriesTag, rating: $rating, source: $source, previewFileUrl: $previewFileUrl, largeFileUrl: $largeFileUrl, fileUrl: $fileUrl, fileExt: $fileExt, imageWidth: $imageWidth, imageHeight: $imageHeight, size: $size, score: $score, favoriteCount: $favoriteCount, uploaderId: $uploaderId, createdAt: $createdAt, updatedAt: $updatedAt, meta: $meta, video: $video)';
   }
 
   @override
@@ -592,6 +616,7 @@ class _$_Post extends _Post {
                 .equals(other.uploaderId, uploaderId) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             const DeepCollectionEquality().equals(other.updatedAt, updatedAt) &&
+            const DeepCollectionEquality().equals(other.meta, meta) &&
             const DeepCollectionEquality().equals(other.video, video));
   }
 
@@ -617,6 +642,7 @@ class _$_Post extends _Post {
         const DeepCollectionEquality().hash(uploaderId),
         const DeepCollectionEquality().hash(createdAt),
         const DeepCollectionEquality().hash(updatedAt),
+        const DeepCollectionEquality().hash(meta),
         const DeepCollectionEquality().hash(video)
       ]);
 
@@ -668,6 +694,8 @@ abstract class _Post extends Post {
           required DateTime createdAt,
       @JsonKey(name: 'updated_at')
           required DateTime updatedAt,
+      @JsonKey(name: 'tag_string_meta', fromJson: _tagsArrayFromJson)
+          required List<String> meta,
       String? video}) = _$_Post;
   _Post._() : super._();
 
@@ -727,6 +755,9 @@ abstract class _Post extends Post {
   @override
   @JsonKey(name: 'updated_at')
   DateTime get updatedAt;
+  @override
+  @JsonKey(name: 'tag_string_meta', fromJson: _tagsArrayFromJson)
+  List<String> get meta;
   @override
   String? get video;
   @override

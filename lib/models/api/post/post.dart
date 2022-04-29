@@ -36,6 +36,8 @@ class Post with _$Post {
     @JsonKey(name: 'uploader_id') required int uploaderId,
     @JsonKey(name: 'created_at') required DateTime createdAt,
     @JsonKey(name: 'updated_at') required DateTime updatedAt,
+    @JsonKey(name: 'tag_string_meta', fromJson: _tagsArrayFromJson)
+        required List<String> meta,
     String? video,
   }) = _Post;
 
@@ -51,6 +53,8 @@ class Post with _$Post {
         return false;
     }
   }
+
+  bool get haveAudio => isVideo && meta.contains('sound');
 
   String get maxQuality => isVideo ? previewFileUrl : fileUrl;
 

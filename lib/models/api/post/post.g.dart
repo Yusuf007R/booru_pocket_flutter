@@ -26,6 +26,7 @@ _$_Post _$$_PostFromJson(Map<String, dynamic> json) => _$_Post(
       uploaderId: json['uploader_id'] as int,
       createdAt: DateTime.parse(json['created_at'] as String),
       updatedAt: DateTime.parse(json['updated_at'] as String),
+      meta: _tagsArrayFromJson(json['tag_string_meta'] as String),
       video: json['video'] as String?,
     );
 
@@ -49,6 +50,7 @@ Map<String, dynamic> _$$_PostToJson(_$_Post instance) => <String, dynamic>{
       'uploader_id': instance.uploaderId,
       'created_at': instance.createdAt.toIso8601String(),
       'updated_at': instance.updatedAt.toIso8601String(),
+      'tag_string_meta': instance.meta,
       'video': instance.video,
     };
 

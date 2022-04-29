@@ -3,6 +3,7 @@ import 'package:booru_pocket_flutter/blocs/gallery_grid_bloc/gallery_grid_bloc.d
 import 'package:booru_pocket_flutter/blocs/post_detail_screen_cubit/post_detail_screen_cubit_cubit.dart';
 import 'package:booru_pocket_flutter/blocs/settings_cubit/settings_cubit.dart';
 import 'package:booru_pocket_flutter/widgets/post_detail_menu.dart';
+import 'package:booru_pocket_flutter/widgets/video_player.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -54,8 +55,10 @@ class _PostDetailScreenState extends State<_PostDetailScreen> {
 
   @override
   void dispose() {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge,
-        overlays: SystemUiOverlay.values);
+    SystemChrome.setEnabledSystemUIMode(
+      SystemUiMode.edgeToEdge,
+      overlays: SystemUiOverlay.values,
+    );
     super.dispose();
   }
 
@@ -90,6 +93,7 @@ class _PostDetailScreenState extends State<_PostDetailScreen> {
               buildWhen: (previous, current) =>
                   (previous.posts.length != current.posts.length),
               builder: (context, gridBlocState) {
+                final postInfo = gridBlocState.posts[state.currentPostIndex];
                 return WillPopScope(
                   onWillPop: () async {
                     detailCubit.willPop();
@@ -97,8 +101,8 @@ class _PostDetailScreenState extends State<_PostDetailScreen> {
                   },
                   child: Scaffold(
                     backgroundColor: Colors.black,
-                    extendBody: true,
-                    extendBodyBehindAppBar: true,
+                    extendBody: !postInfo.isVideo,
+                    extendBodyBehindAppBar: !postInfo.isVideo,
                     appBar: const PostDetailAppBar(),
                     bottomNavigationBar: const PostDetailBottomBar(),
                     body: Stack(
@@ -118,30 +122,41 @@ class _PostDetailScreenState extends State<_PostDetailScreen> {
                                           ImageQuality.max ||
                                       (state.maxQuality[index] ?? false);
 
-                              final tag = index == state.currentPostIndex
+                              final tag = index == state.currentPostIndex &&
+                                      !post.isVideo
                                   ? "${gridBlocState.uniqueKey}-${post.id}"
                                   : UniqueKey().toString();
+
                               return Hero(
                                 tag: tag,
                                 child: Stack(
                                   alignment: Alignment.center,
                                   fit: StackFit.expand,
-                                  children: [
-                                    ExtendedImage.network(
-                                      post.getImage(
-                                          settingsState.gridImageQuality),
-                                      fit: BoxFit.contain,
-                                      loadStateChanged: loadStateChanged,
-                                    ),
-                                    if (isFocus &&
-                                        isMaxQuality &&
-                                        !state.willPop)
-                                      ExtendedImage.network(
-                                        post.maxQuality,
-                                        fit: BoxFit.contain,
-                                        loadStateChanged: loadStateChanged,
-                                      ),
-                                  ],
+                                  children: post.isVideo
+                                      ? [
+                                          if (isFocus)
+                                            VideoPlayerWrapper(
+                                              post: post,
+                                            )
+                                        ]
+                                      : [
+                                          ExtendedImage.network(
+                                            post.getImage(
+                                              settingsState.gridImageQuality,
+                                            ),
+                                            fit: BoxFit.contain,
+                                            loadStateChanged: loadStateChanged,
+                                          ),
+                                          if (isFocus &&
+                                              isMaxQuality &&
+                                              !state.willPop)
+                                            ExtendedImage.network(
+                                              post.maxQuality,
+                                              fit: BoxFit.contain,
+                                              loadStateChanged:
+                                                  loadStateChanged,
+                                            ),
+                                        ],
                                 ),
                               );
                             },
