@@ -154,11 +154,13 @@ class _GalleryGridItemState extends State<GalleryGridItem> {
                                           ? Icons.play_arrow_rounded
                                           : Icons.image,
                                       size: 18,
+                                      color: Colors.white,
                                     ),
                                     if (post.haveAudio)
                                       const Icon(
                                         Icons.volume_up,
                                         size: 15,
+                                        color: Colors.white,
                                       ),
                                   ],
                                 ),

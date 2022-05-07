@@ -10,11 +10,6 @@ class PostsFetched extends GalleryGridEvent {
 
 class PostsRefreshed extends GalleryGridEvent {}
 
-class PostLiked extends GalleryGridEvent {
-  final int postId;
-  PostLiked({required this.postId});
-}
-
 class PostSelectedToggled extends GalleryGridEvent {
   final int postId;
   PostSelectedToggled({required this.postId});

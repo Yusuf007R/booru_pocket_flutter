@@ -1,7 +1,11 @@
+import 'dart:collection';
+
 import 'package:bloc/bloc.dart';
+import 'package:booru_pocket_flutter/models/api/post/post.dart';
 import 'package:booru_pocket_flutter/models/api/user/user.dart';
 import 'package:booru_pocket_flutter/repositories/danbooru.dart';
 import 'package:booru_pocket_flutter/services/locator_service.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:booru_pocket_flutter/router/router.gr.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -21,6 +25,7 @@ class DanbooruAuthCubit extends Cubit<DanbooruAuthState> {
       errorMsg: '',
       usernameErrorMsg: null,
       apiKeyErrorMsg: null,
+      user: const User.authenticating(),
     ));
     if (username.isEmpty) {
       emit(state.copyWith(usernameErrorMsg: 'Username cannot be empty'));
@@ -78,12 +83,55 @@ class DanbooruAuthCubit extends Cubit<DanbooruAuthState> {
     if (user is UserAuthenticated) {
       final page = (user.favoriteCount / 1000).ceil();
       final favorites = await repository.getFavorites(user.name, page);
-      setFavorites(favorites);
+      final map = {for (var v in favorites) v: true};
+      emit(state.copyWith(favoritePostIds: map));
     }
   }
 
-  void setFavorites(List<int> favorites) {
-    favorites.sort(((a, b) => a.compareTo(b)));
-    emit(state.copyWith(favoritePostIds: favorites));
+  bool isPostFavorite(Post post) => state.favoritePostIds[post.id] ?? false;
+
+  void setFavoriteOn(Post post) async {
+    final copyMap = {...state.favoritePostIds};
+    try {
+      copyMap.addEntries({post.id: true}.entries);
+      emit(state.copyWith(favoritePostIds: copyMap));
+      await repository.addFavorite(post.id);
+      return;
+    } on DioError catch (e) {
+      print(e.message);
+      copyMap.remove(post.id);
+      emit(state.copyWith(favoritePostIds: copyMap));
+      return;
+    }
+  }
+
+  void setFavoriteOff(Post post) async {
+    final copyMap = {...state.favoritePostIds};
+    try {
+      copyMap.remove(post.id);
+      emit(state.copyWith(favoritePostIds: copyMap));
+      await repository.deleteFavorite(post.id);
+      return;
+    } on DioError catch (e) {
+      print(e.response);
+      if (e.response?.data['message'] == 'That record was not found.') {
+        return;
+      }
+      copyMap.addEntries({post.id: true}.entries);
+      emit(state.copyWith(favoritePostIds: copyMap));
+      return;
+    }
+  }
+
+  void toggleFavoritePost(Post post) async {
+    final user = state.user;
+    if (user is! UserAuthenticated) {
+      locator<AppRouter>().navigate(const LoginRoute());
+      return;
+    }
+
+    final isFav = isPostFavorite(post);
+    if (isFav) return setFavoriteOff(post);
+    setFavoriteOn(post);
   }
 }

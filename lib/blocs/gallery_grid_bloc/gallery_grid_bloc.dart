@@ -1,11 +1,8 @@
-import 'dart:ffi';
-
 import 'package:bloc/bloc.dart';
 import 'package:booru_pocket_flutter/blocs/danbooru_auth_cubit/danbooru_auth_cubit.dart';
 import 'package:booru_pocket_flutter/blocs/query_params_cubit/query_params_cubit.dart';
 import 'package:booru_pocket_flutter/models/api/user/user.dart';
 import 'package:booru_pocket_flutter/services/locator_service.dart';
-import 'package:dio/dio.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,8 +10,6 @@ import 'package:booru_pocket_flutter/models/api/post/post.dart';
 import 'package:booru_pocket_flutter/repositories/danbooru.dart';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-import '../../router/router.gr.dart';
 
 part 'gallery_grid_event.dart';
 part 'gallery_grid_state.dart';
@@ -87,44 +82,6 @@ class GalleryGridBloc extends Bloc<GalleryGridEvent, GalleryGridState> {
 
     on<SetPostSelected>((event, emit) async {
       emit(state.copyWith(selectedPosts: event.selectedPosts));
-    });
-
-    on<PostLiked>((event, emit) async {
-      final user = danbooruAuthCubit.state.user;
-      if (user is UserNoAuthenticated) {
-        locator<AppRouter>().navigate(const LoginRoute());
-        return;
-      }
-      final favoritesId =
-          List<int>.from(danbooruAuthCubit.state.favoritePostIds);
-      final isFavorite = favoritesId.contains(event.postId);
-      if (isFavorite) {
-        try {
-          favoritesId.remove(event.postId);
-          danbooruAuthCubit.setFavorites(favoritesId);
-          await repository.deleteFavorite(event.postId);
-          return;
-        } on DioError catch (e) {
-          print(e.response);
-          if (e.response?.data['message'] == 'That record was not found.') {
-            return;
-          }
-          favoritesId.add(event.postId);
-          danbooruAuthCubit.setFavorites(favoritesId);
-          return;
-        }
-      }
-      try {
-        favoritesId.add(event.postId);
-        danbooruAuthCubit.setFavorites(favoritesId);
-        await repository.addFavorite(event.postId);
-        return;
-      } on DioError catch (e) {
-        print(e.message);
-        favoritesId.remove(event.postId);
-        danbooruAuthCubit.setFavorites(favoritesId);
-        return;
-      }
     });
   }
 

@@ -119,8 +119,7 @@ class PostDetailBottomBar extends StatelessWidget {
                 current.favoritePostIds.hashCode;
           },
           builder: (context, authState) {
-            final favoritePostIds = authState.favoritePostIds;
-
+            final authCubit = context.read<DanbooruAuthCubit>();
             return BlocBuilder<PostDetailScreenCubitCubit,
                 PostDetailScreenCubitState>(
               builder: (context, state) {
@@ -129,9 +128,7 @@ class PostDetailBottomBar extends StatelessWidget {
                     .read<GalleryGridBloc>()
                     .state
                     .posts[state.currentPostIndex];
-                final isFavorite = favoritePostIds.binarySearch(
-                        post.id, (a, b) => a.compareTo(b)) >
-                    0;
+                final isFavorite = authCubit.isPostFavorite(post);
                 return Visibility(
                   visible: post.isVideo || state.showMenu,
                   child: SafeArea(
@@ -216,8 +213,8 @@ class PostDetailBottomBar extends StatelessWidget {
                               ),
                               onPressed: () {
                                 context
-                                    .read<GalleryGridBloc>()
-                                    .add(PostLiked(postId: post.id));
+                                    .read<DanbooruAuthCubit>()
+                                    .toggleFavoritePost(post);
                               },
                             ),
                           ],

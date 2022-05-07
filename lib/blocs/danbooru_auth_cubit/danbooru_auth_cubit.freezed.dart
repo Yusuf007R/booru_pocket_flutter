@@ -22,7 +22,7 @@ class _$DanbooruAuthStateTearOff {
       {String errorMsg = '',
       String? usernameErrorMsg,
       String? apiKeyErrorMsg,
-      List<int> favoritePostIds = const [],
+      Map<int, bool> favoritePostIds = const {},
       User user = const User.authenticating()}) {
     return _DanbooruAuthState(
       errorMsg: errorMsg,
@@ -42,7 +42,7 @@ mixin _$DanbooruAuthState {
   String get errorMsg => throw _privateConstructorUsedError;
   String? get usernameErrorMsg => throw _privateConstructorUsedError;
   String? get apiKeyErrorMsg => throw _privateConstructorUsedError;
-  List<int> get favoritePostIds => throw _privateConstructorUsedError;
+  Map<int, bool> get favoritePostIds => throw _privateConstructorUsedError;
   User get user => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -59,7 +59,7 @@ abstract class $DanbooruAuthStateCopyWith<$Res> {
       {String errorMsg,
       String? usernameErrorMsg,
       String? apiKeyErrorMsg,
-      List<int> favoritePostIds,
+      Map<int, bool> favoritePostIds,
       User user});
 
   $UserCopyWith<$Res> get user;
@@ -98,7 +98,7 @@ class _$DanbooruAuthStateCopyWithImpl<$Res>
       favoritePostIds: favoritePostIds == freezed
           ? _value.favoritePostIds
           : favoritePostIds // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+              as Map<int, bool>,
       user: user == freezed
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -125,7 +125,7 @@ abstract class _$DanbooruAuthStateCopyWith<$Res>
       {String errorMsg,
       String? usernameErrorMsg,
       String? apiKeyErrorMsg,
-      List<int> favoritePostIds,
+      Map<int, bool> favoritePostIds,
       User user});
 
   @override
@@ -167,7 +167,7 @@ class __$DanbooruAuthStateCopyWithImpl<$Res>
       favoritePostIds: favoritePostIds == freezed
           ? _value.favoritePostIds
           : favoritePostIds // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+              as Map<int, bool>,
       user: user == freezed
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -183,7 +183,7 @@ class _$_DanbooruAuthState implements _DanbooruAuthState {
       {this.errorMsg = '',
       this.usernameErrorMsg,
       this.apiKeyErrorMsg,
-      this.favoritePostIds = const [],
+      this.favoritePostIds = const {},
       this.user = const User.authenticating()});
 
   @JsonKey()
@@ -195,7 +195,7 @@ class _$_DanbooruAuthState implements _DanbooruAuthState {
   final String? apiKeyErrorMsg;
   @JsonKey()
   @override
-  final List<int> favoritePostIds;
+  final Map<int, bool> favoritePostIds;
   @JsonKey()
   @override
   final User user;
@@ -240,7 +240,7 @@ abstract class _DanbooruAuthState implements DanbooruAuthState {
       {String errorMsg,
       String? usernameErrorMsg,
       String? apiKeyErrorMsg,
-      List<int> favoritePostIds,
+      Map<int, bool> favoritePostIds,
       User user}) = _$_DanbooruAuthState;
 
   @override
@@ -250,7 +250,7 @@ abstract class _DanbooruAuthState implements DanbooruAuthState {
   @override
   String? get apiKeyErrorMsg;
   @override
-  List<int> get favoritePostIds;
+  Map<int, bool> get favoritePostIds;
   @override
   User get user;
   @override

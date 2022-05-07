@@ -12,7 +12,7 @@ class CustomDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).viewPadding.top;
+    final height = MediaQuery.of(context).padding.top;
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.65,
       child: Drawer(
@@ -49,7 +49,7 @@ class DrawerBottomList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: const EdgeInsets.only(bottom: 5),
+      padding: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
       shrinkWrap: true,
       physics: const BouncingScrollPhysics(),
       children: [

@@ -82,18 +82,18 @@ class _PostDetailScreenState extends State<_PostDetailScreen> {
         return BlocBuilder<PostDetailScreenCubitCubit,
             PostDetailScreenCubitState>(
           builder: (context, state) {
-            if (state.showMenu) {
-              SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge,
-                  overlays: SystemUiOverlay.values);
-            } else {
-              SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-                  overlays: []);
-            }
             return BlocBuilder<GalleryGridBloc, GalleryGridState>(
               buildWhen: (previous, current) =>
                   (previous.posts.length != current.posts.length),
               builder: (context, gridBlocState) {
                 final postInfo = gridBlocState.posts[state.currentPostIndex];
+                if (state.showMenu) {
+                  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge,
+                      overlays: SystemUiOverlay.values);
+                } else if (!postInfo.isVideo) {
+                  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+                      overlays: []);
+                }
                 return WillPopScope(
                   onWillPop: () async {
                     detailCubit.willPop();

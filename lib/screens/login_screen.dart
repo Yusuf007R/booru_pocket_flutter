@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:booru_pocket_flutter/blocs/danbooru_auth_cubit/danbooru_auth_cubit.dart';
+import 'package:booru_pocket_flutter/models/api/user/user.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,6 +20,8 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return BlocBuilder<DanbooruAuthCubit, DanbooruAuthState>(
       builder: (context, state) {
+        final user = state.user;
+        final isLoading = user is UserAuthenticating;
         return Scaffold(
           appBar: AppBar(
             title: const Text('Danbooru Log in'),
@@ -107,16 +110,25 @@ class _LoginScreenState extends State<LoginScreen> {
                               _apiKeyController.text,
                             );
                           },
-                          child: const SizedBox(
+                          child: SizedBox(
                             height: 50.0,
                             child: Center(
-                              child: Text(
-                                'Log in',
-                                style: TextStyle(
-                                  fontSize: 18.0,
-                                  color: Colors.white,
-                                ),
-                              ),
+                              child: isLoading
+                                  ? const SizedBox(
+                                      height: 28,
+                                      width: 28,
+                                      child: CircularProgressIndicator(
+                                        color: Colors.white,
+                                        strokeWidth: 3,
+                                      ),
+                                    )
+                                  : const Text(
+                                      'Log in',
+                                      style: TextStyle(
+                                        fontSize: 18.0,
+                                        color: Colors.white,
+                                      ),
+                                    ),
                             ),
                           ),
                         ),
