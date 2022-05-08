@@ -140,9 +140,21 @@ class _PostDetailScreenState extends State<_PostDetailScreen> {
                                             )
                                         ]
                                       : [
+                                          if (isFocus &&
+                                              settingsState.gridImageQuality !=
+                                                  settingsState
+                                                      .detailPageQuality)
+                                            ExtendedImage.network(
+                                              post.getImage(
+                                                settingsState.gridImageQuality,
+                                              ),
+                                              fit: BoxFit.contain,
+                                              loadStateChanged:
+                                                  loadStateChanged,
+                                            ),
                                           ExtendedImage.network(
                                             post.getImage(
-                                              settingsState.gridImageQuality,
+                                              settingsState.detailPageQuality,
                                             ),
                                             fit: BoxFit.contain,
                                             loadStateChanged: loadStateChanged,

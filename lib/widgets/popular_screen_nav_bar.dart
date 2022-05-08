@@ -2,6 +2,7 @@ import 'package:booru_pocket_flutter/blocs/popular_screen_nav_bar/popular_screen
 import 'package:booru_pocket_flutter/blocs/query_params_cubit/query_params_cubit.dart';
 import 'package:booru_pocket_flutter/models/api/queryparams/queryparams.dart';
 import 'package:booru_pocket_flutter/widgets/nav_bar_skeleton.dart';
+import 'package:booru_pocket_flutter/widgets/pop_up_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -80,33 +81,24 @@ class PopularScreenNavBarStateWidget extends State<PopularScreenNavBar> {
                 },
                 child: const Icon(Icons.list, size: 28, color: Colors.white),
                 itemBuilder: (context) => [
-                  const PopupMenuItem(
-                    value: 'day',
-                    padding: EdgeInsets.all(0),
-                    child: ListTile(
-                      minLeadingWidth: 0,
-                      leading: Icon(MdiIcons.calendar),
-                      title: Text("day"),
-                    ),
+                  popUpItem(
+                    icon: MdiIcons.calendar,
+                    text: 'Day',
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    iconSeparation: 10,
                   ),
-                  const PopupMenuItem(
-                    value: 'week',
-                    padding: EdgeInsets.all(0),
-                    child: ListTile(
-                      minLeadingWidth: 0,
-                      leading: Icon(MdiIcons.calendarRange),
-                      title: Text("week"),
-                    ),
+                  popUpItem(
+                    icon: MdiIcons.calendarRange,
+                    text: 'Week',
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    iconSeparation: 10,
                   ),
-                  const PopupMenuItem(
-                    value: 'month',
-                    padding: EdgeInsets.all(0),
-                    child: ListTile(
-                      minLeadingWidth: 0,
-                      leading: Icon(MdiIcons.calendarMonth),
-                      title: Text("month"),
-                    ),
-                  )
+                  popUpItem(
+                    icon: MdiIcons.calendarMonth,
+                    text: 'Month',
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    iconSeparation: 10,
+                  ),
                 ],
               ),
             ),

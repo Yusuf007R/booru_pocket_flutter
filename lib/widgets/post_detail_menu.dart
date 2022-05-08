@@ -6,12 +6,12 @@ import 'package:booru_pocket_flutter/blocs/settings_cubit/settings_cubit.dart';
 import 'package:booru_pocket_flutter/models/api/post/post.dart';
 import 'package:booru_pocket_flutter/services/image_downloader_service.dart';
 import 'package:booru_pocket_flutter/services/locator_service.dart';
+import 'package:booru_pocket_flutter/widgets/pop_up_item.dart';
 import 'package:booru_pocket_flutter/widgets/post_detail_bottom_sheets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:collection/collection.dart';
 
 class PostDetailAppBar extends StatelessWidget with PreferredSizeWidget {
   const PostDetailAppBar({
@@ -86,22 +86,6 @@ class PostDetailAppBar extends StatelessWidget with PreferredSizeWidget {
           },
         );
       },
-    );
-  }
-
-  PopupMenuItem<dynamic> popUpItem({
-    required Function() onTap,
-    required String text,
-    required IconData icon,
-  }) {
-    return PopupMenuItem(
-      onTap: onTap,
-      padding: const EdgeInsets.all(0),
-      child: ListTile(
-        minLeadingWidth: 0,
-        leading: Icon(icon),
-        title: Text(text, style: const TextStyle(fontSize: 15)),
-      ),
     );
   }
 }
