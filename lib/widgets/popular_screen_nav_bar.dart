@@ -84,19 +84,16 @@ class PopularScreenNavBarStateWidget extends State<PopularScreenNavBar> {
                   popUpItem(
                     icon: MdiIcons.calendar,
                     text: 'Day',
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
                     iconSeparation: 10,
                   ),
                   popUpItem(
                     icon: MdiIcons.calendarRange,
                     text: 'Week',
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
                     iconSeparation: 10,
                   ),
                   popUpItem(
                     icon: MdiIcons.calendarMonth,
                     text: 'Month',
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
                     iconSeparation: 10,
                   ),
                 ],

@@ -12,30 +12,7 @@ part of 'danbooru_auth_cubit.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$DanbooruAuthStateTearOff {
-  const _$DanbooruAuthStateTearOff();
-
-  _DanbooruAuthState call(
-      {String errorMsg = '',
-      String? usernameErrorMsg,
-      String? apiKeyErrorMsg,
-      Map<int, bool> favoritePostIds = const {},
-      User user = const User.authenticating()}) {
-    return _DanbooruAuthState(
-      errorMsg: errorMsg,
-      usernameErrorMsg: usernameErrorMsg,
-      apiKeyErrorMsg: apiKeyErrorMsg,
-      favoritePostIds: favoritePostIds,
-      user: user,
-    );
-  }
-}
-
-/// @nodoc
-const $DanbooruAuthState = _$DanbooruAuthStateTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$DanbooruAuthState {
@@ -115,11 +92,11 @@ class _$DanbooruAuthStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$DanbooruAuthStateCopyWith<$Res>
+abstract class _$$_DanbooruAuthStateCopyWith<$Res>
     implements $DanbooruAuthStateCopyWith<$Res> {
-  factory _$DanbooruAuthStateCopyWith(
-          _DanbooruAuthState value, $Res Function(_DanbooruAuthState) then) =
-      __$DanbooruAuthStateCopyWithImpl<$Res>;
+  factory _$$_DanbooruAuthStateCopyWith(_$_DanbooruAuthState value,
+          $Res Function(_$_DanbooruAuthState) then) =
+      __$$_DanbooruAuthStateCopyWithImpl<$Res>;
   @override
   $Res call(
       {String errorMsg,
@@ -133,15 +110,15 @@ abstract class _$DanbooruAuthStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$DanbooruAuthStateCopyWithImpl<$Res>
+class __$$_DanbooruAuthStateCopyWithImpl<$Res>
     extends _$DanbooruAuthStateCopyWithImpl<$Res>
-    implements _$DanbooruAuthStateCopyWith<$Res> {
-  __$DanbooruAuthStateCopyWithImpl(
-      _DanbooruAuthState _value, $Res Function(_DanbooruAuthState) _then)
-      : super(_value, (v) => _then(v as _DanbooruAuthState));
+    implements _$$_DanbooruAuthStateCopyWith<$Res> {
+  __$$_DanbooruAuthStateCopyWithImpl(
+      _$_DanbooruAuthState _value, $Res Function(_$_DanbooruAuthState) _then)
+      : super(_value, (v) => _then(v as _$_DanbooruAuthState));
 
   @override
-  _DanbooruAuthState get _value => super._value as _DanbooruAuthState;
+  _$_DanbooruAuthState get _value => super._value as _$_DanbooruAuthState;
 
   @override
   $Res call({
@@ -151,7 +128,7 @@ class __$DanbooruAuthStateCopyWithImpl<$Res>
     Object? favoritePostIds = freezed,
     Object? user = freezed,
   }) {
-    return _then(_DanbooruAuthState(
+    return _then(_$_DanbooruAuthState(
       errorMsg: errorMsg == freezed
           ? _value.errorMsg
           : errorMsg // ignore: cast_nullable_to_non_nullable
@@ -165,7 +142,7 @@ class __$DanbooruAuthStateCopyWithImpl<$Res>
           : apiKeyErrorMsg // ignore: cast_nullable_to_non_nullable
               as String?,
       favoritePostIds: favoritePostIds == freezed
-          ? _value.favoritePostIds
+          ? _value._favoritePostIds
           : favoritePostIds // ignore: cast_nullable_to_non_nullable
               as Map<int, bool>,
       user: user == freezed
@@ -183,21 +160,27 @@ class _$_DanbooruAuthState implements _DanbooruAuthState {
       {this.errorMsg = '',
       this.usernameErrorMsg,
       this.apiKeyErrorMsg,
-      this.favoritePostIds = const {},
-      this.user = const User.authenticating()});
+      final Map<int, bool> favoritePostIds = const {},
+      this.user = const User.authenticating()})
+      : _favoritePostIds = favoritePostIds;
 
-  @JsonKey()
   @override
+  @JsonKey()
   final String errorMsg;
   @override
   final String? usernameErrorMsg;
   @override
   final String? apiKeyErrorMsg;
-  @JsonKey()
+  final Map<int, bool> _favoritePostIds;
   @override
-  final Map<int, bool> favoritePostIds;
   @JsonKey()
+  Map<int, bool> get favoritePostIds {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_favoritePostIds);
+  }
+
   @override
+  @JsonKey()
   final User user;
 
   @override
@@ -209,14 +192,14 @@ class _$_DanbooruAuthState implements _DanbooruAuthState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _DanbooruAuthState &&
+            other is _$_DanbooruAuthState &&
             const DeepCollectionEquality().equals(other.errorMsg, errorMsg) &&
             const DeepCollectionEquality()
                 .equals(other.usernameErrorMsg, usernameErrorMsg) &&
             const DeepCollectionEquality()
                 .equals(other.apiKeyErrorMsg, apiKeyErrorMsg) &&
             const DeepCollectionEquality()
-                .equals(other.favoritePostIds, favoritePostIds) &&
+                .equals(other._favoritePostIds, _favoritePostIds) &&
             const DeepCollectionEquality().equals(other.user, user));
   }
 
@@ -226,35 +209,36 @@ class _$_DanbooruAuthState implements _DanbooruAuthState {
       const DeepCollectionEquality().hash(errorMsg),
       const DeepCollectionEquality().hash(usernameErrorMsg),
       const DeepCollectionEquality().hash(apiKeyErrorMsg),
-      const DeepCollectionEquality().hash(favoritePostIds),
+      const DeepCollectionEquality().hash(_favoritePostIds),
       const DeepCollectionEquality().hash(user));
 
   @JsonKey(ignore: true)
   @override
-  _$DanbooruAuthStateCopyWith<_DanbooruAuthState> get copyWith =>
-      __$DanbooruAuthStateCopyWithImpl<_DanbooruAuthState>(this, _$identity);
+  _$$_DanbooruAuthStateCopyWith<_$_DanbooruAuthState> get copyWith =>
+      __$$_DanbooruAuthStateCopyWithImpl<_$_DanbooruAuthState>(
+          this, _$identity);
 }
 
 abstract class _DanbooruAuthState implements DanbooruAuthState {
   const factory _DanbooruAuthState(
-      {String errorMsg,
-      String? usernameErrorMsg,
-      String? apiKeyErrorMsg,
-      Map<int, bool> favoritePostIds,
-      User user}) = _$_DanbooruAuthState;
+      {final String errorMsg,
+      final String? usernameErrorMsg,
+      final String? apiKeyErrorMsg,
+      final Map<int, bool> favoritePostIds,
+      final User user}) = _$_DanbooruAuthState;
 
   @override
-  String get errorMsg;
+  String get errorMsg => throw _privateConstructorUsedError;
   @override
-  String? get usernameErrorMsg;
+  String? get usernameErrorMsg => throw _privateConstructorUsedError;
   @override
-  String? get apiKeyErrorMsg;
+  String? get apiKeyErrorMsg => throw _privateConstructorUsedError;
   @override
-  Map<int, bool> get favoritePostIds;
+  Map<int, bool> get favoritePostIds => throw _privateConstructorUsedError;
   @override
-  User get user;
+  User get user => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$DanbooruAuthStateCopyWith<_DanbooruAuthState> get copyWith =>
+  _$$_DanbooruAuthStateCopyWith<_$_DanbooruAuthState> get copyWith =>
       throw _privateConstructorUsedError;
 }

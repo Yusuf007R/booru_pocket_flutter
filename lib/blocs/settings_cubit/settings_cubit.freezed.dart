@@ -12,48 +12,11 @@ part of 'settings_cubit.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 SettingsState _$SettingsStateFromJson(Map<String, dynamic> json) {
   return _SettingsState.fromJson(json);
 }
-
-/// @nodoc
-class _$SettingsStateTearOff {
-  const _$SettingsStateTearOff();
-
-  _SettingsState call(
-      {ThemeMode themeMode = ThemeMode.system,
-      String? defaultDownloadPath = null,
-      bool gridRoundedCorners = true,
-      bool safeMode = true,
-      ImageQuality gridImageQuality = ImageQuality.high,
-      ImageQuality downloadQuality = ImageQuality.max,
-      ImageQuality detailPageQuality = ImageQuality.high,
-      GridType gridType = GridType.waterFall,
-      int gridColumns = 2,
-      int pageLimit = 20}) {
-    return _SettingsState(
-      themeMode: themeMode,
-      defaultDownloadPath: defaultDownloadPath,
-      gridRoundedCorners: gridRoundedCorners,
-      safeMode: safeMode,
-      gridImageQuality: gridImageQuality,
-      downloadQuality: downloadQuality,
-      detailPageQuality: detailPageQuality,
-      gridType: gridType,
-      gridColumns: gridColumns,
-      pageLimit: pageLimit,
-    );
-  }
-
-  SettingsState fromJson(Map<String, Object?> json) {
-    return SettingsState.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $SettingsState = _$SettingsStateTearOff();
 
 /// @nodoc
 mixin _$SettingsState {
@@ -160,11 +123,11 @@ class _$SettingsStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$SettingsStateCopyWith<$Res>
+abstract class _$$_SettingsStateCopyWith<$Res>
     implements $SettingsStateCopyWith<$Res> {
-  factory _$SettingsStateCopyWith(
-          _SettingsState value, $Res Function(_SettingsState) then) =
-      __$SettingsStateCopyWithImpl<$Res>;
+  factory _$$_SettingsStateCopyWith(
+          _$_SettingsState value, $Res Function(_$_SettingsState) then) =
+      __$$_SettingsStateCopyWithImpl<$Res>;
   @override
   $Res call(
       {ThemeMode themeMode,
@@ -180,15 +143,15 @@ abstract class _$SettingsStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$SettingsStateCopyWithImpl<$Res>
+class __$$_SettingsStateCopyWithImpl<$Res>
     extends _$SettingsStateCopyWithImpl<$Res>
-    implements _$SettingsStateCopyWith<$Res> {
-  __$SettingsStateCopyWithImpl(
-      _SettingsState _value, $Res Function(_SettingsState) _then)
-      : super(_value, (v) => _then(v as _SettingsState));
+    implements _$$_SettingsStateCopyWith<$Res> {
+  __$$_SettingsStateCopyWithImpl(
+      _$_SettingsState _value, $Res Function(_$_SettingsState) _then)
+      : super(_value, (v) => _then(v as _$_SettingsState));
 
   @override
-  _SettingsState get _value => super._value as _SettingsState;
+  _$_SettingsState get _value => super._value as _$_SettingsState;
 
   @override
   $Res call({
@@ -203,7 +166,7 @@ class __$SettingsStateCopyWithImpl<$Res>
     Object? gridColumns = freezed,
     Object? pageLimit = freezed,
   }) {
-    return _then(_SettingsState(
+    return _then(_$_SettingsState(
       themeMode: themeMode == freezed
           ? _value.themeMode
           : themeMode // ignore: cast_nullable_to_non_nullable
@@ -266,35 +229,35 @@ class _$_SettingsState implements _SettingsState {
   factory _$_SettingsState.fromJson(Map<String, dynamic> json) =>
       _$$_SettingsStateFromJson(json);
 
-  @JsonKey()
   @override
+  @JsonKey()
   final ThemeMode themeMode;
-  @JsonKey()
   @override
+  @JsonKey()
   final String? defaultDownloadPath;
-  @JsonKey()
   @override
+  @JsonKey()
   final bool gridRoundedCorners;
-  @JsonKey()
   @override
+  @JsonKey()
   final bool safeMode;
-  @JsonKey()
   @override
+  @JsonKey()
   final ImageQuality gridImageQuality;
-  @JsonKey()
   @override
+  @JsonKey()
   final ImageQuality downloadQuality;
-  @JsonKey()
   @override
+  @JsonKey()
   final ImageQuality detailPageQuality;
-  @JsonKey()
   @override
+  @JsonKey()
   final GridType gridType;
-  @JsonKey()
   @override
+  @JsonKey()
   final int gridColumns;
-  @JsonKey()
   @override
+  @JsonKey()
   final int pageLimit;
 
   @override
@@ -306,7 +269,7 @@ class _$_SettingsState implements _SettingsState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _SettingsState &&
+            other is _$_SettingsState &&
             const DeepCollectionEquality().equals(other.themeMode, themeMode) &&
             const DeepCollectionEquality()
                 .equals(other.defaultDownloadPath, defaultDownloadPath) &&
@@ -325,6 +288,7 @@ class _$_SettingsState implements _SettingsState {
             const DeepCollectionEquality().equals(other.pageLimit, pageLimit));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -341,8 +305,8 @@ class _$_SettingsState implements _SettingsState {
 
   @JsonKey(ignore: true)
   @override
-  _$SettingsStateCopyWith<_SettingsState> get copyWith =>
-      __$SettingsStateCopyWithImpl<_SettingsState>(this, _$identity);
+  _$$_SettingsStateCopyWith<_$_SettingsState> get copyWith =>
+      __$$_SettingsStateCopyWithImpl<_$_SettingsState>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -352,42 +316,42 @@ class _$_SettingsState implements _SettingsState {
 
 abstract class _SettingsState implements SettingsState {
   const factory _SettingsState(
-      {ThemeMode themeMode,
-      String? defaultDownloadPath,
-      bool gridRoundedCorners,
-      bool safeMode,
-      ImageQuality gridImageQuality,
-      ImageQuality downloadQuality,
-      ImageQuality detailPageQuality,
-      GridType gridType,
-      int gridColumns,
-      int pageLimit}) = _$_SettingsState;
+      {final ThemeMode themeMode,
+      final String? defaultDownloadPath,
+      final bool gridRoundedCorners,
+      final bool safeMode,
+      final ImageQuality gridImageQuality,
+      final ImageQuality downloadQuality,
+      final ImageQuality detailPageQuality,
+      final GridType gridType,
+      final int gridColumns,
+      final int pageLimit}) = _$_SettingsState;
 
   factory _SettingsState.fromJson(Map<String, dynamic> json) =
       _$_SettingsState.fromJson;
 
   @override
-  ThemeMode get themeMode;
+  ThemeMode get themeMode => throw _privateConstructorUsedError;
   @override
-  String? get defaultDownloadPath;
+  String? get defaultDownloadPath => throw _privateConstructorUsedError;
   @override
-  bool get gridRoundedCorners;
+  bool get gridRoundedCorners => throw _privateConstructorUsedError;
   @override
-  bool get safeMode;
+  bool get safeMode => throw _privateConstructorUsedError;
   @override
-  ImageQuality get gridImageQuality;
+  ImageQuality get gridImageQuality => throw _privateConstructorUsedError;
   @override
-  ImageQuality get downloadQuality;
+  ImageQuality get downloadQuality => throw _privateConstructorUsedError;
   @override
-  ImageQuality get detailPageQuality;
+  ImageQuality get detailPageQuality => throw _privateConstructorUsedError;
   @override
-  GridType get gridType;
+  GridType get gridType => throw _privateConstructorUsedError;
   @override
-  int get gridColumns;
+  int get gridColumns => throw _privateConstructorUsedError;
   @override
-  int get pageLimit;
+  int get pageLimit => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$SettingsStateCopyWith<_SettingsState> get copyWith =>
+  _$$_SettingsStateCopyWith<_$_SettingsState> get copyWith =>
       throw _privateConstructorUsedError;
 }

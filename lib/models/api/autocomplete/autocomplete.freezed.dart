@@ -12,34 +12,11 @@ part of 'autocomplete.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 AutoComplete _$AutoCompleteFromJson(Map<String, dynamic> json) {
   return _AutoComplete.fromJson(json);
 }
-
-/// @nodoc
-class _$AutoCompleteTearOff {
-  const _$AutoCompleteTearOff();
-
-  _AutoComplete call(
-      {required String label,
-      required String value,
-      @JsonKey(name: 'post_count') int postCount = 0}) {
-    return _AutoComplete(
-      label: label,
-      value: value,
-      postCount: postCount,
-    );
-  }
-
-  AutoComplete fromJson(Map<String, Object?> json) {
-    return AutoComplete.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $AutoComplete = _$AutoCompleteTearOff();
 
 /// @nodoc
 mixin _$AutoComplete {
@@ -95,25 +72,26 @@ class _$AutoCompleteCopyWithImpl<$Res> implements $AutoCompleteCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$AutoCompleteCopyWith<$Res>
+abstract class _$$_AutoCompleteCopyWith<$Res>
     implements $AutoCompleteCopyWith<$Res> {
-  factory _$AutoCompleteCopyWith(
-          _AutoComplete value, $Res Function(_AutoComplete) then) =
-      __$AutoCompleteCopyWithImpl<$Res>;
+  factory _$$_AutoCompleteCopyWith(
+          _$_AutoComplete value, $Res Function(_$_AutoComplete) then) =
+      __$$_AutoCompleteCopyWithImpl<$Res>;
   @override
   $Res call(
       {String label, String value, @JsonKey(name: 'post_count') int postCount});
 }
 
 /// @nodoc
-class __$AutoCompleteCopyWithImpl<$Res> extends _$AutoCompleteCopyWithImpl<$Res>
-    implements _$AutoCompleteCopyWith<$Res> {
-  __$AutoCompleteCopyWithImpl(
-      _AutoComplete _value, $Res Function(_AutoComplete) _then)
-      : super(_value, (v) => _then(v as _AutoComplete));
+class __$$_AutoCompleteCopyWithImpl<$Res>
+    extends _$AutoCompleteCopyWithImpl<$Res>
+    implements _$$_AutoCompleteCopyWith<$Res> {
+  __$$_AutoCompleteCopyWithImpl(
+      _$_AutoComplete _value, $Res Function(_$_AutoComplete) _then)
+      : super(_value, (v) => _then(v as _$_AutoComplete));
 
   @override
-  _AutoComplete get _value => super._value as _AutoComplete;
+  _$_AutoComplete get _value => super._value as _$_AutoComplete;
 
   @override
   $Res call({
@@ -121,7 +99,7 @@ class __$AutoCompleteCopyWithImpl<$Res> extends _$AutoCompleteCopyWithImpl<$Res>
     Object? value = freezed,
     Object? postCount = freezed,
   }) {
-    return _then(_AutoComplete(
+    return _then(_$_AutoComplete(
       label: label == freezed
           ? _value.label
           : label // ignore: cast_nullable_to_non_nullable
@@ -167,12 +145,13 @@ class _$_AutoComplete extends _AutoComplete {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _AutoComplete &&
+            other is _$_AutoComplete &&
             const DeepCollectionEquality().equals(other.label, label) &&
             const DeepCollectionEquality().equals(other.value, value) &&
             const DeepCollectionEquality().equals(other.postCount, postCount));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -182,8 +161,8 @@ class _$_AutoComplete extends _AutoComplete {
 
   @JsonKey(ignore: true)
   @override
-  _$AutoCompleteCopyWith<_AutoComplete> get copyWith =>
-      __$AutoCompleteCopyWithImpl<_AutoComplete>(this, _$identity);
+  _$$_AutoCompleteCopyWith<_$_AutoComplete> get copyWith =>
+      __$$_AutoCompleteCopyWithImpl<_$_AutoComplete>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -193,23 +172,23 @@ class _$_AutoComplete extends _AutoComplete {
 
 abstract class _AutoComplete extends AutoComplete {
   factory _AutoComplete(
-      {required String label,
-      required String value,
-      @JsonKey(name: 'post_count') int postCount}) = _$_AutoComplete;
+      {required final String label,
+      required final String value,
+      @JsonKey(name: 'post_count') final int postCount}) = _$_AutoComplete;
   _AutoComplete._() : super._();
 
   factory _AutoComplete.fromJson(Map<String, dynamic> json) =
       _$_AutoComplete.fromJson;
 
   @override
-  String get label;
+  String get label => throw _privateConstructorUsedError;
   @override
-  String get value;
+  String get value => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'post_count')
-  int get postCount;
+  int get postCount => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$AutoCompleteCopyWith<_AutoComplete> get copyWith =>
+  _$$_AutoCompleteCopyWith<_$_AutoComplete> get copyWith =>
       throw _privateConstructorUsedError;
 }

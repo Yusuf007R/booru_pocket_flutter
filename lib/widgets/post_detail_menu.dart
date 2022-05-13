@@ -44,6 +44,9 @@ class PostDetailAppBar extends StatelessWidget with PreferredSizeWidget {
                 ),
                 actions: [
                   PopupMenuButton(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                     tooltip: 'More options',
                     icon: const Icon(Icons.more_vert),
                     itemBuilder: (BuildContext context) => [

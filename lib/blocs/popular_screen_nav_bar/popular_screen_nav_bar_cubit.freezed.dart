@@ -12,30 +12,12 @@ part of 'popular_screen_nav_bar_cubit.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 PopularScreenNavBarState _$PopularScreenNavBarStateFromJson(
     Map<String, dynamic> json) {
   return _PopularScreenNavBarState.fromJson(json);
 }
-
-/// @nodoc
-class _$PopularScreenNavBarStateTearOff {
-  const _$PopularScreenNavBarStateTearOff();
-
-  _PopularScreenNavBarState call({required QueryParams queryParams}) {
-    return _PopularScreenNavBarState(
-      queryParams: queryParams,
-    );
-  }
-
-  PopularScreenNavBarState fromJson(Map<String, Object?> json) {
-    return PopularScreenNavBarState.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $PopularScreenNavBarState = _$PopularScreenNavBarStateTearOff();
 
 /// @nodoc
 mixin _$PopularScreenNavBarState {
@@ -87,11 +69,12 @@ class _$PopularScreenNavBarStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$PopularScreenNavBarStateCopyWith<$Res>
+abstract class _$$_PopularScreenNavBarStateCopyWith<$Res>
     implements $PopularScreenNavBarStateCopyWith<$Res> {
-  factory _$PopularScreenNavBarStateCopyWith(_PopularScreenNavBarState value,
-          $Res Function(_PopularScreenNavBarState) then) =
-      __$PopularScreenNavBarStateCopyWithImpl<$Res>;
+  factory _$$_PopularScreenNavBarStateCopyWith(
+          _$_PopularScreenNavBarState value,
+          $Res Function(_$_PopularScreenNavBarState) then) =
+      __$$_PopularScreenNavBarStateCopyWithImpl<$Res>;
   @override
   $Res call({QueryParams queryParams});
 
@@ -100,22 +83,22 @@ abstract class _$PopularScreenNavBarStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$PopularScreenNavBarStateCopyWithImpl<$Res>
+class __$$_PopularScreenNavBarStateCopyWithImpl<$Res>
     extends _$PopularScreenNavBarStateCopyWithImpl<$Res>
-    implements _$PopularScreenNavBarStateCopyWith<$Res> {
-  __$PopularScreenNavBarStateCopyWithImpl(_PopularScreenNavBarState _value,
-      $Res Function(_PopularScreenNavBarState) _then)
-      : super(_value, (v) => _then(v as _PopularScreenNavBarState));
+    implements _$$_PopularScreenNavBarStateCopyWith<$Res> {
+  __$$_PopularScreenNavBarStateCopyWithImpl(_$_PopularScreenNavBarState _value,
+      $Res Function(_$_PopularScreenNavBarState) _then)
+      : super(_value, (v) => _then(v as _$_PopularScreenNavBarState));
 
   @override
-  _PopularScreenNavBarState get _value =>
-      super._value as _PopularScreenNavBarState;
+  _$_PopularScreenNavBarState get _value =>
+      super._value as _$_PopularScreenNavBarState;
 
   @override
   $Res call({
     Object? queryParams = freezed,
   }) {
-    return _then(_PopularScreenNavBarState(
+    return _then(_$_PopularScreenNavBarState(
       queryParams: queryParams == freezed
           ? _value.queryParams
           : queryParams // ignore: cast_nullable_to_non_nullable
@@ -144,20 +127,21 @@ class _$_PopularScreenNavBarState implements _PopularScreenNavBarState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _PopularScreenNavBarState &&
+            other is _$_PopularScreenNavBarState &&
             const DeepCollectionEquality()
                 .equals(other.queryParams, queryParams));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(queryParams));
 
   @JsonKey(ignore: true)
   @override
-  _$PopularScreenNavBarStateCopyWith<_PopularScreenNavBarState> get copyWith =>
-      __$PopularScreenNavBarStateCopyWithImpl<_PopularScreenNavBarState>(
-          this, _$identity);
+  _$$_PopularScreenNavBarStateCopyWith<_$_PopularScreenNavBarState>
+      get copyWith => __$$_PopularScreenNavBarStateCopyWithImpl<
+          _$_PopularScreenNavBarState>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -166,16 +150,16 @@ class _$_PopularScreenNavBarState implements _PopularScreenNavBarState {
 }
 
 abstract class _PopularScreenNavBarState implements PopularScreenNavBarState {
-  factory _PopularScreenNavBarState({required QueryParams queryParams}) =
+  factory _PopularScreenNavBarState({required final QueryParams queryParams}) =
       _$_PopularScreenNavBarState;
 
   factory _PopularScreenNavBarState.fromJson(Map<String, dynamic> json) =
       _$_PopularScreenNavBarState.fromJson;
 
   @override
-  QueryParams get queryParams;
+  QueryParams get queryParams => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$PopularScreenNavBarStateCopyWith<_PopularScreenNavBarState> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_PopularScreenNavBarStateCopyWith<_$_PopularScreenNavBarState>
+      get copyWith => throw _privateConstructorUsedError;
 }

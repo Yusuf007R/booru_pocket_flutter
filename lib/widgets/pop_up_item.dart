@@ -12,7 +12,7 @@ PopupMenuItem<T> popUpItem<T>({
     onTap: onTap,
     height: 45,
     value: value ?? text?.toLowerCase() as T,
-    padding: padding ?? const EdgeInsets.symmetric(horizontal: 10),
+    padding: padding ?? const EdgeInsets.only(left: 15),
     child: Row(children: [
       if (icon != null) Icon(icon),
       SizedBox(width: iconSeparation ?? 8),

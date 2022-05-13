@@ -32,17 +32,13 @@ class SettingsCubit extends HydratedCubit<SettingsState> {
         state.copyWith(downloadQuality: quality),
       );
 
-  void setDetailPageQuality(ImageQuality quality) => emit(
-        state.copyWith(detailPageQuality: quality),
-      );
+  void setDetailPageQuality(ImageQuality quality) =>
+      emit(state.copyWith(detailPageQuality: quality));
 
-  void toggleGridRoundedCorners() => emit(
-        state.copyWith(gridRoundedCorners: !state.gridRoundedCorners),
-      );
+  void toggleGridRoundedCorners() =>
+      emit(state.copyWith(gridRoundedCorners: !state.gridRoundedCorners));
 
-  void toggleSafeMode() => emit(
-        state.copyWith(safeMode: !state.safeMode),
-      );
+  void toggleSafeMode() => emit(state.copyWith(safeMode: !state.safeMode));
 
   void setGridType(GridType type) => emit(state.copyWith(gridType: type));
 

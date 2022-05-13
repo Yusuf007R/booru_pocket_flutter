@@ -43,7 +43,7 @@ class _MyAppState extends State<MyApp> {
   final router = locator<AppRouter>();
   @override
   void initState() {
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       final context = router.navigatorKey.currentState?.context;
       if (context != null) locator<ContextService>().setContext(context);
     });
