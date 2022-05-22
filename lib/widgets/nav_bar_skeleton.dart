@@ -18,6 +18,12 @@ class NavBarSkeleton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverAppBar(
       title: Container(
+        width: MediaQuery.of(context).size.width * 0.95,
+        height: 45,
+        decoration: BoxDecoration(
+          color: const Color(0xFF6C3FC7),
+          borderRadius: BorderRadius.circular(8),
+        ),
         child: Stack(
           fit: StackFit.expand,
           children: [
@@ -38,12 +44,6 @@ class NavBarSkeleton extends StatelessWidget {
               ],
             ),
           ],
-        ),
-        width: MediaQuery.of(context).size.width * 0.95,
-        height: 45,
-        decoration: BoxDecoration(
-          color: const Color(0xFF6C3FC7),
-          borderRadius: BorderRadius.circular(8),
         ),
       ),
       floating: true,

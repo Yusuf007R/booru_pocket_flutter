@@ -58,18 +58,18 @@ class Tag extends StatelessWidget {
                 }
                 AutoRouter.of(context).push(PostRoute(inputTextValue: tag));
               },
-              child: Text(
-                tag,
-                style: const TextStyle(
-                  color: Colors.white,
-                ),
-              ),
               style: ElevatedButton.styleFrom(
                   minimumSize: const Size(1, 1),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
                   primary: getColor(context, clicked)),
+              child: Text(
+                tag,
+                style: const TextStyle(
+                  color: Colors.white,
+                ),
+              ),
             ),
           ),
         );

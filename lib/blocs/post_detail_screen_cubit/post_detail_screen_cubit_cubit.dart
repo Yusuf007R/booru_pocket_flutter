@@ -1,11 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:booru_pocket_flutter/blocs/danbooru_auth_cubit/danbooru_auth_cubit.dart';
-import 'package:booru_pocket_flutter/models/api/user/user.dart';
 import 'package:booru_pocket_flutter/repositories/danbooru.dart';
-import 'package:booru_pocket_flutter/router/router.gr.dart';
 
 import 'package:booru_pocket_flutter/services/locator_service.dart';
-import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'post_detail_screen_cubit_state.dart';

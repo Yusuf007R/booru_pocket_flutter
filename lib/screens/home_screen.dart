@@ -3,7 +3,6 @@ import 'package:booru_pocket_flutter/router/router.gr.dart';
 import 'package:booru_pocket_flutter/screens/post_screen.dart';
 import 'package:booru_pocket_flutter/widgets/drawer_content.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -12,10 +11,10 @@ class HomeScreen extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  HomeScreenState createState() => HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class HomeScreenState extends State<HomeScreen> {
   double? navbarHeight;
   final key = GlobalKey();
   @override

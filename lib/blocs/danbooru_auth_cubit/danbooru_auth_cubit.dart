@@ -1,5 +1,3 @@
-import 'dart:collection';
-
 import 'package:bloc/bloc.dart';
 import 'package:booru_pocket_flutter/models/api/post/post.dart';
 import 'package:booru_pocket_flutter/models/api/user/user.dart';
@@ -83,8 +81,7 @@ class DanbooruAuthCubit extends Cubit<DanbooruAuthState> {
     if (user is UserAuthenticated) {
       final page = (user.favoriteCount / 1000).ceil();
       final favorites = await repository.getFavorites(user.name, page);
-      final map = {for (var v in favorites) v: true};
-      emit(state.copyWith(favoritePostIds: map));
+      emit(state.copyWith(favoritePostIds: favorites));
     }
   }
 

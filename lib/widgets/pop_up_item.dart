@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 PopupMenuItem<T> popUpItem<T>({
   IconData? icon,
+  Color? iconColor,
   String? text,
   T? value,
   Function()? onTap,
@@ -12,9 +13,9 @@ PopupMenuItem<T> popUpItem<T>({
     onTap: onTap,
     height: 45,
     value: value ?? text?.toLowerCase() as T,
-    padding: padding ?? const EdgeInsets.only(left: 15),
+    padding: padding ?? const EdgeInsets.symmetric(horizontal: 15),
     child: Row(children: [
-      if (icon != null) Icon(icon),
+      if (icon != null) Icon(icon, color: iconColor),
       SizedBox(width: iconSeparation ?? 8),
       Text(text ?? ''),
     ]),

@@ -6,12 +6,12 @@ import 'package:booru_pocket_flutter/blocs/settings_cubit/settings_cubit.dart';
 import 'package:booru_pocket_flutter/models/api/post/post.dart';
 import 'package:booru_pocket_flutter/services/image_downloader_service.dart';
 import 'package:booru_pocket_flutter/services/locator_service.dart';
+import 'package:booru_pocket_flutter/utils/launch_url.dart';
 import 'package:booru_pocket_flutter/widgets/pop_up_item.dart';
 import 'package:booru_pocket_flutter/widgets/post_detail_bottom_sheets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class PostDetailAppBar extends StatelessWidget with PreferredSizeWidget {
   const PostDetailAppBar({
@@ -33,7 +33,7 @@ class PostDetailAppBar extends StatelessWidget with PreferredSizeWidget {
               visible: post.isVideo || state.showMenu,
               child: AppBar(
                 elevation: 20,
-                shadowColor: Colors.black.withOpacity(0.35),
+                shadowColor: Colors.black.withOpacity(0.6),
                 title: Text("Post #${post.id}"),
                 backgroundColor: Colors.transparent,
                 leading: IconButton(
@@ -72,13 +72,8 @@ class PostDetailAppBar extends StatelessWidget with PreferredSizeWidget {
                         icon: Icons.open_in_browser,
                         text: 'Open in browser',
                         onTap: () async {
-                          String url =
-                              'https://danbooru.donmai.us/posts/${post.id}';
-                          if (await canLaunch(url)) {
-                            await launch(url);
-                          } else {
-                            print('Could not launch $url');
-                          }
+                          launchStringUrl(
+                              'https://danbooru.donmai.us/posts/${post.id}');
                         },
                       ),
                     ],
@@ -122,7 +117,7 @@ class PostDetailBottomBar extends StatelessWidget {
                     child: Material(
                       color: Colors.transparent,
                       elevation: 20,
-                      shadowColor: Colors.black.withOpacity(0.35),
+                      shadowColor: Colors.black.withOpacity(0.8),
                       child: Container(
                         margin: const EdgeInsets.only(top: 15),
                         padding: const EdgeInsets.symmetric(vertical: 5),

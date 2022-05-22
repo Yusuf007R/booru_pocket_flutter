@@ -20,9 +20,11 @@ class PopularScreenNavBarStateWidget extends State<PopularScreenNavBar> {
   Widget build(BuildContext context) {
     return BlocBuilder<PopularScreenNavbarCubit, PopularScreenNavBarState>(
       builder: (context, state) {
+        final popularCubit = context.read<PopularScreenNavbarCubit>();
         return NavBarSkeleton(
           leftSideWidgets: [
             Padding(
+              padding: const EdgeInsets.only(left: 10),
               child: GestureDetector(
                 onTap: () {
                   Feedback.forTap(context);
@@ -30,9 +32,9 @@ class PopularScreenNavBarStateWidget extends State<PopularScreenNavBar> {
                 },
                 child: const Icon(MdiIcons.menu, size: 28, color: Colors.white),
               ),
-              padding: const EdgeInsets.only(left: 10),
             ),
             const Padding(
+              padding: EdgeInsets.only(top: 4, left: 3),
               child: Text(
                 'Popular',
                 style: TextStyle(
@@ -40,11 +42,11 @@ class PopularScreenNavBarStateWidget extends State<PopularScreenNavBar> {
                   fontSize: 16,
                 ),
               ),
-              padding: EdgeInsets.only(top: 4, left: 3),
             ),
           ],
           rightSideWidgets: [
             Padding(
+              padding: const EdgeInsets.only(right: 5),
               child: GestureDetector(
                 onTap: () async {
                   Feedback.forTap(context);
@@ -57,12 +59,11 @@ class PopularScreenNavBarStateWidget extends State<PopularScreenNavBar> {
                         firstDate: DateTime.fromMillisecondsSinceEpoch(0),
                         lastDate: DateTime.now());
                     if (date == null) return;
-                    context.read<PopularScreenNavbarCubit>().setDate(date);
+                    popularCubit.setDate(date);
                   }
                 },
                 child: const Icon(Icons.today, size: 28, color: Colors.white),
               ),
-              padding: const EdgeInsets.only(right: 5),
             ),
             Padding(
               padding: const EdgeInsets.only(right: 5),
@@ -77,7 +78,7 @@ class PopularScreenNavBarStateWidget extends State<PopularScreenNavBar> {
                         element.toString().split('.').last == value.toString(),
                     orElse: () => ScaleType.day,
                   );
-                  context.read<PopularScreenNavbarCubit>().setScale(scale);
+                  popularCubit.setScale(scale);
                 },
                 child: const Icon(Icons.list, size: 28, color: Colors.white),
                 itemBuilder: (context) => [
