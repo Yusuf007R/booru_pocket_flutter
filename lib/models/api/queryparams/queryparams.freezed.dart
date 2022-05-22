@@ -12,7 +12,7 @@ part of 'queryparams.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 QueryParams _$QueryParamsFromJson(Map<String, dynamic> json) {
   switch (json['runtimeType']) {
@@ -30,58 +30,9 @@ QueryParams _$QueryParamsFromJson(Map<String, dynamic> json) {
 }
 
 /// @nodoc
-class _$QueryParamsTearOff {
-  const _$QueryParamsTearOff();
-
-  PostParams post({int page = 1, int limit = 50, String tags = ''}) {
-    return PostParams(
-      page: page,
-      limit: limit,
-      tags: tags,
-    );
-  }
-
-  PopularParams popular(
-      {int page = 1,
-      int limit = 50,
-      required DateTime date,
-      ScaleType scale = ScaleType.day}) {
-    return PopularParams(
-      page: page,
-      limit: limit,
-      date: date,
-      scale: scale,
-    );
-  }
-
-  RecommendedParams recommended(
-      {int page = 1,
-      int limit = 50,
-      @JsonKey(name: 'search[user_name]') required String user,
-      @JsonKey(name: 'search[post_tags_match]') required String tags,
-      @JsonKey(name: 'search[post_id]') required int postId}) {
-    return RecommendedParams(
-      page: page,
-      limit: limit,
-      user: user,
-      tags: tags,
-      postId: postId,
-    );
-  }
-
-  QueryParams fromJson(Map<String, Object?> json) {
-    return QueryParams.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $QueryParams = _$QueryParamsTearOff();
-
-/// @nodoc
 mixin _$QueryParams {
   int get page => throw _privateConstructorUsedError;
   int get limit => throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int page, int limit, String tags) post,
@@ -189,22 +140,24 @@ class _$QueryParamsCopyWithImpl<$Res> implements $QueryParamsCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class $PostParamsCopyWith<$Res> implements $QueryParamsCopyWith<$Res> {
-  factory $PostParamsCopyWith(
-          PostParams value, $Res Function(PostParams) then) =
-      _$PostParamsCopyWithImpl<$Res>;
+abstract class _$$PostParamsCopyWith<$Res>
+    implements $QueryParamsCopyWith<$Res> {
+  factory _$$PostParamsCopyWith(
+          _$PostParams value, $Res Function(_$PostParams) then) =
+      __$$PostParamsCopyWithImpl<$Res>;
   @override
   $Res call({int page, int limit, String tags});
 }
 
 /// @nodoc
-class _$PostParamsCopyWithImpl<$Res> extends _$QueryParamsCopyWithImpl<$Res>
-    implements $PostParamsCopyWith<$Res> {
-  _$PostParamsCopyWithImpl(PostParams _value, $Res Function(PostParams) _then)
-      : super(_value, (v) => _then(v as PostParams));
+class __$$PostParamsCopyWithImpl<$Res> extends _$QueryParamsCopyWithImpl<$Res>
+    implements _$$PostParamsCopyWith<$Res> {
+  __$$PostParamsCopyWithImpl(
+      _$PostParams _value, $Res Function(_$PostParams) _then)
+      : super(_value, (v) => _then(v as _$PostParams));
 
   @override
-  PostParams get _value => super._value as PostParams;
+  _$PostParams get _value => super._value as _$PostParams;
 
   @override
   $Res call({
@@ -212,7 +165,7 @@ class _$PostParamsCopyWithImpl<$Res> extends _$QueryParamsCopyWithImpl<$Res>
     Object? limit = freezed,
     Object? tags = freezed,
   }) {
-    return _then(PostParams(
+    return _then(_$PostParams(
       page: page == freezed
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
@@ -233,20 +186,20 @@ class _$PostParamsCopyWithImpl<$Res> extends _$QueryParamsCopyWithImpl<$Res>
 @JsonSerializable()
 class _$PostParams implements PostParams {
   const _$PostParams(
-      {this.page = 1, this.limit = 50, this.tags = '', String? $type})
+      {this.page = 1, this.limit = 50, this.tags = '', final String? $type})
       : $type = $type ?? 'post';
 
   factory _$PostParams.fromJson(Map<String, dynamic> json) =>
       _$$PostParamsFromJson(json);
 
-  @JsonKey()
   @override
+  @JsonKey()
   final int page;
-  @JsonKey()
   @override
+  @JsonKey()
   final int limit;
-  @JsonKey()
   @override
+  @JsonKey()
   final String tags;
 
   @JsonKey(name: 'runtimeType')
@@ -261,12 +214,13 @@ class _$PostParams implements PostParams {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is PostParams &&
+            other is _$PostParams &&
             const DeepCollectionEquality().equals(other.page, page) &&
             const DeepCollectionEquality().equals(other.limit, limit) &&
             const DeepCollectionEquality().equals(other.tags, tags));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -276,8 +230,8 @@ class _$PostParams implements PostParams {
 
   @JsonKey(ignore: true)
   @override
-  $PostParamsCopyWith<PostParams> get copyWith =>
-      _$PostParamsCopyWithImpl<PostParams>(this, _$identity);
+  _$$PostParamsCopyWith<_$PostParams> get copyWith =>
+      __$$PostParamsCopyWithImpl<_$PostParams>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -376,41 +330,43 @@ class _$PostParams implements PostParams {
 }
 
 abstract class PostParams implements QueryParams {
-  const factory PostParams({int page, int limit, String tags}) = _$PostParams;
+  const factory PostParams(
+      {final int page, final int limit, final String tags}) = _$PostParams;
 
   factory PostParams.fromJson(Map<String, dynamic> json) =
       _$PostParams.fromJson;
 
   @override
-  int get page;
+  int get page => throw _privateConstructorUsedError;
   @override
-  int get limit;
-  String get tags;
+  int get limit => throw _privateConstructorUsedError;
+  String get tags => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  $PostParamsCopyWith<PostParams> get copyWith =>
+  _$$PostParamsCopyWith<_$PostParams> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $PopularParamsCopyWith<$Res>
+abstract class _$$PopularParamsCopyWith<$Res>
     implements $QueryParamsCopyWith<$Res> {
-  factory $PopularParamsCopyWith(
-          PopularParams value, $Res Function(PopularParams) then) =
-      _$PopularParamsCopyWithImpl<$Res>;
+  factory _$$PopularParamsCopyWith(
+          _$PopularParams value, $Res Function(_$PopularParams) then) =
+      __$$PopularParamsCopyWithImpl<$Res>;
   @override
   $Res call({int page, int limit, DateTime date, ScaleType scale});
 }
 
 /// @nodoc
-class _$PopularParamsCopyWithImpl<$Res> extends _$QueryParamsCopyWithImpl<$Res>
-    implements $PopularParamsCopyWith<$Res> {
-  _$PopularParamsCopyWithImpl(
-      PopularParams _value, $Res Function(PopularParams) _then)
-      : super(_value, (v) => _then(v as PopularParams));
+class __$$PopularParamsCopyWithImpl<$Res>
+    extends _$QueryParamsCopyWithImpl<$Res>
+    implements _$$PopularParamsCopyWith<$Res> {
+  __$$PopularParamsCopyWithImpl(
+      _$PopularParams _value, $Res Function(_$PopularParams) _then)
+      : super(_value, (v) => _then(v as _$PopularParams));
 
   @override
-  PopularParams get _value => super._value as PopularParams;
+  _$PopularParams get _value => super._value as _$PopularParams;
 
   @override
   $Res call({
@@ -419,7 +375,7 @@ class _$PopularParamsCopyWithImpl<$Res> extends _$QueryParamsCopyWithImpl<$Res>
     Object? date = freezed,
     Object? scale = freezed,
   }) {
-    return _then(PopularParams(
+    return _then(_$PopularParams(
       page: page == freezed
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
@@ -448,22 +404,22 @@ class _$PopularParams implements PopularParams {
       this.limit = 50,
       required this.date,
       this.scale = ScaleType.day,
-      String? $type})
+      final String? $type})
       : $type = $type ?? 'popular';
 
   factory _$PopularParams.fromJson(Map<String, dynamic> json) =>
       _$$PopularParamsFromJson(json);
 
-  @JsonKey()
   @override
+  @JsonKey()
   final int page;
-  @JsonKey()
   @override
+  @JsonKey()
   final int limit;
   @override
   final DateTime date;
-  @JsonKey()
   @override
+  @JsonKey()
   final ScaleType scale;
 
   @JsonKey(name: 'runtimeType')
@@ -478,13 +434,14 @@ class _$PopularParams implements PopularParams {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is PopularParams &&
+            other is _$PopularParams &&
             const DeepCollectionEquality().equals(other.page, page) &&
             const DeepCollectionEquality().equals(other.limit, limit) &&
             const DeepCollectionEquality().equals(other.date, date) &&
             const DeepCollectionEquality().equals(other.scale, scale));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -495,8 +452,8 @@ class _$PopularParams implements PopularParams {
 
   @JsonKey(ignore: true)
   @override
-  $PopularParamsCopyWith<PopularParams> get copyWith =>
-      _$PopularParamsCopyWithImpl<PopularParams>(this, _$identity);
+  _$$PopularParamsCopyWith<_$PopularParams> get copyWith =>
+      __$$PopularParamsCopyWithImpl<_$PopularParams>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -596,32 +553,32 @@ class _$PopularParams implements PopularParams {
 
 abstract class PopularParams implements QueryParams {
   const factory PopularParams(
-      {int page,
-      int limit,
-      required DateTime date,
-      ScaleType scale}) = _$PopularParams;
+      {final int page,
+      final int limit,
+      required final DateTime date,
+      final ScaleType scale}) = _$PopularParams;
 
   factory PopularParams.fromJson(Map<String, dynamic> json) =
       _$PopularParams.fromJson;
 
   @override
-  int get page;
+  int get page => throw _privateConstructorUsedError;
   @override
-  int get limit;
-  DateTime get date;
-  ScaleType get scale;
+  int get limit => throw _privateConstructorUsedError;
+  DateTime get date => throw _privateConstructorUsedError;
+  ScaleType get scale => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  $PopularParamsCopyWith<PopularParams> get copyWith =>
+  _$$PopularParamsCopyWith<_$PopularParams> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $RecommendedParamsCopyWith<$Res>
+abstract class _$$RecommendedParamsCopyWith<$Res>
     implements $QueryParamsCopyWith<$Res> {
-  factory $RecommendedParamsCopyWith(
-          RecommendedParams value, $Res Function(RecommendedParams) then) =
-      _$RecommendedParamsCopyWithImpl<$Res>;
+  factory _$$RecommendedParamsCopyWith(
+          _$RecommendedParams value, $Res Function(_$RecommendedParams) then) =
+      __$$RecommendedParamsCopyWithImpl<$Res>;
   @override
   $Res call(
       {int page,
@@ -632,15 +589,15 @@ abstract class $RecommendedParamsCopyWith<$Res>
 }
 
 /// @nodoc
-class _$RecommendedParamsCopyWithImpl<$Res>
+class __$$RecommendedParamsCopyWithImpl<$Res>
     extends _$QueryParamsCopyWithImpl<$Res>
-    implements $RecommendedParamsCopyWith<$Res> {
-  _$RecommendedParamsCopyWithImpl(
-      RecommendedParams _value, $Res Function(RecommendedParams) _then)
-      : super(_value, (v) => _then(v as RecommendedParams));
+    implements _$$RecommendedParamsCopyWith<$Res> {
+  __$$RecommendedParamsCopyWithImpl(
+      _$RecommendedParams _value, $Res Function(_$RecommendedParams) _then)
+      : super(_value, (v) => _then(v as _$RecommendedParams));
 
   @override
-  RecommendedParams get _value => super._value as RecommendedParams;
+  _$RecommendedParams get _value => super._value as _$RecommendedParams;
 
   @override
   $Res call({
@@ -650,7 +607,7 @@ class _$RecommendedParamsCopyWithImpl<$Res>
     Object? tags = freezed,
     Object? postId = freezed,
   }) {
-    return _then(RecommendedParams(
+    return _then(_$RecommendedParams(
       page: page == freezed
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
@@ -684,17 +641,17 @@ class _$RecommendedParams implements RecommendedParams {
       @JsonKey(name: 'search[user_name]') required this.user,
       @JsonKey(name: 'search[post_tags_match]') required this.tags,
       @JsonKey(name: 'search[post_id]') required this.postId,
-      String? $type})
+      final String? $type})
       : $type = $type ?? 'recommended';
 
   factory _$RecommendedParams.fromJson(Map<String, dynamic> json) =>
       _$$RecommendedParamsFromJson(json);
 
-  @JsonKey()
   @override
+  @JsonKey()
   final int page;
-  @JsonKey()
   @override
+  @JsonKey()
   final int limit;
   @override
   @JsonKey(name: 'search[user_name]')
@@ -718,7 +675,7 @@ class _$RecommendedParams implements RecommendedParams {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is RecommendedParams &&
+            other is _$RecommendedParams &&
             const DeepCollectionEquality().equals(other.page, page) &&
             const DeepCollectionEquality().equals(other.limit, limit) &&
             const DeepCollectionEquality().equals(other.user, user) &&
@@ -726,6 +683,7 @@ class _$RecommendedParams implements RecommendedParams {
             const DeepCollectionEquality().equals(other.postId, postId));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -737,8 +695,8 @@ class _$RecommendedParams implements RecommendedParams {
 
   @JsonKey(ignore: true)
   @override
-  $RecommendedParamsCopyWith<RecommendedParams> get copyWith =>
-      _$RecommendedParamsCopyWithImpl<RecommendedParams>(this, _$identity);
+  _$$RecommendedParamsCopyWith<_$RecommendedParams> get copyWith =>
+      __$$RecommendedParamsCopyWithImpl<_$RecommendedParams>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -838,28 +796,28 @@ class _$RecommendedParams implements RecommendedParams {
 
 abstract class RecommendedParams implements QueryParams {
   const factory RecommendedParams(
-          {int page,
-          int limit,
-          @JsonKey(name: 'search[user_name]') required String user,
-          @JsonKey(name: 'search[post_tags_match]') required String tags,
-          @JsonKey(name: 'search[post_id]') required int postId}) =
+          {final int page,
+          final int limit,
+          @JsonKey(name: 'search[user_name]') required final String user,
+          @JsonKey(name: 'search[post_tags_match]') required final String tags,
+          @JsonKey(name: 'search[post_id]') required final int postId}) =
       _$RecommendedParams;
 
   factory RecommendedParams.fromJson(Map<String, dynamic> json) =
       _$RecommendedParams.fromJson;
 
   @override
-  int get page;
+  int get page => throw _privateConstructorUsedError;
   @override
-  int get limit;
+  int get limit => throw _privateConstructorUsedError;
   @JsonKey(name: 'search[user_name]')
-  String get user;
+  String get user => throw _privateConstructorUsedError;
   @JsonKey(name: 'search[post_tags_match]')
-  String get tags;
+  String get tags => throw _privateConstructorUsedError;
   @JsonKey(name: 'search[post_id]')
-  int get postId;
+  int get postId => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  $RecommendedParamsCopyWith<RecommendedParams> get copyWith =>
+  _$$RecommendedParamsCopyWith<_$RecommendedParams> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:booru_pocket_flutter/router/router.gr.dart';
 import 'package:booru_pocket_flutter/screens/post_screen.dart';
+import 'package:booru_pocket_flutter/utils/launch_url.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({
@@ -58,11 +58,7 @@ class DrawerBottomList extends StatelessWidget {
             text: 'Github',
             onTap: () async {
               String url = 'https://github.com/Yusuf007R/booru_pocket_flutter';
-              if (await canLaunch(url)) {
-                await launch(url);
-              } else {
-                print('Could not launch $url');
-              }
+              launchStringUrl(url);
             }),
         DrawerTile(
           icon: Icons.settings,

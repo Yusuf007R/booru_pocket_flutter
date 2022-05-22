@@ -12,87 +12,11 @@ part of 'post.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 Post _$PostFromJson(Map<String, dynamic> json) {
   return _Post.fromJson(json);
 }
-
-/// @nodoc
-class _$PostTearOff {
-  const _$PostTearOff();
-
-  _Post call(
-      {required int id,
-      @JsonKey(name: 'tag_string_general', fromJson: _tagsArrayFromJson)
-          required List<String> tags,
-      @JsonKey(name: 'tag_string_artist', fromJson: _tagsArrayFromJson)
-          required List<String> artistTag,
-      @JsonKey(name: 'tag_string_character', fromJson: _tagsArrayFromJson)
-          required List<String> characterTag,
-      @JsonKey(name: 'tag_string_copyright', fromJson: _tagsArrayFromJson)
-          required List<String> seriesTag,
-      @JsonKey(fromJson: _ratingFromJson)
-          required PostRating rating,
-      required String source,
-      @JsonKey(name: 'preview_file_url')
-          required String previewFileUrl,
-      @JsonKey(name: 'large_file_url')
-          required String largeFileUrl,
-      @JsonKey(name: 'file_url')
-          required String fileUrl,
-      @JsonKey(name: 'file_ext')
-          required String fileExt,
-      @JsonKey(name: 'image_width')
-          required double imageWidth,
-      @JsonKey(name: 'image_height')
-          required double imageHeight,
-      @JsonKey(name: 'file_size')
-          required double size,
-      required int score,
-      @JsonKey(name: 'fav_count')
-          required int favoriteCount,
-      @JsonKey(name: 'uploader_id')
-          required int uploaderId,
-      @JsonKey(name: 'created_at')
-          required DateTime createdAt,
-      @JsonKey(name: 'updated_at')
-          required DateTime updatedAt,
-      @JsonKey(name: 'tag_string_meta', fromJson: _tagsArrayFromJson)
-          required List<String> meta,
-      String? video}) {
-    return _Post(
-      id: id,
-      tags: tags,
-      artistTag: artistTag,
-      characterTag: characterTag,
-      seriesTag: seriesTag,
-      rating: rating,
-      source: source,
-      previewFileUrl: previewFileUrl,
-      largeFileUrl: largeFileUrl,
-      fileUrl: fileUrl,
-      fileExt: fileExt,
-      imageWidth: imageWidth,
-      imageHeight: imageHeight,
-      size: size,
-      score: score,
-      favoriteCount: favoriteCount,
-      uploaderId: uploaderId,
-      createdAt: createdAt,
-      updatedAt: updatedAt,
-      meta: meta,
-      video: video,
-    );
-  }
-
-  Post fromJson(Map<String, Object?> json) {
-    return Post.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $Post = _$PostTearOff();
 
 /// @nodoc
 mixin _$Post {
@@ -307,9 +231,9 @@ class _$PostCopyWithImpl<$Res> implements $PostCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$PostCopyWith<$Res> implements $PostCopyWith<$Res> {
-  factory _$PostCopyWith(_Post value, $Res Function(_Post) then) =
-      __$PostCopyWithImpl<$Res>;
+abstract class _$$_PostCopyWith<$Res> implements $PostCopyWith<$Res> {
+  factory _$$_PostCopyWith(_$_Post value, $Res Function(_$_Post) then) =
+      __$$_PostCopyWithImpl<$Res>;
   @override
   $Res call(
       {int id,
@@ -353,13 +277,13 @@ abstract class _$PostCopyWith<$Res> implements $PostCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res>
-    implements _$PostCopyWith<$Res> {
-  __$PostCopyWithImpl(_Post _value, $Res Function(_Post) _then)
-      : super(_value, (v) => _then(v as _Post));
+class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res>
+    implements _$$_PostCopyWith<$Res> {
+  __$$_PostCopyWithImpl(_$_Post _value, $Res Function(_$_Post) _then)
+      : super(_value, (v) => _then(v as _$_Post));
 
   @override
-  _Post get _value => super._value as _Post;
+  _$_Post get _value => super._value as _$_Post;
 
   @override
   $Res call({
@@ -385,25 +309,25 @@ class __$PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res>
     Object? meta = freezed,
     Object? video = freezed,
   }) {
-    return _then(_Post(
+    return _then(_$_Post(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
       tags: tags == freezed
-          ? _value.tags
+          ? _value._tags
           : tags // ignore: cast_nullable_to_non_nullable
               as List<String>,
       artistTag: artistTag == freezed
-          ? _value.artistTag
+          ? _value._artistTag
           : artistTag // ignore: cast_nullable_to_non_nullable
               as List<String>,
       characterTag: characterTag == freezed
-          ? _value.characterTag
+          ? _value._characterTag
           : characterTag // ignore: cast_nullable_to_non_nullable
               as List<String>,
       seriesTag: seriesTag == freezed
-          ? _value.seriesTag
+          ? _value._seriesTag
           : seriesTag // ignore: cast_nullable_to_non_nullable
               as List<String>,
       rating: rating == freezed
@@ -463,7 +387,7 @@ class __$PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res>
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
       meta: meta == freezed
-          ? _value.meta
+          ? _value._meta
           : meta // ignore: cast_nullable_to_non_nullable
               as List<String>,
       video: video == freezed
@@ -480,13 +404,13 @@ class _$_Post extends _Post {
   _$_Post(
       {required this.id,
       @JsonKey(name: 'tag_string_general', fromJson: _tagsArrayFromJson)
-          required this.tags,
+          required final List<String> tags,
       @JsonKey(name: 'tag_string_artist', fromJson: _tagsArrayFromJson)
-          required this.artistTag,
+          required final List<String> artistTag,
       @JsonKey(name: 'tag_string_character', fromJson: _tagsArrayFromJson)
-          required this.characterTag,
+          required final List<String> characterTag,
       @JsonKey(name: 'tag_string_copyright', fromJson: _tagsArrayFromJson)
-          required this.seriesTag,
+          required final List<String> seriesTag,
       @JsonKey(fromJson: _ratingFromJson)
           required this.rating,
       required this.source,
@@ -514,26 +438,51 @@ class _$_Post extends _Post {
       @JsonKey(name: 'updated_at')
           required this.updatedAt,
       @JsonKey(name: 'tag_string_meta', fromJson: _tagsArrayFromJson)
-          required this.meta,
+          required final List<String> meta,
       this.video})
-      : super._();
+      : _tags = tags,
+        _artistTag = artistTag,
+        _characterTag = characterTag,
+        _seriesTag = seriesTag,
+        _meta = meta,
+        super._();
 
   factory _$_Post.fromJson(Map<String, dynamic> json) => _$$_PostFromJson(json);
 
   @override
   final int id;
+  final List<String> _tags;
   @override
   @JsonKey(name: 'tag_string_general', fromJson: _tagsArrayFromJson)
-  final List<String> tags;
+  List<String> get tags {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_tags);
+  }
+
+  final List<String> _artistTag;
   @override
   @JsonKey(name: 'tag_string_artist', fromJson: _tagsArrayFromJson)
-  final List<String> artistTag;
+  List<String> get artistTag {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_artistTag);
+  }
+
+  final List<String> _characterTag;
   @override
   @JsonKey(name: 'tag_string_character', fromJson: _tagsArrayFromJson)
-  final List<String> characterTag;
+  List<String> get characterTag {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_characterTag);
+  }
+
+  final List<String> _seriesTag;
   @override
   @JsonKey(name: 'tag_string_copyright', fromJson: _tagsArrayFromJson)
-  final List<String> seriesTag;
+  List<String> get seriesTag {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_seriesTag);
+  }
+
   @override
   @JsonKey(fromJson: _ratingFromJson)
   final PostRating rating;
@@ -574,9 +523,14 @@ class _$_Post extends _Post {
   @override
   @JsonKey(name: 'updated_at')
   final DateTime updatedAt;
+  final List<String> _meta;
   @override
   @JsonKey(name: 'tag_string_meta', fromJson: _tagsArrayFromJson)
-  final List<String> meta;
+  List<String> get meta {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_meta);
+  }
+
   @override
   final String? video;
 
@@ -589,13 +543,15 @@ class _$_Post extends _Post {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Post &&
+            other is _$_Post &&
             const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.tags, tags) &&
-            const DeepCollectionEquality().equals(other.artistTag, artistTag) &&
+            const DeepCollectionEquality().equals(other._tags, _tags) &&
             const DeepCollectionEquality()
-                .equals(other.characterTag, characterTag) &&
-            const DeepCollectionEquality().equals(other.seriesTag, seriesTag) &&
+                .equals(other._artistTag, _artistTag) &&
+            const DeepCollectionEquality()
+                .equals(other._characterTag, _characterTag) &&
+            const DeepCollectionEquality()
+                .equals(other._seriesTag, _seriesTag) &&
             const DeepCollectionEquality().equals(other.rating, rating) &&
             const DeepCollectionEquality().equals(other.source, source) &&
             const DeepCollectionEquality()
@@ -616,18 +572,19 @@ class _$_Post extends _Post {
                 .equals(other.uploaderId, uploaderId) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             const DeepCollectionEquality().equals(other.updatedAt, updatedAt) &&
-            const DeepCollectionEquality().equals(other.meta, meta) &&
+            const DeepCollectionEquality().equals(other._meta, _meta) &&
             const DeepCollectionEquality().equals(other.video, video));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
         const DeepCollectionEquality().hash(id),
-        const DeepCollectionEquality().hash(tags),
-        const DeepCollectionEquality().hash(artistTag),
-        const DeepCollectionEquality().hash(characterTag),
-        const DeepCollectionEquality().hash(seriesTag),
+        const DeepCollectionEquality().hash(_tags),
+        const DeepCollectionEquality().hash(_artistTag),
+        const DeepCollectionEquality().hash(_characterTag),
+        const DeepCollectionEquality().hash(_seriesTag),
         const DeepCollectionEquality().hash(rating),
         const DeepCollectionEquality().hash(source),
         const DeepCollectionEquality().hash(previewFileUrl),
@@ -642,14 +599,14 @@ class _$_Post extends _Post {
         const DeepCollectionEquality().hash(uploaderId),
         const DeepCollectionEquality().hash(createdAt),
         const DeepCollectionEquality().hash(updatedAt),
-        const DeepCollectionEquality().hash(meta),
+        const DeepCollectionEquality().hash(_meta),
         const DeepCollectionEquality().hash(video)
       ]);
 
   @JsonKey(ignore: true)
   @override
-  _$PostCopyWith<_Post> get copyWith =>
-      __$PostCopyWithImpl<_Post>(this, _$identity);
+  _$$_PostCopyWith<_$_Post> get copyWith =>
+      __$$_PostCopyWithImpl<_$_Post>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -659,108 +616,108 @@ class _$_Post extends _Post {
 
 abstract class _Post extends Post {
   factory _Post(
-      {required int id,
+      {required final int id,
       @JsonKey(name: 'tag_string_general', fromJson: _tagsArrayFromJson)
-          required List<String> tags,
+          required final List<String> tags,
       @JsonKey(name: 'tag_string_artist', fromJson: _tagsArrayFromJson)
-          required List<String> artistTag,
+          required final List<String> artistTag,
       @JsonKey(name: 'tag_string_character', fromJson: _tagsArrayFromJson)
-          required List<String> characterTag,
+          required final List<String> characterTag,
       @JsonKey(name: 'tag_string_copyright', fromJson: _tagsArrayFromJson)
-          required List<String> seriesTag,
+          required final List<String> seriesTag,
       @JsonKey(fromJson: _ratingFromJson)
-          required PostRating rating,
-      required String source,
+          required final PostRating rating,
+      required final String source,
       @JsonKey(name: 'preview_file_url')
-          required String previewFileUrl,
+          required final String previewFileUrl,
       @JsonKey(name: 'large_file_url')
-          required String largeFileUrl,
+          required final String largeFileUrl,
       @JsonKey(name: 'file_url')
-          required String fileUrl,
+          required final String fileUrl,
       @JsonKey(name: 'file_ext')
-          required String fileExt,
+          required final String fileExt,
       @JsonKey(name: 'image_width')
-          required double imageWidth,
+          required final double imageWidth,
       @JsonKey(name: 'image_height')
-          required double imageHeight,
+          required final double imageHeight,
       @JsonKey(name: 'file_size')
-          required double size,
-      required int score,
+          required final double size,
+      required final int score,
       @JsonKey(name: 'fav_count')
-          required int favoriteCount,
+          required final int favoriteCount,
       @JsonKey(name: 'uploader_id')
-          required int uploaderId,
+          required final int uploaderId,
       @JsonKey(name: 'created_at')
-          required DateTime createdAt,
+          required final DateTime createdAt,
       @JsonKey(name: 'updated_at')
-          required DateTime updatedAt,
+          required final DateTime updatedAt,
       @JsonKey(name: 'tag_string_meta', fromJson: _tagsArrayFromJson)
-          required List<String> meta,
-      String? video}) = _$_Post;
+          required final List<String> meta,
+      final String? video}) = _$_Post;
   _Post._() : super._();
 
   factory _Post.fromJson(Map<String, dynamic> json) = _$_Post.fromJson;
 
   @override
-  int get id;
+  int get id => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'tag_string_general', fromJson: _tagsArrayFromJson)
-  List<String> get tags;
+  List<String> get tags => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'tag_string_artist', fromJson: _tagsArrayFromJson)
-  List<String> get artistTag;
+  List<String> get artistTag => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'tag_string_character', fromJson: _tagsArrayFromJson)
-  List<String> get characterTag;
+  List<String> get characterTag => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'tag_string_copyright', fromJson: _tagsArrayFromJson)
-  List<String> get seriesTag;
+  List<String> get seriesTag => throw _privateConstructorUsedError;
   @override
   @JsonKey(fromJson: _ratingFromJson)
-  PostRating get rating;
+  PostRating get rating => throw _privateConstructorUsedError;
   @override
-  String get source;
+  String get source => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'preview_file_url')
-  String get previewFileUrl;
+  String get previewFileUrl => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'large_file_url')
-  String get largeFileUrl;
+  String get largeFileUrl => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'file_url')
-  String get fileUrl;
+  String get fileUrl => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'file_ext')
-  String get fileExt;
+  String get fileExt => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'image_width')
-  double get imageWidth;
+  double get imageWidth => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'image_height')
-  double get imageHeight;
+  double get imageHeight => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'file_size')
-  double get size;
+  double get size => throw _privateConstructorUsedError;
   @override
-  int get score;
+  int get score => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'fav_count')
-  int get favoriteCount;
+  int get favoriteCount => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'uploader_id')
-  int get uploaderId;
+  int get uploaderId => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'created_at')
-  DateTime get createdAt;
+  DateTime get createdAt => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'updated_at')
-  DateTime get updatedAt;
+  DateTime get updatedAt => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'tag_string_meta', fromJson: _tagsArrayFromJson)
-  List<String> get meta;
+  List<String> get meta => throw _privateConstructorUsedError;
   @override
-  String? get video;
+  String? get video => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$PostCopyWith<_Post> get copyWith => throw _privateConstructorUsedError;
+  _$$_PostCopyWith<_$_Post> get copyWith => throw _privateConstructorUsedError;
 }

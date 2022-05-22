@@ -12,7 +12,7 @@ part of 'user.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 User _$UserFromJson(Map<String, dynamic> json) {
   switch (json['runtimeType']) {
@@ -28,46 +28,6 @@ User _$UserFromJson(Map<String, dynamic> json) {
           'Invalid union type "${json['runtimeType']}"!');
   }
 }
-
-/// @nodoc
-class _$UserTearOff {
-  const _$UserTearOff();
-
-  UserNoAuthenticated noAuthenticated() {
-    return const UserNoAuthenticated();
-  }
-
-  UserAuthenticating authenticating() {
-    return const UserAuthenticating();
-  }
-
-  UserAuthenticated authenticated(
-      {required int id,
-      required String name,
-      required int level,
-      @JsonKey(name: 'blacklisted_tags', fromJson: _fromJson)
-          required List<String> blackListedTags,
-      @JsonKey(name: 'favorite_count')
-          required int favoriteCount,
-      @JsonKey(name: 'tag_query_limit', defaultValue: 2)
-          required int tagLimit}) {
-    return UserAuthenticated(
-      id: id,
-      name: name,
-      level: level,
-      blackListedTags: blackListedTags,
-      favoriteCount: favoriteCount,
-      tagLimit: tagLimit,
-    );
-  }
-
-  User fromJson(Map<String, Object?> json) {
-    return User.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $User = _$UserTearOff();
 
 /// @nodoc
 mixin _$User {
@@ -164,27 +124,27 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class $UserNoAuthenticatedCopyWith<$Res> {
-  factory $UserNoAuthenticatedCopyWith(
-          UserNoAuthenticated value, $Res Function(UserNoAuthenticated) then) =
-      _$UserNoAuthenticatedCopyWithImpl<$Res>;
+abstract class _$$UserNoAuthenticatedCopyWith<$Res> {
+  factory _$$UserNoAuthenticatedCopyWith(_$UserNoAuthenticated value,
+          $Res Function(_$UserNoAuthenticated) then) =
+      __$$UserNoAuthenticatedCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$UserNoAuthenticatedCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
-    implements $UserNoAuthenticatedCopyWith<$Res> {
-  _$UserNoAuthenticatedCopyWithImpl(
-      UserNoAuthenticated _value, $Res Function(UserNoAuthenticated) _then)
-      : super(_value, (v) => _then(v as UserNoAuthenticated));
+class __$$UserNoAuthenticatedCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
+    implements _$$UserNoAuthenticatedCopyWith<$Res> {
+  __$$UserNoAuthenticatedCopyWithImpl(
+      _$UserNoAuthenticated _value, $Res Function(_$UserNoAuthenticated) _then)
+      : super(_value, (v) => _then(v as _$UserNoAuthenticated));
 
   @override
-  UserNoAuthenticated get _value => super._value as UserNoAuthenticated;
+  _$UserNoAuthenticated get _value => super._value as _$UserNoAuthenticated;
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$UserNoAuthenticated extends UserNoAuthenticated {
-  const _$UserNoAuthenticated({String? $type})
+  const _$UserNoAuthenticated({final String? $type})
       : $type = $type ?? 'noAuthenticated',
         super._();
 
@@ -202,9 +162,10 @@ class _$UserNoAuthenticated extends UserNoAuthenticated {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is UserNoAuthenticated);
+        (other.runtimeType == runtimeType && other is _$UserNoAuthenticated);
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => runtimeType.hashCode;
 
@@ -321,27 +282,27 @@ abstract class UserNoAuthenticated extends User {
 }
 
 /// @nodoc
-abstract class $UserAuthenticatingCopyWith<$Res> {
-  factory $UserAuthenticatingCopyWith(
-          UserAuthenticating value, $Res Function(UserAuthenticating) then) =
-      _$UserAuthenticatingCopyWithImpl<$Res>;
+abstract class _$$UserAuthenticatingCopyWith<$Res> {
+  factory _$$UserAuthenticatingCopyWith(_$UserAuthenticating value,
+          $Res Function(_$UserAuthenticating) then) =
+      __$$UserAuthenticatingCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$UserAuthenticatingCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
-    implements $UserAuthenticatingCopyWith<$Res> {
-  _$UserAuthenticatingCopyWithImpl(
-      UserAuthenticating _value, $Res Function(UserAuthenticating) _then)
-      : super(_value, (v) => _then(v as UserAuthenticating));
+class __$$UserAuthenticatingCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
+    implements _$$UserAuthenticatingCopyWith<$Res> {
+  __$$UserAuthenticatingCopyWithImpl(
+      _$UserAuthenticating _value, $Res Function(_$UserAuthenticating) _then)
+      : super(_value, (v) => _then(v as _$UserAuthenticating));
 
   @override
-  UserAuthenticating get _value => super._value as UserAuthenticating;
+  _$UserAuthenticating get _value => super._value as _$UserAuthenticating;
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$UserAuthenticating extends UserAuthenticating {
-  const _$UserAuthenticating({String? $type})
+  const _$UserAuthenticating({final String? $type})
       : $type = $type ?? 'authenticating',
         super._();
 
@@ -359,9 +320,10 @@ class _$UserAuthenticating extends UserAuthenticating {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is UserAuthenticating);
+        (other.runtimeType == runtimeType && other is _$UserAuthenticating);
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => runtimeType.hashCode;
 
@@ -478,10 +440,10 @@ abstract class UserAuthenticating extends User {
 }
 
 /// @nodoc
-abstract class $UserAuthenticatedCopyWith<$Res> {
-  factory $UserAuthenticatedCopyWith(
-          UserAuthenticated value, $Res Function(UserAuthenticated) then) =
-      _$UserAuthenticatedCopyWithImpl<$Res>;
+abstract class _$$UserAuthenticatedCopyWith<$Res> {
+  factory _$$UserAuthenticatedCopyWith(
+          _$UserAuthenticated value, $Res Function(_$UserAuthenticated) then) =
+      __$$UserAuthenticatedCopyWithImpl<$Res>;
   $Res call(
       {int id,
       String name,
@@ -495,14 +457,14 @@ abstract class $UserAuthenticatedCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$UserAuthenticatedCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
-    implements $UserAuthenticatedCopyWith<$Res> {
-  _$UserAuthenticatedCopyWithImpl(
-      UserAuthenticated _value, $Res Function(UserAuthenticated) _then)
-      : super(_value, (v) => _then(v as UserAuthenticated));
+class __$$UserAuthenticatedCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
+    implements _$$UserAuthenticatedCopyWith<$Res> {
+  __$$UserAuthenticatedCopyWithImpl(
+      _$UserAuthenticated _value, $Res Function(_$UserAuthenticated) _then)
+      : super(_value, (v) => _then(v as _$UserAuthenticated));
 
   @override
-  UserAuthenticated get _value => super._value as UserAuthenticated;
+  _$UserAuthenticated get _value => super._value as _$UserAuthenticated;
 
   @override
   $Res call({
@@ -513,7 +475,7 @@ class _$UserAuthenticatedCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
     Object? favoriteCount = freezed,
     Object? tagLimit = freezed,
   }) {
-    return _then(UserAuthenticated(
+    return _then(_$UserAuthenticated(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -527,7 +489,7 @@ class _$UserAuthenticatedCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
           : level // ignore: cast_nullable_to_non_nullable
               as int,
       blackListedTags: blackListedTags == freezed
-          ? _value.blackListedTags
+          ? _value._blackListedTags
           : blackListedTags // ignore: cast_nullable_to_non_nullable
               as List<String>,
       favoriteCount: favoriteCount == freezed
@@ -550,13 +512,14 @@ class _$UserAuthenticated extends UserAuthenticated {
       required this.name,
       required this.level,
       @JsonKey(name: 'blacklisted_tags', fromJson: _fromJson)
-          required this.blackListedTags,
+          required final List<String> blackListedTags,
       @JsonKey(name: 'favorite_count')
           required this.favoriteCount,
       @JsonKey(name: 'tag_query_limit', defaultValue: 2)
           required this.tagLimit,
-      String? $type})
-      : $type = $type ?? 'authenticated',
+      final String? $type})
+      : _blackListedTags = blackListedTags,
+        $type = $type ?? 'authenticated',
         super._();
 
   factory _$UserAuthenticated.fromJson(Map<String, dynamic> json) =>
@@ -568,9 +531,14 @@ class _$UserAuthenticated extends UserAuthenticated {
   final String name;
   @override
   final int level;
+  final List<String> _blackListedTags;
   @override
   @JsonKey(name: 'blacklisted_tags', fromJson: _fromJson)
-  final List<String> blackListedTags;
+  List<String> get blackListedTags {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_blackListedTags);
+  }
+
   @override
   @JsonKey(name: 'favorite_count')
   final int favoriteCount;
@@ -590,31 +558,32 @@ class _$UserAuthenticated extends UserAuthenticated {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is UserAuthenticated &&
+            other is _$UserAuthenticated &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.level, level) &&
             const DeepCollectionEquality()
-                .equals(other.blackListedTags, blackListedTags) &&
+                .equals(other._blackListedTags, _blackListedTags) &&
             const DeepCollectionEquality()
                 .equals(other.favoriteCount, favoriteCount) &&
             const DeepCollectionEquality().equals(other.tagLimit, tagLimit));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(level),
-      const DeepCollectionEquality().hash(blackListedTags),
+      const DeepCollectionEquality().hash(_blackListedTags),
       const DeepCollectionEquality().hash(favoriteCount),
       const DeepCollectionEquality().hash(tagLimit));
 
   @JsonKey(ignore: true)
   @override
-  $UserAuthenticatedCopyWith<UserAuthenticated> get copyWith =>
-      _$UserAuthenticatedCopyWithImpl<UserAuthenticated>(this, _$identity);
+  _$$UserAuthenticatedCopyWith<_$UserAuthenticated> get copyWith =>
+      __$$UserAuthenticatedCopyWithImpl<_$UserAuthenticated>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -725,30 +694,30 @@ class _$UserAuthenticated extends UserAuthenticated {
 
 abstract class UserAuthenticated extends User {
   const factory UserAuthenticated(
-      {required int id,
-      required String name,
-      required int level,
+      {required final int id,
+      required final String name,
+      required final int level,
       @JsonKey(name: 'blacklisted_tags', fromJson: _fromJson)
-          required List<String> blackListedTags,
+          required final List<String> blackListedTags,
       @JsonKey(name: 'favorite_count')
-          required int favoriteCount,
+          required final int favoriteCount,
       @JsonKey(name: 'tag_query_limit', defaultValue: 2)
-          required int tagLimit}) = _$UserAuthenticated;
+          required final int tagLimit}) = _$UserAuthenticated;
   const UserAuthenticated._() : super._();
 
   factory UserAuthenticated.fromJson(Map<String, dynamic> json) =
       _$UserAuthenticated.fromJson;
 
-  int get id;
-  String get name;
-  int get level;
+  int get id => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  int get level => throw _privateConstructorUsedError;
   @JsonKey(name: 'blacklisted_tags', fromJson: _fromJson)
-  List<String> get blackListedTags;
+  List<String> get blackListedTags => throw _privateConstructorUsedError;
   @JsonKey(name: 'favorite_count')
-  int get favoriteCount;
+  int get favoriteCount => throw _privateConstructorUsedError;
   @JsonKey(name: 'tag_query_limit', defaultValue: 2)
-  int get tagLimit;
+  int get tagLimit => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $UserAuthenticatedCopyWith<UserAuthenticated> get copyWith =>
+  _$$UserAuthenticatedCopyWith<_$UserAuthenticated> get copyWith =>
       throw _privateConstructorUsedError;
 }

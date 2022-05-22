@@ -39,13 +39,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 shrinkWrap: true,
                 children: [
                   MediaQuery(
+                    data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
                     child: const Text(
                       'Log in to Danbooru',
                       style: TextStyle(
                         fontSize: 50,
                       ),
                     ),
-                    data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
                   ),
                   const SizedBox(height: 20),
                   Container(

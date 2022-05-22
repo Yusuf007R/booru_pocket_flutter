@@ -12,21 +12,7 @@ part of 'query_params_cubit.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$QueryParamsCubitStateTearOff {
-  const _$QueryParamsCubitStateTearOff();
-
-  _QueryParamsCubitState call({required QueryParams queryParams}) {
-    return _QueryParamsCubitState(
-      queryParams: queryParams,
-    );
-  }
-}
-
-/// @nodoc
-const $QueryParamsCubitState = _$QueryParamsCubitStateTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$QueryParamsCubitState {
@@ -77,11 +63,11 @@ class _$QueryParamsCubitStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$QueryParamsCubitStateCopyWith<$Res>
+abstract class _$$_QueryParamsCubitStateCopyWith<$Res>
     implements $QueryParamsCubitStateCopyWith<$Res> {
-  factory _$QueryParamsCubitStateCopyWith(_QueryParamsCubitState value,
-          $Res Function(_QueryParamsCubitState) then) =
-      __$QueryParamsCubitStateCopyWithImpl<$Res>;
+  factory _$$_QueryParamsCubitStateCopyWith(_$_QueryParamsCubitState value,
+          $Res Function(_$_QueryParamsCubitState) then) =
+      __$$_QueryParamsCubitStateCopyWithImpl<$Res>;
   @override
   $Res call({QueryParams queryParams});
 
@@ -90,21 +76,22 @@ abstract class _$QueryParamsCubitStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$QueryParamsCubitStateCopyWithImpl<$Res>
+class __$$_QueryParamsCubitStateCopyWithImpl<$Res>
     extends _$QueryParamsCubitStateCopyWithImpl<$Res>
-    implements _$QueryParamsCubitStateCopyWith<$Res> {
-  __$QueryParamsCubitStateCopyWithImpl(_QueryParamsCubitState _value,
-      $Res Function(_QueryParamsCubitState) _then)
-      : super(_value, (v) => _then(v as _QueryParamsCubitState));
+    implements _$$_QueryParamsCubitStateCopyWith<$Res> {
+  __$$_QueryParamsCubitStateCopyWithImpl(_$_QueryParamsCubitState _value,
+      $Res Function(_$_QueryParamsCubitState) _then)
+      : super(_value, (v) => _then(v as _$_QueryParamsCubitState));
 
   @override
-  _QueryParamsCubitState get _value => super._value as _QueryParamsCubitState;
+  _$_QueryParamsCubitState get _value =>
+      super._value as _$_QueryParamsCubitState;
 
   @override
   $Res call({
     Object? queryParams = freezed,
   }) {
-    return _then(_QueryParamsCubitState(
+    return _then(_$_QueryParamsCubitState(
       queryParams: queryParams == freezed
           ? _value.queryParams
           : queryParams // ignore: cast_nullable_to_non_nullable
@@ -130,7 +117,7 @@ class _$_QueryParamsCubitState implements _QueryParamsCubitState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _QueryParamsCubitState &&
+            other is _$_QueryParamsCubitState &&
             const DeepCollectionEquality()
                 .equals(other.queryParams, queryParams));
   }
@@ -141,19 +128,19 @@ class _$_QueryParamsCubitState implements _QueryParamsCubitState {
 
   @JsonKey(ignore: true)
   @override
-  _$QueryParamsCubitStateCopyWith<_QueryParamsCubitState> get copyWith =>
-      __$QueryParamsCubitStateCopyWithImpl<_QueryParamsCubitState>(
+  _$$_QueryParamsCubitStateCopyWith<_$_QueryParamsCubitState> get copyWith =>
+      __$$_QueryParamsCubitStateCopyWithImpl<_$_QueryParamsCubitState>(
           this, _$identity);
 }
 
 abstract class _QueryParamsCubitState implements QueryParamsCubitState {
-  const factory _QueryParamsCubitState({required QueryParams queryParams}) =
-      _$_QueryParamsCubitState;
+  const factory _QueryParamsCubitState(
+      {required final QueryParams queryParams}) = _$_QueryParamsCubitState;
 
   @override
-  QueryParams get queryParams;
+  QueryParams get queryParams => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$QueryParamsCubitStateCopyWith<_QueryParamsCubitState> get copyWith =>
+  _$$_QueryParamsCubitStateCopyWith<_$_QueryParamsCubitState> get copyWith =>
       throw _privateConstructorUsedError;
 }

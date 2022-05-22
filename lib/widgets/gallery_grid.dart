@@ -48,17 +48,17 @@ class GalleryGrid extends StatelessWidget {
             return state.posts.isEmpty &&
                     state.gridStatus != GridStatus.refreshing
                 ? const SliverFillRemaining(
-                    child: Center(child: CircularProgressIndicator()),
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
                   )
                 : SliverMasonryGrid.count(
                     crossAxisCount: settingsState.gridColumns,
                     childCount: state.posts.length,
-                    itemBuilder: (context, index) {
-                      return GalleryGridItem(
-                        index: index,
-                        width: width,
-                      );
-                    },
+                    itemBuilder: (context, index) => GalleryGridItem(
+                      index: index,
+                      width: width,
+                    ),
                   );
           },
         );

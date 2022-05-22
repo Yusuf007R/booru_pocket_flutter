@@ -54,14 +54,16 @@ class DanbooruRepository {
         response.data.map((element) => AutoComplete.fromJson(element)));
   }
 
-  Future<List<int>> getFavorites(String username, int pages) async {
-    final responses = await Future.wait(List.filled(pages, (int index) => index)
-        .map((value) => dio.get('/favorites.json', queryParameters: {
-              'search[user_name]': username,
-              'commit': 'Search',
-              'limit': 1000,
-              'page': value,
-            })));
+  Future<Map<int, bool>> getFavorites(String username, int page) async {
+    final responses = await Future.wait(
+        [for (int index = 1; index <= page; index++) index].map((value) {
+      return dio.get('/favorites.json', queryParameters: {
+        'search[user_name]': username,
+        'commit': 'Search',
+        'limit': 1000,
+        'page': value,
+      });
+    }));
 
     return await transformFavoriteResponse(responses);
   }

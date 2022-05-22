@@ -55,10 +55,6 @@ class _PostDetailScreenState extends State<_PostDetailScreen> {
 
   @override
   void dispose() {
-    SystemChrome.setEnabledSystemUIMode(
-      SystemUiMode.edgeToEdge,
-      overlays: SystemUiOverlay.values,
-    );
     super.dispose();
   }
 
@@ -87,16 +83,22 @@ class _PostDetailScreenState extends State<_PostDetailScreen> {
                   (previous.posts.length != current.posts.length),
               builder: (context, gridBlocState) {
                 final postInfo = gridBlocState.posts[state.currentPostIndex];
-                if (state.showMenu) {
-                  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge,
-                      overlays: SystemUiOverlay.values);
-                } else if (!postInfo.isVideo) {
-                  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-                      overlays: []);
+                if (!state.willPop) {
+                  if (state.showMenu) {
+                    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge,
+                        overlays: SystemUiOverlay.values);
+                  } else if (!postInfo.isVideo) {
+                    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+                        overlays: []);
+                  }
                 }
                 return WillPopScope(
                   onWillPop: () async {
                     detailCubit.willPop();
+                    await SystemChrome.setEnabledSystemUIMode(
+                      SystemUiMode.edgeToEdge,
+                      overlays: SystemUiOverlay.values,
+                    );
                     return true;
                   },
                   child: Scaffold(

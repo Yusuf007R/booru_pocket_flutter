@@ -92,6 +92,7 @@ class _PostScreenNavBarState extends State<PostScreenNavBar> {
     return NavBarSkeleton(
       leftSideWidgets: [
         Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           child: GestureDetector(
             onTap: () {
               Feedback.forTap(context);
@@ -107,11 +108,11 @@ class _PostScreenNavBarState extends State<PostScreenNavBar> {
               color: Colors.white,
             ),
           ),
-          padding: const EdgeInsets.symmetric(horizontal: 10),
         ),
       ],
       rightSideWidgets: [
         Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           child: GestureDetector(
             onTap: () {
               Feedback.forTap(context);
@@ -132,7 +133,6 @@ class _PostScreenNavBarState extends State<PostScreenNavBar> {
               ),
             ),
           ),
-          padding: const EdgeInsets.symmetric(horizontal: 10),
         ),
       ],
       backgroundWidget:
@@ -149,10 +149,10 @@ class SearchInput extends StatefulWidget {
   final TextEditingController textController;
 
   @override
-  _SearchInputState createState() => _SearchInputState();
+  SearchInputState createState() => SearchInputState();
 }
 
-class _SearchInputState extends State<SearchInput> {
+class SearchInputState extends State<SearchInput> {
   OverlayEntry? _overlayEntry;
   final GlobalKey _widgetKey = GlobalKey();
 

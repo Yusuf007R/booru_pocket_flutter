@@ -20,16 +20,16 @@ class _VideoPlayerWrapperState extends State<VideoPlayerWrapper> {
 
   @override
   void initState() {
-    initPlayer();
+    final cubit = context.read<PostDetailScreenCubitCubit>();
+    initPlayer(cubit);
     super.initState();
   }
 
-  void initPlayer() async {
+  void initPlayer(PostDetailScreenCubitCubit cubit) async {
     videoPlayerController = VideoPlayerController.network(widget.post.fileUrl);
-
-    context.read<PostDetailScreenCubitCubit>().setLoading(true);
+    cubit.setLoading(true);
     await videoPlayerController.initialize();
-    context.read<PostDetailScreenCubitCubit>().setLoading(false);
+    cubit.setLoading(false);
     chewieController = ChewieController(
       videoPlayerController: videoPlayerController,
       autoPlay: true,

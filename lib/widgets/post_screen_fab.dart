@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:booru_pocket_flutter/blocs/danbooru_auth_cubit/danbooru_auth_cubit.dart';
 import 'package:booru_pocket_flutter/services/image_downloader_service.dart';
@@ -29,81 +31,90 @@ class PostScreenFAB extends StatelessWidget {
         return ValueListenableBuilder(
           valueListenable: Provider.of<ValueNotifier<bool>>(context),
           builder: (context, bool value, child) {
-            return SpeedDial(
-              icon: Icons.menu,
-              visible: isSelectedMode || value,
-              children: isSelectedMode
-                  ? [
-                      SpeedDialChild(
-                        child: const Icon(Icons.clear_all_rounded),
-                        label: 'Clear Selected Post',
-                        onTap: () {
-                          bloc.add(SetPostSelected(selectedPosts: const []));
-                        },
-                      ),
-                      SpeedDialChild(
-                        child: const Icon(MdiIcons.heart),
-                        label: 'Favorite',
-                        onTap: () {
-                          final posts = state.posts
-                              .where((element) =>
-                                  state.selectedPosts.contains(element.id))
-                              .toSet()
-                              .toList();
-                          for (var post in posts) {
-                            context
-                                .read<DanbooruAuthCubit>()
-                                .setFavoriteOn(post);
-                          }
-                        },
-                      ),
-                      SpeedDialChild(
-                        child: const Icon(Icons.share_outlined),
-                        label: 'Share',
-                        onTap: () {
-                          locator<ImageDownloaderService>().downloadShareImage(
-                            state.posts
+            return AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              padding: !value && isSelectedMode
+                  ? EdgeInsets.only(
+                      bottom: MediaQueryData.fromWindow(window).padding.bottom,
+                    )
+                  : EdgeInsets.zero,
+              child: SpeedDial(
+                icon: Icons.menu,
+                visible: isSelectedMode || value,
+                children: isSelectedMode
+                    ? [
+                        SpeedDialChild(
+                          child: const Icon(Icons.clear_all_rounded),
+                          label: 'Clear Selected Post',
+                          onTap: () {
+                            bloc.add(SetPostSelected(selectedPosts: const []));
+                          },
+                        ),
+                        SpeedDialChild(
+                          child: const Icon(MdiIcons.heart),
+                          label: 'Favorite',
+                          onTap: () {
+                            final posts = state.posts
                                 .where((element) =>
                                     state.selectedPosts.contains(element.id))
                                 .toSet()
-                                .toList(),
-                          );
-                        },
-                      ),
-                      SpeedDialChild(
-                        child: const Icon(Icons.save_alt_outlined),
-                        label: 'Download',
-                        onTap: () {
-                          locator<ImageDownloaderService>().downloadImages(
-                            state.posts
-                                .where((element) =>
-                                    state.selectedPosts.contains(element.id))
-                                .toSet()
-                                .toList(),
-                          );
-                        },
-                      ),
-                    ]
-                  : [
-                      SpeedDialChild(
-                        child: const Icon(Icons.arrow_upward),
-                        label: 'Scroll to top',
-                        onTap: () {
-                          _scrollController.animateTo(
-                            0,
-                            duration: const Duration(milliseconds: 300),
-                            curve: Curves.easeInOut,
-                          );
-                        },
-                      ),
-                      SpeedDialChild(
-                        child: const Icon(Icons.home),
-                        label: 'Go home',
-                        onTap: () {
-                          AutoRouter.of(context).navigate(const HomeRoute());
-                        },
-                      ),
-                    ],
+                                .toList();
+                            for (var post in posts) {
+                              context
+                                  .read<DanbooruAuthCubit>()
+                                  .setFavoriteOn(post);
+                            }
+                          },
+                        ),
+                        SpeedDialChild(
+                          child: const Icon(Icons.share_outlined),
+                          label: 'Share',
+                          onTap: () {
+                            locator<ImageDownloaderService>()
+                                .downloadShareImage(
+                              state.posts
+                                  .where((element) =>
+                                      state.selectedPosts.contains(element.id))
+                                  .toSet()
+                                  .toList(),
+                            );
+                          },
+                        ),
+                        SpeedDialChild(
+                          child: const Icon(Icons.save_alt_outlined),
+                          label: 'Download',
+                          onTap: () {
+                            locator<ImageDownloaderService>().downloadImages(
+                              state.posts
+                                  .where((element) =>
+                                      state.selectedPosts.contains(element.id))
+                                  .toSet()
+                                  .toList(),
+                            );
+                          },
+                        ),
+                      ]
+                    : [
+                        SpeedDialChild(
+                          child: const Icon(Icons.arrow_upward),
+                          label: 'Scroll to top',
+                          onTap: () {
+                            _scrollController.animateTo(
+                              0,
+                              duration: const Duration(milliseconds: 300),
+                              curve: Curves.easeInOut,
+                            );
+                          },
+                        ),
+                        SpeedDialChild(
+                          child: const Icon(Icons.home),
+                          label: 'Go home',
+                          onTap: () {
+                            AutoRouter.of(context).navigate(const HomeRoute());
+                          },
+                        ),
+                      ],
+              ),
             );
           },
         );
