@@ -1,6 +1,7 @@
 import 'package:booru_pocket_flutter/blocs/danbooru_auth_cubit/danbooru_auth_cubit.dart';
 import 'package:booru_pocket_flutter/blocs/settings_cubit/settings_cubit.dart';
 import 'package:booru_pocket_flutter/models/api/user/user.dart';
+import 'package:booru_pocket_flutter/repositories/danbooru.dart';
 
 import 'package:booru_pocket_flutter/router/router.gr.dart';
 import 'package:booru_pocket_flutter/services/context_service.dart';
@@ -45,7 +46,9 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final context = router.navigatorKey.currentState?.context;
-      if (context != null) locator<ContextService>().setContext(context);
+      if (context != null) {
+        locator<ContextService>().setContext(context);
+      }
     });
 
     super.initState();

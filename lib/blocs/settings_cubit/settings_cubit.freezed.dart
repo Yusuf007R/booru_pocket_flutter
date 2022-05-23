@@ -23,7 +23,7 @@ mixin _$SettingsState {
   ThemeMode get themeMode => throw _privateConstructorUsedError;
   String? get defaultDownloadPath => throw _privateConstructorUsedError;
   bool get gridRoundedCorners => throw _privateConstructorUsedError;
-  bool get safeMode => throw _privateConstructorUsedError;
+  PostRating get rating => throw _privateConstructorUsedError;
   ImageQuality get gridImageQuality => throw _privateConstructorUsedError;
   ImageQuality get downloadQuality => throw _privateConstructorUsedError;
   ImageQuality get detailPageQuality => throw _privateConstructorUsedError;
@@ -46,7 +46,7 @@ abstract class $SettingsStateCopyWith<$Res> {
       {ThemeMode themeMode,
       String? defaultDownloadPath,
       bool gridRoundedCorners,
-      bool safeMode,
+      PostRating rating,
       ImageQuality gridImageQuality,
       ImageQuality downloadQuality,
       ImageQuality detailPageQuality,
@@ -69,7 +69,7 @@ class _$SettingsStateCopyWithImpl<$Res>
     Object? themeMode = freezed,
     Object? defaultDownloadPath = freezed,
     Object? gridRoundedCorners = freezed,
-    Object? safeMode = freezed,
+    Object? rating = freezed,
     Object? gridImageQuality = freezed,
     Object? downloadQuality = freezed,
     Object? detailPageQuality = freezed,
@@ -90,10 +90,10 @@ class _$SettingsStateCopyWithImpl<$Res>
           ? _value.gridRoundedCorners
           : gridRoundedCorners // ignore: cast_nullable_to_non_nullable
               as bool,
-      safeMode: safeMode == freezed
-          ? _value.safeMode
-          : safeMode // ignore: cast_nullable_to_non_nullable
-              as bool,
+      rating: rating == freezed
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
+              as PostRating,
       gridImageQuality: gridImageQuality == freezed
           ? _value.gridImageQuality
           : gridImageQuality // ignore: cast_nullable_to_non_nullable
@@ -133,7 +133,7 @@ abstract class _$$_SettingsStateCopyWith<$Res>
       {ThemeMode themeMode,
       String? defaultDownloadPath,
       bool gridRoundedCorners,
-      bool safeMode,
+      PostRating rating,
       ImageQuality gridImageQuality,
       ImageQuality downloadQuality,
       ImageQuality detailPageQuality,
@@ -158,7 +158,7 @@ class __$$_SettingsStateCopyWithImpl<$Res>
     Object? themeMode = freezed,
     Object? defaultDownloadPath = freezed,
     Object? gridRoundedCorners = freezed,
-    Object? safeMode = freezed,
+    Object? rating = freezed,
     Object? gridImageQuality = freezed,
     Object? downloadQuality = freezed,
     Object? detailPageQuality = freezed,
@@ -179,10 +179,10 @@ class __$$_SettingsStateCopyWithImpl<$Res>
           ? _value.gridRoundedCorners
           : gridRoundedCorners // ignore: cast_nullable_to_non_nullable
               as bool,
-      safeMode: safeMode == freezed
-          ? _value.safeMode
-          : safeMode // ignore: cast_nullable_to_non_nullable
-              as bool,
+      rating: rating == freezed
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
+              as PostRating,
       gridImageQuality: gridImageQuality == freezed
           ? _value.gridImageQuality
           : gridImageQuality // ignore: cast_nullable_to_non_nullable
@@ -218,7 +218,7 @@ class _$_SettingsState implements _SettingsState {
       {this.themeMode = ThemeMode.system,
       this.defaultDownloadPath = null,
       this.gridRoundedCorners = true,
-      this.safeMode = true,
+      this.rating = PostRating.general,
       this.gridImageQuality = ImageQuality.high,
       this.downloadQuality = ImageQuality.max,
       this.detailPageQuality = ImageQuality.high,
@@ -240,7 +240,7 @@ class _$_SettingsState implements _SettingsState {
   final bool gridRoundedCorners;
   @override
   @JsonKey()
-  final bool safeMode;
+  final PostRating rating;
   @override
   @JsonKey()
   final ImageQuality gridImageQuality;
@@ -262,7 +262,7 @@ class _$_SettingsState implements _SettingsState {
 
   @override
   String toString() {
-    return 'SettingsState(themeMode: $themeMode, defaultDownloadPath: $defaultDownloadPath, gridRoundedCorners: $gridRoundedCorners, safeMode: $safeMode, gridImageQuality: $gridImageQuality, downloadQuality: $downloadQuality, detailPageQuality: $detailPageQuality, gridType: $gridType, gridColumns: $gridColumns, pageLimit: $pageLimit)';
+    return 'SettingsState(themeMode: $themeMode, defaultDownloadPath: $defaultDownloadPath, gridRoundedCorners: $gridRoundedCorners, rating: $rating, gridImageQuality: $gridImageQuality, downloadQuality: $downloadQuality, detailPageQuality: $detailPageQuality, gridType: $gridType, gridColumns: $gridColumns, pageLimit: $pageLimit)';
   }
 
   @override
@@ -275,7 +275,7 @@ class _$_SettingsState implements _SettingsState {
                 .equals(other.defaultDownloadPath, defaultDownloadPath) &&
             const DeepCollectionEquality()
                 .equals(other.gridRoundedCorners, gridRoundedCorners) &&
-            const DeepCollectionEquality().equals(other.safeMode, safeMode) &&
+            const DeepCollectionEquality().equals(other.rating, rating) &&
             const DeepCollectionEquality()
                 .equals(other.gridImageQuality, gridImageQuality) &&
             const DeepCollectionEquality()
@@ -295,7 +295,7 @@ class _$_SettingsState implements _SettingsState {
       const DeepCollectionEquality().hash(themeMode),
       const DeepCollectionEquality().hash(defaultDownloadPath),
       const DeepCollectionEquality().hash(gridRoundedCorners),
-      const DeepCollectionEquality().hash(safeMode),
+      const DeepCollectionEquality().hash(rating),
       const DeepCollectionEquality().hash(gridImageQuality),
       const DeepCollectionEquality().hash(downloadQuality),
       const DeepCollectionEquality().hash(detailPageQuality),
@@ -319,7 +319,7 @@ abstract class _SettingsState implements SettingsState {
       {final ThemeMode themeMode,
       final String? defaultDownloadPath,
       final bool gridRoundedCorners,
-      final bool safeMode,
+      final PostRating rating,
       final ImageQuality gridImageQuality,
       final ImageQuality downloadQuality,
       final ImageQuality detailPageQuality,
@@ -337,7 +337,7 @@ abstract class _SettingsState implements SettingsState {
   @override
   bool get gridRoundedCorners => throw _privateConstructorUsedError;
   @override
-  bool get safeMode => throw _privateConstructorUsedError;
+  PostRating get rating => throw _privateConstructorUsedError;
   @override
   ImageQuality get gridImageQuality => throw _privateConstructorUsedError;
   @override

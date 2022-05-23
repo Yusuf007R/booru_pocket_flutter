@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:booru_pocket_flutter/blocs/gallery_grid_bloc/gallery_grid_bloc.dart';
+import 'package:booru_pocket_flutter/blocs/settings_cubit/settings_cubit.dart';
+import 'package:booru_pocket_flutter/router/router.gr.dart';
 
 import 'package:booru_pocket_flutter/widgets/gallery_grid.dart';
 import 'package:booru_pocket_flutter/widgets/popular_screen_nav_bar.dart';
@@ -10,7 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-enum PostScreenType { user, gallery, favorites, popular }
+enum PostScreenType { user, gallery, favorites, popular, curated }
 
 class PostScreen extends StatefulWidget {
   const PostScreen({
@@ -35,38 +37,46 @@ class _PostScreenState extends State<PostScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<GalleryGridBloc, GalleryGridState>(
-      builder: (context, state) {
-        final isPopularScreen =
-            context.read<PostScreenType>() == PostScreenType.popular;
-
-        return Scaffold(
-          floatingActionButton:
-              PostScreenFAB(scrollController: _scrollController),
-          body: Scrollbar(
-            child: RefreshIndicator(
-              edgeOffset: 30,
-              onRefresh: onRefresh,
-              child: CustomScrollView(
-                keyboardDismissBehavior:
-                    ScrollViewKeyboardDismissBehavior.onDrag,
-                controller: _scrollController,
-                physics: state.posts.isEmpty
-                    ? const NeverScrollableScrollPhysics()
-                    : const NoImplicitScrollPhysics(
-                        parent: BouncingScrollPhysics(),
-                      ),
-                slivers: [
-                  isPopularScreen
-                      ? const PopularScreenNavBar()
-                      : const PostScreenNavBar(),
-                  const GalleryGrid(),
-                ],
+    return BlocListener<SettingsCubit, SettingsState>(
+      listenWhen: (previous, current) =>
+          previous.rating != current.rating ||
+          previous.pageLimit != current.pageLimit,
+      listener: (context, state) {
+        context.read<GalleryGridBloc>().add(PostsFetched(shouldReset: true));
+      },
+      child: BlocBuilder<GalleryGridBloc, GalleryGridState>(
+        builder: (context, state) {
+          final postScreenType = context.read<PostScreenType>();
+          final isDatePostScreen = postScreenType == PostScreenType.curated ||
+              postScreenType == PostScreenType.popular;
+          return Scaffold(
+            floatingActionButton:
+                PostScreenFAB(scrollController: _scrollController),
+            body: Scrollbar(
+              child: RefreshIndicator(
+                edgeOffset: 30,
+                onRefresh: onRefresh,
+                child: CustomScrollView(
+                  keyboardDismissBehavior:
+                      ScrollViewKeyboardDismissBehavior.onDrag,
+                  controller: _scrollController,
+                  physics: state.posts.isEmpty
+                      ? const NeverScrollableScrollPhysics()
+                      : const NoImplicitScrollPhysics(
+                          parent: BouncingScrollPhysics(),
+                        ),
+                  slivers: [
+                    isDatePostScreen
+                        ? const DatePostScreenNavBar()
+                        : const PostScreenNavBar(),
+                    const GalleryGrid(),
+                  ],
+                ),
               ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 
