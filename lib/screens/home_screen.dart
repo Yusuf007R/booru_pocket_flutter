@@ -35,7 +35,7 @@ class HomeScreenState extends State<HomeScreen> {
       routes: [
         PostRouteHomePage(),
         PostRouteHomePage(postScreenType: PostScreenType.popular),
-        PostRouteHomePage(inputTextValue: 'order:rank'),
+        PostRouteHomePage(postScreenType: PostScreenType.curated),
         PostRouteHomePage(inputTextValue: 'order:rank'),
       ],
       builder: (context, child, animation) {
@@ -80,12 +80,12 @@ class HomeScreenState extends State<HomeScreen> {
                           label: 'Popular',
                         ),
                         BottomNavigationBarItem(
-                          icon: Icon(Icons.local_fire_department),
-                          label: 'Hot',
+                          icon: Icon(Icons.collections_bookmark),
+                          label: 'Curated',
                         ),
                         BottomNavigationBarItem(
-                          icon: Icon(Icons.collections_bookmark),
-                          label: 'Pools',
+                          icon: Icon(Icons.local_fire_department),
+                          label: 'Hot',
                         ),
                       ],
                     ),

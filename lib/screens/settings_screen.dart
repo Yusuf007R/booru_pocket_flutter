@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:booru_pocket_flutter/blocs/settings_cubit/settings_cubit.dart';
+import 'package:booru_pocket_flutter/models/api/post/post.dart';
 import 'package:booru_pocket_flutter/theme/theme_constants.dart';
 import 'package:booru_pocket_flutter/utils/enum_value_getter.dart';
 import 'package:booru_pocket_flutter/widgets/pop_up_item.dart';
@@ -77,14 +78,15 @@ class SettingsScreen extends StatelessWidget {
                       settingsCubit.setGridColumns(value),
                 ),
                 const SettingsSectionDivider(text: 'Booru'),
-                SwitchListTile(
-                  contentPadding: const EdgeInsets.all(0),
-                  title: const Text('Safe mode'),
-                  value: state.safeMode,
-                  onChanged: (bool value) {
-                    Feedback.forTap(context);
-                    settingsCubit.toggleSafeMode();
-                  },
+                ListTileDropDownMenu(
+                  title: 'Rating',
+                  subtitle: state.rating.name.capitalize(),
+                  items: PostRating.values
+                      .where((element) => element != PostRating.unknown)
+                      .map((e) => e.name.capitalize()),
+                  onSelected: (String value) => settingsCubit.setRating(
+                    enumValueGetter(PostRating.values, value),
+                  ),
                 ),
                 ListTileDropDownMenu(
                   title: 'Page limit',

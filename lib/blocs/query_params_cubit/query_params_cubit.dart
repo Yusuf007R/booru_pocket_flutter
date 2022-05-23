@@ -1,4 +1,6 @@
 import 'package:bloc/bloc.dart';
+import 'package:booru_pocket_flutter/blocs/settings_cubit/settings_cubit.dart';
+import 'package:booru_pocket_flutter/models/api/post/post.dart';
 import 'package:booru_pocket_flutter/models/api/queryparams/queryparams.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -6,7 +8,9 @@ part 'query_params_cubit_state.dart';
 part 'query_params_cubit.freezed.dart';
 
 class QueryParamsCubit extends Cubit<QueryParamsCubitState> {
-  QueryParamsCubit({required QueryParams queryParams})
+  SettingsCubit settingsCubit;
+  QueryParamsCubit(
+      {required QueryParams queryParams, required this.settingsCubit})
       : super(QueryParamsCubitState(queryParams: queryParams));
 
   void updateQueryParams(QueryParams queryParams) {
@@ -23,7 +27,17 @@ class QueryParamsCubit extends Cubit<QueryParamsCubitState> {
     emit(state.copyWith(queryParams: state.queryParams.copyWith(page: 1)));
   }
 
-  void updateLimit(int limit) {
-    emit(state.copyWith(queryParams: state.queryParams.copyWith(limit: limit)));
+  Map<String, dynamic> get queryParams {
+    final params = state.queryParams;
+    final Map<String, dynamic> json = {};
+    if (params is PostParams) {
+      json.addAll(state.queryParams.toJson());
+      json['limit'] = settingsCubit.state.pageLimit;
+      final rating = settingsCubit.state.rating;
+      if (rating != PostRating.all && rating != PostRating.unknown) {
+        json['tags'] = '${json['tags']} rating:${rating.name}'.trim();
+      }
+    }
+    return json;
   }
 }

@@ -122,7 +122,7 @@ class __$$_PostScreenNavBarStateCopyWithImpl<$Res>
 class _$_PostScreenNavBarState implements _PostScreenNavBarState {
   _$_PostScreenNavBarState(
       {final List<AutoComplete> autoCompletes = const [],
-      this.queryParams = const QueryParams.post(page: 1, limit: 50, tags: '')})
+      this.queryParams = const QueryParams.post(page: 1, tags: '')})
       : _autoCompletes = autoCompletes;
 
   factory _$_PostScreenNavBarState.fromJson(Map<String, dynamic> json) =>

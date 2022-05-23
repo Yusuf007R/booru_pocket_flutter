@@ -1,3 +1,4 @@
+import 'package:booru_pocket_flutter/models/api/post/post.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -38,7 +39,7 @@ class SettingsCubit extends HydratedCubit<SettingsState> {
   void toggleGridRoundedCorners() =>
       emit(state.copyWith(gridRoundedCorners: !state.gridRoundedCorners));
 
-  void toggleSafeMode() => emit(state.copyWith(safeMode: !state.safeMode));
+  void setRating(PostRating rating) => emit(state.copyWith(rating: rating));
 
   void setGridType(GridType type) => emit(state.copyWith(gridType: type));
 

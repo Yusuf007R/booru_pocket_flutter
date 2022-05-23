@@ -1,26 +1,25 @@
-import 'package:booru_pocket_flutter/blocs/popular_screen_nav_bar/popular_screen_nav_bar_cubit.dart';
-import 'package:booru_pocket_flutter/blocs/query_params_cubit/query_params_cubit.dart';
-import 'package:booru_pocket_flutter/models/api/queryparams/queryparams.dart';
+import 'package:booru_pocket_flutter/blocs/date_post_screen_nav_bar/date_post_screen_nav_bar_cubit.dart';
 import 'package:booru_pocket_flutter/widgets/nav_bar_skeleton.dart';
 import 'package:booru_pocket_flutter/widgets/pop_up_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:booru_pocket_flutter/utils/string_extentions.dart';
 
-class PopularScreenNavBar extends StatefulWidget {
-  const PopularScreenNavBar({Key? key}) : super(key: key);
+class DatePostScreenNavBar extends StatefulWidget {
+  const DatePostScreenNavBar({Key? key}) : super(key: key);
 
   @override
-  PopularScreenNavBarStateWidget createState() =>
-      PopularScreenNavBarStateWidget();
+  DatePostScreenNavBarStateWidget createState() =>
+      DatePostScreenNavBarStateWidget();
 }
 
-class PopularScreenNavBarStateWidget extends State<PopularScreenNavBar> {
+class DatePostScreenNavBarStateWidget extends State<DatePostScreenNavBar> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PopularScreenNavbarCubit, PopularScreenNavBarState>(
+    return BlocBuilder<DatePostScreenNavbarCubit, DatePostScreenNavbarState>(
       builder: (context, state) {
-        final popularCubit = context.read<PopularScreenNavbarCubit>();
+        final popularCubit = context.read<DatePostScreenNavbarCubit>();
         return NavBarSkeleton(
           leftSideWidgets: [
             Padding(
@@ -33,11 +32,11 @@ class PopularScreenNavBarStateWidget extends State<PopularScreenNavBar> {
                 child: const Icon(MdiIcons.menu, size: 28, color: Colors.white),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(top: 4, left: 3),
+            Padding(
+              padding: const EdgeInsets.only(top: 4, left: 3),
               child: Text(
-                'Popular',
-                style: TextStyle(
+                state.type.name.capitalize(),
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 16,
                 ),
@@ -50,17 +49,13 @@ class PopularScreenNavBarStateWidget extends State<PopularScreenNavBar> {
               child: GestureDetector(
                 onTap: () async {
                   Feedback.forTap(context);
-                  final queryParams =
-                      context.read<QueryParamsCubit>().state.queryParams;
-                  if (queryParams is PopularParams) {
-                    final DateTime? date = await showDatePicker(
-                        context: context,
-                        initialDate: queryParams.date,
-                        firstDate: DateTime.fromMillisecondsSinceEpoch(0),
-                        lastDate: DateTime.now());
-                    if (date == null) return;
-                    popularCubit.setDate(date);
-                  }
+                  final DateTime? date = await showDatePicker(
+                      context: context,
+                      initialDate: state.date,
+                      firstDate: DateTime.fromMillisecondsSinceEpoch(0),
+                      lastDate: DateTime.now());
+                  if (date == null) return;
+                  popularCubit.setDate(date);
                 },
                 child: const Icon(Icons.today, size: 28, color: Colors.white),
               ),

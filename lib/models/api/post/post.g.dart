@@ -55,8 +55,10 @@ Map<String, dynamic> _$$_PostToJson(_$_Post instance) => <String, dynamic>{
     };
 
 const _$PostRatingEnumMap = {
-  PostRating.safe: 'safe',
+  PostRating.general: 'general',
+  PostRating.sensitive: 'sensitive',
   PostRating.questionable: 'questionable',
   PostRating.explicit: 'explicit',
+  PostRating.all: 'all',
   PostRating.unknown: 'unknown',
 };
