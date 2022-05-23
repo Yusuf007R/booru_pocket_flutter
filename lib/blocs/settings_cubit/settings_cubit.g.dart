@@ -12,7 +12,8 @@ _$_SettingsState _$$_SettingsStateFromJson(Map<String, dynamic> json) =>
           ThemeMode.system,
       defaultDownloadPath: json['defaultDownloadPath'] as String? ?? null,
       gridRoundedCorners: json['gridRoundedCorners'] as bool? ?? true,
-      safeMode: json['safeMode'] as bool? ?? true,
+      rating: $enumDecodeNullable(_$PostRatingEnumMap, json['rating']) ??
+          PostRating.general,
       gridImageQuality: $enumDecodeNullable(
               _$ImageQualityEnumMap, json['gridImageQuality']) ??
           ImageQuality.high,
@@ -33,7 +34,7 @@ Map<String, dynamic> _$$_SettingsStateToJson(_$_SettingsState instance) =>
       'themeMode': _$ThemeModeEnumMap[instance.themeMode],
       'defaultDownloadPath': instance.defaultDownloadPath,
       'gridRoundedCorners': instance.gridRoundedCorners,
-      'safeMode': instance.safeMode,
+      'rating': _$PostRatingEnumMap[instance.rating],
       'gridImageQuality': _$ImageQualityEnumMap[instance.gridImageQuality],
       'downloadQuality': _$ImageQualityEnumMap[instance.downloadQuality],
       'detailPageQuality': _$ImageQualityEnumMap[instance.detailPageQuality],
@@ -46,6 +47,15 @@ const _$ThemeModeEnumMap = {
   ThemeMode.system: 'system',
   ThemeMode.light: 'light',
   ThemeMode.dark: 'dark',
+};
+
+const _$PostRatingEnumMap = {
+  PostRating.general: 'general',
+  PostRating.sensitive: 'sensitive',
+  PostRating.questionable: 'questionable',
+  PostRating.explicit: 'explicit',
+  PostRating.all: 'all',
+  PostRating.unknown: 'unknown',
 };
 
 const _$ImageQualityEnumMap = {

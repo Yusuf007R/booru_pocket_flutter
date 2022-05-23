@@ -6,7 +6,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'post.freezed.dart';
 part 'post.g.dart';
 
-enum PostRating { safe, questionable, explicit, unknown }
+enum PostRating { general, sensitive, questionable, explicit, all, unknown }
 
 @freezed
 class Post with _$Post {
@@ -89,7 +89,9 @@ PostRating _ratingFromJson(
 ) {
   switch (rating) {
     case 's':
-      return PostRating.safe;
+      return PostRating.sensitive;
+    case 'g':
+      return PostRating.general;
     case 'q':
       return PostRating.questionable;
     case 'e':

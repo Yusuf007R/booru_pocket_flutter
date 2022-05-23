@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:booru_pocket_flutter/blocs/danbooru_auth_cubit/danbooru_auth_cubit.dart';
 import 'package:booru_pocket_flutter/blocs/query_params_cubit/query_params_cubit.dart';
+import 'package:booru_pocket_flutter/blocs/settings_cubit/settings_cubit.dart';
 import 'package:booru_pocket_flutter/models/api/user/user.dart';
 import 'package:booru_pocket_flutter/services/locator_service.dart';
 
@@ -22,9 +23,10 @@ class GalleryGridBloc extends Bloc<GalleryGridEvent, GalleryGridState> {
   final QueryParamsCubit queryParamsCubit;
   final DanbooruAuthCubit danbooruAuthCubit;
 
-  GalleryGridBloc(
-      {required this.queryParamsCubit, required this.danbooruAuthCubit})
-      : super(
+  GalleryGridBloc({
+    required this.queryParamsCubit,
+    required this.danbooruAuthCubit,
+  }) : super(
           GalleryGridState(
             uniqueKey: UniqueKey().toString(),
           ),
@@ -94,18 +96,12 @@ class GalleryGridBloc extends Bloc<GalleryGridEvent, GalleryGridState> {
 
   _fetchPosts() async {
     final queryParams = queryParamsCubit.state.queryParams;
-
     return queryParams.map(
-        post: (params) async {
-          return await repository.getPosts(
-            params,
-          );
-        },
-        popular: (params) async {
-          return await repository.getPopularPosts(
-            params,
-          );
-        },
-        recommended: (params) async {});
+      post: (params) async {
+        return await repository.getPosts(
+          queryParamsCubit.queryParams,
+        );
+      },
+    );
   }
 }

@@ -11,26 +11,17 @@ import 'package:booru_pocket_flutter/utils/transform_favorite_response.dart';
 import 'package:dio/dio.dart';
 
 class DanbooruRepository {
-  Dio dio = Dio(BaseOptions(baseUrl: 'https://safebooru.donmai.us/'));
-  bool safeMode = true;
+  Dio dio = Dio(BaseOptions(baseUrl: 'https://danbooru.donmai.us/'));
+
   DanbooruRepository() {
     dio.transformer = MyTransformer();
   }
 
-  Future<List<Post>> getPosts(PostParams params) async {
+  Future<List<Post>> getPosts(Map<String, dynamic> query) async {
     Response response = await dio.get(
       '/posts.json',
-      queryParameters: params.toJson(),
+      queryParameters: query,
     );
-
-    return List<Post>.from(response.data
-        .where(((element) => element['id'] != null))
-        .map((element) => Post.fromJson(element)));
-  }
-
-  Future<List<Post>> getPopularPosts(PopularParams params) async {
-    Response response = await dio.get('/explore/posts/popular.json',
-        queryParameters: params.toJson());
     return List<Post>.from(response.data
         .where(((element) => element['id'] != null))
         .map((element) => Post.fromJson(element)));
@@ -104,12 +95,5 @@ class DanbooruRepository {
       dio.options.headers.remove('Authorization');
       rethrow;
     }
-  }
-
-  void toggleSafeMode() async {
-    safeMode = !safeMode;
-    dio.options.baseUrl = safeMode
-        ? 'https://safebooru.donmai.us/'
-        : 'https://danbooru.donmai.us/';
   }
 }

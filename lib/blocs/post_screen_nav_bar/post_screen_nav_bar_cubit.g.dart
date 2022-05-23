@@ -14,7 +14,7 @@ _$_PostScreenNavBarState _$$_PostScreenNavBarStateFromJson(
               .toList() ??
           const [],
       queryParams: json['queryParams'] == null
-          ? const QueryParams.post(page: 1, limit: 50, tags: '')
+          ? const QueryParams.post(page: 1, tags: '')
           : QueryParams.fromJson(json['queryParams'] as Map<String, dynamic>),
     );
 

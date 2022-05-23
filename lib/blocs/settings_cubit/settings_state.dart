@@ -10,7 +10,7 @@ class SettingsState with _$SettingsState {
     @Default(ThemeMode.system) ThemeMode themeMode,
     @Default(null) String? defaultDownloadPath,
     @Default(true) bool gridRoundedCorners,
-    @Default(true) bool safeMode,
+    @Default(PostRating.general) PostRating rating,
     @Default(ImageQuality.high) ImageQuality gridImageQuality,
     @Default(ImageQuality.max) ImageQuality downloadQuality,
     @Default(ImageQuality.high) ImageQuality detailPageQuality,

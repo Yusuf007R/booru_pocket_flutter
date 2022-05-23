@@ -4,8 +4,7 @@ part of 'post_screen_nav_bar_cubit.dart';
 class PostScreenNavBarState with _$PostScreenNavBarState {
   factory PostScreenNavBarState({
     @Default([]) List<AutoComplete> autoCompletes,
-    @Default(QueryParams.post(page: 1, limit: 50, tags: ''))
-        QueryParams queryParams,
+    @Default(QueryParams.post(page: 1, tags: '')) QueryParams queryParams,
   }) = _PostScreenNavBarState;
 
   factory PostScreenNavBarState.fromJson(Map<String, dynamic> json) =>

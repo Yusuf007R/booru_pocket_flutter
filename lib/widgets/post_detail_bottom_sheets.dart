@@ -24,7 +24,9 @@ class InfoBottomSheet extends StatelessWidget {
           Container(
             width: double.infinity,
             color: Theme.of(context).scaffoldBackgroundColor,
-            padding: const EdgeInsets.symmetric(vertical: 20),
+            padding: const EdgeInsets.symmetric(vertical: 20).add(
+              MediaQuery.of(context).padding,
+            ),
             child: Table(
               defaultColumnWidth:
                   FixedColumnWidth(MediaQuery.of(context).size.width * 0.40),
@@ -96,11 +98,9 @@ class TagBottomSheet extends StatelessWidget {
                         maxHeight: MediaQuery.of(context).size.height * 0.4),
                     width: double.infinity,
                     color: Theme.of(context).scaffoldBackgroundColor,
+                    padding: MediaQuery.of(context).padding,
                     child: SingleChildScrollView(
-                      padding: const EdgeInsets.only(
-                        top: 20,
-                        bottom: 70,
-                      ),
+                      padding: const EdgeInsets.symmetric(vertical: 20),
                       child: Wrap(
                         alignment: WrapAlignment.center,
                         children: getTags,
@@ -179,11 +179,12 @@ class PostDetailBottomSheetAppBar extends StatelessWidget {
           topRight: Radius.circular(25),
         ),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 10),
       alignment: Alignment.centerLeft,
       child: Text(
         text,
-        style: const TextStyle(fontSize: 20, color: Colors.white),
+        style: const TextStyle(
+            fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
       ),
     );
   }
