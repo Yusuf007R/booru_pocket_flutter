@@ -89,6 +89,7 @@ class _PostScreenNavBarState extends State<PostScreenNavBar> {
   Widget build(BuildContext context) {
     final bool isPushedScreen =
         AutoRouter.of(context).routeData.name == 'PostRoute';
+
     return NavBarSkeleton(
       leftSideWidgets: [
         Padding(

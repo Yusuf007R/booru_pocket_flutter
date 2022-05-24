@@ -4,7 +4,6 @@ import 'dart:io';
 
 import 'package:booru_pocket_flutter/models/api/autocomplete/autocomplete.dart';
 import 'package:booru_pocket_flutter/models/api/post/post.dart';
-import 'package:booru_pocket_flutter/models/api/queryparams/queryparams.dart';
 import 'package:booru_pocket_flutter/models/api/user/user.dart';
 import 'package:booru_pocket_flutter/utils/compute_json_decode.dart';
 import 'package:booru_pocket_flutter/utils/transform_favorite_response.dart';

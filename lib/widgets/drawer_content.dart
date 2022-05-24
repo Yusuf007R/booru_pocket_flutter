@@ -121,10 +121,23 @@ class DrawerTopList extends StatelessWidget {
               },
             ),
             DrawerTile(
-              icon: MdiIcons.magnify,
-              text: 'SauceNao',
+              icon: Icons.filter_alt_rounded,
+              text: 'Curated',
               onTap: () {
-                print('pressed');
+                AutoRouter.of(context).push(
+                  PostRoute(postScreenType: PostScreenType.curated),
+                );
+              },
+            ),
+            DrawerTile(
+              icon: MdiIcons.wallpaper,
+              text: 'Wallpapers',
+              onTap: () {
+                final width = MediaQuery.of(context).size.width;
+                final height = MediaQuery.of(context).size.height;
+                AutoRouter.of(context).push(
+                  PostRoute(inputTextValue: 'ratio:${width / height}'),
+                );
               },
             ),
           ],
