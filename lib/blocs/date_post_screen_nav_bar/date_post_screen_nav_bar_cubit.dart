@@ -53,6 +53,6 @@ class DatePostScreenNavbarCubit extends Cubit<DatePostScreenNavbarState> {
     final isWeekly = scale == ScaleType.week;
     DateTime minDate = isWeekly ? date.startOfWeek() : date.startOfMonth();
     DateTime maxDate = isWeekly ? minDate.endOfWeek() : minDate.endOfMonth();
-    return "date:${minDate.yyyyMMdd}..${maxDate.yyyyMMdd}";
+    return "date:${minDate.yyyyMMdd()}..${maxDate.yyyyMMdd()}";
   }
 }
