@@ -1,79 +1,43 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:booru_pocket_flutter/blocs/post_detail_screen_cubit/post_detail_screen_cubit_cubit.dart';
-import 'package:booru_pocket_flutter/router/router.gr.dart';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-enum TagType {
-  artist,
-  series,
-  character,
-  normal,
-}
 
 class Tag extends StatelessWidget {
-  const Tag({Key? key, required this.tag, required this.tagType})
+  const Tag(
+      {Key? key,
+      this.onLongPress,
+      this.onPressed,
+      required this.value,
+      this.color})
       : super(key: key);
 
-  final String tag;
-  final TagType tagType;
-
-  Color getColor(BuildContext context, bool clicked) {
-    if (clicked) return Theme.of(context).colorScheme.secondary;
-    if (tagType == TagType.artist) {
-      return const Color.fromARGB(255, 195, 8, 8);
-    }
-    if (tagType == TagType.series) {
-      return const Color.fromARGB(255, 68, 87, 149);
-    }
-    if (tagType == TagType.character) {
-      return const Color.fromARGB(255, 132, 20, 167);
-    }
-    return Theme.of(context).primaryColor;
-  }
+  final void Function()? onLongPress;
+  final void Function()? onPressed;
+  final String value;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
-    if (tag.isEmpty) {
-      return Container();
-    }
-    return BlocBuilder<PostDetailScreenCubitCubit, PostDetailScreenCubitState>(
-      builder: (context, state) {
-        final clicked = state.selectedTags.contains(tag);
-        final detailCubit = context.read<PostDetailScreenCubitCubit>();
-        return Padding(
-          padding: const EdgeInsets.all(4),
-          child: SizedBox(
-            height: 28,
-            child: ElevatedButton(
-              onLongPress: () {
-                detailCubit.toggleSelectedtag(tag);
-              },
-              onPressed: () {
-                if (state.selectedTags.isNotEmpty) {
-                  Feedback.forLongPress(context);
-                  detailCubit.toggleSelectedtag(tag);
-                  return;
-                }
-                AutoRouter.of(context).push(PostRoute(inputTextValue: tag));
-              },
-              style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(1, 1),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  primary: getColor(context, clicked)),
-              child: Text(
-                tag,
-                style: const TextStyle(
-                  color: Colors.white,
-                ),
-              ),
+    return Padding(
+      padding: const EdgeInsets.all(4),
+      child: SizedBox(
+        height: 28,
+        child: ElevatedButton(
+          onLongPress: onLongPress,
+          onPressed: onPressed,
+          style: ElevatedButton.styleFrom(
+            minimumSize: const Size(1, 1),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            primary: color ?? Theme.of(context).primaryColor,
+          ),
+          child: Text(
+            value,
+            style: const TextStyle(
+              color: Colors.white,
             ),
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }

@@ -11,6 +11,12 @@ ThemeData lightThemeData = ThemeData.light().copyWith(
     unselectedItemColor: Colors.grey.shade700,
     backgroundColor: Colors.grey.shade200,
   ),
+  iconTheme: const IconThemeData(
+    color: Colors.black54,
+  ),
+  listTileTheme: const ListTileThemeData(
+    iconColor: Colors.black54,
+  ),
   appBarTheme: const AppBarTheme(
     color: primaryColor,
     titleSpacing: 0,
@@ -26,9 +32,6 @@ ThemeData lightThemeData = ThemeData.light().copyWith(
   ),
   scaffoldBackgroundColor: Colors.grey.shade200,
   primaryColor: primaryColor,
-  iconTheme: const IconThemeData(
-    color: Colors.black,
-  ),
   brightness: Brightness.light,
   colorScheme: const ColorScheme.light(
     primary: primaryColor,

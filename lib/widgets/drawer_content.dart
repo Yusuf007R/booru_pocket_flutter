@@ -135,8 +135,11 @@ class DrawerTopList extends StatelessWidget {
               onTap: () {
                 final width = MediaQuery.of(context).size.width;
                 final height = MediaQuery.of(context).size.height;
+                final ratio = width / height;
                 AutoRouter.of(context).push(
-                  PostRoute(inputTextValue: 'ratio:${width / height}'),
+                  PostRoute(
+                      inputTextValue:
+                          'ratio:${(ratio - 0.05).toStringAsFixed(2)}..${(ratio + 0.05).toStringAsFixed(2)}'),
                 );
               },
             ),

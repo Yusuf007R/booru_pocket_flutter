@@ -59,6 +59,7 @@ class GalleryGridBloc extends Bloc<GalleryGridEvent, GalleryGridState> {
       emit(state.copyWith(posts: const []));
       queryParamsCubit.resetPage();
       List<Post> posts = await _fetchPosts();
+
       GalleryGridState stateCopy =
           state.copyWith(posts: posts, gridStatus: GridStatus.idle);
       if (!queryParamsCubit.isClosed) queryParamsCubit.incrementPage();

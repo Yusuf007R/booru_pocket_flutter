@@ -6,6 +6,8 @@ import 'package:booru_pocket_flutter/models/api/autocomplete/autocomplete.dart';
 import 'package:booru_pocket_flutter/models/api/queryparams/queryparams.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:booru_pocket_flutter/widgets/nav_bar_skeleton.dart';
+import 'package:booru_pocket_flutter/widgets/danbooru_tag.dart';
+import 'package:booru_pocket_flutter/widgets/tag.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
