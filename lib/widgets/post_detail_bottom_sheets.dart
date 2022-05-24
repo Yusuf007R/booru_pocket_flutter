@@ -2,14 +2,15 @@ import 'package:auto_route/auto_route.dart';
 import 'package:booru_pocket_flutter/blocs/post_detail_screen_cubit/post_detail_screen_cubit_cubit.dart';
 import 'package:booru_pocket_flutter/router/router.gr.dart';
 import 'package:booru_pocket_flutter/utils/bytes_to_human.dart';
-import 'package:booru_pocket_flutter/widgets/tag.dart';
+import 'package:booru_pocket_flutter/widgets/danbooru_tag.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
+import 'package:booru_pocket_flutter/utils/string_extentions.dart';
 import '../models/api/post/post.dart';
+import 'package:booru_pocket_flutter/utils/date_extensions.dart';
 
 class InfoBottomSheet extends StatelessWidget {
   const InfoBottomSheet({Key? key, required this.post}) : super(key: key);
@@ -34,13 +35,13 @@ class InfoBottomSheet extends StatelessWidget {
                 infoTableRow('Post ID', post.id.toString()),
                 infoTableRow('Uploader ID', post.uploaderId.toString()),
                 infoTableRow('Score', post.score.toString()),
-                infoTableRow('Rating', post.rating.name),
+                infoTableRow('Rating', post.rating.name.capitalize()),
                 infoTableRow('File size', formatBytes(post.size.toInt(), 2)),
                 infoTableRow('Resolution',
                     '${post.imageWidth.toStringAsFixed(0)}x${post.imageHeight.toStringAsFixed(0)}'),
                 infoTableRow(
                   'Upload At',
-                  '${post.updatedAt.day.toString().padLeft(2, '0')}-${post.updatedAt.month.toString().padLeft(2, '0')}-${post.updatedAt.year}',
+                  post.updatedAt.yyyyMMdd(),
                 ),
               ],
             ),
@@ -154,10 +155,14 @@ class TagBottomSheet extends StatelessWidget {
 
   List<Widget> get getTags {
     return [
-      ...post.artistTag.map((e) => Tag(tag: e, tagType: TagType.artist)),
-      ...post.seriesTag.map((e) => Tag(tag: e, tagType: TagType.series)),
-      ...post.characterTag.map((e) => Tag(tag: e, tagType: TagType.character)),
-      ...post.tags.map((e) => Tag(tag: e, tagType: TagType.normal)),
+      ...post.artistTag
+          .map((e) => DanbooruTag(value: e, tagType: DanbooruTagType.artist)),
+      ...post.seriesTag
+          .map((e) => DanbooruTag(value: e, tagType: DanbooruTagType.series)),
+      ...post.characterTag.map(
+          (e) => DanbooruTag(value: e, tagType: DanbooruTagType.character)),
+      ...post.tags
+          .map((e) => DanbooruTag(value: e, tagType: DanbooruTagType.normal)),
     ];
   }
 }

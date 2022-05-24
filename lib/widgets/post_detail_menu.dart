@@ -120,7 +120,7 @@ class PostDetailBottomBar extends StatelessWidget {
                       shadowColor: Colors.black.withOpacity(0.8),
                       child: Container(
                         margin: const EdgeInsets.only(top: 15),
-                        padding: const EdgeInsets.symmetric(vertical: 5),
+                        padding: const EdgeInsets.symmetric(vertical: 15),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [

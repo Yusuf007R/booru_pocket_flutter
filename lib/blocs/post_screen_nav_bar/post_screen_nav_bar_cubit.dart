@@ -34,7 +34,7 @@ class PostScreenNavbarCubit extends Cubit<PostScreenNavBarState> {
   }
 
   void onTextFieldSubmitted() {
-    galleryGridBloc.add(PostsRefreshed());
+    galleryGridBloc.add(PostsFetched(shouldReset: true));
   }
 
   void fetchAutoComplete(String value) async {

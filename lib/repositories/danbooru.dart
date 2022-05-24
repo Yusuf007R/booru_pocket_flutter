@@ -4,7 +4,6 @@ import 'dart:io';
 
 import 'package:booru_pocket_flutter/models/api/autocomplete/autocomplete.dart';
 import 'package:booru_pocket_flutter/models/api/post/post.dart';
-import 'package:booru_pocket_flutter/models/api/queryparams/queryparams.dart';
 import 'package:booru_pocket_flutter/models/api/user/user.dart';
 import 'package:booru_pocket_flutter/utils/compute_json_decode.dart';
 import 'package:booru_pocket_flutter/utils/transform_favorite_response.dart';
@@ -18,10 +17,12 @@ class DanbooruRepository {
   }
 
   Future<List<Post>> getPosts(Map<String, dynamic> query) async {
+    print(query);
     Response response = await dio.get(
       '/posts.json',
       queryParameters: query,
     );
+
     return List<Post>.from(response.data
         .where(((element) => element['id'] != null))
         .map((element) => Post.fromJson(element)));
