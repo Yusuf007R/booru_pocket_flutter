@@ -2,10 +2,9 @@ import 'dart:async';
 
 import 'package:booru_pocket_flutter/blocs/gallery_grid_bloc/gallery_grid_bloc.dart';
 import 'package:booru_pocket_flutter/blocs/settings_cubit/settings_cubit.dart';
-import 'package:booru_pocket_flutter/router/router.gr.dart';
 
 import 'package:booru_pocket_flutter/widgets/gallery_grid.dart';
-import 'package:booru_pocket_flutter/widgets/popular_screen_nav_bar.dart';
+import 'package:booru_pocket_flutter/widgets/date_post_screen_nav_bar.dart';
 import 'package:booru_pocket_flutter/widgets/post_screen_fab.dart';
 import 'package:booru_pocket_flutter/widgets/post_screen_nav_bar.dart';
 import 'package:flutter/material.dart';
@@ -49,6 +48,12 @@ class _PostScreenState extends State<PostScreen> {
           final postScreenType = context.read<PostScreenType>();
           final isDatePostScreen = postScreenType == PostScreenType.curated ||
               postScreenType == PostScreenType.popular;
+
+          if (state.posts.isEmpty &&
+              _scrollController.hasClients &&
+              _scrollController.offset != 0) {
+            _scrollController.jumpTo(0);
+          }
           return Scaffold(
             floatingActionButton:
                 PostScreenFAB(scrollController: _scrollController),

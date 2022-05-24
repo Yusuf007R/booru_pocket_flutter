@@ -15,7 +15,11 @@ class AuthGuard extends AutoRouteGuard {
 
     if (context != null) {
       if (resolver.route.name == 'PostRoute') {
-        if (resolver.route.args.postScreenType == PostScreenType.gallery) {
+        if ([
+          PostScreenType.gallery,
+          PostScreenType.curated,
+          PostScreenType.popular
+        ].any((element) => element == resolver.route.args.postScreenType)) {
           return resolver.next(true);
         }
       }

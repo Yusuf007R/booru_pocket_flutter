@@ -8,8 +8,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
+import 'package:booru_pocket_flutter/utils/string_extentions.dart';
 import '../models/api/post/post.dart';
+import 'package:booru_pocket_flutter/utils/date_extensions.dart';
 
 class InfoBottomSheet extends StatelessWidget {
   const InfoBottomSheet({Key? key, required this.post}) : super(key: key);
@@ -34,13 +35,13 @@ class InfoBottomSheet extends StatelessWidget {
                 infoTableRow('Post ID', post.id.toString()),
                 infoTableRow('Uploader ID', post.uploaderId.toString()),
                 infoTableRow('Score', post.score.toString()),
-                infoTableRow('Rating', post.rating.name),
+                infoTableRow('Rating', post.rating.name.capitalize()),
                 infoTableRow('File size', formatBytes(post.size.toInt(), 2)),
                 infoTableRow('Resolution',
                     '${post.imageWidth.toStringAsFixed(0)}x${post.imageHeight.toStringAsFixed(0)}'),
                 infoTableRow(
                   'Upload At',
-                  '${post.updatedAt.day.toString().padLeft(2, '0')}-${post.updatedAt.month.toString().padLeft(2, '0')}-${post.updatedAt.year}',
+                  post.updatedAt.yyyyMMdd(),
                 ),
               ],
             ),
