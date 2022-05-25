@@ -6,29 +6,34 @@ class Tag extends StatelessWidget {
       this.onLongPress,
       this.onPressed,
       required this.value,
-      this.color})
+      this.color,
+      this.padding,
+      this.disabled = false})
       : super(key: key);
 
   final void Function()? onLongPress;
   final void Function()? onPressed;
   final String value;
   final Color? color;
+  final EdgeInsets? padding;
+  final bool disabled;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(4),
-      child: SizedBox(
-        height: 28,
+    return SizedBox(
+      height: 28,
+      child: IgnorePointer(
+        ignoring: disabled,
         child: ElevatedButton(
           onLongPress: onLongPress,
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
+            padding: padding,
             minimumSize: const Size(1, 1),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
             ),
-            primary: color ?? Theme.of(context).primaryColor,
+            primary: color ?? Theme.of(context).colorScheme.primary,
           ),
           child: Text(
             value,

@@ -8,6 +8,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:booru_pocket_flutter/widgets/nav_bar_skeleton.dart';
 import 'package:booru_pocket_flutter/widgets/danbooru_tag.dart';
 import 'package:booru_pocket_flutter/widgets/tag.dart';
+import 'package:booru_pocket_flutter/utils/string_extentions.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,6 +26,7 @@ class _PostScreenNavBarState extends State<PostScreenNavBar> {
   late final TextEditingController _textController;
   bool isFieldFocused = false;
   Timer? _debounce;
+  bool expandTag = false;
 
   @override
   void initState() {
@@ -66,8 +68,10 @@ class _PostScreenNavBarState extends State<PostScreenNavBar> {
 
   void _onTextChange() {
     final navBarCubit = context.read<PostScreenNavbarCubit>();
+    // final queryParams = context.read<QueryParamsCubit>();
 
     final String text = _textController.text.trimLeft();
+
     if (_textController.text != text) {
       _textController.value = _textController.value.copyWith(
         text: text,
@@ -76,9 +80,7 @@ class _PostScreenNavBarState extends State<PostScreenNavBar> {
       );
     }
 
-    if (_debounce != null) {
-      _debounce?.cancel();
-    }
+    if (_debounce != null) _debounce?.cancel();
     _debounce = Timer(
       const Duration(milliseconds: 150),
       () {
@@ -95,7 +97,7 @@ class _PostScreenNavBarState extends State<PostScreenNavBar> {
     return NavBarSkeleton(
       leftSideWidgets: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
+          padding: const EdgeInsets.only(left: 10),
           child: GestureDetector(
             onTap: () {
               Feedback.forTap(context);
@@ -115,7 +117,7 @@ class _PostScreenNavBarState extends State<PostScreenNavBar> {
       ],
       rightSideWidgets: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
+          padding: const EdgeInsets.only(left: 10),
           child: GestureDetector(
             onTap: () {
               Feedback.forTap(context);
@@ -138,8 +140,39 @@ class _PostScreenNavBarState extends State<PostScreenNavBar> {
           ),
         ),
       ],
-      backgroundWidget:
-          SearchInput(focusNode: _focusNode, textController: _textController),
+      backgroundWidget: Row(
+        children: [
+          Expanded(
+            child: SearchInput(
+                focusNode: _focusNode, textController: _textController),
+          ),
+          BlocBuilder<QueryParamsCubit, QueryParamsCubitState>(
+            builder: (context, state) {
+              if (state.strictTag == '') return Container();
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 2),
+                child: Tag(
+                  color: Theme.of(context).colorScheme.secondary,
+                  onPressed: () async {
+                    if (expandTag) return;
+                    setState(() {
+                      expandTag = true;
+                    });
+                    await Future.delayed(const Duration(seconds: 3));
+                    setState(() {
+                      expandTag = false;
+                    });
+                  },
+                  value: expandTag
+                      ? state.strictTag
+                      : state.strictTag.overFlowElipsis(10),
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                ),
+              );
+            },
+          ),
+        ],
+      ),
     );
   }
 }
@@ -196,9 +229,9 @@ class SearchInputState extends State<SearchInput> {
             BlocBuilder<PostScreenNavbarCubit, PostScreenNavBarState>(
               builder: (context, state) {
                 return Positioned(
-                  left: offset.dx,
+                  left: 10,
                   top: offset.dy + size.height,
-                  width: size.width,
+                  width: MediaQuery.of(context).size.width * 0.95,
                   child: Material(
                     color: Colors.grey.shade300,
                     borderRadius: BorderRadius.circular(10),
@@ -232,7 +265,7 @@ class SearchInputState extends State<SearchInput> {
 
   void onOptionTap(AutoComplete option) {
     final String prev = widget.textController.text;
-    int lastIndex = prev.lastIndexOf(' ');
+    final lastIndex = prev.lastIndexOf(' ');
     String newText;
     if (lastIndex > 1) {
       newText = "${prev.substring(0, lastIndex + 1)}${option.value} ";
@@ -269,7 +302,6 @@ class SearchInputState extends State<SearchInput> {
         ),
         enabledBorder: InputBorder.none,
         focusedBorder: InputBorder.none,
-        contentPadding: EdgeInsets.symmetric(horizontal: 40),
       ),
     );
   }
