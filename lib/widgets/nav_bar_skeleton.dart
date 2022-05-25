@@ -27,7 +27,7 @@ class NavBarSkeleton extends StatelessWidget {
         child: Stack(
           fit: StackFit.expand,
           children: [
-            backgroundWidget,
+            // b
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -35,6 +35,9 @@ class NavBarSkeleton extends StatelessWidget {
                   children: [
                     ...leftSideWidgets,
                   ],
+                ),
+                Expanded(
+                  child: backgroundWidget,
                 ),
                 Row(
                   children: [

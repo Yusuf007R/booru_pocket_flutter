@@ -35,8 +35,8 @@ class HomeScreenState extends State<HomeScreen> {
       routes: [
         PostRouteHomePage(),
         PostRouteHomePage(postScreenType: PostScreenType.popular),
-        PostRouteHomePage(inputTextValue: 'order:rank'),
-        PostRouteHomePage(inputTextValue: 'order:rank'),
+        PostRouteHomePage(strictTag: 'order:rank'),
+        PostRouteHomePage(strictTag: 'order:rank'),
       ],
       builder: (context, child, animation) {
         final tabsRouter = AutoTabsRouter.of(context);

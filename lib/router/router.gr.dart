@@ -45,7 +45,8 @@ class AppRouter extends _i8.RootStackRouter {
           child: _i2.PostRouteWrapper(
               key: args.key,
               inputTextValue: args.inputTextValue,
-              postScreenType: args.postScreenType));
+              postScreenType: args.postScreenType,
+              strictTag: args.strictTag));
     },
     LoginRoute.name: (routeData) {
       return _i8.MaterialPageX<dynamic>(
@@ -79,7 +80,8 @@ class AppRouter extends _i8.RootStackRouter {
           child: _i2.PostRouteWrapper(
               key: args.key,
               inputTextValue: args.inputTextValue,
-              postScreenType: args.postScreenType));
+              postScreenType: args.postScreenType,
+              strictTag: args.strictTag));
     },
     PostScreenHomePageInternal.name: (routeData) {
       return _i8.MaterialPageX<dynamic>(
@@ -132,13 +134,15 @@ class PostRoute extends _i8.PageRouteInfo<PostRouteArgs> {
       {_i9.Key? key,
       String inputTextValue = '',
       _i7.PostScreenType postScreenType = _i7.PostScreenType.gallery,
+      String strictTag = '',
       List<_i8.PageRouteInfo>? children})
       : super(PostRoute.name,
             path: '/post-route-wrapper',
             args: PostRouteArgs(
                 key: key,
                 inputTextValue: inputTextValue,
-                postScreenType: postScreenType),
+                postScreenType: postScreenType,
+                strictTag: strictTag),
             initialChildren: children);
 
   static const String name = 'PostRoute';
@@ -148,7 +152,8 @@ class PostRouteArgs {
   const PostRouteArgs(
       {this.key,
       this.inputTextValue = '',
-      this.postScreenType = _i7.PostScreenType.gallery});
+      this.postScreenType = _i7.PostScreenType.gallery,
+      this.strictTag = ''});
 
   final _i9.Key? key;
 
@@ -156,9 +161,11 @@ class PostRouteArgs {
 
   final _i7.PostScreenType postScreenType;
 
+  final String strictTag;
+
   @override
   String toString() {
-    return 'PostRouteArgs{key: $key, inputTextValue: $inputTextValue, postScreenType: $postScreenType}';
+    return 'PostRouteArgs{key: $key, inputTextValue: $inputTextValue, postScreenType: $postScreenType, strictTag: $strictTag}';
   }
 }
 
@@ -227,13 +234,15 @@ class PostRouteHomePage extends _i8.PageRouteInfo<PostRouteHomePageArgs> {
       {_i9.Key? key,
       String inputTextValue = '',
       _i7.PostScreenType postScreenType = _i7.PostScreenType.gallery,
+      String strictTag = '',
       List<_i8.PageRouteInfo>? children})
       : super(PostRouteHomePage.name,
             path: '',
             args: PostRouteHomePageArgs(
                 key: key,
                 inputTextValue: inputTextValue,
-                postScreenType: postScreenType),
+                postScreenType: postScreenType,
+                strictTag: strictTag),
             initialChildren: children);
 
   static const String name = 'PostRouteHomePage';
@@ -243,7 +252,8 @@ class PostRouteHomePageArgs {
   const PostRouteHomePageArgs(
       {this.key,
       this.inputTextValue = '',
-      this.postScreenType = _i7.PostScreenType.gallery});
+      this.postScreenType = _i7.PostScreenType.gallery,
+      this.strictTag = ''});
 
   final _i9.Key? key;
 
@@ -251,9 +261,11 @@ class PostRouteHomePageArgs {
 
   final _i7.PostScreenType postScreenType;
 
+  final String strictTag;
+
   @override
   String toString() {
-    return 'PostRouteHomePageArgs{key: $key, inputTextValue: $inputTextValue, postScreenType: $postScreenType}';
+    return 'PostRouteHomePageArgs{key: $key, inputTextValue: $inputTextValue, postScreenType: $postScreenType, strictTag: $strictTag}';
   }
 }
 

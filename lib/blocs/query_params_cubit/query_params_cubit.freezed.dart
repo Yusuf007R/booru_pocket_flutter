@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$QueryParamsCubitState {
   QueryParams get queryParams => throw _privateConstructorUsedError;
+  String get strictTag => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $QueryParamsCubitStateCopyWith<QueryParamsCubitState> get copyWith =>
@@ -28,7 +29,7 @@ abstract class $QueryParamsCubitStateCopyWith<$Res> {
   factory $QueryParamsCubitStateCopyWith(QueryParamsCubitState value,
           $Res Function(QueryParamsCubitState) then) =
       _$QueryParamsCubitStateCopyWithImpl<$Res>;
-  $Res call({QueryParams queryParams});
+  $Res call({QueryParams queryParams, String strictTag});
 
   $QueryParamsCopyWith<$Res> get queryParams;
 }
@@ -45,12 +46,17 @@ class _$QueryParamsCubitStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? queryParams = freezed,
+    Object? strictTag = freezed,
   }) {
     return _then(_value.copyWith(
       queryParams: queryParams == freezed
           ? _value.queryParams
           : queryParams // ignore: cast_nullable_to_non_nullable
               as QueryParams,
+      strictTag: strictTag == freezed
+          ? _value.strictTag
+          : strictTag // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 
@@ -69,7 +75,7 @@ abstract class _$$_QueryParamsCubitStateCopyWith<$Res>
           $Res Function(_$_QueryParamsCubitState) then) =
       __$$_QueryParamsCubitStateCopyWithImpl<$Res>;
   @override
-  $Res call({QueryParams queryParams});
+  $Res call({QueryParams queryParams, String strictTag});
 
   @override
   $QueryParamsCopyWith<$Res> get queryParams;
@@ -90,12 +96,17 @@ class __$$_QueryParamsCubitStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? queryParams = freezed,
+    Object? strictTag = freezed,
   }) {
     return _then(_$_QueryParamsCubitState(
       queryParams: queryParams == freezed
           ? _value.queryParams
           : queryParams // ignore: cast_nullable_to_non_nullable
               as QueryParams,
+      strictTag: strictTag == freezed
+          ? _value.strictTag
+          : strictTag // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -103,14 +114,18 @@ class __$$_QueryParamsCubitStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_QueryParamsCubitState implements _QueryParamsCubitState {
-  const _$_QueryParamsCubitState({required this.queryParams});
+  const _$_QueryParamsCubitState(
+      {required this.queryParams, this.strictTag = ""});
 
   @override
   final QueryParams queryParams;
+  @override
+  @JsonKey()
+  final String strictTag;
 
   @override
   String toString() {
-    return 'QueryParamsCubitState(queryParams: $queryParams)';
+    return 'QueryParamsCubitState(queryParams: $queryParams, strictTag: $strictTag)';
   }
 
   @override
@@ -119,12 +134,15 @@ class _$_QueryParamsCubitState implements _QueryParamsCubitState {
         (other.runtimeType == runtimeType &&
             other is _$_QueryParamsCubitState &&
             const DeepCollectionEquality()
-                .equals(other.queryParams, queryParams));
+                .equals(other.queryParams, queryParams) &&
+            const DeepCollectionEquality().equals(other.strictTag, strictTag));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(queryParams));
+      runtimeType,
+      const DeepCollectionEquality().hash(queryParams),
+      const DeepCollectionEquality().hash(strictTag));
 
   @JsonKey(ignore: true)
   @override
@@ -135,10 +153,13 @@ class _$_QueryParamsCubitState implements _QueryParamsCubitState {
 
 abstract class _QueryParamsCubitState implements QueryParamsCubitState {
   const factory _QueryParamsCubitState(
-      {required final QueryParams queryParams}) = _$_QueryParamsCubitState;
+      {required final QueryParams queryParams,
+      final String strictTag}) = _$_QueryParamsCubitState;
 
   @override
   QueryParams get queryParams => throw _privateConstructorUsedError;
+  @override
+  String get strictTag => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_QueryParamsCubitStateCopyWith<_$_QueryParamsCubitState> get copyWith =>

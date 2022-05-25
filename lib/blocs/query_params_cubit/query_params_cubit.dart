@@ -9,9 +9,13 @@ part 'query_params_cubit.freezed.dart';
 
 class QueryParamsCubit extends Cubit<QueryParamsCubitState> {
   SettingsCubit settingsCubit;
+
   QueryParamsCubit(
-      {required QueryParams queryParams, required this.settingsCubit})
-      : super(QueryParamsCubitState(queryParams: queryParams));
+      {String strictTag = '',
+      required QueryParams queryParams,
+      required this.settingsCubit})
+      : super(QueryParamsCubitState(
+            queryParams: queryParams, strictTag: strictTag));
 
   void updateQueryParams(QueryParams queryParams) {
     emit(state.copyWith(queryParams: queryParams));
@@ -36,6 +40,9 @@ class QueryParamsCubit extends Cubit<QueryParamsCubitState> {
       final rating = settingsCubit.state.rating;
       if (rating != PostRating.all && rating != PostRating.unknown) {
         json['tags'] = '${json['tags']} rating:${rating.name}'.trim();
+      }
+      if (state.strictTag != '') {
+        json['tags'] = '${json['tags']} ${state.strictTag}'.trim();
       }
     }
     return json;
