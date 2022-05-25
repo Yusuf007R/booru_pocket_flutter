@@ -16,11 +16,13 @@ import 'package:provider/provider.dart';
 class PostRouteWrapper extends StatelessWidget {
   final String inputTextValue;
   final PostScreenType postScreenType;
+  final String strictTag;
 
   const PostRouteWrapper(
       {Key? key,
       this.inputTextValue = '',
-      this.postScreenType = PostScreenType.gallery})
+      this.postScreenType = PostScreenType.gallery,
+      this.strictTag = ''})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -44,6 +46,7 @@ class PostRouteWrapper extends StatelessWidget {
         providers: [
           BlocProvider(
             create: (context) => QueryParamsCubit(
+              strictTag: strictTag,
               settingsCubit: context.read<SettingsCubit>(),
               queryParams: QueryParams.post(
                 tags: query ?? inputTextValue,

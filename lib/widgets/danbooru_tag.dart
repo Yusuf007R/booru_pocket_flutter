@@ -46,24 +46,27 @@ class DanbooruTag extends StatelessWidget {
       builder: (context, state) {
         final detailCubit = context.read<PostDetailScreenCubitCubit>();
         final isSelected = state.selectedTags.contains(value);
-        return Tag(
-          value: value,
-          color: getColor(context, isSelected),
-          onLongPress: () {
-            detailCubit.toggleSelectedtag(value);
-          },
-          onPressed: () {
-            if (state.selectedTags.isNotEmpty) {
-              Feedback.forLongPress(context);
+        return Padding(
+          padding: const EdgeInsets.all(4),
+          child: Tag(
+            value: value,
+            color: getColor(context, isSelected),
+            onLongPress: () {
               detailCubit.toggleSelectedtag(value);
-              return;
-            }
-            AutoRouter.of(context).push(
-              PostRoute(
-                inputTextValue: value,
-              ),
-            );
-          },
+            },
+            onPressed: () {
+              if (state.selectedTags.isNotEmpty) {
+                Feedback.forLongPress(context);
+                detailCubit.toggleSelectedtag(value);
+                return;
+              }
+              AutoRouter.of(context).push(
+                PostRoute(
+                  inputTextValue: value,
+                ),
+              );
+            },
+          ),
         );
       },
     );

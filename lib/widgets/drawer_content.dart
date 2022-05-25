@@ -138,7 +138,7 @@ class DrawerTopList extends StatelessWidget {
                 final ratio = width / height;
                 AutoRouter.of(context).push(
                   PostRoute(
-                      inputTextValue:
+                      strictTag:
                           'ratio:${(ratio - 0.05).toStringAsFixed(2)}..${(ratio + 0.05).toStringAsFixed(2)}'),
                 );
               },
