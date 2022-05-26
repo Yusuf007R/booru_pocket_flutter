@@ -2,7 +2,6 @@ import 'package:booru_pocket_flutter/blocs/danbooru_auth_cubit/danbooru_auth_cub
 import 'package:booru_pocket_flutter/blocs/settings_cubit/settings_cubit.dart';
 import 'package:booru_pocket_flutter/models/api/user/user.dart';
 
-
 import 'package:booru_pocket_flutter/router/router.gr.dart';
 import 'package:booru_pocket_flutter/services/context_service.dart';
 import 'package:booru_pocket_flutter/services/locator_service.dart';

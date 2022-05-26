@@ -1,3 +1,4 @@
+import 'package:booru_pocket_flutter/constants/constants.dart';
 import 'package:flutter/material.dart';
 
 class NavBarSkeleton extends StatelessWidget {
@@ -19,7 +20,7 @@ class NavBarSkeleton extends StatelessWidget {
     return SliverAppBar(
       title: Container(
         width: MediaQuery.of(context).size.width * 0.95,
-        height: 45,
+        height: navbarHeight,
         decoration: BoxDecoration(
           color: const Color(0xFF6C3FC7),
           borderRadius: BorderRadius.circular(8),
