@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:booru_pocket_flutter/blocs/post_detail_screen_cubit/post_detail_screen_cubit_cubit.dart';
-import 'package:booru_pocket_flutter/router/router.gr.dart';
-import 'package:booru_pocket_flutter/widgets/tag.dart';
+import 'package:BooruPocket/blocs/post_detail_screen_cubit/post_detail_screen_cubit_cubit.dart';
+import 'package:BooruPocket/router/router.gr.dart';
+import 'package:BooruPocket/widgets/tag.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

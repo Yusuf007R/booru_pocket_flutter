@@ -1,4 +1,4 @@
-package com.example.booru_pocket_flutter
+package com.yusuf007r.booru_pocket
 
 import io.flutter.embedding.android.FlutterActivity
 

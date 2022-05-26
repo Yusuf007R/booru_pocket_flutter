@@ -1,14 +1,14 @@
 import 'package:bloc/bloc.dart';
-import 'package:booru_pocket_flutter/blocs/danbooru_auth_cubit/danbooru_auth_cubit.dart';
-import 'package:booru_pocket_flutter/blocs/query_params_cubit/query_params_cubit.dart';
-import 'package:booru_pocket_flutter/blocs/settings_cubit/settings_cubit.dart';
-import 'package:booru_pocket_flutter/models/api/user/user.dart';
-import 'package:booru_pocket_flutter/services/locator_service.dart';
+import 'package:BooruPocket/blocs/danbooru_auth_cubit/danbooru_auth_cubit.dart';
+import 'package:BooruPocket/blocs/query_params_cubit/query_params_cubit.dart';
+import 'package:BooruPocket/blocs/settings_cubit/settings_cubit.dart';
+import 'package:BooruPocket/models/api/user/user.dart';
+import 'package:BooruPocket/services/locator_service.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:booru_pocket_flutter/models/api/post/post.dart';
-import 'package:booru_pocket_flutter/repositories/danbooru.dart';
+import 'package:BooruPocket/models/api/post/post.dart';
+import 'package:BooruPocket/repositories/danbooru.dart';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 

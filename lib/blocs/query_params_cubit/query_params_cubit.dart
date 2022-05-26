@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:booru_pocket_flutter/blocs/settings_cubit/settings_cubit.dart';
-import 'package:booru_pocket_flutter/models/api/post/post.dart';
-import 'package:booru_pocket_flutter/models/api/queryparams/queryparams.dart';
+import 'package:BooruPocket/blocs/settings_cubit/settings_cubit.dart';
+import 'package:BooruPocket/models/api/post/post.dart';
+import 'package:BooruPocket/models/api/queryparams/queryparams.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'query_params_cubit_state.dart';
