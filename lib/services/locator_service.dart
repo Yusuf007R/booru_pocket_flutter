@@ -4,7 +4,7 @@ import 'package:booru_pocket_flutter/router/router.gr.dart';
 import 'package:booru_pocket_flutter/services/context_service.dart';
 import 'package:booru_pocket_flutter/services/image_downloader_service.dart';
 import 'package:booru_pocket_flutter/services/notification_service.dart';
-import 'package:booru_pocket_flutter/services/snackbar_service.dart';
+import 'package:booru_pocket_flutter/services/alert_service.dart';
 import 'package:get_it/get_it.dart';
 
 GetIt locator = GetIt.instance;
@@ -15,5 +15,5 @@ void setupLocator() {
   locator.registerLazySingleton(() => (ContextService()));
   locator.registerLazySingleton(() => (DanbooruRepository()));
   locator.registerLazySingleton(() => (ImageDownloaderService()));
-  locator.registerLazySingleton(() => (SnackBarService()));
+  locator.registerLazySingleton(() => (AlertService()));
 }

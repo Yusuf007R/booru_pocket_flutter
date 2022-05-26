@@ -13,7 +13,7 @@ import '../models/api/post/post.dart';
 import 'package:booru_pocket_flutter/utils/date_extensions.dart';
 
 import '../services/locator_service.dart';
-import '../services/snackbar_service.dart';
+import '../services/alert_service.dart';
 
 class InfoBottomSheet extends StatelessWidget {
   const InfoBottomSheet({Key? key, required this.post}) : super(key: key);
@@ -39,12 +39,15 @@ class InfoBottomSheet extends StatelessWidget {
                 infoTableRow('Uploader ID', post.uploaderId.toString()),
                 infoTableRow('Score', post.score.toString()),
                 infoTableRow('Rating', post.rating.name.capitalize()),
+                infoTableRow('File Type', post.fileExt.toUpperCase()),
                 infoTableRow('File size', formatBytes(post.size.toInt(), 2)),
+                infoTableRow('Ratio',
+                    (post.imageWidth / post.imageHeight).toStringAsFixed(2)),
                 infoTableRow('Resolution',
                     '${post.imageWidth.toStringAsFixed(0)}x${post.imageHeight.toStringAsFixed(0)}'),
                 infoTableRow(
                   'Upload At',
-                  post.updatedAt.yyyyMMdd(),
+                  post.createdAt.yyyyMMdd(),
                 ),
               ],
             ),
@@ -126,8 +129,8 @@ class TagBottomSheet extends StatelessWidget {
                         onTap: () {
                           Clipboard.setData(ClipboardData(
                               text: state.selectedTags.join(' ')));
-                          locator<SnackBarService>().showSnackBar(
-                            text: 'Tags copied to clipboard',
+                          locator<AlertService>().showSnackBar(
+                            text: 'Tags copied to clipboard.',
                           );
                         }),
                     SpeedDialChild(

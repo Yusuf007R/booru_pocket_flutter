@@ -1,7 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:booru_pocket_flutter/blocs/settings_cubit/settings_cubit.dart';
+import 'package:booru_pocket_flutter/constants/constants.dart';
+
 import 'package:booru_pocket_flutter/models/api/post/post.dart';
-import 'package:booru_pocket_flutter/theme/theme_constants.dart';
+
 import 'package:booru_pocket_flutter/utils/enum_value_getter.dart';
 import 'package:booru_pocket_flutter/widgets/pop_up_item.dart';
 import 'package:flutter/material.dart';

@@ -6,26 +6,26 @@ class NotificationService {
   NotificationService() {
     donwloadChannelKey = 'download_channeltest3';
     AwesomeNotifications().initialize(
-        null,
-        [
-          NotificationChannel(
-            importance: NotificationImportance.Default,
-            channelGroupKey: '$donwloadChannelKey-group',
-            channelKey: donwloadChannelKey,
-            channelName: 'Download Channel',
-            channelDescription: 'Notification channel for basic tests',
-            defaultColor: const Color(0xFF6C3FC7),
-            ledColor: Colors.white,
-            criticalAlerts: true,
-          )
-        ],
-        channelGroups: [
-          NotificationChannelGroup(
-            channelGroupkey: '$donwloadChannelKey-group',
-            channelGroupName: 'Download Channel Group',
-          )
-        ],
-        debug: true);
+      null,
+      [
+        NotificationChannel(
+          importance: NotificationImportance.Default,
+          channelGroupKey: '$donwloadChannelKey-group',
+          channelKey: donwloadChannelKey,
+          channelName: 'Download Channel',
+          channelDescription: 'Notification channel for basic tests',
+          defaultColor: const Color(0xFF6C3FC7),
+          ledColor: Colors.white,
+          criticalAlerts: true,
+        )
+      ],
+      channelGroups: [
+        NotificationChannelGroup(
+          channelGroupkey: '$donwloadChannelKey-group',
+          channelGroupName: 'Download Channel Group',
+        )
+      ],
+    );
 
     AwesomeNotifications()
         .actionStream

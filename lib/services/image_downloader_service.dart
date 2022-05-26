@@ -6,7 +6,7 @@ import 'package:booru_pocket_flutter/models/api/post/post.dart';
 import 'package:booru_pocket_flutter/services/context_service.dart';
 import 'package:booru_pocket_flutter/services/locator_service.dart';
 import 'package:booru_pocket_flutter/services/notification_service.dart';
-import 'package:booru_pocket_flutter/services/snackbar_service.dart';
+import 'package:booru_pocket_flutter/services/alert_service.dart';
 import 'package:dio/dio.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +18,7 @@ import 'package:share_plus/share_plus.dart';
 
 class ImageDownloaderService {
   BuildContext context = locator<ContextService>().context;
-  SnackBarService snackBarService = locator<SnackBarService>();
+  AlertService snackBarService = locator<AlertService>();
   late SettingsCubit settingsCubit = context.read<SettingsCubit>();
 
   Future<bool> requestPermission() async {
@@ -89,7 +89,12 @@ class ImageDownloaderService {
       }
     }
     List<File?> files = [];
-    snackBarService.showSnackBar(text: 'Download Started');
+    snackBarService.showSnackBar(
+      text: posts.length > 1
+          ? 'Downloading ${posts.length} images.'
+          : 'Download Started.',
+      type: SnackbarType.download,
+    );
     for (var post in posts) {
       final file = File('$path/post-${post.id}.${post.fileExt}');
       final notifyService = locator<NotificationService>();

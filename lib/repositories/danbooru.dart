@@ -17,12 +17,10 @@ class DanbooruRepository {
   }
 
   Future<List<Post>> getPosts(Map<String, dynamic> query) async {
-    print(query);
     Response response = await dio.get(
       '/posts.json',
       queryParameters: query,
     );
-
     return List<Post>.from(response.data
         .where(((element) => element['id'] != null))
         .map((element) => Post.fromJson(element)));
