@@ -1,8 +1,8 @@
 import 'dart:ui';
 
 import 'package:auto_route/auto_route.dart';
-import 'package:booru_pocket_flutter/blocs/danbooru_auth_cubit/danbooru_auth_cubit.dart';
-import 'package:booru_pocket_flutter/services/image_downloader_service.dart';
+import 'package:BooruPocket/blocs/danbooru_auth_cubit/danbooru_auth_cubit.dart';
+import 'package:BooruPocket/services/image_downloader_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';

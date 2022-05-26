@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
-import 'package:booru_pocket_flutter/blocs/gallery_grid_bloc/gallery_grid_bloc.dart';
-import 'package:booru_pocket_flutter/blocs/query_params_cubit/query_params_cubit.dart';
-import 'package:booru_pocket_flutter/models/api/autocomplete/autocomplete.dart';
-import 'package:booru_pocket_flutter/models/api/queryparams/queryparams.dart';
-import 'package:booru_pocket_flutter/repositories/danbooru.dart';
-import 'package:booru_pocket_flutter/services/locator_service.dart';
+import 'package:BooruPocket/blocs/gallery_grid_bloc/gallery_grid_bloc.dart';
+import 'package:BooruPocket/blocs/query_params_cubit/query_params_cubit.dart';
+import 'package:BooruPocket/models/api/autocomplete/autocomplete.dart';
+import 'package:BooruPocket/models/api/queryparams/queryparams.dart';
+import 'package:BooruPocket/repositories/danbooru.dart';
+import 'package:BooruPocket/services/locator_service.dart';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 

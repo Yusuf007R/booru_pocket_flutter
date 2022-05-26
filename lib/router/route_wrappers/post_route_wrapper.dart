@@ -1,13 +1,13 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:booru_pocket_flutter/blocs/danbooru_auth_cubit/danbooru_auth_cubit.dart';
-import 'package:booru_pocket_flutter/blocs/date_post_screen_nav_bar/date_post_screen_nav_bar_cubit.dart';
-import 'package:booru_pocket_flutter/blocs/gallery_grid_bloc/gallery_grid_bloc.dart';
-import 'package:booru_pocket_flutter/blocs/post_screen_nav_bar/post_screen_nav_bar_cubit.dart';
-import 'package:booru_pocket_flutter/blocs/query_params_cubit/query_params_cubit.dart';
-import 'package:booru_pocket_flutter/blocs/settings_cubit/settings_cubit.dart';
-import 'package:booru_pocket_flutter/models/api/queryparams/queryparams.dart';
-import 'package:booru_pocket_flutter/models/api/user/user.dart';
-import 'package:booru_pocket_flutter/screens/post_screen.dart';
+import 'package:BooruPocket/blocs/danbooru_auth_cubit/danbooru_auth_cubit.dart';
+import 'package:BooruPocket/blocs/date_post_screen_nav_bar/date_post_screen_nav_bar_cubit.dart';
+import 'package:BooruPocket/blocs/gallery_grid_bloc/gallery_grid_bloc.dart';
+import 'package:BooruPocket/blocs/post_screen_nav_bar/post_screen_nav_bar_cubit.dart';
+import 'package:BooruPocket/blocs/query_params_cubit/query_params_cubit.dart';
+import 'package:BooruPocket/blocs/settings_cubit/settings_cubit.dart';
+import 'package:BooruPocket/models/api/queryparams/queryparams.dart';
+import 'package:BooruPocket/models/api/user/user.dart';
+import 'package:BooruPocket/screens/post_screen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

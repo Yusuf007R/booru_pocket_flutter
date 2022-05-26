@@ -1,6 +1,6 @@
 import 'package:another_flushbar/flushbar.dart';
-import 'package:booru_pocket_flutter/services/locator_service.dart';
-import 'package:booru_pocket_flutter/constants/constants.dart';
+import 'package:BooruPocket/services/locator_service.dart';
+import 'package:BooruPocket/constants/constants.dart';
 import 'package:flutter/material.dart';
 
 import 'context_service.dart';

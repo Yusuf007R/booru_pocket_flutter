@@ -1,11 +1,11 @@
 import 'package:bloc/bloc.dart';
-import 'package:booru_pocket_flutter/models/api/post/post.dart';
-import 'package:booru_pocket_flutter/models/api/user/user.dart';
-import 'package:booru_pocket_flutter/repositories/danbooru.dart';
-import 'package:booru_pocket_flutter/services/locator_service.dart';
+import 'package:BooruPocket/models/api/post/post.dart';
+import 'package:BooruPocket/models/api/user/user.dart';
+import 'package:BooruPocket/repositories/danbooru.dart';
+import 'package:BooruPocket/services/locator_service.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:booru_pocket_flutter/router/router.gr.dart';
+import 'package:BooruPocket/router/router.gr.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'danbooru_auth_state.dart';

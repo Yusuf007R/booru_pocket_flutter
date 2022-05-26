@@ -1,12 +1,12 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:booru_pocket_flutter/router/guards/auth_guard.dart';
-import 'package:booru_pocket_flutter/router/route_wrappers/post_route_wrapper.dart';
-import 'package:booru_pocket_flutter/screens/home_screen.dart';
-import 'package:booru_pocket_flutter/screens/login_screen.dart';
-import 'package:booru_pocket_flutter/screens/post_detail_screen.dart';
-import 'package:booru_pocket_flutter/screens/post_screen.dart';
-import 'package:booru_pocket_flutter/screens/settings_screen.dart';
-import 'package:booru_pocket_flutter/screens/user_profile_screen.dart';
+import 'package:BooruPocket/router/guards/auth_guard.dart';
+import 'package:BooruPocket/router/route_wrappers/post_route_wrapper.dart';
+import 'package:BooruPocket/screens/home_screen.dart';
+import 'package:BooruPocket/screens/login_screen.dart';
+import 'package:BooruPocket/screens/post_detail_screen.dart';
+import 'package:BooruPocket/screens/post_screen.dart';
+import 'package:BooruPocket/screens/settings_screen.dart';
+import 'package:BooruPocket/screens/user_profile_screen.dart';
 
 @MaterialAutoRouter(
   replaceInRouteName: 'Screen,Route',

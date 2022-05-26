@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:booru_pocket_flutter/blocs/danbooru_auth_cubit/danbooru_auth_cubit.dart';
-import 'package:booru_pocket_flutter/models/api/user/user.dart';
-import 'package:booru_pocket_flutter/router/router.gr.dart';
-import 'package:booru_pocket_flutter/screens/post_screen.dart';
+import 'package:BooruPocket/blocs/danbooru_auth_cubit/danbooru_auth_cubit.dart';
+import 'package:BooruPocket/models/api/user/user.dart';
+import 'package:BooruPocket/router/router.gr.dart';
+import 'package:BooruPocket/screens/post_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AuthGuard extends AutoRouteGuard {

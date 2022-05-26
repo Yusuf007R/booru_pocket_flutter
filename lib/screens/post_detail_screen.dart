@@ -1,9 +1,9 @@
-import 'package:booru_pocket_flutter/blocs/danbooru_auth_cubit/danbooru_auth_cubit.dart';
-import 'package:booru_pocket_flutter/blocs/gallery_grid_bloc/gallery_grid_bloc.dart';
-import 'package:booru_pocket_flutter/blocs/post_detail_screen_cubit/post_detail_screen_cubit_cubit.dart';
-import 'package:booru_pocket_flutter/blocs/settings_cubit/settings_cubit.dart';
-import 'package:booru_pocket_flutter/widgets/post_detail_menu.dart';
-import 'package:booru_pocket_flutter/widgets/video_player.dart';
+import 'package:BooruPocket/blocs/danbooru_auth_cubit/danbooru_auth_cubit.dart';
+import 'package:BooruPocket/blocs/gallery_grid_bloc/gallery_grid_bloc.dart';
+import 'package:BooruPocket/blocs/post_detail_screen_cubit/post_detail_screen_cubit_cubit.dart';
+import 'package:BooruPocket/blocs/settings_cubit/settings_cubit.dart';
+import 'package:BooruPocket/widgets/post_detail_menu.dart';
+import 'package:BooruPocket/widgets/video_player.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

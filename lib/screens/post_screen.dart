@@ -1,12 +1,12 @@
 import 'dart:async';
 
-import 'package:booru_pocket_flutter/blocs/gallery_grid_bloc/gallery_grid_bloc.dart';
-import 'package:booru_pocket_flutter/blocs/settings_cubit/settings_cubit.dart';
+import 'package:BooruPocket/blocs/gallery_grid_bloc/gallery_grid_bloc.dart';
+import 'package:BooruPocket/blocs/settings_cubit/settings_cubit.dart';
 
-import 'package:booru_pocket_flutter/widgets/gallery_grid.dart';
-import 'package:booru_pocket_flutter/widgets/date_post_screen_nav_bar.dart';
-import 'package:booru_pocket_flutter/widgets/post_screen_fab.dart';
-import 'package:booru_pocket_flutter/widgets/post_screen_nav_bar.dart';
+import 'package:BooruPocket/widgets/gallery_grid.dart';
+import 'package:BooruPocket/widgets/date_post_screen_nav_bar.dart';
+import 'package:BooruPocket/widgets/post_screen_fab.dart';
+import 'package:BooruPocket/widgets/post_screen_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

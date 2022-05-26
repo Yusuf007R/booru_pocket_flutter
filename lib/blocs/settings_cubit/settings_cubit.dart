@@ -1,4 +1,4 @@
-import 'package:booru_pocket_flutter/models/api/post/post.dart';
+import 'package:BooruPocket/models/api/post/post.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
