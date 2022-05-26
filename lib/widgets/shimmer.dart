@@ -1,4 +1,4 @@
-import 'package:booru_pocket_flutter/theme/theme_constants.dart';
+import 'package:booru_pocket_flutter/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
