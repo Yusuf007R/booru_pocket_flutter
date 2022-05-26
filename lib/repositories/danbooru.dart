@@ -47,16 +47,16 @@ class DanbooruRepository {
   }
 
   Future<Map<int, bool>> getFavorites(String username, int page) async {
-    final responses = await Future.wait(
-        [for (int index = 1; index <= page; index++) index].map((value) {
-      return dio.get('/favorites.json', queryParameters: {
+    List<Response<dynamic>> responses = [];
+
+    for (var i = 1; i <= page; i++) {
+      responses.add(await dio.get('/favorites.json', queryParameters: {
         'search[user_name]': username,
         'commit': 'Search',
         'limit': 1000,
-        'page': value,
-      });
-    }));
-
+        'page': i,
+      }));
+    }
     return await transformFavoriteResponse(responses);
   }
 

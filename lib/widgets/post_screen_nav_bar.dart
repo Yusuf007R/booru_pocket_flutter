@@ -6,7 +6,6 @@ import 'package:booru_pocket_flutter/models/api/autocomplete/autocomplete.dart';
 import 'package:booru_pocket_flutter/models/api/queryparams/queryparams.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:booru_pocket_flutter/widgets/nav_bar_skeleton.dart';
-import 'package:booru_pocket_flutter/widgets/danbooru_tag.dart';
 import 'package:booru_pocket_flutter/widgets/tag.dart';
 import 'package:booru_pocket_flutter/utils/string_extentions.dart';
 import 'package:flutter/material.dart';
@@ -117,7 +116,7 @@ class _PostScreenNavBarState extends State<PostScreenNavBar> {
       ],
       rightSideWidgets: [
         Padding(
-          padding: const EdgeInsets.only(left: 10),
+          padding: const EdgeInsets.only(right: 10),
           child: GestureDetector(
             onTap: () {
               Feedback.forTap(context);
@@ -134,7 +133,6 @@ class _PostScreenNavBarState extends State<PostScreenNavBar> {
               child: const Icon(
                 Icons.add,
                 size: 28,
-                // color: Colors.white,
               ),
             ),
           ),

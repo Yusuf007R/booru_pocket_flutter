@@ -7,10 +7,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+
 import 'package:booru_pocket_flutter/utils/string_extentions.dart';
 import '../models/api/post/post.dart';
 import 'package:booru_pocket_flutter/utils/date_extensions.dart';
+
+import '../services/locator_service.dart';
+import '../services/snackbar_service.dart';
 
 class InfoBottomSheet extends StatelessWidget {
   const InfoBottomSheet({Key? key, required this.post}) : super(key: key);
@@ -77,13 +80,13 @@ class InfoBottomSheet extends StatelessWidget {
 }
 
 class TagBottomSheet extends StatelessWidget {
-  const TagBottomSheet({
+  TagBottomSheet({
     Key? key,
     required this.post,
   }) : super(key: key);
 
   final Post post;
-
+  final scaffoldKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PostDetailScreenCubitCubit, PostDetailScreenCubitState>(
@@ -111,7 +114,7 @@ class TagBottomSheet extends StatelessWidget {
                 ],
               ),
               Positioned(
-                bottom: 15,
+                bottom: MediaQuery.of(context).padding.bottom + 15,
                 right: 15,
                 child: SpeedDial(
                   icon: Icons.menu_rounded,
@@ -123,13 +126,8 @@ class TagBottomSheet extends StatelessWidget {
                         onTap: () {
                           Clipboard.setData(ClipboardData(
                               text: state.selectedTags.join(' ')));
-                          Fluttertoast.showToast(
-                            msg: "Tags copied to clipboard",
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.CENTER,
-                            timeInSecForIosWeb: 1,
-                            textColor: Colors.white,
-                            fontSize: 16.0,
+                          locator<SnackBarService>().showSnackBar(
+                            text: 'Tags copied to clipboard',
                           );
                         }),
                     SpeedDialChild(
