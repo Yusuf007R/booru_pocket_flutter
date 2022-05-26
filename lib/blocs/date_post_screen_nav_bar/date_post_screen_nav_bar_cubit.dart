@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
-import 'package:booru_pocket_flutter/blocs/gallery_grid_bloc/gallery_grid_bloc.dart';
-import 'package:booru_pocket_flutter/blocs/query_params_cubit/query_params_cubit.dart';
-import 'package:booru_pocket_flutter/models/api/queryparams/queryparams.dart';
-import 'package:booru_pocket_flutter/utils/date_extensions.dart';
+import 'package:BooruPocket/blocs/gallery_grid_bloc/gallery_grid_bloc.dart';
+import 'package:BooruPocket/blocs/query_params_cubit/query_params_cubit.dart';
+import 'package:BooruPocket/models/api/queryparams/queryparams.dart';
+import 'package:BooruPocket/utils/date_extensions.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'date_post_screen_nav_bar_cubit.freezed.dart';

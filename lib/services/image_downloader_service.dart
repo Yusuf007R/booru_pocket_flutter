@@ -1,12 +1,12 @@
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:booru_pocket_flutter/blocs/settings_cubit/settings_cubit.dart';
-import 'package:booru_pocket_flutter/models/api/post/post.dart';
-import 'package:booru_pocket_flutter/services/context_service.dart';
-import 'package:booru_pocket_flutter/services/locator_service.dart';
-import 'package:booru_pocket_flutter/services/notification_service.dart';
-import 'package:booru_pocket_flutter/services/alert_service.dart';
+import 'package:BooruPocket/blocs/settings_cubit/settings_cubit.dart';
+import 'package:BooruPocket/models/api/post/post.dart';
+import 'package:BooruPocket/services/context_service.dart';
+import 'package:BooruPocket/services/locator_service.dart';
+import 'package:BooruPocket/services/notification_service.dart';
+import 'package:BooruPocket/services/alert_service.dart';
 import 'package:dio/dio.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
