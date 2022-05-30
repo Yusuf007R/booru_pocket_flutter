@@ -26,15 +26,15 @@ class PostRouteWrapper extends StatelessWidget {
       : super(key: key);
   @override
   Widget build(BuildContext context) {
-    String? query;
     final danbooruAuthCubit = context.read<DanbooruAuthCubit>();
     final user = danbooruAuthCubit.state.user;
+    String? customStrictTag;
     if (user is UserAuthenticated) {
       if (postScreenType == PostScreenType.favorites) {
-        query = " ordfav:${user.name}";
+        customStrictTag = "ordfav:${user.name}";
       }
       if (postScreenType == PostScreenType.user) {
-        query = 'user:${user.name}';
+        customStrictTag = 'user:${user.name}';
       }
     }
     final isDatePostScreen = postScreenType == PostScreenType.curated ||
@@ -46,10 +46,10 @@ class PostRouteWrapper extends StatelessWidget {
         providers: [
           BlocProvider(
             create: (context) => QueryParamsCubit(
-              strictTag: strictTag,
+              strictTag: customStrictTag ?? strictTag,
               settingsCubit: context.read<SettingsCubit>(),
               queryParams: QueryParams.post(
-                tags: query ?? inputTextValue,
+                tags: inputTextValue,
                 type: isDatePostScreen
                     ? QueryParamsPostType.datePost
                     : QueryParamsPostType.post,
