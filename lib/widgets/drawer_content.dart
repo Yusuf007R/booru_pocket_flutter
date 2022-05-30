@@ -139,7 +139,7 @@ class DrawerTopList extends StatelessWidget {
                 AutoRouter.of(context).push(
                   PostRoute(
                       strictTag:
-                          'ratio:${(ratio - 0.05).toStringAsFixed(2)}..${(ratio + 0.05).toStringAsFixed(2)}'),
+                          'ratio:${(ratio - 0.03).toStringAsFixed(2)}..${(ratio + 0.03).toStringAsFixed(2)}'),
                 );
               },
             ),
