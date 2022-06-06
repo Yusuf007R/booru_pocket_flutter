@@ -76,8 +76,8 @@ class DanbooruAuthCubit extends Cubit<DanbooruAuthState> {
     }
   }
 
-  void getFavorites() async {
-    final user = state.user;
+  void getFavorites({User? customUser}) async {
+    final user = customUser ?? state.user;
     if (user is UserAuthenticated) {
       final page = (user.favoriteCount / 1000).ceil();
       final favorites = await repository.getFavorites(user.name, page);
@@ -130,5 +130,15 @@ class DanbooruAuthCubit extends Cubit<DanbooruAuthState> {
     final isFav = isPostFavorite(post);
     if (isFav) return setFavoriteOff(post);
     setFavoriteOn(post);
+  }
+
+  @override
+  void onChange(Change<DanbooruAuthState> change) {
+    super.onChange(change);
+    if (change.currentState.user == change.nextState.user) return;
+    final user = change.nextState.user;
+    if (state.favoritePostIds.isEmpty && user is UserAuthenticated) {
+      getFavorites(customUser: user);
+    }
   }
 }

@@ -67,28 +67,16 @@ class _MyAppState extends State<MyApp> {
       ],
       child: ListenableProvider(
         create: (context) => ValueNotifier(true),
-        child: Builder(
-          builder: (context) =>
-              BlocListener<DanbooruAuthCubit, DanbooruAuthState>(
-            listenWhen: (previous, current) => previous.user != current.user,
-            listener: (context, state) {
-              final user = state.user;
-              if (state.favoritePostIds.isEmpty && user is UserAuthenticated) {
-                context.read<DanbooruAuthCubit>().getFavorites();
-              }
-            },
-            child: BlocBuilder<SettingsCubit, SettingsState>(
-              builder: (context, settingsState) {
-                return MaterialApp.router(
-                  theme: lightThemeData,
-                  darkTheme: darkThemeData,
-                  themeMode: settingsState.themeMode,
-                  routerDelegate: router.delegate(),
-                  routeInformationParser: router.defaultRouteParser(),
-                );
-              },
-            ),
-          ),
+        child: BlocBuilder<SettingsCubit, SettingsState>(
+          builder: (context, settingsState) {
+            return MaterialApp.router(
+              theme: lightThemeData,
+              darkTheme: darkThemeData,
+              themeMode: settingsState.themeMode,
+              routerDelegate: router.delegate(),
+              routeInformationParser: router.defaultRouteParser(),
+            );
+          },
         ),
       ),
     );
