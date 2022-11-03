@@ -21,9 +21,9 @@ Map<String, dynamic> _$$_DatePostScreenNavbarStateToJson(
         _$_DatePostScreenNavbarState instance) =>
     <String, dynamic>{
       'queryParams': instance.queryParams,
-      'scale': _$ScaleTypeEnumMap[instance.scale],
+      'scale': _$ScaleTypeEnumMap[instance.scale]!,
       'date': instance.date.toIso8601String(),
-      'type': _$DatePostTypeEnumMap[instance.type],
+      'type': _$DatePostTypeEnumMap[instance.type]!,
     };
 
 const _$ScaleTypeEnumMap = {

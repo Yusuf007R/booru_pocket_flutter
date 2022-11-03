@@ -21,9 +21,18 @@ class DanbooruRepository {
       '/posts.json',
       queryParameters: query,
     );
-    return List<Post>.from(response.data
+
+    return List<Post?>.from(response.data
         .where(((element) => element['id'] != null))
-        .map((element) => Post.fromJson(element)));
+        .map((element) {
+      try {
+        return Post.fromJson(element);
+      } catch (e) {
+        // ignore: avoid_print
+        print("Post could not be parsed: $element");
+        return null;
+      }
+    })).whereType<Post>().toList();
   }
 
   Future<User> getUserProfile() async {

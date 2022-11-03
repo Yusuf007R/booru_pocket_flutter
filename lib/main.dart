@@ -1,6 +1,5 @@
 import 'package:BooruPocket/blocs/danbooru_auth_cubit/danbooru_auth_cubit.dart';
 import 'package:BooruPocket/blocs/settings_cubit/settings_cubit.dart';
-import 'package:BooruPocket/models/api/user/user.dart';
 
 import 'package:BooruPocket/router/router.gr.dart';
 import 'package:BooruPocket/services/context_service.dart';
@@ -34,7 +33,6 @@ void main() async {
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
-
   @override
   State<MyApp> createState() => _MyAppState();
 }
