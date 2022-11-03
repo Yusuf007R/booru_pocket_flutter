@@ -157,9 +157,9 @@ abstract class _QueryParamsCubitState implements QueryParamsCubitState {
       final String strictTag}) = _$_QueryParamsCubitState;
 
   @override
-  QueryParams get queryParams => throw _privateConstructorUsedError;
+  QueryParams get queryParams;
   @override
-  String get strictTag => throw _privateConstructorUsedError;
+  String get strictTag;
   @override
   @JsonKey(ignore: true)
   _$$_QueryParamsCubitStateCopyWith<_$_QueryParamsCubitState> get copyWith =>

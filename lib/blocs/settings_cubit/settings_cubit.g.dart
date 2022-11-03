@@ -31,14 +31,14 @@ _$_SettingsState _$$_SettingsStateFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$_SettingsStateToJson(_$_SettingsState instance) =>
     <String, dynamic>{
-      'themeMode': _$ThemeModeEnumMap[instance.themeMode],
+      'themeMode': _$ThemeModeEnumMap[instance.themeMode]!,
       'defaultDownloadPath': instance.defaultDownloadPath,
       'gridRoundedCorners': instance.gridRoundedCorners,
-      'rating': _$PostRatingEnumMap[instance.rating],
-      'gridImageQuality': _$ImageQualityEnumMap[instance.gridImageQuality],
-      'downloadQuality': _$ImageQualityEnumMap[instance.downloadQuality],
-      'detailPageQuality': _$ImageQualityEnumMap[instance.detailPageQuality],
-      'gridType': _$GridTypeEnumMap[instance.gridType],
+      'rating': _$PostRatingEnumMap[instance.rating]!,
+      'gridImageQuality': _$ImageQualityEnumMap[instance.gridImageQuality]!,
+      'downloadQuality': _$ImageQualityEnumMap[instance.downloadQuality]!,
+      'detailPageQuality': _$ImageQualityEnumMap[instance.detailPageQuality]!,
+      'gridType': _$GridTypeEnumMap[instance.gridType]!,
       'gridColumns': instance.gridColumns,
       'pageLimit': instance.pageLimit,
     };

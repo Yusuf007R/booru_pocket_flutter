@@ -36,7 +36,7 @@ Map<String, dynamic> _$$_PostToJson(_$_Post instance) => <String, dynamic>{
       'tag_string_artist': instance.artistTag,
       'tag_string_character': instance.characterTag,
       'tag_string_copyright': instance.seriesTag,
-      'rating': _$PostRatingEnumMap[instance.rating],
+      'rating': _$PostRatingEnumMap[instance.rating]!,
       'source': instance.source,
       'preview_file_url': instance.previewFileUrl,
       'large_file_url': instance.largeFileUrl,

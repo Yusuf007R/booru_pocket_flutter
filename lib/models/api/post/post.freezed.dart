@@ -610,7 +610,9 @@ class _$_Post extends _Post {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PostToJson(this);
+    return _$$_PostToJson(
+      this,
+    );
   }
 }
 
@@ -659,64 +661,64 @@ abstract class _Post extends Post {
   factory _Post.fromJson(Map<String, dynamic> json) = _$_Post.fromJson;
 
   @override
-  int get id => throw _privateConstructorUsedError;
+  int get id;
   @override
   @JsonKey(name: 'tag_string_general', fromJson: _tagsArrayFromJson)
-  List<String> get tags => throw _privateConstructorUsedError;
+  List<String> get tags;
   @override
   @JsonKey(name: 'tag_string_artist', fromJson: _tagsArrayFromJson)
-  List<String> get artistTag => throw _privateConstructorUsedError;
+  List<String> get artistTag;
   @override
   @JsonKey(name: 'tag_string_character', fromJson: _tagsArrayFromJson)
-  List<String> get characterTag => throw _privateConstructorUsedError;
+  List<String> get characterTag;
   @override
   @JsonKey(name: 'tag_string_copyright', fromJson: _tagsArrayFromJson)
-  List<String> get seriesTag => throw _privateConstructorUsedError;
+  List<String> get seriesTag;
   @override
   @JsonKey(fromJson: _ratingFromJson)
-  PostRating get rating => throw _privateConstructorUsedError;
+  PostRating get rating;
   @override
-  String get source => throw _privateConstructorUsedError;
+  String get source;
   @override
   @JsonKey(name: 'preview_file_url')
-  String get previewFileUrl => throw _privateConstructorUsedError;
+  String get previewFileUrl;
   @override
   @JsonKey(name: 'large_file_url')
-  String get largeFileUrl => throw _privateConstructorUsedError;
+  String get largeFileUrl;
   @override
   @JsonKey(name: 'file_url')
-  String get fileUrl => throw _privateConstructorUsedError;
+  String get fileUrl;
   @override
   @JsonKey(name: 'file_ext')
-  String get fileExt => throw _privateConstructorUsedError;
+  String get fileExt;
   @override
   @JsonKey(name: 'image_width')
-  double get imageWidth => throw _privateConstructorUsedError;
+  double get imageWidth;
   @override
   @JsonKey(name: 'image_height')
-  double get imageHeight => throw _privateConstructorUsedError;
+  double get imageHeight;
   @override
   @JsonKey(name: 'file_size')
-  double get size => throw _privateConstructorUsedError;
+  double get size;
   @override
-  int get score => throw _privateConstructorUsedError;
+  int get score;
   @override
   @JsonKey(name: 'fav_count')
-  int get favoriteCount => throw _privateConstructorUsedError;
+  int get favoriteCount;
   @override
   @JsonKey(name: 'uploader_id')
-  int get uploaderId => throw _privateConstructorUsedError;
+  int get uploaderId;
   @override
   @JsonKey(name: 'created_at')
-  DateTime get createdAt => throw _privateConstructorUsedError;
+  DateTime get createdAt;
   @override
   @JsonKey(name: 'updated_at')
-  DateTime get updatedAt => throw _privateConstructorUsedError;
+  DateTime get updatedAt;
   @override
   @JsonKey(name: 'tag_string_meta', fromJson: _tagsArrayFromJson)
-  List<String> get meta => throw _privateConstructorUsedError;
+  List<String> get meta;
   @override
-  String? get video => throw _privateConstructorUsedError;
+  String? get video;
   @override
   @JsonKey(ignore: true)
   _$$_PostCopyWith<_$_Post> get copyWith => throw _privateConstructorUsedError;

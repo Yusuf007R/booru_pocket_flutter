@@ -228,15 +228,15 @@ abstract class _DanbooruAuthState implements DanbooruAuthState {
       final User user}) = _$_DanbooruAuthState;
 
   @override
-  String get errorMsg => throw _privateConstructorUsedError;
+  String get errorMsg;
   @override
-  String? get usernameErrorMsg => throw _privateConstructorUsedError;
+  String? get usernameErrorMsg;
   @override
-  String? get apiKeyErrorMsg => throw _privateConstructorUsedError;
+  String? get apiKeyErrorMsg;
   @override
-  Map<int, bool> get favoritePostIds => throw _privateConstructorUsedError;
+  Map<int, bool> get favoritePostIds;
   @override
-  User get user => throw _privateConstructorUsedError;
+  User get user;
   @override
   @JsonKey(ignore: true)
   _$$_DanbooruAuthStateCopyWith<_$_DanbooruAuthState> get copyWith =>
