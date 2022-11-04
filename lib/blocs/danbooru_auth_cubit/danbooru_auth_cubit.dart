@@ -7,6 +7,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:BooruPocket/router/router.gr.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 part 'danbooru_auth_state.dart';
 part 'danbooru_auth_cubit.freezed.dart';
@@ -42,15 +43,15 @@ class DanbooruAuthCubit extends Cubit<DanbooruAuthState> {
       if (!isAuthLoad) {
         locator<AppRouter>().replace(const UserProfileRoute());
       }
-    } catch (e) {
-      print(e);
-      if (!isAuthLoad) {
-        emit(
-          state.copyWith(
-              errorMsg: 'Invalid username or API key',
-              user: const UserNoAuthenticated()),
-        );
-      }
+    } catch (error, stackTrace) {
+      Sentry.captureException(Exception("Coundn't authenticated the user"),
+          stackTrace: stackTrace);
+      emit(
+        state.copyWith(
+            errorMsg: 'Invalid username or API key',
+            user: const UserNoAuthenticated()),
+      );
+      storage.delete(key: 'auth');
     }
   }
 
@@ -94,8 +95,15 @@ class DanbooruAuthCubit extends Cubit<DanbooruAuthState> {
       emit(state.copyWith(favoritePostIds: copyMap));
       await repository.addFavorite(post.id);
       return;
-    } on DioError catch (e) {
-      print(e.message);
+    } on DioError catch (error, stackTrace) {
+      Sentry.captureException(
+          Exception("Counldn't change post favorite status"),
+          stackTrace: stackTrace,
+          withScope: (scope) => scope
+            ..setExtra('Post id', post.id.toString())
+            ..setExtra("Response Message",
+                error.response?.data['message'] ?? "Unknown")
+            ..setExtra("Type", 'on'));
       copyMap.remove(post.id);
       emit(state.copyWith(favoritePostIds: copyMap));
       return;
@@ -109,9 +117,16 @@ class DanbooruAuthCubit extends Cubit<DanbooruAuthState> {
       emit(state.copyWith(favoritePostIds: copyMap));
       await repository.deleteFavorite(post.id);
       return;
-    } on DioError catch (e) {
-      print(e.response);
-      if (e.response?.data['message'] == 'That record was not found.') {
+    } on DioError catch (error, stackTrace) {
+      Sentry.captureException(
+          Exception("Counldn't change post favorite status"),
+          stackTrace: stackTrace,
+          withScope: (scope) => scope
+            ..setExtra('Post id', post.id.toString())
+            ..setExtra("Response Message",
+                error.response?.data['message'] ?? "Unknown")
+            ..setExtra("Type", 'off'));
+      if (error.response?.data['message'] == 'That record was not found.') {
         return;
       }
       copyMap.addEntries({post.id: true}.entries);

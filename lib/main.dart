@@ -11,6 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 void main() async {
   setupLocator();
@@ -25,9 +26,17 @@ void main() async {
   final storage = await HydratedStorage.build(
     storageDirectory: await getTemporaryDirectory(),
   );
-  HydratedBlocOverrides.runZoned(
-    () => runApp(const MyApp()),
-    storage: storage,
+
+  SentryFlutter.init(
+    (options) => options
+      ..dsn =
+          'https://612e67846b274d5284bcf9089cbc0e38@glitchtip.yusuf007r.dev/1'
+      ..tracesSampleRate = 0.01
+      ..enableAutoSessionTracking = false,
+    appRunner: () => HydratedBlocOverrides.runZoned(
+      () => runApp(const MyApp()),
+      storage: storage,
+    ),
   );
 }
 

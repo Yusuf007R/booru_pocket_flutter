@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:BooruPocket/models/api/autocomplete/autocomplete.dart';
 import 'package:BooruPocket/models/api/post/post.dart';
@@ -8,6 +9,7 @@ import 'package:BooruPocket/models/api/user/user.dart';
 import 'package:BooruPocket/utils/compute_json_decode.dart';
 import 'package:BooruPocket/utils/transform_favorite_response.dart';
 import 'package:dio/dio.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 class DanbooruRepository {
   Dio dio = Dio(BaseOptions(baseUrl: 'https://danbooru.donmai.us/'));
@@ -16,20 +18,36 @@ class DanbooruRepository {
     dio.transformer = MyTransformer();
   }
 
-  Future<List<Post>> getPosts(Map<String, dynamic> query) async {
+  Future<List<Post>> getPosts(Map<String, dynamic> query, User user) async {
     Response response = await dio.get(
       '/posts.json',
       queryParameters: query,
     );
 
-    return List<Post?>.from(response.data
-        .where(((element) => element['id'] != null))
-        .map((element) {
+    return List<Post?>.from(response.data.where(((element) {
+      if (element['id'] == null ||
+          [element['is_deleted'], element['is_banned']].contains(true)) {
+        return false;
+      }
+      // here we filter out posts that are not visible to the user
+      final isGoldOrHigher = user.map(
+          noAuthenticated: (_) => false,
+          authenticating: (_) => false,
+          authenticated: (value) => value.level > 10);
+      if (!isGoldOrHigher &&
+          ['loli', 'shota'].any((tag) => element['tag_string'].contains(tag))) {
+        return false;
+      }
+      return true;
+    })).map((element) {
       try {
         return Post.fromJson(element);
-      } catch (e) {
-        // ignore: avoid_print
-        print("Post could not be parsed: $element");
+      } catch (error, stackTrace) {
+        Sentry.captureException(error,
+            stackTrace: stackTrace,
+            withScope: (scope) => scope
+              ..setExtra("Couldn't parse post:", element['id'].toString()));
+
         return null;
       }
     })).whereType<Post>().toList();
