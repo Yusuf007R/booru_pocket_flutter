@@ -14,6 +14,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 //
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
+import 'package:BooruPocket/utils/sentry_utils.dart';
 import 'package:share_plus/share_plus.dart';
 
 class ImageDownloaderService {
@@ -68,7 +70,9 @@ class ImageDownloaderService {
       final response = await Dio()
           .get(url, options: Options(responseType: ResponseType.bytes));
       return response.data;
-    } catch (e) {
+    } catch (error, stacktrace) {
+      reportException("Error while getting image data",
+          originalError: error, stackTrace: stacktrace, extras: {"url": url});
       return null;
     }
   }
@@ -109,7 +113,11 @@ class ImageDownloaderService {
         notifyService.showDownloadCompletedNotify(post.id, post.highQuality);
         files.add(file);
         continue;
-      } catch (e) {
+      } catch (error, stacktrace) {
+        reportException("Error while downloading image",
+            originalError: error,
+            stackTrace: stacktrace,
+            extras: {"url": post.highQuality});
         files.add(null);
         continue;
       }

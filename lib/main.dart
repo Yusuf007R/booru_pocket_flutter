@@ -30,9 +30,7 @@ void main() async {
   SentryFlutter.init(
     (options) => options
       ..dsn =
-          'https://612e67846b274d5284bcf9089cbc0e38@glitchtip.yusuf007r.dev/1'
-      ..tracesSampleRate = 0.01
-      ..enableAutoSessionTracking = false,
+          'https://612e67846b274d5284bcf9089cbc0e38@glitchtip.yusuf007r.dev/1',
     appRunner: () => HydratedBlocOverrides.runZoned(
       () => runApp(const MyApp()),
       storage: storage,

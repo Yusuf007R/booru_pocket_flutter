@@ -1,15 +1,14 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'dart:math';
 
 import 'package:BooruPocket/models/api/autocomplete/autocomplete.dart';
 import 'package:BooruPocket/models/api/post/post.dart';
 import 'package:BooruPocket/models/api/user/user.dart';
 import 'package:BooruPocket/utils/compute_json_decode.dart';
+import 'package:BooruPocket/utils/sentry_utils.dart';
 import 'package:BooruPocket/utils/transform_favorite_response.dart';
 import 'package:dio/dio.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
 
 class DanbooruRepository {
   Dio dio = Dio(BaseOptions(baseUrl: 'https://danbooru.donmai.us/'));
@@ -43,10 +42,10 @@ class DanbooruRepository {
       try {
         return Post.fromJson(element);
       } catch (error, stackTrace) {
-        Sentry.captureException(error,
+        reportException("Error while parsing Post",
+            originalError: error,
             stackTrace: stackTrace,
-            withScope: (scope) => scope
-              ..setExtra("Couldn't parse post:", element['id'].toString()));
+            extras: {"Post Id": element['id'].toString()});
 
         return null;
       }
@@ -67,8 +66,17 @@ class DanbooruRepository {
         'limit': 5,
       },
     );
-    return List<AutoComplete>.from(
-        response.data.map((element) => AutoComplete.fromJson(element)));
+    return List<AutoComplete?>.from(response.data.map((element) {
+      try {
+        return AutoComplete.fromJson(element);
+      } catch (error, stackTrace) {
+        reportException("Error while parsing AutoComplete",
+            originalError: error,
+            stackTrace: stackTrace,
+            extras: {"AutoComplete": element.toString()});
+        return null;
+      }
+    })).whereType<AutoComplete>().toList();
   }
 
   Future<Map<int, bool>> getFavorites(String username, int page) async {

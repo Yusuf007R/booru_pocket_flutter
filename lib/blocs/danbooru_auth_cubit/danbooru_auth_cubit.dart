@@ -1,3 +1,4 @@
+import 'package:BooruPocket/utils/sentry_utils.dart';
 import 'package:bloc/bloc.dart';
 import 'package:BooruPocket/models/api/post/post.dart';
 import 'package:BooruPocket/models/api/user/user.dart';
@@ -44,8 +45,9 @@ class DanbooruAuthCubit extends Cubit<DanbooruAuthState> {
         locator<AppRouter>().replace(const UserProfileRoute());
       }
     } catch (error, stackTrace) {
-      Sentry.captureException(Exception("Coundn't authenticated the user"),
-          stackTrace: stackTrace);
+      reportException("Error while authenticating",
+          originalError: error, stackTrace: stackTrace);
+
       emit(
         state.copyWith(
             errorMsg: 'Invalid username or API key',
@@ -96,14 +98,15 @@ class DanbooruAuthCubit extends Cubit<DanbooruAuthState> {
       await repository.addFavorite(post.id);
       return;
     } on DioError catch (error, stackTrace) {
-      Sentry.captureException(
-          Exception("Counldn't change post favorite status"),
+      reportException("Couldn't change favorite status",
+          originalError: error,
           stackTrace: stackTrace,
-          withScope: (scope) => scope
-            ..setExtra('Post id', post.id.toString())
-            ..setExtra("Response Message",
-                error.response?.data['message'] ?? "Unknown")
-            ..setExtra("Type", 'on'));
+          extras: {
+            "post-id": post.id.toString(),
+            "response": error.response?.data['message'] ?? "Unknown",
+            "type": "on"
+          });
+
       copyMap.remove(post.id);
       emit(state.copyWith(favoritePostIds: copyMap));
       return;
@@ -118,14 +121,14 @@ class DanbooruAuthCubit extends Cubit<DanbooruAuthState> {
       await repository.deleteFavorite(post.id);
       return;
     } on DioError catch (error, stackTrace) {
-      Sentry.captureException(
-          Exception("Counldn't change post favorite status"),
+      reportException("Couldn't change favorite status",
+          originalError: error,
           stackTrace: stackTrace,
-          withScope: (scope) => scope
-            ..setExtra('Post id', post.id.toString())
-            ..setExtra("Response Message",
-                error.response?.data['message'] ?? "Unknown")
-            ..setExtra("Type", 'off'));
+          extras: {
+            "post-id": post.id.toString(),
+            "response": error.response?.data['message'] ?? "Unknown",
+            "type": "off"
+          });
       if (error.response?.data['message'] == 'That record was not found.') {
         return;
       }
