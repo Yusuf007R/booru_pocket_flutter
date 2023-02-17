@@ -11,7 +11,9 @@ import 'package:BooruPocket/utils/transform_favorite_response.dart';
 import 'package:dio/dio.dart';
 
 class DanbooruRepository {
-  Dio dio = Dio(BaseOptions(baseUrl: 'https://danbooru.donmai.us/'));
+  Dio dio = Dio(BaseOptions(
+    baseUrl: 'https://danbooru.donmai.us/',
+  ));
 
   DanbooruRepository() {
     dio.transformer = MyTransformer();
@@ -116,6 +118,10 @@ class DanbooruRepository {
       },
     );
     return true;
+  }
+
+  void setUserAgent(String userAgent) {
+    dio.options.headers['user-agent'] = userAgent;
   }
 
   Future<User> setBasicAuthHeader(String username, String password) async {

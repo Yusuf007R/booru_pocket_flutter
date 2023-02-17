@@ -1,3 +1,4 @@
+import 'package:BooruPocket/blocs/danbooru_auth_cubit/danbooru_auth_cubit.dart';
 import 'package:BooruPocket/blocs/post_detail_screen_cubit/post_detail_screen_cubit_cubit.dart';
 import 'package:BooruPocket/models/api/post/post.dart';
 import 'package:chewie/chewie.dart';
@@ -20,16 +21,25 @@ class _VideoPlayerWrapperState extends State<VideoPlayerWrapper> {
 
   @override
   void initState() {
-    final cubit = context.read<PostDetailScreenCubitCubit>();
-    initPlayer(cubit);
+    final postDetailCubit = context.read<PostDetailScreenCubitCubit>();
+    final authCubit = context.read<DanbooruAuthCubit>();
+    initPlayer(postDetailCubit, authCubit);
     super.initState();
   }
 
-  void initPlayer(PostDetailScreenCubitCubit cubit) async {
-    videoPlayerController = VideoPlayerController.network(widget.post.fileUrl);
-    cubit.setLoading(true);
+  void initPlayer(
+    PostDetailScreenCubitCubit postDetailCubit,
+    DanbooruAuthCubit authCubit,
+  ) async {
+    videoPlayerController = VideoPlayerController.network(
+      widget.post.fileUrl,
+      httpHeaders: {
+        'user-agent': authCubit.userAgentHeader(),
+      },
+    );
+    postDetailCubit.setLoading(true);
     await videoPlayerController.initialize();
-    cubit.setLoading(false);
+    postDetailCubit.setLoading(false);
     chewieController = ChewieController(
       videoPlayerController: videoPlayerController,
       autoPlay: true,

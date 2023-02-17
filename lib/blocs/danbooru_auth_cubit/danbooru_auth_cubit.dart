@@ -71,10 +71,12 @@ class DanbooruAuthCubit extends Cubit<DanbooruAuthState> {
     final auth = await storage.read(key: 'auth');
     if (auth == null) {
       emit(state.copyWith(user: const UserNoAuthenticated()));
+      repository.setUserAgent(userAgentHeader());
     } else {
       final parts = auth.split(':');
       final username = parts[0];
       final apiKey = parts[1];
+      repository.setUserAgent(userAgentHeader(username: username));
       setAuth(username, apiKey, isAuthLoad: true);
     }
   }
@@ -148,6 +150,12 @@ class DanbooruAuthCubit extends Cubit<DanbooruAuthState> {
     final isFav = isPostFavorite(post);
     if (isFav) return setFavoriteOff(post);
     setFavoriteOn(post);
+  }
+
+  String userAgentHeader({String? username}) {
+    final user = state.user;
+    if (user is UserAuthenticated) return 'Danbooru user ${user.name}';
+    return 'Danbooru user ${username ?? 'unknown'}';
   }
 
   @override
