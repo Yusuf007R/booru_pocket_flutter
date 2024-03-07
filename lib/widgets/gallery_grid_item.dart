@@ -62,7 +62,6 @@ class _GalleryGridItemState extends State<GalleryGridItem> {
               builder: (context, danbooruAuthState) {
                 final isFavorite =
                     context.read<DanbooruAuthCubit>().isPostFavorite(post);
-
                 return SizedBox(
                   height: height,
                   width: widget.width,
@@ -176,6 +175,11 @@ class _GalleryGridItemState extends State<GalleryGridItem> {
                                 ),
                                 child: ExtendedImage.network(
                                   post.getImage(settingState.gridImageQuality),
+                                  headers: {
+                                    'user-agent': context
+                                        .read<DanbooruAuthCubit>()
+                                        .userAgentHeader(),
+                                  },
                                   fit: BoxFit.cover,
                                   cache: true,
                                   loadStateChanged: (ExtendedImageState state) {

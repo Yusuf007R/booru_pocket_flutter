@@ -6,24 +6,52 @@ import 'package:BooruPocket/models/api/autocomplete/autocomplete.dart';
 import 'package:BooruPocket/models/api/post/post.dart';
 import 'package:BooruPocket/models/api/user/user.dart';
 import 'package:BooruPocket/utils/compute_json_decode.dart';
+import 'package:BooruPocket/utils/sentry_utils.dart';
 import 'package:BooruPocket/utils/transform_favorite_response.dart';
 import 'package:dio/dio.dart';
 
 class DanbooruRepository {
-  Dio dio = Dio(BaseOptions(baseUrl: 'https://danbooru.donmai.us/'));
+  Dio dio = Dio(BaseOptions(
+    baseUrl: 'https://danbooru.donmai.us/',
+  ));
 
   DanbooruRepository() {
     dio.transformer = MyTransformer();
   }
 
-  Future<List<Post>> getPosts(Map<String, dynamic> query) async {
+  Future<List<Post>> getPosts(Map<String, dynamic> query, User user) async {
     Response response = await dio.get(
       '/posts.json',
       queryParameters: query,
     );
-    return List<Post>.from(response.data
-        .where(((element) => element['id'] != null))
-        .map((element) => Post.fromJson(element)));
+
+    return List<Post?>.from(response.data.where(((element) {
+      if (element['id'] == null ||
+          [element['is_deleted'], element['is_banned']].contains(true)) {
+        return false;
+      }
+      // here we filter out posts that are not visible to the user
+      final isGoldOrHigher = user.map(
+          noAuthenticated: (_) => false,
+          authenticating: (_) => false,
+          authenticated: (value) => value.level > 10);
+      if (!isGoldOrHigher &&
+          ['loli', 'shota'].any((tag) => element['tag_string'].contains(tag))) {
+        return false;
+      }
+      return true;
+    })).map((element) {
+      try {
+        return Post.fromJson(element);
+      } catch (error, stackTrace) {
+        reportException("Error while parsing Post",
+            originalError: error,
+            stackTrace: stackTrace,
+            extras: {"Post Id": element['id'].toString()});
+
+        return null;
+      }
+    })).whereType<Post>().toList();
   }
 
   Future<User> getUserProfile() async {
@@ -40,8 +68,17 @@ class DanbooruRepository {
         'limit': 5,
       },
     );
-    return List<AutoComplete>.from(
-        response.data.map((element) => AutoComplete.fromJson(element)));
+    return List<AutoComplete?>.from(response.data.map((element) {
+      try {
+        return AutoComplete.fromJson(element);
+      } catch (error, stackTrace) {
+        reportException("Error while parsing AutoComplete",
+            originalError: error,
+            stackTrace: stackTrace,
+            extras: {"AutoComplete": element.toString()});
+        return null;
+      }
+    })).whereType<AutoComplete>().toList();
   }
 
   Future<Map<int, bool>> getFavorites(String username, int page) async {
@@ -81,6 +118,10 @@ class DanbooruRepository {
       },
     );
     return true;
+  }
+
+  void setUserAgent(String userAgent) {
+    dio.options.headers['user-agent'] = userAgent;
   }
 
   Future<User> setBasicAuthHeader(String username, String password) async {

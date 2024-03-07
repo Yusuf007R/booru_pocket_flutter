@@ -205,7 +205,9 @@ class _$_DatePostScreenNavbarState implements _DatePostScreenNavbarState {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_DatePostScreenNavbarStateToJson(this);
+    return _$$_DatePostScreenNavbarStateToJson(
+      this,
+    );
   }
 }
 
@@ -220,13 +222,13 @@ abstract class _DatePostScreenNavbarState implements DatePostScreenNavbarState {
       _$_DatePostScreenNavbarState.fromJson;
 
   @override
-  QueryParams get queryParams => throw _privateConstructorUsedError;
+  QueryParams get queryParams;
   @override
-  ScaleType get scale => throw _privateConstructorUsedError;
+  ScaleType get scale;
   @override
-  DateTime get date => throw _privateConstructorUsedError;
+  DateTime get date;
   @override
-  DatePostType get type => throw _privateConstructorUsedError;
+  DatePostType get type;
   @override
   @JsonKey(ignore: true)
   _$$_DatePostScreenNavbarStateCopyWith<_$_DatePostScreenNavbarState>

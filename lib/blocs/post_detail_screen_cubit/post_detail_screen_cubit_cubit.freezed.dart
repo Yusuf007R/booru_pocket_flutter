@@ -247,17 +247,17 @@ abstract class _PostDetailScreenCubitState
       final bool showMenu}) = _$_PostDetailScreenCubitState;
 
   @override
-  bool get willPop => throw _privateConstructorUsedError;
+  bool get willPop;
   @override
-  Map<int, bool> get maxQuality => throw _privateConstructorUsedError;
+  Map<int, bool> get maxQuality;
   @override
-  bool get loading => throw _privateConstructorUsedError;
+  bool get loading;
   @override
-  List<String> get selectedTags => throw _privateConstructorUsedError;
+  List<String> get selectedTags;
   @override
-  int get currentPostIndex => throw _privateConstructorUsedError;
+  int get currentPostIndex;
   @override
-  bool get showMenu => throw _privateConstructorUsedError;
+  bool get showMenu;
   @override
   @JsonKey(ignore: true)
   _$$_PostDetailScreenCubitStateCopyWith<_$_PostDetailScreenCubitState>

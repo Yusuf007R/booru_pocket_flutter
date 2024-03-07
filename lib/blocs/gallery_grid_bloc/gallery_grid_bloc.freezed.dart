@@ -202,7 +202,9 @@ class _$_GalleryGridState implements _GalleryGridState {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_GalleryGridStateToJson(this);
+    return _$$_GalleryGridStateToJson(
+      this,
+    );
   }
 }
 
@@ -217,13 +219,13 @@ abstract class _GalleryGridState implements GalleryGridState {
       _$_GalleryGridState.fromJson;
 
   @override
-  List<Post> get posts => throw _privateConstructorUsedError;
+  List<Post> get posts;
   @override
-  GridStatus get gridStatus => throw _privateConstructorUsedError;
+  GridStatus get gridStatus;
   @override
-  String get uniqueKey => throw _privateConstructorUsedError;
+  String get uniqueKey;
   @override
-  List<int> get selectedPosts => throw _privateConstructorUsedError;
+  List<int> get selectedPosts;
   @override
   @JsonKey(ignore: true)
   _$$_GalleryGridStateCopyWith<_$_GalleryGridState> get copyWith =>

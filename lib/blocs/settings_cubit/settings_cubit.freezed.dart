@@ -310,7 +310,9 @@ class _$_SettingsState implements _SettingsState {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SettingsStateToJson(this);
+    return _$$_SettingsStateToJson(
+      this,
+    );
   }
 }
 
@@ -331,25 +333,25 @@ abstract class _SettingsState implements SettingsState {
       _$_SettingsState.fromJson;
 
   @override
-  ThemeMode get themeMode => throw _privateConstructorUsedError;
+  ThemeMode get themeMode;
   @override
-  String? get defaultDownloadPath => throw _privateConstructorUsedError;
+  String? get defaultDownloadPath;
   @override
-  bool get gridRoundedCorners => throw _privateConstructorUsedError;
+  bool get gridRoundedCorners;
   @override
-  PostRating get rating => throw _privateConstructorUsedError;
+  PostRating get rating;
   @override
-  ImageQuality get gridImageQuality => throw _privateConstructorUsedError;
+  ImageQuality get gridImageQuality;
   @override
-  ImageQuality get downloadQuality => throw _privateConstructorUsedError;
+  ImageQuality get downloadQuality;
   @override
-  ImageQuality get detailPageQuality => throw _privateConstructorUsedError;
+  ImageQuality get detailPageQuality;
   @override
-  GridType get gridType => throw _privateConstructorUsedError;
+  GridType get gridType;
   @override
-  int get gridColumns => throw _privateConstructorUsedError;
+  int get gridColumns;
   @override
-  int get pageLimit => throw _privateConstructorUsedError;
+  int get pageLimit;
   @override
   @JsonKey(ignore: true)
   _$$_SettingsStateCopyWith<_$_SettingsState> get copyWith =>

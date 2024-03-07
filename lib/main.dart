@@ -1,6 +1,5 @@
 import 'package:BooruPocket/blocs/danbooru_auth_cubit/danbooru_auth_cubit.dart';
 import 'package:BooruPocket/blocs/settings_cubit/settings_cubit.dart';
-import 'package:BooruPocket/models/api/user/user.dart';
 
 import 'package:BooruPocket/router/router.gr.dart';
 import 'package:BooruPocket/services/context_service.dart';
@@ -12,6 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 void main() async {
   setupLocator();
@@ -26,15 +26,20 @@ void main() async {
   final storage = await HydratedStorage.build(
     storageDirectory: await getTemporaryDirectory(),
   );
-  HydratedBlocOverrides.runZoned(
-    () => runApp(const MyApp()),
-    storage: storage,
+
+  SentryFlutter.init(
+    (options) => options
+      ..dsn =
+          'https://612e67846b274d5284bcf9089cbc0e38@glitchtip.yusuf007r.dev/1',
+    appRunner: () => HydratedBlocOverrides.runZoned(
+      () => runApp(const MyApp()),
+      storage: storage,
+    ),
   );
 }
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
-
   @override
   State<MyApp> createState() => _MyAppState();
 }
@@ -67,28 +72,16 @@ class _MyAppState extends State<MyApp> {
       ],
       child: ListenableProvider(
         create: (context) => ValueNotifier(true),
-        child: Builder(
-          builder: (context) =>
-              BlocListener<DanbooruAuthCubit, DanbooruAuthState>(
-            listenWhen: (previous, current) => previous.user != current.user,
-            listener: (context, state) {
-              final user = state.user;
-              if (state.favoritePostIds.isEmpty && user is UserAuthenticated) {
-                context.read<DanbooruAuthCubit>().getFavorites();
-              }
-            },
-            child: BlocBuilder<SettingsCubit, SettingsState>(
-              builder: (context, settingsState) {
-                return MaterialApp.router(
-                  theme: lightThemeData,
-                  darkTheme: darkThemeData,
-                  themeMode: settingsState.themeMode,
-                  routerDelegate: router.delegate(),
-                  routeInformationParser: router.defaultRouteParser(),
-                );
-              },
-            ),
-          ),
+        child: BlocBuilder<SettingsCubit, SettingsState>(
+          builder: (context, settingsState) {
+            return MaterialApp.router(
+              theme: lightThemeData,
+              darkTheme: darkThemeData,
+              themeMode: settingsState.themeMode,
+              routerDelegate: router.delegate(),
+              routeInformationParser: router.defaultRouteParser(),
+            );
+          },
         ),
       ),
     );

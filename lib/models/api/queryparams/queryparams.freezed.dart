@@ -265,7 +265,9 @@ class _$PostParams implements PostParams {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$PostParamsToJson(this);
+    return _$$PostParamsToJson(
+      this,
+    );
   }
 }
 
@@ -279,12 +281,12 @@ abstract class PostParams implements QueryParams {
       _$PostParams.fromJson;
 
   @override
-  int get page => throw _privateConstructorUsedError;
+  int get page;
   @override
-  String get tags => throw _privateConstructorUsedError;
+  String get tags;
   @override
   @JsonKey(ignore: true)
-  QueryParamsPostType get type => throw _privateConstructorUsedError;
+  QueryParamsPostType get type;
   @override
   @JsonKey(ignore: true)
   _$$PostParamsCopyWith<_$PostParams> get copyWith =>

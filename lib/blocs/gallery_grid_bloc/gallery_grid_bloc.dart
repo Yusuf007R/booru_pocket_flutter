@@ -11,6 +11,7 @@ import 'package:BooruPocket/models/api/post/post.dart';
 import 'package:BooruPocket/repositories/danbooru.dart';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 part 'gallery_grid_event.dart';
 part 'gallery_grid_state.dart';
@@ -41,7 +42,7 @@ class GalleryGridBloc extends Bloc<GalleryGridEvent, GalleryGridState> {
         emit(state.copyWith(posts: const []));
       }
       print('fetching ${queryParamsCubit.state.queryParams.page}');
-      List<Post> posts = await _fetchPosts();
+      final posts = await _fetchPosts();
       final mergedPosts = List<Post>.from(state.posts)
         ..addAll(posts)
         ..toSet()
@@ -58,7 +59,7 @@ class GalleryGridBloc extends Bloc<GalleryGridEvent, GalleryGridState> {
       await verifyUser();
       emit(state.copyWith(posts: const []));
       queryParamsCubit.resetPage();
-      List<Post> posts = await _fetchPosts();
+      final posts = await _fetchPosts();
 
       GalleryGridState stateCopy =
           state.copyWith(posts: posts, gridStatus: GridStatus.idle);
@@ -95,13 +96,17 @@ class GalleryGridBloc extends Bloc<GalleryGridEvent, GalleryGridState> {
     }
   }
 
-  _fetchPosts() async {
+  Future<List<Post>> _fetchPosts() async {
     final queryParams = queryParamsCubit.state.queryParams;
+    final user = danbooruAuthCubit.state.user;
+    if (user is UserAuthenticating) {
+      Sentry.captureMessage(
+          "Trying to fetch posts while user is authenticating",
+          level: SentryLevel.error);
+    }
     return queryParams.map(
       post: (params) async {
-        return await repository.getPosts(
-          queryParamsCubit.queryParams,
-        );
+        return await repository.getPosts(queryParamsCubit.queryParams, user);
       },
     );
   }

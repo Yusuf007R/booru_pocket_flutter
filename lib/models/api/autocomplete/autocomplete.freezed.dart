@@ -166,7 +166,9 @@ class _$_AutoComplete extends _AutoComplete {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AutoCompleteToJson(this);
+    return _$$_AutoCompleteToJson(
+      this,
+    );
   }
 }
 
@@ -181,12 +183,12 @@ abstract class _AutoComplete extends AutoComplete {
       _$_AutoComplete.fromJson;
 
   @override
-  String get label => throw _privateConstructorUsedError;
+  String get label;
   @override
-  String get value => throw _privateConstructorUsedError;
+  String get value;
   @override
   @JsonKey(name: 'post_count')
-  int get postCount => throw _privateConstructorUsedError;
+  int get postCount;
   @override
   @JsonKey(ignore: true)
   _$$_AutoCompleteCopyWith<_$_AutoComplete> get copyWith =>

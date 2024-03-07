@@ -25,7 +25,7 @@ _$_GalleryGridState _$$_GalleryGridStateFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$_GalleryGridStateToJson(_$_GalleryGridState instance) =>
     <String, dynamic>{
       'posts': instance.posts,
-      'gridStatus': _$GridStatusEnumMap[instance.gridStatus],
+      'gridStatus': _$GridStatusEnumMap[instance.gridStatus]!,
       'uniqueKey': instance.uniqueKey,
       'selectedPosts': instance.selectedPosts,
     };

@@ -158,6 +158,11 @@ class _PostDetailScreenState extends State<_PostDetailScreen> {
                                             post.getImage(
                                               settingsState.detailPageQuality,
                                             ),
+                                            headers: {
+                                              'user-agent': context
+                                                  .read<DanbooruAuthCubit>()
+                                                  .userAgentHeader(),
+                                            },
                                             fit: BoxFit.contain,
                                             loadStateChanged: loadStateChanged,
                                           ),
@@ -166,6 +171,11 @@ class _PostDetailScreenState extends State<_PostDetailScreen> {
                                               !state.willPop)
                                             ExtendedImage.network(
                                               post.maxQuality,
+                                              headers: {
+                                                'user-agent': context
+                                                    .read<DanbooruAuthCubit>()
+                                                    .userAgentHeader(),
+                                              },
                                               fit: BoxFit.contain,
                                               loadStateChanged:
                                                   loadStateChanged,

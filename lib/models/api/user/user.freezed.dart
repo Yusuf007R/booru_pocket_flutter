@@ -269,7 +269,9 @@ class _$UserNoAuthenticated extends UserNoAuthenticated {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$UserNoAuthenticatedToJson(this);
+    return _$$UserNoAuthenticatedToJson(
+      this,
+    );
   }
 }
 
@@ -427,7 +429,9 @@ class _$UserAuthenticating extends UserAuthenticating {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$UserAuthenticatingToJson(this);
+    return _$$UserAuthenticatingToJson(
+      this,
+    );
   }
 }
 
@@ -688,7 +692,9 @@ class _$UserAuthenticated extends UserAuthenticated {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$UserAuthenticatedToJson(this);
+    return _$$UserAuthenticatedToJson(
+      this,
+    );
   }
 }
 
@@ -708,15 +714,15 @@ abstract class UserAuthenticated extends User {
   factory UserAuthenticated.fromJson(Map<String, dynamic> json) =
       _$UserAuthenticated.fromJson;
 
-  int get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  int get level => throw _privateConstructorUsedError;
+  int get id;
+  String get name;
+  int get level;
   @JsonKey(name: 'blacklisted_tags', fromJson: _fromJson)
-  List<String> get blackListedTags => throw _privateConstructorUsedError;
+  List<String> get blackListedTags;
   @JsonKey(name: 'favorite_count')
-  int get favoriteCount => throw _privateConstructorUsedError;
+  int get favoriteCount;
   @JsonKey(name: 'tag_query_limit', defaultValue: 2)
-  int get tagLimit => throw _privateConstructorUsedError;
+  int get tagLimit;
   @JsonKey(ignore: true)
   _$$UserAuthenticatedCopyWith<_$UserAuthenticated> get copyWith =>
       throw _privateConstructorUsedError;

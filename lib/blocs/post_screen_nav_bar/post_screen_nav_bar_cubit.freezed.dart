@@ -171,7 +171,9 @@ class _$_PostScreenNavBarState implements _PostScreenNavBarState {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PostScreenNavBarStateToJson(this);
+    return _$$_PostScreenNavBarStateToJson(
+      this,
+    );
   }
 }
 
@@ -184,9 +186,9 @@ abstract class _PostScreenNavBarState implements PostScreenNavBarState {
       _$_PostScreenNavBarState.fromJson;
 
   @override
-  List<AutoComplete> get autoCompletes => throw _privateConstructorUsedError;
+  List<AutoComplete> get autoCompletes;
   @override
-  QueryParams get queryParams => throw _privateConstructorUsedError;
+  QueryParams get queryParams;
   @override
   @JsonKey(ignore: true)
   _$$_PostScreenNavBarStateCopyWith<_$_PostScreenNavBarState> get copyWith =>
