@@ -2,21 +2,27 @@ import 'package:BooruPocket/blocs/danbooru_auth_cubit/danbooru_auth_cubit.dart';
 import 'package:BooruPocket/blocs/gallery_grid_bloc/gallery_grid_bloc.dart';
 import 'package:BooruPocket/blocs/post_detail_screen_cubit/post_detail_screen_cubit_cubit.dart';
 import 'package:BooruPocket/blocs/settings_cubit/settings_cubit.dart';
+import 'package:BooruPocket/router/router.dart';
+import 'package:BooruPocket/services/locator_service.dart';
 import 'package:BooruPocket/widgets/post_detail_menu.dart';
 import 'package:BooruPocket/widgets/video_player.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:interactiveviewer_gallery/interactiveviewer_gallery.dart';
 
+@RoutePage()
 class PostDetailScreen extends StatelessWidget {
-  const PostDetailScreen(
-      {Key? key, required this.galleryGridBloc, required this.initialIndex})
-      : super(key: key);
-
   final int initialIndex;
+
   final GalleryGridBloc galleryGridBloc;
+  const PostDetailScreen({
+    super.key,
+    required this.galleryGridBloc,
+    required this.initialIndex,
+  });
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -24,7 +30,6 @@ class PostDetailScreen extends StatelessWidget {
         BlocProvider(
           create: (context) => PostDetailScreenCubitCubit(
             initialIndex: initialIndex,
-            danbooruAuthCubit: context.read<DanbooruAuthCubit>(),
           ),
         ),
         BlocProvider.value(
@@ -37,7 +42,7 @@ class PostDetailScreen extends StatelessWidget {
 }
 
 class _PostDetailScreen extends StatefulWidget {
-  const _PostDetailScreen({Key? key}) : super(key: key);
+  const _PostDetailScreen();
 
   @override
   State<_PostDetailScreen> createState() => _PostDetailScreenState();
@@ -46,30 +51,6 @@ class _PostDetailScreen extends StatefulWidget {
 class _PostDetailScreenState extends State<_PostDetailScreen> {
   late final PostDetailScreenCubitCubit detailCubit;
   late final int initialIndex;
-
-  @override
-  void initState() {
-    super.initState();
-    detailCubit = context.read<PostDetailScreenCubitCubit>();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
-  Widget? loadStateChanged(ExtendedImageState state) {
-    switch (state.extendedImageLoadState) {
-      case LoadState.loading:
-        detailCubit.setLoading(true);
-        return const SizedBox();
-      case LoadState.completed:
-        detailCubit.setLoading(false);
-        return null;
-      default:
-        return const SizedBox();
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,21 +66,26 @@ class _PostDetailScreenState extends State<_PostDetailScreen> {
                 final postInfo = gridBlocState.posts[state.currentPostIndex];
                 if (!state.willPop) {
                   if (state.showMenu) {
-                    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge,
-                        overlays: SystemUiOverlay.values);
+                    SystemChrome.setEnabledSystemUIMode(
+                      SystemUiMode.edgeToEdge,
+                      overlays: SystemUiOverlay.values,
+                    );
                   } else if (!postInfo.isVideo) {
-                    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-                        overlays: []);
+                    SystemChrome.setEnabledSystemUIMode(
+                      SystemUiMode.manual,
+                      overlays: [],
+                    );
                   }
                 }
-                return WillPopScope(
-                  onWillPop: () async {
+                return PopScope(
+                  canPop: false,
+                  onPopInvoked: (didPop) async {
                     detailCubit.willPop();
                     await SystemChrome.setEnabledSystemUIMode(
                       SystemUiMode.edgeToEdge,
                       overlays: SystemUiOverlay.values,
                     );
-                    return true;
+                    locator<AppRouter>().popForced();
                   },
                   child: Scaffold(
                     backgroundColor: Colors.black,
@@ -139,7 +125,7 @@ class _PostDetailScreenState extends State<_PostDetailScreen> {
                                           if (isFocus)
                                             VideoPlayerWrapper(
                                               post: post,
-                                            )
+                                            ),
                                         ]
                                       : [
                                           if (isFocus &&
@@ -158,6 +144,11 @@ class _PostDetailScreenState extends State<_PostDetailScreen> {
                                             post.getImage(
                                               settingsState.detailPageQuality,
                                             ),
+                                            headers: {
+                                              'user-agent': context
+                                                  .read<DanbooruAuthCubit>()
+                                                  .userAgentHeader(),
+                                            },
                                             fit: BoxFit.contain,
                                             loadStateChanged: loadStateChanged,
                                           ),
@@ -166,6 +157,11 @@ class _PostDetailScreenState extends State<_PostDetailScreen> {
                                               !state.willPop)
                                             ExtendedImage.network(
                                               post.maxQuality,
+                                              headers: {
+                                                'user-agent': context
+                                                    .read<DanbooruAuthCubit>()
+                                                    .userAgentHeader(),
+                                              },
                                               fit: BoxFit.contain,
                                               loadStateChanged:
                                                   loadStateChanged,
@@ -193,5 +189,29 @@ class _PostDetailScreenState extends State<_PostDetailScreen> {
         );
       },
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    detailCubit = context.read<PostDetailScreenCubitCubit>();
+  }
+
+  Widget? loadStateChanged(ExtendedImageState state) {
+    switch (state.extendedImageLoadState) {
+      case LoadState.loading:
+        detailCubit.setLoading(true);
+        return const SizedBox();
+      case LoadState.completed:
+        detailCubit.setLoading(false);
+        return null;
+      default:
+        return const SizedBox();
+    }
   }
 }

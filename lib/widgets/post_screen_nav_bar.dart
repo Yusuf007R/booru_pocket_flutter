@@ -14,7 +14,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class PostScreenNavBar extends StatefulWidget {
-  const PostScreenNavBar({Key? key}) : super(key: key);
+  const PostScreenNavBar({super.key});
 
   @override
   State<PostScreenNavBar> createState() => _PostScreenNavBarState();
@@ -142,7 +142,9 @@ class _PostScreenNavBarState extends State<PostScreenNavBar> {
         children: [
           Expanded(
             child: SearchInput(
-                focusNode: _focusNode, textController: _textController),
+              focusNode: _focusNode,
+              textController: _textController,
+            ),
           ),
           BlocBuilder<QueryParamsCubit, QueryParamsCubitState>(
             builder: (context, state) {
@@ -176,9 +178,11 @@ class _PostScreenNavBarState extends State<PostScreenNavBar> {
 }
 
 class SearchInput extends StatefulWidget {
-  const SearchInput(
-      {Key? key, required this.textController, required this.focusNode})
-      : super(key: key);
+  const SearchInput({
+    super.key,
+    required this.textController,
+    required this.focusNode,
+  });
   final FocusNode focusNode;
   final TextEditingController textController;
 
@@ -209,7 +213,7 @@ class SearchInputState extends State<SearchInput> {
   void _focusListener() {
     if (widget.focusNode.hasFocus) {
       _overlayEntry ??= _createOverlayEntry();
-      Overlay.of(context)?.insert(_overlayEntry!);
+      Overlay.of(context).insert(_overlayEntry!);
     } else {
       if (_overlayEntry != null) {
         if (_overlayEntry!.mounted) _overlayEntry!.remove();
@@ -223,42 +227,43 @@ class SearchInputState extends State<SearchInput> {
     final size = renderBox.size;
     final offset = renderBox.localToGlobal(Offset.zero);
     return OverlayEntry(
-        builder: (context) =>
-            BlocBuilder<PostScreenNavbarCubit, PostScreenNavBarState>(
-              builder: (context, state) {
-                return Positioned(
-                  left: 10,
-                  top: offset.dy + size.height,
-                  width: MediaQuery.of(context).size.width * 0.95,
-                  child: Material(
-                    color: Colors.grey.shade300,
-                    borderRadius: BorderRadius.circular(10),
-                    child: MediaQuery.removePadding(
-                      context: context,
-                      removeTop: true,
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: state.autoCompletes.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          final AutoComplete option =
-                              state.autoCompletes.elementAt(index);
-                          return ListTile(
-                            enableFeedback: true,
-                            onTap: () => onOptionTap(option),
-                            title: Text(
-                              option.value,
-                              style: const TextStyle(
-                                color: Colors.black,
-                              ),
-                            ),
-                          );
-                        },
+      builder: (context) =>
+          BlocBuilder<PostScreenNavbarCubit, PostScreenNavBarState>(
+        builder: (context, state) {
+          return Positioned(
+            left: 10,
+            top: offset.dy + size.height,
+            width: MediaQuery.of(context).size.width * 0.95,
+            child: Material(
+              color: Colors.grey.shade300,
+              borderRadius: BorderRadius.circular(10),
+              child: MediaQuery.removePadding(
+                context: context,
+                removeTop: true,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: state.autoCompletes.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    final AutoComplete option =
+                        state.autoCompletes.elementAt(index);
+                    return ListTile(
+                      enableFeedback: true,
+                      onTap: () => onOptionTap(option),
+                      title: Text(
+                        option.value,
+                        style: const TextStyle(
+                          color: Colors.black,
+                        ),
                       ),
-                    ),
-                  ),
-                );
-              },
-            ));
+                    );
+                  },
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
   }
 
   void onOptionTap(AutoComplete option) {

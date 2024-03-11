@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'date_post_screen_nav_bar_cubit.dart';
 
@@ -12,7 +12,7 @@ part of 'date_post_screen_nav_bar_cubit.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 DatePostScreenNavbarState _$DatePostScreenNavbarStateFromJson(
     Map<String, dynamic> json) {
@@ -36,7 +36,8 @@ mixin _$DatePostScreenNavbarState {
 abstract class $DatePostScreenNavbarStateCopyWith<$Res> {
   factory $DatePostScreenNavbarStateCopyWith(DatePostScreenNavbarState value,
           $Res Function(DatePostScreenNavbarState) then) =
-      _$DatePostScreenNavbarStateCopyWithImpl<$Res>;
+      _$DatePostScreenNavbarStateCopyWithImpl<$Res, DatePostScreenNavbarState>;
+  @useResult
   $Res call(
       {QueryParams queryParams,
       ScaleType scale,
@@ -47,57 +48,62 @@ abstract class $DatePostScreenNavbarStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$DatePostScreenNavbarStateCopyWithImpl<$Res>
+class _$DatePostScreenNavbarStateCopyWithImpl<$Res,
+        $Val extends DatePostScreenNavbarState>
     implements $DatePostScreenNavbarStateCopyWith<$Res> {
   _$DatePostScreenNavbarStateCopyWithImpl(this._value, this._then);
 
-  final DatePostScreenNavbarState _value;
   // ignore: unused_field
-  final $Res Function(DatePostScreenNavbarState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? queryParams = freezed,
-    Object? scale = freezed,
-    Object? date = freezed,
-    Object? type = freezed,
+    Object? queryParams = null,
+    Object? scale = null,
+    Object? date = null,
+    Object? type = null,
   }) {
     return _then(_value.copyWith(
-      queryParams: queryParams == freezed
+      queryParams: null == queryParams
           ? _value.queryParams
           : queryParams // ignore: cast_nullable_to_non_nullable
               as QueryParams,
-      scale: scale == freezed
+      scale: null == scale
           ? _value.scale
           : scale // ignore: cast_nullable_to_non_nullable
               as ScaleType,
-      date: date == freezed
+      date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as DatePostType,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $QueryParamsCopyWith<$Res> get queryParams {
     return $QueryParamsCopyWith<$Res>(_value.queryParams, (value) {
-      return _then(_value.copyWith(queryParams: value));
+      return _then(_value.copyWith(queryParams: value) as $Val);
     });
   }
 }
 
 /// @nodoc
-abstract class _$$_DatePostScreenNavbarStateCopyWith<$Res>
+abstract class _$$DatePostScreenNavbarStateImplCopyWith<$Res>
     implements $DatePostScreenNavbarStateCopyWith<$Res> {
-  factory _$$_DatePostScreenNavbarStateCopyWith(
-          _$_DatePostScreenNavbarState value,
-          $Res Function(_$_DatePostScreenNavbarState) then) =
-      __$$_DatePostScreenNavbarStateCopyWithImpl<$Res>;
+  factory _$$DatePostScreenNavbarStateImplCopyWith(
+          _$DatePostScreenNavbarStateImpl value,
+          $Res Function(_$DatePostScreenNavbarStateImpl) then) =
+      __$$DatePostScreenNavbarStateImplCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {QueryParams queryParams,
       ScaleType scale,
@@ -109,39 +115,37 @@ abstract class _$$_DatePostScreenNavbarStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_DatePostScreenNavbarStateCopyWithImpl<$Res>
-    extends _$DatePostScreenNavbarStateCopyWithImpl<$Res>
-    implements _$$_DatePostScreenNavbarStateCopyWith<$Res> {
-  __$$_DatePostScreenNavbarStateCopyWithImpl(
-      _$_DatePostScreenNavbarState _value,
-      $Res Function(_$_DatePostScreenNavbarState) _then)
-      : super(_value, (v) => _then(v as _$_DatePostScreenNavbarState));
+class __$$DatePostScreenNavbarStateImplCopyWithImpl<$Res>
+    extends _$DatePostScreenNavbarStateCopyWithImpl<$Res,
+        _$DatePostScreenNavbarStateImpl>
+    implements _$$DatePostScreenNavbarStateImplCopyWith<$Res> {
+  __$$DatePostScreenNavbarStateImplCopyWithImpl(
+      _$DatePostScreenNavbarStateImpl _value,
+      $Res Function(_$DatePostScreenNavbarStateImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$_DatePostScreenNavbarState get _value =>
-      super._value as _$_DatePostScreenNavbarState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? queryParams = freezed,
-    Object? scale = freezed,
-    Object? date = freezed,
-    Object? type = freezed,
+    Object? queryParams = null,
+    Object? scale = null,
+    Object? date = null,
+    Object? type = null,
   }) {
-    return _then(_$_DatePostScreenNavbarState(
-      queryParams: queryParams == freezed
+    return _then(_$DatePostScreenNavbarStateImpl(
+      queryParams: null == queryParams
           ? _value.queryParams
           : queryParams // ignore: cast_nullable_to_non_nullable
               as QueryParams,
-      scale: scale == freezed
+      scale: null == scale
           ? _value.scale
           : scale // ignore: cast_nullable_to_non_nullable
               as ScaleType,
-      date: date == freezed
+      date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as DatePostType,
@@ -151,15 +155,15 @@ class __$$_DatePostScreenNavbarStateCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_DatePostScreenNavbarState implements _DatePostScreenNavbarState {
-  _$_DatePostScreenNavbarState(
+class _$DatePostScreenNavbarStateImpl implements _DatePostScreenNavbarState {
+  _$DatePostScreenNavbarStateImpl(
       {required this.queryParams,
       this.scale = ScaleType.day,
       required this.date,
       required this.type});
 
-  factory _$_DatePostScreenNavbarState.fromJson(Map<String, dynamic> json) =>
-      _$$_DatePostScreenNavbarStateFromJson(json);
+  factory _$DatePostScreenNavbarStateImpl.fromJson(Map<String, dynamic> json) =>
+      _$$DatePostScreenNavbarStateImplFromJson(json);
 
   @override
   final QueryParams queryParams;
@@ -177,35 +181,31 @@ class _$_DatePostScreenNavbarState implements _DatePostScreenNavbarState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DatePostScreenNavbarState &&
-            const DeepCollectionEquality()
-                .equals(other.queryParams, queryParams) &&
-            const DeepCollectionEquality().equals(other.scale, scale) &&
-            const DeepCollectionEquality().equals(other.date, date) &&
-            const DeepCollectionEquality().equals(other.type, type));
+            other is _$DatePostScreenNavbarStateImpl &&
+            (identical(other.queryParams, queryParams) ||
+                other.queryParams == queryParams) &&
+            (identical(other.scale, scale) || other.scale == scale) &&
+            (identical(other.date, date) || other.date == date) &&
+            (identical(other.type, type) || other.type == type));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(queryParams),
-      const DeepCollectionEquality().hash(scale),
-      const DeepCollectionEquality().hash(date),
-      const DeepCollectionEquality().hash(type));
+  int get hashCode => Object.hash(runtimeType, queryParams, scale, date, type);
 
   @JsonKey(ignore: true)
   @override
-  _$$_DatePostScreenNavbarStateCopyWith<_$_DatePostScreenNavbarState>
-      get copyWith => __$$_DatePostScreenNavbarStateCopyWithImpl<
-          _$_DatePostScreenNavbarState>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$DatePostScreenNavbarStateImplCopyWith<_$DatePostScreenNavbarStateImpl>
+      get copyWith => __$$DatePostScreenNavbarStateImplCopyWithImpl<
+          _$DatePostScreenNavbarStateImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_DatePostScreenNavbarStateToJson(
+    return _$$DatePostScreenNavbarStateImplToJson(
       this,
     );
   }
@@ -216,10 +216,10 @@ abstract class _DatePostScreenNavbarState implements DatePostScreenNavbarState {
       {required final QueryParams queryParams,
       final ScaleType scale,
       required final DateTime date,
-      required final DatePostType type}) = _$_DatePostScreenNavbarState;
+      required final DatePostType type}) = _$DatePostScreenNavbarStateImpl;
 
   factory _DatePostScreenNavbarState.fromJson(Map<String, dynamic> json) =
-      _$_DatePostScreenNavbarState.fromJson;
+      _$DatePostScreenNavbarStateImpl.fromJson;
 
   @override
   QueryParams get queryParams;
@@ -231,6 +231,6 @@ abstract class _DatePostScreenNavbarState implements DatePostScreenNavbarState {
   DatePostType get type;
   @override
   @JsonKey(ignore: true)
-  _$$_DatePostScreenNavbarStateCopyWith<_$_DatePostScreenNavbarState>
+  _$$DatePostScreenNavbarStateImplCopyWith<_$DatePostScreenNavbarStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

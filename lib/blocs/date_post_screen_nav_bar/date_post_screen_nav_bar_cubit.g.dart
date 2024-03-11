@@ -6,9 +6,9 @@ part of 'date_post_screen_nav_bar_cubit.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_DatePostScreenNavbarState _$$_DatePostScreenNavbarStateFromJson(
+_$DatePostScreenNavbarStateImpl _$$DatePostScreenNavbarStateImplFromJson(
         Map<String, dynamic> json) =>
-    _$_DatePostScreenNavbarState(
+    _$DatePostScreenNavbarStateImpl(
       queryParams:
           QueryParams.fromJson(json['queryParams'] as Map<String, dynamic>),
       scale: $enumDecodeNullable(_$ScaleTypeEnumMap, json['scale']) ??
@@ -17,8 +17,8 @@ _$_DatePostScreenNavbarState _$$_DatePostScreenNavbarStateFromJson(
       type: $enumDecode(_$DatePostTypeEnumMap, json['type']),
     );
 
-Map<String, dynamic> _$$_DatePostScreenNavbarStateToJson(
-        _$_DatePostScreenNavbarState instance) =>
+Map<String, dynamic> _$$DatePostScreenNavbarStateImplToJson(
+        _$DatePostScreenNavbarStateImpl instance) =>
     <String, dynamic>{
       'queryParams': instance.queryParams,
       'scale': _$ScaleTypeEnumMap[instance.scale]!,

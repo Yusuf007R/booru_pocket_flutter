@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'queryparams.dart';
 
@@ -12,7 +12,7 @@ part of 'queryparams.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 QueryParams _$QueryParamsFromJson(Map<String, dynamic> json) {
   return PostParams.fromJson(json);
@@ -33,7 +33,7 @@ mixin _$QueryParams {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(int page, String tags,
+    TResult? Function(int page, String tags,
             @JsonKey(ignore: true) QueryParamsPostType type)?
         post,
   }) =>
@@ -53,7 +53,7 @@ mixin _$QueryParams {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(PostParams value)? post,
+    TResult? Function(PostParams value)? post,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -72,79 +72,83 @@ mixin _$QueryParams {
 abstract class $QueryParamsCopyWith<$Res> {
   factory $QueryParamsCopyWith(
           QueryParams value, $Res Function(QueryParams) then) =
-      _$QueryParamsCopyWithImpl<$Res>;
+      _$QueryParamsCopyWithImpl<$Res, QueryParams>;
+  @useResult
   $Res call(
       {int page, String tags, @JsonKey(ignore: true) QueryParamsPostType type});
 }
 
 /// @nodoc
-class _$QueryParamsCopyWithImpl<$Res> implements $QueryParamsCopyWith<$Res> {
+class _$QueryParamsCopyWithImpl<$Res, $Val extends QueryParams>
+    implements $QueryParamsCopyWith<$Res> {
   _$QueryParamsCopyWithImpl(this._value, this._then);
 
-  final QueryParams _value;
   // ignore: unused_field
-  final $Res Function(QueryParams) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? page = freezed,
-    Object? tags = freezed,
-    Object? type = freezed,
+    Object? page = null,
+    Object? tags = null,
+    Object? type = null,
   }) {
     return _then(_value.copyWith(
-      page: page == freezed
+      page: null == page
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
               as int,
-      tags: tags == freezed
+      tags: null == tags
           ? _value.tags
           : tags // ignore: cast_nullable_to_non_nullable
               as String,
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as QueryParamsPostType,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$PostParamsCopyWith<$Res>
+abstract class _$$PostParamsImplCopyWith<$Res>
     implements $QueryParamsCopyWith<$Res> {
-  factory _$$PostParamsCopyWith(
-          _$PostParams value, $Res Function(_$PostParams) then) =
-      __$$PostParamsCopyWithImpl<$Res>;
+  factory _$$PostParamsImplCopyWith(
+          _$PostParamsImpl value, $Res Function(_$PostParamsImpl) then) =
+      __$$PostParamsImplCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {int page, String tags, @JsonKey(ignore: true) QueryParamsPostType type});
 }
 
 /// @nodoc
-class __$$PostParamsCopyWithImpl<$Res> extends _$QueryParamsCopyWithImpl<$Res>
-    implements _$$PostParamsCopyWith<$Res> {
-  __$$PostParamsCopyWithImpl(
-      _$PostParams _value, $Res Function(_$PostParams) _then)
-      : super(_value, (v) => _then(v as _$PostParams));
+class __$$PostParamsImplCopyWithImpl<$Res>
+    extends _$QueryParamsCopyWithImpl<$Res, _$PostParamsImpl>
+    implements _$$PostParamsImplCopyWith<$Res> {
+  __$$PostParamsImplCopyWithImpl(
+      _$PostParamsImpl _value, $Res Function(_$PostParamsImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$PostParams get _value => super._value as _$PostParams;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? page = freezed,
-    Object? tags = freezed,
-    Object? type = freezed,
+    Object? page = null,
+    Object? tags = null,
+    Object? type = null,
   }) {
-    return _then(_$PostParams(
-      page: page == freezed
+    return _then(_$PostParamsImpl(
+      page: null == page
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
               as int,
-      tags: tags == freezed
+      tags: null == tags
           ? _value.tags
           : tags // ignore: cast_nullable_to_non_nullable
               as String,
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as QueryParamsPostType,
@@ -154,14 +158,14 @@ class __$$PostParamsCopyWithImpl<$Res> extends _$QueryParamsCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$PostParams implements PostParams {
-  const _$PostParams(
+class _$PostParamsImpl implements PostParams {
+  const _$PostParamsImpl(
       {this.page = 1,
       this.tags = '',
       @JsonKey(ignore: true) this.type = QueryParamsPostType.post});
 
-  factory _$PostParams.fromJson(Map<String, dynamic> json) =>
-      _$$PostParamsFromJson(json);
+  factory _$PostParamsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PostParamsImplFromJson(json);
 
   @override
   @JsonKey()
@@ -179,27 +183,24 @@ class _$PostParams implements PostParams {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PostParams &&
-            const DeepCollectionEquality().equals(other.page, page) &&
-            const DeepCollectionEquality().equals(other.tags, tags) &&
-            const DeepCollectionEquality().equals(other.type, type));
+            other is _$PostParamsImpl &&
+            (identical(other.page, page) || other.page == page) &&
+            (identical(other.tags, tags) || other.tags == tags) &&
+            (identical(other.type, type) || other.type == type));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(page),
-      const DeepCollectionEquality().hash(tags),
-      const DeepCollectionEquality().hash(type));
+  int get hashCode => Object.hash(runtimeType, page, tags, type);
 
   @JsonKey(ignore: true)
   @override
-  _$$PostParamsCopyWith<_$PostParams> get copyWith =>
-      __$$PostParamsCopyWithImpl<_$PostParams>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$PostParamsImplCopyWith<_$PostParamsImpl> get copyWith =>
+      __$$PostParamsImplCopyWithImpl<_$PostParamsImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -214,7 +215,7 @@ class _$PostParams implements PostParams {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(int page, String tags,
+    TResult? Function(int page, String tags,
             @JsonKey(ignore: true) QueryParamsPostType type)?
         post,
   }) {
@@ -246,7 +247,7 @@ class _$PostParams implements PostParams {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(PostParams value)? post,
+    TResult? Function(PostParams value)? post,
   }) {
     return post?.call(this);
   }
@@ -265,7 +266,7 @@ class _$PostParams implements PostParams {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$PostParamsToJson(
+    return _$$PostParamsImplToJson(
       this,
     );
   }
@@ -273,12 +274,13 @@ class _$PostParams implements PostParams {
 
 abstract class PostParams implements QueryParams {
   const factory PostParams(
-      {final int page,
-      final String tags,
-      @JsonKey(ignore: true) final QueryParamsPostType type}) = _$PostParams;
+          {final int page,
+          final String tags,
+          @JsonKey(ignore: true) final QueryParamsPostType type}) =
+      _$PostParamsImpl;
 
   factory PostParams.fromJson(Map<String, dynamic> json) =
-      _$PostParams.fromJson;
+      _$PostParamsImpl.fromJson;
 
   @override
   int get page;
@@ -289,6 +291,6 @@ abstract class PostParams implements QueryParams {
   QueryParamsPostType get type;
   @override
   @JsonKey(ignore: true)
-  _$$PostParamsCopyWith<_$PostParams> get copyWith =>
+  _$$PostParamsImplCopyWith<_$PostParamsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

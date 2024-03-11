@@ -1,16 +1,9 @@
-import 'package:another_flushbar/flushbar.dart';
-import 'package:BooruPocket/services/locator_service.dart';
 import 'package:BooruPocket/constants/constants.dart';
+import 'package:BooruPocket/services/locator_service.dart';
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 
 import 'context_service.dart';
-
-enum SnackbarType {
-  info,
-  success,
-  download,
-  error,
-}
 
 class AlertService {
   BuildContext context = locator<ContextService>().context;
@@ -39,7 +32,7 @@ class AlertService {
           spreadRadius: 10,
           blurRadius: 15,
           offset: const Offset(0, 5),
-        )
+        ),
       ],
       messageText: Text(
         text,
@@ -68,4 +61,11 @@ class AlertService {
         return null;
     }
   }
+}
+
+enum SnackbarType {
+  info,
+  success,
+  download,
+  error,
 }

@@ -2,37 +2,43 @@ import 'dart:async';
 
 import 'package:BooruPocket/blocs/gallery_grid_bloc/gallery_grid_bloc.dart';
 import 'package:BooruPocket/blocs/settings_cubit/settings_cubit.dart';
-
-import 'package:BooruPocket/widgets/gallery_grid.dart';
 import 'package:BooruPocket/widgets/date_post_screen_nav_bar.dart';
+import 'package:BooruPocket/widgets/gallery_grid.dart';
 import 'package:BooruPocket/widgets/post_screen_fab.dart';
 import 'package:BooruPocket/widgets/post_screen_nav_bar.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-enum PostScreenType { user, gallery, favorites, popular, curated }
+class NoImplicitScrollPhysics extends AlwaysScrollableScrollPhysics {
+  const NoImplicitScrollPhysics({required ScrollPhysics parent})
+      : super(parent: parent);
 
+  @override
+  bool get allowImplicitScrolling => false;
+
+  @override
+  NoImplicitScrollPhysics applyTo(ScrollPhysics? ancestor) {
+    return NoImplicitScrollPhysics(parent: buildParent(ancestor)!);
+  }
+}
+
+@RoutePage()
 class PostScreen extends StatefulWidget {
   const PostScreen({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<PostScreen> createState() => _PostScreenState();
 }
 
+enum PostScreenType { user, gallery, favorites, popular, curated }
+
 class _PostScreenState extends State<PostScreen> {
   final ScrollController _scrollController = ScrollController();
   late ValueNotifier<bool> visible;
-
-  @override
-  void initState() {
-    super.initState();
-    _scrollController.addListener(onScroll);
-    context.read<GalleryGridBloc>().add(PostsFetched());
-    visible = context.read<ValueNotifier<bool>>();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,6 +91,30 @@ class _PostScreenState extends State<PostScreen> {
     );
   }
 
+  @override
+  void dispose() {
+    _scrollController
+      ..removeListener(onScroll)
+      ..dispose();
+
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(onScroll);
+    context.read<GalleryGridBloc>().add(PostsFetched());
+    visible = context.read<ValueNotifier<bool>>();
+  }
+
+  Future<GalleryGridState> onRefresh() {
+    GalleryGridBloc bloc = context.read<GalleryGridBloc>();
+    bloc.add(PostsRefreshed());
+    return bloc.stream
+        .firstWhere((element) => element.gridStatus != GridStatus.refreshing);
+  }
+
   void onScroll() async {
     if (!_scrollController.hasClients) return;
 
@@ -105,34 +135,5 @@ class _PostScreenState extends State<PostScreen> {
     if (!isScreenFilled || (isNotAtStart && isAtOrNearEdge)) {
       context.read<GalleryGridBloc>().add(PostsFetched());
     }
-  }
-
-  Future<GalleryGridState> onRefresh() {
-    GalleryGridBloc bloc = context.read<GalleryGridBloc>();
-    bloc.add(PostsRefreshed());
-    return bloc.stream
-        .firstWhere((element) => element.gridStatus != GridStatus.refreshing);
-  }
-
-  @override
-  void dispose() {
-    _scrollController
-      ..removeListener(onScroll)
-      ..dispose();
-
-    super.dispose();
-  }
-}
-
-class NoImplicitScrollPhysics extends AlwaysScrollableScrollPhysics {
-  const NoImplicitScrollPhysics({required ScrollPhysics parent})
-      : super(parent: parent);
-
-  @override
-  bool get allowImplicitScrolling => false;
-
-  @override
-  NoImplicitScrollPhysics applyTo(ScrollPhysics? ancestor) {
-    return NoImplicitScrollPhysics(parent: buildParent(ancestor)!);
   }
 }

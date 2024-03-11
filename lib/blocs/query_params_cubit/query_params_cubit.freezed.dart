@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'query_params_cubit.dart';
 
@@ -12,7 +12,7 @@ part of 'query_params_cubit.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$QueryParamsCubitState {
@@ -28,53 +28,60 @@ mixin _$QueryParamsCubitState {
 abstract class $QueryParamsCubitStateCopyWith<$Res> {
   factory $QueryParamsCubitStateCopyWith(QueryParamsCubitState value,
           $Res Function(QueryParamsCubitState) then) =
-      _$QueryParamsCubitStateCopyWithImpl<$Res>;
+      _$QueryParamsCubitStateCopyWithImpl<$Res, QueryParamsCubitState>;
+  @useResult
   $Res call({QueryParams queryParams, String strictTag});
 
   $QueryParamsCopyWith<$Res> get queryParams;
 }
 
 /// @nodoc
-class _$QueryParamsCubitStateCopyWithImpl<$Res>
+class _$QueryParamsCubitStateCopyWithImpl<$Res,
+        $Val extends QueryParamsCubitState>
     implements $QueryParamsCubitStateCopyWith<$Res> {
   _$QueryParamsCubitStateCopyWithImpl(this._value, this._then);
 
-  final QueryParamsCubitState _value;
   // ignore: unused_field
-  final $Res Function(QueryParamsCubitState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? queryParams = freezed,
-    Object? strictTag = freezed,
+    Object? queryParams = null,
+    Object? strictTag = null,
   }) {
     return _then(_value.copyWith(
-      queryParams: queryParams == freezed
+      queryParams: null == queryParams
           ? _value.queryParams
           : queryParams // ignore: cast_nullable_to_non_nullable
               as QueryParams,
-      strictTag: strictTag == freezed
+      strictTag: null == strictTag
           ? _value.strictTag
           : strictTag // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $QueryParamsCopyWith<$Res> get queryParams {
     return $QueryParamsCopyWith<$Res>(_value.queryParams, (value) {
-      return _then(_value.copyWith(queryParams: value));
+      return _then(_value.copyWith(queryParams: value) as $Val);
     });
   }
 }
 
 /// @nodoc
-abstract class _$$_QueryParamsCubitStateCopyWith<$Res>
+abstract class _$$QueryParamsCubitStateImplCopyWith<$Res>
     implements $QueryParamsCubitStateCopyWith<$Res> {
-  factory _$$_QueryParamsCubitStateCopyWith(_$_QueryParamsCubitState value,
-          $Res Function(_$_QueryParamsCubitState) then) =
-      __$$_QueryParamsCubitStateCopyWithImpl<$Res>;
+  factory _$$QueryParamsCubitStateImplCopyWith(
+          _$QueryParamsCubitStateImpl value,
+          $Res Function(_$QueryParamsCubitStateImpl) then) =
+      __$$QueryParamsCubitStateImplCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({QueryParams queryParams, String strictTag});
 
   @override
@@ -82,28 +89,26 @@ abstract class _$$_QueryParamsCubitStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_QueryParamsCubitStateCopyWithImpl<$Res>
-    extends _$QueryParamsCubitStateCopyWithImpl<$Res>
-    implements _$$_QueryParamsCubitStateCopyWith<$Res> {
-  __$$_QueryParamsCubitStateCopyWithImpl(_$_QueryParamsCubitState _value,
-      $Res Function(_$_QueryParamsCubitState) _then)
-      : super(_value, (v) => _then(v as _$_QueryParamsCubitState));
+class __$$QueryParamsCubitStateImplCopyWithImpl<$Res>
+    extends _$QueryParamsCubitStateCopyWithImpl<$Res,
+        _$QueryParamsCubitStateImpl>
+    implements _$$QueryParamsCubitStateImplCopyWith<$Res> {
+  __$$QueryParamsCubitStateImplCopyWithImpl(_$QueryParamsCubitStateImpl _value,
+      $Res Function(_$QueryParamsCubitStateImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$_QueryParamsCubitState get _value =>
-      super._value as _$_QueryParamsCubitState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? queryParams = freezed,
-    Object? strictTag = freezed,
+    Object? queryParams = null,
+    Object? strictTag = null,
   }) {
-    return _then(_$_QueryParamsCubitState(
-      queryParams: queryParams == freezed
+    return _then(_$QueryParamsCubitStateImpl(
+      queryParams: null == queryParams
           ? _value.queryParams
           : queryParams // ignore: cast_nullable_to_non_nullable
               as QueryParams,
-      strictTag: strictTag == freezed
+      strictTag: null == strictTag
           ? _value.strictTag
           : strictTag // ignore: cast_nullable_to_non_nullable
               as String,
@@ -113,8 +118,8 @@ class __$$_QueryParamsCubitStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_QueryParamsCubitState implements _QueryParamsCubitState {
-  const _$_QueryParamsCubitState(
+class _$QueryParamsCubitStateImpl implements _QueryParamsCubitState {
+  const _$QueryParamsCubitStateImpl(
       {required this.queryParams, this.strictTag = ""});
 
   @override
@@ -129,32 +134,31 @@ class _$_QueryParamsCubitState implements _QueryParamsCubitState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_QueryParamsCubitState &&
-            const DeepCollectionEquality()
-                .equals(other.queryParams, queryParams) &&
-            const DeepCollectionEquality().equals(other.strictTag, strictTag));
+            other is _$QueryParamsCubitStateImpl &&
+            (identical(other.queryParams, queryParams) ||
+                other.queryParams == queryParams) &&
+            (identical(other.strictTag, strictTag) ||
+                other.strictTag == strictTag));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(queryParams),
-      const DeepCollectionEquality().hash(strictTag));
+  int get hashCode => Object.hash(runtimeType, queryParams, strictTag);
 
   @JsonKey(ignore: true)
   @override
-  _$$_QueryParamsCubitStateCopyWith<_$_QueryParamsCubitState> get copyWith =>
-      __$$_QueryParamsCubitStateCopyWithImpl<_$_QueryParamsCubitState>(
-          this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$QueryParamsCubitStateImplCopyWith<_$QueryParamsCubitStateImpl>
+      get copyWith => __$$QueryParamsCubitStateImplCopyWithImpl<
+          _$QueryParamsCubitStateImpl>(this, _$identity);
 }
 
 abstract class _QueryParamsCubitState implements QueryParamsCubitState {
   const factory _QueryParamsCubitState(
       {required final QueryParams queryParams,
-      final String strictTag}) = _$_QueryParamsCubitState;
+      final String strictTag}) = _$QueryParamsCubitStateImpl;
 
   @override
   QueryParams get queryParams;
@@ -162,6 +166,6 @@ abstract class _QueryParamsCubitState implements QueryParamsCubitState {
   String get strictTag;
   @override
   @JsonKey(ignore: true)
-  _$$_QueryParamsCubitStateCopyWith<_$_QueryParamsCubitState> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$QueryParamsCubitStateImplCopyWith<_$QueryParamsCubitStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ Shimmer getShimmer(double height, double width) {
         baseColor,
         highlightColor,
         baseColor,
-        baseColor
+        baseColor,
       ],
       stops: const <double>[
         0.0,

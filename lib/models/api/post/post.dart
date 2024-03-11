@@ -15,13 +15,13 @@ class Post with _$Post {
   factory Post({
     required int id,
     @JsonKey(name: 'tag_string_general', fromJson: _tagsArrayFromJson)
-        required List<String> tags,
+    required List<String> tags,
     @JsonKey(name: 'tag_string_artist', fromJson: _tagsArrayFromJson)
-        required List<String> artistTag,
+    required List<String> artistTag,
     @JsonKey(name: 'tag_string_character', fromJson: _tagsArrayFromJson)
-        required List<String> characterTag,
+    required List<String> characterTag,
     @JsonKey(name: 'tag_string_copyright', fromJson: _tagsArrayFromJson)
-        required List<String> seriesTag,
+    required List<String> seriesTag,
     @JsonKey(fromJson: _ratingFromJson) required PostRating rating,
     required String source,
     @JsonKey(name: 'preview_file_url') required String previewFileUrl,
@@ -37,7 +37,7 @@ class Post with _$Post {
     @JsonKey(name: 'created_at') required DateTime createdAt,
     @JsonKey(name: 'updated_at') required DateTime updatedAt,
     @JsonKey(name: 'tag_string_meta', fromJson: _tagsArrayFromJson)
-        required List<String> meta,
+    required List<String> meta,
     String? video,
   }) = _Post;
 

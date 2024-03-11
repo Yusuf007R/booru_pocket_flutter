@@ -6,8 +6,9 @@ part of 'gallery_grid_bloc.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_GalleryGridState _$$_GalleryGridStateFromJson(Map<String, dynamic> json) =>
-    _$_GalleryGridState(
+_$GalleryGridStateImpl _$$GalleryGridStateImplFromJson(
+        Map<String, dynamic> json) =>
+    _$GalleryGridStateImpl(
       posts: (json['posts'] as List<dynamic>?)
               ?.map((e) => Post.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -22,7 +23,8 @@ _$_GalleryGridState _$$_GalleryGridStateFromJson(Map<String, dynamic> json) =>
           const [],
     );
 
-Map<String, dynamic> _$$_GalleryGridStateToJson(_$_GalleryGridState instance) =>
+Map<String, dynamic> _$$GalleryGridStateImplToJson(
+        _$GalleryGridStateImpl instance) =>
     <String, dynamic>{
       'posts': instance.posts,
       'gridStatus': _$GridStatusEnumMap[instance.gridStatus]!,

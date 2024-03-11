@@ -14,13 +14,17 @@ PopupMenuItem<T> popUpItem<T>({
     height: 45,
     value: value ?? text?.toLowerCase() as T,
     padding: padding ?? const EdgeInsets.symmetric(horizontal: 15),
-    child: Builder(builder: (context) {
-      return Row(children: [
-        if (icon != null)
-          Icon(icon, color: iconColor ?? Theme.of(context).iconTheme.color),
-        SizedBox(width: iconSeparation ?? 8),
-        Text(text ?? ''),
-      ]);
-    }),
+    child: Builder(
+      builder: (context) {
+        return Row(
+          children: [
+            if (icon != null)
+              Icon(icon, color: iconColor ?? Theme.of(context).iconTheme.color),
+            SizedBox(width: iconSeparation ?? 8),
+            Text(text ?? ''),
+          ],
+        );
+      },
+    ),
   );
 }

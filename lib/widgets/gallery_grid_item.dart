@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:BooruPocket/blocs/danbooru_auth_cubit/danbooru_auth_cubit.dart';
 import 'package:BooruPocket/blocs/gallery_grid_bloc/gallery_grid_bloc.dart';
 import 'package:BooruPocket/blocs/settings_cubit/settings_cubit.dart';
@@ -7,24 +6,23 @@ import 'package:BooruPocket/router/router.gr.dart';
 import 'package:BooruPocket/services/locator_service.dart';
 import 'package:BooruPocket/widgets/pop_up_item.dart';
 import 'package:BooruPocket/widgets/shimmer.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import 'dart:ui' as ui;
-
 import '../services/image_downloader_service.dart';
 
 class GalleryGridItem extends StatefulWidget {
+  final double width;
+  final int index;
+
   const GalleryGridItem({
-    Key? key,
+    super.key,
     required this.width,
     required this.index,
-  }) : super(key: key);
-  final double width;
-
-  final int index;
+  });
 
   @override
   State<GalleryGridItem> createState() => _GalleryGridItemState();
@@ -62,7 +60,6 @@ class _GalleryGridItemState extends State<GalleryGridItem> {
               builder: (context, danbooruAuthState) {
                 final isFavorite =
                     context.read<DanbooruAuthCubit>().isPostFavorite(post);
-
                 return SizedBox(
                   height: height,
                   width: widget.width,
@@ -73,54 +70,59 @@ class _GalleryGridItemState extends State<GalleryGridItem> {
 
                       final itemsList = [
                         popUpItem(
-                            text: 'Favorite',
-                            icon: MdiIcons.heart,
-                            iconColor: isFavorite ? Colors.pinkAccent : null,
-                            onTap: () {
-                              context
-                                  .read<DanbooruAuthCubit>()
-                                  .toggleFavoritePost(post);
-                            }),
+                          text: 'Favorite',
+                          icon: MdiIcons.heart,
+                          iconColor: isFavorite ? Colors.pinkAccent : null,
+                          onTap: () {
+                            context
+                                .read<DanbooruAuthCubit>()
+                                .toggleFavoritePost(post);
+                          },
+                        ),
                         popUpItem(
-                            text: 'Select',
-                            icon: isSelected
-                                ? Icons.check_box
-                                : Icons.check_box_outlined,
-                            onTap: () {
-                              bloc.add(PostSelectedToggled(postId: post.id));
-                            }),
+                          text: 'Select',
+                          icon: isSelected
+                              ? Icons.check_box
+                              : Icons.check_box_outlined,
+                          onTap: () {
+                            bloc.add(PostSelectedToggled(postId: post.id));
+                          },
+                        ),
                         popUpItem(
-                            text: 'Share',
-                            icon: Icons.share_outlined,
-                            onTap: () {
-                              locator<ImageDownloaderService>()
-                                  .downloadShareImage([post]);
-                            }),
+                          text: 'Share',
+                          icon: Icons.share_outlined,
+                          onTap: () {
+                            locator<ImageDownloaderService>()
+                                .downloadShareImage([post]);
+                          },
+                        ),
                         popUpItem(
-                            text: 'Download',
-                            icon: Icons.save_alt_outlined,
-                            onTap: () {
-                              locator<ImageDownloaderService>()
-                                  .downloadImages([post]);
-                            }),
+                          text: 'Download',
+                          icon: Icons.save_alt_outlined,
+                          onTap: () {
+                            locator<ImageDownloaderService>()
+                                .downloadImages([post]);
+                          },
+                        ),
                       ];
 
                       final menuHeight = itemsList.fold(
-                          0.0,
-                          (previousValue, element) =>
-                              (previousValue as double) + element.height);
+                        0.0,
+                        (previousValue, element) =>
+                            (previousValue) + element.height,
+                      );
 
                       final height = MediaQuery.of(context).size.height;
-                      final bottomPadding =
-                          MediaQueryData.fromWindow(ui.window).padding.bottom;
+                      final bottomPadding = View.of(context).padding.bottom;
 
                       final RenderBox renderBox =
                           context.findRenderObject() as RenderBox;
 
-                      final biggerBttomPadding = bottomPadding + menuHeight;
-                      final top = (height - _position.dy) >= biggerBttomPadding
+                      final biggerBottomPadding = bottomPadding + menuHeight;
+                      final top = (height - _position.dy) >= biggerBottomPadding
                           ? _position.dy
-                          : _position.dy - (biggerBttomPadding - bottomPadding);
+                          : _position.dy -
+                              (biggerBottomPadding - bottomPadding);
 
                       final left = _position.dx;
                       final right = _position.dx + renderBox.size.width;
@@ -176,6 +178,11 @@ class _GalleryGridItemState extends State<GalleryGridItem> {
                                 ),
                                 child: ExtendedImage.network(
                                   post.getImage(settingState.gridImageQuality),
+                                  headers: {
+                                    'user-agent': context
+                                        .read<DanbooruAuthCubit>()
+                                        .userAgentHeader(),
+                                  },
                                   fit: BoxFit.cover,
                                   cache: true,
                                   loadStateChanged: (ExtendedImageState state) {
@@ -205,7 +212,7 @@ class _GalleryGridItemState extends State<GalleryGridItem> {
                                     child: Row(
                                       children: [
                                         if (isFavorite)
-                                          const Icon(
+                                          Icon(
                                             MdiIcons.heart,
                                             size: 16,
                                             color: Colors.pinkAccent,
@@ -227,7 +234,7 @@ class _GalleryGridItemState extends State<GalleryGridItem> {
                                     ),
                                   ),
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         ),

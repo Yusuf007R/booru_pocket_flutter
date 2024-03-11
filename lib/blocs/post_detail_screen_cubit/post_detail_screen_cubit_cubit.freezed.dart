@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'post_detail_screen_cubit_cubit.dart';
 
@@ -12,7 +12,7 @@ part of 'post_detail_screen_cubit_cubit.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$PostDetailScreenCubitState {
@@ -32,7 +32,9 @@ mixin _$PostDetailScreenCubitState {
 abstract class $PostDetailScreenCubitStateCopyWith<$Res> {
   factory $PostDetailScreenCubitStateCopyWith(PostDetailScreenCubitState value,
           $Res Function(PostDetailScreenCubitState) then) =
-      _$PostDetailScreenCubitStateCopyWithImpl<$Res>;
+      _$PostDetailScreenCubitStateCopyWithImpl<$Res,
+          PostDetailScreenCubitState>;
+  @useResult
   $Res call(
       {bool willPop,
       Map<int, bool> maxQuality,
@@ -43,60 +45,64 @@ abstract class $PostDetailScreenCubitStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$PostDetailScreenCubitStateCopyWithImpl<$Res>
+class _$PostDetailScreenCubitStateCopyWithImpl<$Res,
+        $Val extends PostDetailScreenCubitState>
     implements $PostDetailScreenCubitStateCopyWith<$Res> {
   _$PostDetailScreenCubitStateCopyWithImpl(this._value, this._then);
 
-  final PostDetailScreenCubitState _value;
   // ignore: unused_field
-  final $Res Function(PostDetailScreenCubitState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? willPop = freezed,
-    Object? maxQuality = freezed,
-    Object? loading = freezed,
-    Object? selectedTags = freezed,
-    Object? currentPostIndex = freezed,
-    Object? showMenu = freezed,
+    Object? willPop = null,
+    Object? maxQuality = null,
+    Object? loading = null,
+    Object? selectedTags = null,
+    Object? currentPostIndex = null,
+    Object? showMenu = null,
   }) {
     return _then(_value.copyWith(
-      willPop: willPop == freezed
+      willPop: null == willPop
           ? _value.willPop
           : willPop // ignore: cast_nullable_to_non_nullable
               as bool,
-      maxQuality: maxQuality == freezed
+      maxQuality: null == maxQuality
           ? _value.maxQuality
           : maxQuality // ignore: cast_nullable_to_non_nullable
               as Map<int, bool>,
-      loading: loading == freezed
+      loading: null == loading
           ? _value.loading
           : loading // ignore: cast_nullable_to_non_nullable
               as bool,
-      selectedTags: selectedTags == freezed
+      selectedTags: null == selectedTags
           ? _value.selectedTags
           : selectedTags // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      currentPostIndex: currentPostIndex == freezed
+      currentPostIndex: null == currentPostIndex
           ? _value.currentPostIndex
           : currentPostIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      showMenu: showMenu == freezed
+      showMenu: null == showMenu
           ? _value.showMenu
           : showMenu // ignore: cast_nullable_to_non_nullable
               as bool,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_PostDetailScreenCubitStateCopyWith<$Res>
+abstract class _$$PostDetailScreenCubitStateImplCopyWith<$Res>
     implements $PostDetailScreenCubitStateCopyWith<$Res> {
-  factory _$$_PostDetailScreenCubitStateCopyWith(
-          _$_PostDetailScreenCubitState value,
-          $Res Function(_$_PostDetailScreenCubitState) then) =
-      __$$_PostDetailScreenCubitStateCopyWithImpl<$Res>;
+  factory _$$PostDetailScreenCubitStateImplCopyWith(
+          _$PostDetailScreenCubitStateImpl value,
+          $Res Function(_$PostDetailScreenCubitStateImpl) then) =
+      __$$PostDetailScreenCubitStateImplCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {bool willPop,
       Map<int, bool> maxQuality,
@@ -107,49 +113,47 @@ abstract class _$$_PostDetailScreenCubitStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PostDetailScreenCubitStateCopyWithImpl<$Res>
-    extends _$PostDetailScreenCubitStateCopyWithImpl<$Res>
-    implements _$$_PostDetailScreenCubitStateCopyWith<$Res> {
-  __$$_PostDetailScreenCubitStateCopyWithImpl(
-      _$_PostDetailScreenCubitState _value,
-      $Res Function(_$_PostDetailScreenCubitState) _then)
-      : super(_value, (v) => _then(v as _$_PostDetailScreenCubitState));
+class __$$PostDetailScreenCubitStateImplCopyWithImpl<$Res>
+    extends _$PostDetailScreenCubitStateCopyWithImpl<$Res,
+        _$PostDetailScreenCubitStateImpl>
+    implements _$$PostDetailScreenCubitStateImplCopyWith<$Res> {
+  __$$PostDetailScreenCubitStateImplCopyWithImpl(
+      _$PostDetailScreenCubitStateImpl _value,
+      $Res Function(_$PostDetailScreenCubitStateImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$_PostDetailScreenCubitState get _value =>
-      super._value as _$_PostDetailScreenCubitState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? willPop = freezed,
-    Object? maxQuality = freezed,
-    Object? loading = freezed,
-    Object? selectedTags = freezed,
-    Object? currentPostIndex = freezed,
-    Object? showMenu = freezed,
+    Object? willPop = null,
+    Object? maxQuality = null,
+    Object? loading = null,
+    Object? selectedTags = null,
+    Object? currentPostIndex = null,
+    Object? showMenu = null,
   }) {
-    return _then(_$_PostDetailScreenCubitState(
-      willPop: willPop == freezed
+    return _then(_$PostDetailScreenCubitStateImpl(
+      willPop: null == willPop
           ? _value.willPop
           : willPop // ignore: cast_nullable_to_non_nullable
               as bool,
-      maxQuality: maxQuality == freezed
+      maxQuality: null == maxQuality
           ? _value._maxQuality
           : maxQuality // ignore: cast_nullable_to_non_nullable
               as Map<int, bool>,
-      loading: loading == freezed
+      loading: null == loading
           ? _value.loading
           : loading // ignore: cast_nullable_to_non_nullable
               as bool,
-      selectedTags: selectedTags == freezed
+      selectedTags: null == selectedTags
           ? _value._selectedTags
           : selectedTags // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      currentPostIndex: currentPostIndex == freezed
+      currentPostIndex: null == currentPostIndex
           ? _value.currentPostIndex
           : currentPostIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      showMenu: showMenu == freezed
+      showMenu: null == showMenu
           ? _value.showMenu
           : showMenu // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -159,8 +163,8 @@ class __$$_PostDetailScreenCubitStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PostDetailScreenCubitState implements _PostDetailScreenCubitState {
-  _$_PostDetailScreenCubitState(
+class _$PostDetailScreenCubitStateImpl implements _PostDetailScreenCubitState {
+  _$PostDetailScreenCubitStateImpl(
       {this.willPop = false,
       final Map<int, bool> maxQuality = const {},
       this.loading = false,
@@ -177,6 +181,7 @@ class _$_PostDetailScreenCubitState implements _PostDetailScreenCubitState {
   @override
   @JsonKey()
   Map<int, bool> get maxQuality {
+    if (_maxQuality is EqualUnmodifiableMapView) return _maxQuality;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_maxQuality);
   }
@@ -188,6 +193,7 @@ class _$_PostDetailScreenCubitState implements _PostDetailScreenCubitState {
   @override
   @JsonKey()
   List<String> get selectedTags {
+    if (_selectedTags is EqualUnmodifiableListView) return _selectedTags;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_selectedTags);
   }
@@ -204,36 +210,38 @@ class _$_PostDetailScreenCubitState implements _PostDetailScreenCubitState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PostDetailScreenCubitState &&
-            const DeepCollectionEquality().equals(other.willPop, willPop) &&
+            other is _$PostDetailScreenCubitStateImpl &&
+            (identical(other.willPop, willPop) || other.willPop == willPop) &&
             const DeepCollectionEquality()
                 .equals(other._maxQuality, _maxQuality) &&
-            const DeepCollectionEquality().equals(other.loading, loading) &&
+            (identical(other.loading, loading) || other.loading == loading) &&
             const DeepCollectionEquality()
                 .equals(other._selectedTags, _selectedTags) &&
-            const DeepCollectionEquality()
-                .equals(other.currentPostIndex, currentPostIndex) &&
-            const DeepCollectionEquality().equals(other.showMenu, showMenu));
+            (identical(other.currentPostIndex, currentPostIndex) ||
+                other.currentPostIndex == currentPostIndex) &&
+            (identical(other.showMenu, showMenu) ||
+                other.showMenu == showMenu));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(willPop),
+      willPop,
       const DeepCollectionEquality().hash(_maxQuality),
-      const DeepCollectionEquality().hash(loading),
+      loading,
       const DeepCollectionEquality().hash(_selectedTags),
-      const DeepCollectionEquality().hash(currentPostIndex),
-      const DeepCollectionEquality().hash(showMenu));
+      currentPostIndex,
+      showMenu);
 
   @JsonKey(ignore: true)
   @override
-  _$$_PostDetailScreenCubitStateCopyWith<_$_PostDetailScreenCubitState>
-      get copyWith => __$$_PostDetailScreenCubitStateCopyWithImpl<
-          _$_PostDetailScreenCubitState>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$PostDetailScreenCubitStateImplCopyWith<_$PostDetailScreenCubitStateImpl>
+      get copyWith => __$$PostDetailScreenCubitStateImplCopyWithImpl<
+          _$PostDetailScreenCubitStateImpl>(this, _$identity);
 }
 
 abstract class _PostDetailScreenCubitState
@@ -244,7 +252,7 @@ abstract class _PostDetailScreenCubitState
       final bool loading,
       final List<String> selectedTags,
       required final int currentPostIndex,
-      final bool showMenu}) = _$_PostDetailScreenCubitState;
+      final bool showMenu}) = _$PostDetailScreenCubitStateImpl;
 
   @override
   bool get willPop;
@@ -260,6 +268,6 @@ abstract class _PostDetailScreenCubitState
   bool get showMenu;
   @override
   @JsonKey(ignore: true)
-  _$$_PostDetailScreenCubitStateCopyWith<_$_PostDetailScreenCubitState>
+  _$$PostDetailScreenCubitStateImplCopyWith<_$PostDetailScreenCubitStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
