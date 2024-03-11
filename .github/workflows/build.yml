@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: generate files from secret
         run: |
-          echo '{"SENTRY_DSN":"$SENTRY_DNS","DANBOORU_URL":"$DANBOORU_URL","STAGE":"$STAGE"}' >> env.json
+          echo '{"SENTRY_DSN":"$SENTRY_DSN","DANBOORU_URL":"$DANBOORU_URL","STAGE":"$STAGE"}' >> env.json
           cd android
           echo "$PLAY_STORE_UPLOAD_KEY" | base64 --decode > app/keystore.jks
           echo "storeFile=keystore.jks" >> key.properties
@@ -24,7 +24,7 @@ jobs:
           KEYSTORE_KEY_ALIAS: ${{ secrets.KEYSTORE_KEY_ALIAS }}
           KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
           KEYSTORE_STORE_PASSWORD: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
-          SENTRY_DNS: ${{ secrets.SENTRY_DNS }}
+          SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
           DANBOORU_URL: ${{ secrets.DANBOORU_URL }}
           STAGE: ${{ secrets.STAGE }}
       - uses: subosito/flutter-action@v2
