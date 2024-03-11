@@ -9,17 +9,32 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-java@v1
+      - uses: actions/checkout@v4
+      - name: generate files from secret
+        run: |
+          echo '{"SENTRY_DSN":"$SENTRY_DNS","DANBOORU_URL":"$DANBOORU_URL","STAGE":"$STAGE"}' >> env.json
+          cd android
+          echo "$PLAY_STORE_UPLOAD_KEY" | base64 --decode > app/keystore.jks
+          echo "storeFile=keystore.jks" >> key.properties
+          echo "keyAlias=$KEYSTORE_KEY_ALIAS" >> key.properties
+          echo "storePassword=$KEYSTORE_STORE_PASSWORD" >> key.properties
+          echo "keyPassword=$KEYSTORE_KEY_PASSWORD" >> key.properties
+        env:
+          PLAY_STORE_UPLOAD_KEY: ${{ secrets.BOORU_POCKET_KEY }}
+          KEYSTORE_KEY_ALIAS: ${{ secrets.KEYSTORE_KEY_ALIAS }}
+          KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
+          KEYSTORE_STORE_PASSWORD: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
+          SENTRY_DNS: ${{ secrets.SENTRY_DNS }}
+          DANBOORU_URL: ${{ secrets.DANBOORU_URL }}
+          STAGE: ${{ secrets.STAGE }}
+      - uses: subosito/flutter-action@@v2
         with:
-          distribution: "zulu"
-          java-version: "11"
-      - uses: subosito/flutter-action@v1
-        with:
-          channel: "beta"
+          channel: "stable"
+          flutter-version: "3.19.3"
+          cache: true
       - run: flutter pub get
-      - run: flutter build apk
+      - run: flutter build appbundle --dart-define-from-file=env.json
       - uses: actions/upload-artifact@v1
         with:
-          name: release-apk
-          path: build/app/outputs/apk/release/app-release.apk
+          name: release-aab
+          path: build/app/outputs/apk/release/app-release.aab
