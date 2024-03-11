@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'post.dart';
 
@@ -12,7 +12,7 @@ part of 'post.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 Post _$PostFromJson(Map<String, dynamic> json) {
   return _Post.fromJson(json);
@@ -67,330 +67,311 @@ mixin _$Post {
 /// @nodoc
 abstract class $PostCopyWith<$Res> {
   factory $PostCopyWith(Post value, $Res Function(Post) then) =
-      _$PostCopyWithImpl<$Res>;
+      _$PostCopyWithImpl<$Res, Post>;
+  @useResult
   $Res call(
       {int id,
       @JsonKey(name: 'tag_string_general', fromJson: _tagsArrayFromJson)
-          List<String> tags,
+      List<String> tags,
       @JsonKey(name: 'tag_string_artist', fromJson: _tagsArrayFromJson)
-          List<String> artistTag,
+      List<String> artistTag,
       @JsonKey(name: 'tag_string_character', fromJson: _tagsArrayFromJson)
-          List<String> characterTag,
+      List<String> characterTag,
       @JsonKey(name: 'tag_string_copyright', fromJson: _tagsArrayFromJson)
-          List<String> seriesTag,
-      @JsonKey(fromJson: _ratingFromJson)
-          PostRating rating,
+      List<String> seriesTag,
+      @JsonKey(fromJson: _ratingFromJson) PostRating rating,
       String source,
-      @JsonKey(name: 'preview_file_url')
-          String previewFileUrl,
-      @JsonKey(name: 'large_file_url')
-          String largeFileUrl,
-      @JsonKey(name: 'file_url')
-          String fileUrl,
-      @JsonKey(name: 'file_ext')
-          String fileExt,
-      @JsonKey(name: 'image_width')
-          double imageWidth,
-      @JsonKey(name: 'image_height')
-          double imageHeight,
-      @JsonKey(name: 'file_size')
-          double size,
+      @JsonKey(name: 'preview_file_url') String previewFileUrl,
+      @JsonKey(name: 'large_file_url') String largeFileUrl,
+      @JsonKey(name: 'file_url') String fileUrl,
+      @JsonKey(name: 'file_ext') String fileExt,
+      @JsonKey(name: 'image_width') double imageWidth,
+      @JsonKey(name: 'image_height') double imageHeight,
+      @JsonKey(name: 'file_size') double size,
       int score,
-      @JsonKey(name: 'fav_count')
-          int favoriteCount,
-      @JsonKey(name: 'uploader_id')
-          int uploaderId,
-      @JsonKey(name: 'created_at')
-          DateTime createdAt,
-      @JsonKey(name: 'updated_at')
-          DateTime updatedAt,
+      @JsonKey(name: 'fav_count') int favoriteCount,
+      @JsonKey(name: 'uploader_id') int uploaderId,
+      @JsonKey(name: 'created_at') DateTime createdAt,
+      @JsonKey(name: 'updated_at') DateTime updatedAt,
       @JsonKey(name: 'tag_string_meta', fromJson: _tagsArrayFromJson)
-          List<String> meta,
+      List<String> meta,
       String? video});
 }
 
 /// @nodoc
-class _$PostCopyWithImpl<$Res> implements $PostCopyWith<$Res> {
+class _$PostCopyWithImpl<$Res, $Val extends Post>
+    implements $PostCopyWith<$Res> {
   _$PostCopyWithImpl(this._value, this._then);
 
-  final Post _value;
   // ignore: unused_field
-  final $Res Function(Post) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? tags = freezed,
-    Object? artistTag = freezed,
-    Object? characterTag = freezed,
-    Object? seriesTag = freezed,
-    Object? rating = freezed,
-    Object? source = freezed,
-    Object? previewFileUrl = freezed,
-    Object? largeFileUrl = freezed,
-    Object? fileUrl = freezed,
-    Object? fileExt = freezed,
-    Object? imageWidth = freezed,
-    Object? imageHeight = freezed,
-    Object? size = freezed,
-    Object? score = freezed,
-    Object? favoriteCount = freezed,
-    Object? uploaderId = freezed,
-    Object? createdAt = freezed,
-    Object? updatedAt = freezed,
-    Object? meta = freezed,
+    Object? id = null,
+    Object? tags = null,
+    Object? artistTag = null,
+    Object? characterTag = null,
+    Object? seriesTag = null,
+    Object? rating = null,
+    Object? source = null,
+    Object? previewFileUrl = null,
+    Object? largeFileUrl = null,
+    Object? fileUrl = null,
+    Object? fileExt = null,
+    Object? imageWidth = null,
+    Object? imageHeight = null,
+    Object? size = null,
+    Object? score = null,
+    Object? favoriteCount = null,
+    Object? uploaderId = null,
+    Object? createdAt = null,
+    Object? updatedAt = null,
+    Object? meta = null,
     Object? video = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      tags: tags == freezed
+      tags: null == tags
           ? _value.tags
           : tags // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      artistTag: artistTag == freezed
+      artistTag: null == artistTag
           ? _value.artistTag
           : artistTag // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      characterTag: characterTag == freezed
+      characterTag: null == characterTag
           ? _value.characterTag
           : characterTag // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      seriesTag: seriesTag == freezed
+      seriesTag: null == seriesTag
           ? _value.seriesTag
           : seriesTag // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      rating: rating == freezed
+      rating: null == rating
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
               as PostRating,
-      source: source == freezed
+      source: null == source
           ? _value.source
           : source // ignore: cast_nullable_to_non_nullable
               as String,
-      previewFileUrl: previewFileUrl == freezed
+      previewFileUrl: null == previewFileUrl
           ? _value.previewFileUrl
           : previewFileUrl // ignore: cast_nullable_to_non_nullable
               as String,
-      largeFileUrl: largeFileUrl == freezed
+      largeFileUrl: null == largeFileUrl
           ? _value.largeFileUrl
           : largeFileUrl // ignore: cast_nullable_to_non_nullable
               as String,
-      fileUrl: fileUrl == freezed
+      fileUrl: null == fileUrl
           ? _value.fileUrl
           : fileUrl // ignore: cast_nullable_to_non_nullable
               as String,
-      fileExt: fileExt == freezed
+      fileExt: null == fileExt
           ? _value.fileExt
           : fileExt // ignore: cast_nullable_to_non_nullable
               as String,
-      imageWidth: imageWidth == freezed
+      imageWidth: null == imageWidth
           ? _value.imageWidth
           : imageWidth // ignore: cast_nullable_to_non_nullable
               as double,
-      imageHeight: imageHeight == freezed
+      imageHeight: null == imageHeight
           ? _value.imageHeight
           : imageHeight // ignore: cast_nullable_to_non_nullable
               as double,
-      size: size == freezed
+      size: null == size
           ? _value.size
           : size // ignore: cast_nullable_to_non_nullable
               as double,
-      score: score == freezed
+      score: null == score
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
               as int,
-      favoriteCount: favoriteCount == freezed
+      favoriteCount: null == favoriteCount
           ? _value.favoriteCount
           : favoriteCount // ignore: cast_nullable_to_non_nullable
               as int,
-      uploaderId: uploaderId == freezed
+      uploaderId: null == uploaderId
           ? _value.uploaderId
           : uploaderId // ignore: cast_nullable_to_non_nullable
               as int,
-      createdAt: createdAt == freezed
+      createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      updatedAt: updatedAt == freezed
+      updatedAt: null == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      meta: meta == freezed
+      meta: null == meta
           ? _value.meta
           : meta // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      video: video == freezed
+      video: freezed == video
           ? _value.video
           : video // ignore: cast_nullable_to_non_nullable
               as String?,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_PostCopyWith<$Res> implements $PostCopyWith<$Res> {
-  factory _$$_PostCopyWith(_$_Post value, $Res Function(_$_Post) then) =
-      __$$_PostCopyWithImpl<$Res>;
+abstract class _$$PostImplCopyWith<$Res> implements $PostCopyWith<$Res> {
+  factory _$$PostImplCopyWith(
+          _$PostImpl value, $Res Function(_$PostImpl) then) =
+      __$$PostImplCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {int id,
       @JsonKey(name: 'tag_string_general', fromJson: _tagsArrayFromJson)
-          List<String> tags,
+      List<String> tags,
       @JsonKey(name: 'tag_string_artist', fromJson: _tagsArrayFromJson)
-          List<String> artistTag,
+      List<String> artistTag,
       @JsonKey(name: 'tag_string_character', fromJson: _tagsArrayFromJson)
-          List<String> characterTag,
+      List<String> characterTag,
       @JsonKey(name: 'tag_string_copyright', fromJson: _tagsArrayFromJson)
-          List<String> seriesTag,
-      @JsonKey(fromJson: _ratingFromJson)
-          PostRating rating,
+      List<String> seriesTag,
+      @JsonKey(fromJson: _ratingFromJson) PostRating rating,
       String source,
-      @JsonKey(name: 'preview_file_url')
-          String previewFileUrl,
-      @JsonKey(name: 'large_file_url')
-          String largeFileUrl,
-      @JsonKey(name: 'file_url')
-          String fileUrl,
-      @JsonKey(name: 'file_ext')
-          String fileExt,
-      @JsonKey(name: 'image_width')
-          double imageWidth,
-      @JsonKey(name: 'image_height')
-          double imageHeight,
-      @JsonKey(name: 'file_size')
-          double size,
+      @JsonKey(name: 'preview_file_url') String previewFileUrl,
+      @JsonKey(name: 'large_file_url') String largeFileUrl,
+      @JsonKey(name: 'file_url') String fileUrl,
+      @JsonKey(name: 'file_ext') String fileExt,
+      @JsonKey(name: 'image_width') double imageWidth,
+      @JsonKey(name: 'image_height') double imageHeight,
+      @JsonKey(name: 'file_size') double size,
       int score,
-      @JsonKey(name: 'fav_count')
-          int favoriteCount,
-      @JsonKey(name: 'uploader_id')
-          int uploaderId,
-      @JsonKey(name: 'created_at')
-          DateTime createdAt,
-      @JsonKey(name: 'updated_at')
-          DateTime updatedAt,
+      @JsonKey(name: 'fav_count') int favoriteCount,
+      @JsonKey(name: 'uploader_id') int uploaderId,
+      @JsonKey(name: 'created_at') DateTime createdAt,
+      @JsonKey(name: 'updated_at') DateTime updatedAt,
       @JsonKey(name: 'tag_string_meta', fromJson: _tagsArrayFromJson)
-          List<String> meta,
+      List<String> meta,
       String? video});
 }
 
 /// @nodoc
-class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res>
-    implements _$$_PostCopyWith<$Res> {
-  __$$_PostCopyWithImpl(_$_Post _value, $Res Function(_$_Post) _then)
-      : super(_value, (v) => _then(v as _$_Post));
+class __$$PostImplCopyWithImpl<$Res>
+    extends _$PostCopyWithImpl<$Res, _$PostImpl>
+    implements _$$PostImplCopyWith<$Res> {
+  __$$PostImplCopyWithImpl(_$PostImpl _value, $Res Function(_$PostImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$_Post get _value => super._value as _$_Post;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? tags = freezed,
-    Object? artistTag = freezed,
-    Object? characterTag = freezed,
-    Object? seriesTag = freezed,
-    Object? rating = freezed,
-    Object? source = freezed,
-    Object? previewFileUrl = freezed,
-    Object? largeFileUrl = freezed,
-    Object? fileUrl = freezed,
-    Object? fileExt = freezed,
-    Object? imageWidth = freezed,
-    Object? imageHeight = freezed,
-    Object? size = freezed,
-    Object? score = freezed,
-    Object? favoriteCount = freezed,
-    Object? uploaderId = freezed,
-    Object? createdAt = freezed,
-    Object? updatedAt = freezed,
-    Object? meta = freezed,
+    Object? id = null,
+    Object? tags = null,
+    Object? artistTag = null,
+    Object? characterTag = null,
+    Object? seriesTag = null,
+    Object? rating = null,
+    Object? source = null,
+    Object? previewFileUrl = null,
+    Object? largeFileUrl = null,
+    Object? fileUrl = null,
+    Object? fileExt = null,
+    Object? imageWidth = null,
+    Object? imageHeight = null,
+    Object? size = null,
+    Object? score = null,
+    Object? favoriteCount = null,
+    Object? uploaderId = null,
+    Object? createdAt = null,
+    Object? updatedAt = null,
+    Object? meta = null,
     Object? video = freezed,
   }) {
-    return _then(_$_Post(
-      id: id == freezed
+    return _then(_$PostImpl(
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      tags: tags == freezed
+      tags: null == tags
           ? _value._tags
           : tags // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      artistTag: artistTag == freezed
+      artistTag: null == artistTag
           ? _value._artistTag
           : artistTag // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      characterTag: characterTag == freezed
+      characterTag: null == characterTag
           ? _value._characterTag
           : characterTag // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      seriesTag: seriesTag == freezed
+      seriesTag: null == seriesTag
           ? _value._seriesTag
           : seriesTag // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      rating: rating == freezed
+      rating: null == rating
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
               as PostRating,
-      source: source == freezed
+      source: null == source
           ? _value.source
           : source // ignore: cast_nullable_to_non_nullable
               as String,
-      previewFileUrl: previewFileUrl == freezed
+      previewFileUrl: null == previewFileUrl
           ? _value.previewFileUrl
           : previewFileUrl // ignore: cast_nullable_to_non_nullable
               as String,
-      largeFileUrl: largeFileUrl == freezed
+      largeFileUrl: null == largeFileUrl
           ? _value.largeFileUrl
           : largeFileUrl // ignore: cast_nullable_to_non_nullable
               as String,
-      fileUrl: fileUrl == freezed
+      fileUrl: null == fileUrl
           ? _value.fileUrl
           : fileUrl // ignore: cast_nullable_to_non_nullable
               as String,
-      fileExt: fileExt == freezed
+      fileExt: null == fileExt
           ? _value.fileExt
           : fileExt // ignore: cast_nullable_to_non_nullable
               as String,
-      imageWidth: imageWidth == freezed
+      imageWidth: null == imageWidth
           ? _value.imageWidth
           : imageWidth // ignore: cast_nullable_to_non_nullable
               as double,
-      imageHeight: imageHeight == freezed
+      imageHeight: null == imageHeight
           ? _value.imageHeight
           : imageHeight // ignore: cast_nullable_to_non_nullable
               as double,
-      size: size == freezed
+      size: null == size
           ? _value.size
           : size // ignore: cast_nullable_to_non_nullable
               as double,
-      score: score == freezed
+      score: null == score
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
               as int,
-      favoriteCount: favoriteCount == freezed
+      favoriteCount: null == favoriteCount
           ? _value.favoriteCount
           : favoriteCount // ignore: cast_nullable_to_non_nullable
               as int,
-      uploaderId: uploaderId == freezed
+      uploaderId: null == uploaderId
           ? _value.uploaderId
           : uploaderId // ignore: cast_nullable_to_non_nullable
               as int,
-      createdAt: createdAt == freezed
+      createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      updatedAt: updatedAt == freezed
+      updatedAt: null == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      meta: meta == freezed
+      meta: null == meta
           ? _value._meta
           : meta // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      video: video == freezed
+      video: freezed == video
           ? _value.video
           : video // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -400,45 +381,33 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Post extends _Post {
-  _$_Post(
+class _$PostImpl extends _Post {
+  _$PostImpl(
       {required this.id,
       @JsonKey(name: 'tag_string_general', fromJson: _tagsArrayFromJson)
-          required final List<String> tags,
+      required final List<String> tags,
       @JsonKey(name: 'tag_string_artist', fromJson: _tagsArrayFromJson)
-          required final List<String> artistTag,
+      required final List<String> artistTag,
       @JsonKey(name: 'tag_string_character', fromJson: _tagsArrayFromJson)
-          required final List<String> characterTag,
+      required final List<String> characterTag,
       @JsonKey(name: 'tag_string_copyright', fromJson: _tagsArrayFromJson)
-          required final List<String> seriesTag,
-      @JsonKey(fromJson: _ratingFromJson)
-          required this.rating,
+      required final List<String> seriesTag,
+      @JsonKey(fromJson: _ratingFromJson) required this.rating,
       required this.source,
-      @JsonKey(name: 'preview_file_url')
-          required this.previewFileUrl,
-      @JsonKey(name: 'large_file_url')
-          required this.largeFileUrl,
-      @JsonKey(name: 'file_url')
-          required this.fileUrl,
-      @JsonKey(name: 'file_ext')
-          required this.fileExt,
-      @JsonKey(name: 'image_width')
-          required this.imageWidth,
-      @JsonKey(name: 'image_height')
-          required this.imageHeight,
-      @JsonKey(name: 'file_size')
-          required this.size,
+      @JsonKey(name: 'preview_file_url') required this.previewFileUrl,
+      @JsonKey(name: 'large_file_url') required this.largeFileUrl,
+      @JsonKey(name: 'file_url') required this.fileUrl,
+      @JsonKey(name: 'file_ext') required this.fileExt,
+      @JsonKey(name: 'image_width') required this.imageWidth,
+      @JsonKey(name: 'image_height') required this.imageHeight,
+      @JsonKey(name: 'file_size') required this.size,
       required this.score,
-      @JsonKey(name: 'fav_count')
-          required this.favoriteCount,
-      @JsonKey(name: 'uploader_id')
-          required this.uploaderId,
-      @JsonKey(name: 'created_at')
-          required this.createdAt,
-      @JsonKey(name: 'updated_at')
-          required this.updatedAt,
+      @JsonKey(name: 'fav_count') required this.favoriteCount,
+      @JsonKey(name: 'uploader_id') required this.uploaderId,
+      @JsonKey(name: 'created_at') required this.createdAt,
+      @JsonKey(name: 'updated_at') required this.updatedAt,
       @JsonKey(name: 'tag_string_meta', fromJson: _tagsArrayFromJson)
-          required final List<String> meta,
+      required final List<String> meta,
       this.video})
       : _tags = tags,
         _artistTag = artistTag,
@@ -447,7 +416,8 @@ class _$_Post extends _Post {
         _meta = meta,
         super._();
 
-  factory _$_Post.fromJson(Map<String, dynamic> json) => _$$_PostFromJson(json);
+  factory _$PostImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PostImplFromJson(json);
 
   @override
   final int id;
@@ -455,6 +425,7 @@ class _$_Post extends _Post {
   @override
   @JsonKey(name: 'tag_string_general', fromJson: _tagsArrayFromJson)
   List<String> get tags {
+    if (_tags is EqualUnmodifiableListView) return _tags;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_tags);
   }
@@ -463,6 +434,7 @@ class _$_Post extends _Post {
   @override
   @JsonKey(name: 'tag_string_artist', fromJson: _tagsArrayFromJson)
   List<String> get artistTag {
+    if (_artistTag is EqualUnmodifiableListView) return _artistTag;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_artistTag);
   }
@@ -471,6 +443,7 @@ class _$_Post extends _Post {
   @override
   @JsonKey(name: 'tag_string_character', fromJson: _tagsArrayFromJson)
   List<String> get characterTag {
+    if (_characterTag is EqualUnmodifiableListView) return _characterTag;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_characterTag);
   }
@@ -479,6 +452,7 @@ class _$_Post extends _Post {
   @override
   @JsonKey(name: 'tag_string_copyright', fromJson: _tagsArrayFromJson)
   List<String> get seriesTag {
+    if (_seriesTag is EqualUnmodifiableListView) return _seriesTag;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_seriesTag);
   }
@@ -527,6 +501,7 @@ class _$_Post extends _Post {
   @override
   @JsonKey(name: 'tag_string_meta', fromJson: _tagsArrayFromJson)
   List<String> get meta {
+    if (_meta is EqualUnmodifiableListView) return _meta;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_meta);
   }
@@ -540,11 +515,11 @@ class _$_Post extends _Post {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Post &&
-            const DeepCollectionEquality().equals(other.id, id) &&
+            other is _$PostImpl &&
+            (identical(other.id, id) || other.id == id) &&
             const DeepCollectionEquality().equals(other._tags, _tags) &&
             const DeepCollectionEquality()
                 .equals(other._artistTag, _artistTag) &&
@@ -552,65 +527,68 @@ class _$_Post extends _Post {
                 .equals(other._characterTag, _characterTag) &&
             const DeepCollectionEquality()
                 .equals(other._seriesTag, _seriesTag) &&
-            const DeepCollectionEquality().equals(other.rating, rating) &&
-            const DeepCollectionEquality().equals(other.source, source) &&
-            const DeepCollectionEquality()
-                .equals(other.previewFileUrl, previewFileUrl) &&
-            const DeepCollectionEquality()
-                .equals(other.largeFileUrl, largeFileUrl) &&
-            const DeepCollectionEquality().equals(other.fileUrl, fileUrl) &&
-            const DeepCollectionEquality().equals(other.fileExt, fileExt) &&
-            const DeepCollectionEquality()
-                .equals(other.imageWidth, imageWidth) &&
-            const DeepCollectionEquality()
-                .equals(other.imageHeight, imageHeight) &&
-            const DeepCollectionEquality().equals(other.size, size) &&
-            const DeepCollectionEquality().equals(other.score, score) &&
-            const DeepCollectionEquality()
-                .equals(other.favoriteCount, favoriteCount) &&
-            const DeepCollectionEquality()
-                .equals(other.uploaderId, uploaderId) &&
-            const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
-            const DeepCollectionEquality().equals(other.updatedAt, updatedAt) &&
+            (identical(other.rating, rating) || other.rating == rating) &&
+            (identical(other.source, source) || other.source == source) &&
+            (identical(other.previewFileUrl, previewFileUrl) ||
+                other.previewFileUrl == previewFileUrl) &&
+            (identical(other.largeFileUrl, largeFileUrl) ||
+                other.largeFileUrl == largeFileUrl) &&
+            (identical(other.fileUrl, fileUrl) || other.fileUrl == fileUrl) &&
+            (identical(other.fileExt, fileExt) || other.fileExt == fileExt) &&
+            (identical(other.imageWidth, imageWidth) ||
+                other.imageWidth == imageWidth) &&
+            (identical(other.imageHeight, imageHeight) ||
+                other.imageHeight == imageHeight) &&
+            (identical(other.size, size) || other.size == size) &&
+            (identical(other.score, score) || other.score == score) &&
+            (identical(other.favoriteCount, favoriteCount) ||
+                other.favoriteCount == favoriteCount) &&
+            (identical(other.uploaderId, uploaderId) ||
+                other.uploaderId == uploaderId) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt) &&
             const DeepCollectionEquality().equals(other._meta, _meta) &&
-            const DeepCollectionEquality().equals(other.video, video));
+            (identical(other.video, video) || other.video == video));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
-        const DeepCollectionEquality().hash(id),
+        id,
         const DeepCollectionEquality().hash(_tags),
         const DeepCollectionEquality().hash(_artistTag),
         const DeepCollectionEquality().hash(_characterTag),
         const DeepCollectionEquality().hash(_seriesTag),
-        const DeepCollectionEquality().hash(rating),
-        const DeepCollectionEquality().hash(source),
-        const DeepCollectionEquality().hash(previewFileUrl),
-        const DeepCollectionEquality().hash(largeFileUrl),
-        const DeepCollectionEquality().hash(fileUrl),
-        const DeepCollectionEquality().hash(fileExt),
-        const DeepCollectionEquality().hash(imageWidth),
-        const DeepCollectionEquality().hash(imageHeight),
-        const DeepCollectionEquality().hash(size),
-        const DeepCollectionEquality().hash(score),
-        const DeepCollectionEquality().hash(favoriteCount),
-        const DeepCollectionEquality().hash(uploaderId),
-        const DeepCollectionEquality().hash(createdAt),
-        const DeepCollectionEquality().hash(updatedAt),
+        rating,
+        source,
+        previewFileUrl,
+        largeFileUrl,
+        fileUrl,
+        fileExt,
+        imageWidth,
+        imageHeight,
+        size,
+        score,
+        favoriteCount,
+        uploaderId,
+        createdAt,
+        updatedAt,
         const DeepCollectionEquality().hash(_meta),
-        const DeepCollectionEquality().hash(video)
+        video
       ]);
 
   @JsonKey(ignore: true)
   @override
-  _$$_PostCopyWith<_$_Post> get copyWith =>
-      __$$_PostCopyWithImpl<_$_Post>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$PostImplCopyWith<_$PostImpl> get copyWith =>
+      __$$PostImplCopyWithImpl<_$PostImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PostToJson(
+    return _$$PostImplToJson(
       this,
     );
   }
@@ -620,45 +598,33 @@ abstract class _Post extends Post {
   factory _Post(
       {required final int id,
       @JsonKey(name: 'tag_string_general', fromJson: _tagsArrayFromJson)
-          required final List<String> tags,
+      required final List<String> tags,
       @JsonKey(name: 'tag_string_artist', fromJson: _tagsArrayFromJson)
-          required final List<String> artistTag,
+      required final List<String> artistTag,
       @JsonKey(name: 'tag_string_character', fromJson: _tagsArrayFromJson)
-          required final List<String> characterTag,
+      required final List<String> characterTag,
       @JsonKey(name: 'tag_string_copyright', fromJson: _tagsArrayFromJson)
-          required final List<String> seriesTag,
-      @JsonKey(fromJson: _ratingFromJson)
-          required final PostRating rating,
+      required final List<String> seriesTag,
+      @JsonKey(fromJson: _ratingFromJson) required final PostRating rating,
       required final String source,
-      @JsonKey(name: 'preview_file_url')
-          required final String previewFileUrl,
-      @JsonKey(name: 'large_file_url')
-          required final String largeFileUrl,
-      @JsonKey(name: 'file_url')
-          required final String fileUrl,
-      @JsonKey(name: 'file_ext')
-          required final String fileExt,
-      @JsonKey(name: 'image_width')
-          required final double imageWidth,
-      @JsonKey(name: 'image_height')
-          required final double imageHeight,
-      @JsonKey(name: 'file_size')
-          required final double size,
+      @JsonKey(name: 'preview_file_url') required final String previewFileUrl,
+      @JsonKey(name: 'large_file_url') required final String largeFileUrl,
+      @JsonKey(name: 'file_url') required final String fileUrl,
+      @JsonKey(name: 'file_ext') required final String fileExt,
+      @JsonKey(name: 'image_width') required final double imageWidth,
+      @JsonKey(name: 'image_height') required final double imageHeight,
+      @JsonKey(name: 'file_size') required final double size,
       required final int score,
-      @JsonKey(name: 'fav_count')
-          required final int favoriteCount,
-      @JsonKey(name: 'uploader_id')
-          required final int uploaderId,
-      @JsonKey(name: 'created_at')
-          required final DateTime createdAt,
-      @JsonKey(name: 'updated_at')
-          required final DateTime updatedAt,
+      @JsonKey(name: 'fav_count') required final int favoriteCount,
+      @JsonKey(name: 'uploader_id') required final int uploaderId,
+      @JsonKey(name: 'created_at') required final DateTime createdAt,
+      @JsonKey(name: 'updated_at') required final DateTime updatedAt,
       @JsonKey(name: 'tag_string_meta', fromJson: _tagsArrayFromJson)
-          required final List<String> meta,
-      final String? video}) = _$_Post;
+      required final List<String> meta,
+      final String? video}) = _$PostImpl;
   _Post._() : super._();
 
-  factory _Post.fromJson(Map<String, dynamic> json) = _$_Post.fromJson;
+  factory _Post.fromJson(Map<String, dynamic> json) = _$PostImpl.fromJson;
 
   @override
   int get id;
@@ -721,5 +687,6 @@ abstract class _Post extends Post {
   String? get video;
   @override
   @JsonKey(ignore: true)
-  _$$_PostCopyWith<_$_Post> get copyWith => throw _privateConstructorUsedError;
+  _$$PostImplCopyWith<_$PostImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

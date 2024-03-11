@@ -17,9 +17,10 @@ class PostScreenNavbarCubit extends Cubit<PostScreenNavBarState> {
   final DanbooruRepository repository = locator<DanbooruRepository>();
   final QueryParamsCubit queryParamsCubit;
   final GalleryGridBloc galleryGridBloc;
-  PostScreenNavbarCubit(
-      {required this.queryParamsCubit, required this.galleryGridBloc})
-      : super(
+  PostScreenNavbarCubit({
+    required this.queryParamsCubit,
+    required this.galleryGridBloc,
+  }) : super(
           PostScreenNavBarState(),
         );
 

@@ -7,13 +7,15 @@
     {
       "name": "booru_pocket_flutter",
       "request": "launch",
-      "type": "dart"
+      "type": "dart",
+      "toolArgs": ["--dart-define-from-file=env.json"]
     },
     {
       "name": "booru_pocket_flutter (profile mode)",
       "request": "launch",
       "type": "dart",
-      "flutterMode": "profile"
+      "flutterMode": "profile",
+      "toolArgs": ["--dart-define-from-file=env.json"]
     }
   ]
 }

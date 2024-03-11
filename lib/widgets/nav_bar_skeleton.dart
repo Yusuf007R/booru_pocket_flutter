@@ -2,12 +2,12 @@ import 'package:BooruPocket/constants/constants.dart';
 import 'package:flutter/material.dart';
 
 class NavBarSkeleton extends StatelessWidget {
-  const NavBarSkeleton(
-      {Key? key,
-      this.leftSideWidgets = const [],
-      this.rightSideWidgets = const [],
-      this.backgroundWidget = const SizedBox.shrink()})
-      : super(key: key);
+  const NavBarSkeleton({
+    super.key,
+    this.leftSideWidgets = const [],
+    this.rightSideWidgets = const [],
+    this.backgroundWidget = const SizedBox.shrink(),
+  });
 
   final List<Widget> leftSideWidgets;
 

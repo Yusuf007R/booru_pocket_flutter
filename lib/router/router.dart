@@ -1,60 +1,61 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:BooruPocket/router/guards/auth_guard.dart';
-import 'package:BooruPocket/router/route_wrappers/post_route_wrapper.dart';
-import 'package:BooruPocket/screens/home_screen.dart';
-import 'package:BooruPocket/screens/login_screen.dart';
-import 'package:BooruPocket/screens/post_detail_screen.dart';
-import 'package:BooruPocket/screens/post_screen.dart';
-import 'package:BooruPocket/screens/settings_screen.dart';
-import 'package:BooruPocket/screens/user_profile_screen.dart';
+import 'package:BooruPocket/router/router.gr.dart';
+import 'package:auto_route/auto_route.dart';
 
-@MaterialAutoRouter(
-  replaceInRouteName: 'Screen,Route',
-  routes: <AutoRoute>[
-    AutoRoute(
-      initial: true,
-      page: HomeScreen,
-      children: [
+// @MaterialAutoRouter(
+//   replaceInRouteName: 'Screen,Route',
+//   routes: <AutoRoute>[
+
+//   ],
+// )
+// class $AppRouter {}
+
+@AutoRouterConfig(replaceInRouteName: 'Screen,Route')
+class AppRouter extends $AppRouter {
+  @override
+  RouteType get defaultRouteType => const RouteType.material();
+
+  @override
+  List<AutoRoute> get routes => [
         AutoRoute(
-          page: PostRouteWrapper,
-          name: 'PostRouteHomePage',
           initial: true,
+          page: HomeRoute.page,
+          children: [
+            AutoRoute(
+              page: PostRouteWrapper.page,
+              initial: true,
+              children: [
+                AutoRoute(
+                  initial: true,
+                  page: PostRoute.page,
+                ),
+              ],
+            ),
+          ],
+        ),
+        AutoRoute(
+          page: PostRouteWrapper.page,
+          guards: [AuthGuard()],
           children: [
             AutoRoute(
               initial: true,
-              page: PostScreen,
-              name: 'PostScreenHomePageInternal',
-            )
+              page: PostRoute.page,
+            ),
           ],
         ),
-      ],
-    ),
-    AutoRoute(
-      page: PostRouteWrapper,
-      guards: [AuthGuard],
-      name: 'PostRoute',
-      children: [
         AutoRoute(
-          initial: true,
-          page: PostScreen,
-          name: 'PostScreenPushed',
-        )
-      ],
-    ),
-    AutoRoute(
-      page: LoginScreen,
-    ),
-    AutoRoute(
-      page: SettingsScreen,
-    ),
-    AutoRoute(
-      guards: [AuthGuard],
-      page: UserProfileScreen,
-    ),
-    CustomRoute(
-      transitionsBuilder: TransitionsBuilders.fadeIn,
-      page: PostDetailScreen,
-    )
-  ],
-)
-class $AppRouter {}
+          page: LoginRoute.page,
+        ),
+        AutoRoute(
+          page: SettingsRoute.page,
+        ),
+        AutoRoute(
+          guards: [AuthGuard()],
+          page: UserProfileRoute.page,
+        ),
+        CustomRoute(
+          transitionsBuilder: TransitionsBuilders.fadeIn,
+          page: PostDetailRoute.page,
+        ),
+      ];
+}

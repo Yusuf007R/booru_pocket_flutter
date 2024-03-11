@@ -1,23 +1,19 @@
-import 'package:bloc/bloc.dart';
 import 'package:BooruPocket/blocs/danbooru_auth_cubit/danbooru_auth_cubit.dart';
 import 'package:BooruPocket/blocs/query_params_cubit/query_params_cubit.dart';
-import 'package:BooruPocket/blocs/settings_cubit/settings_cubit.dart';
+import 'package:BooruPocket/models/api/post/post.dart';
 import 'package:BooruPocket/models/api/user/user.dart';
+import 'package:BooruPocket/repositories/danbooru.dart';
 import 'package:BooruPocket/services/locator_service.dart';
-
+import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:BooruPocket/models/api/post/post.dart';
-import 'package:BooruPocket/repositories/danbooru.dart';
-
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
-part 'gallery_grid_event.dart';
-part 'gallery_grid_state.dart';
-
 part 'gallery_grid_bloc.freezed.dart';
 part 'gallery_grid_bloc.g.dart';
+part 'gallery_grid_event.dart';
+part 'gallery_grid_state.dart';
 
 class GalleryGridBloc extends Bloc<GalleryGridEvent, GalleryGridState> {
   final DanbooruRepository repository = locator<DanbooruRepository>();
@@ -41,6 +37,7 @@ class GalleryGridBloc extends Bloc<GalleryGridEvent, GalleryGridState> {
         queryParamsCubit.resetPage();
         emit(state.copyWith(posts: const []));
       }
+      // ignore: avoid_print
       print('fetching ${queryParamsCubit.state.queryParams.page}');
       final posts = await _fetchPosts();
       final mergedPosts = List<Post>.from(state.posts)
@@ -80,8 +77,9 @@ class GalleryGridBloc extends Bloc<GalleryGridEvent, GalleryGridState> {
         return;
       }
 
-      emit(state
-          .copyWith(selectedPosts: [...state.selectedPosts, event.postId]));
+      emit(
+        state.copyWith(selectedPosts: [...state.selectedPosts, event.postId]),
+      );
     });
 
     on<SetPostSelected>((event, emit) async {
@@ -101,8 +99,9 @@ class GalleryGridBloc extends Bloc<GalleryGridEvent, GalleryGridState> {
     final user = danbooruAuthCubit.state.user;
     if (user is UserAuthenticating) {
       Sentry.captureMessage(
-          "Trying to fetch posts while user is authenticating",
-          level: SentryLevel.error);
+        "Trying to fetch posts while user is authenticating",
+        level: SentryLevel.error,
+      );
     }
     return queryParams.map(
       post: (params) async {

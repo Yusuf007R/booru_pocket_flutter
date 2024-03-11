@@ -6,7 +6,7 @@ part of 'post.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Post _$$_PostFromJson(Map<String, dynamic> json) => _$_Post(
+_$PostImpl _$$PostImplFromJson(Map<String, dynamic> json) => _$PostImpl(
       id: json['id'] as int,
       tags: _tagsArrayFromJson(json['tag_string_general'] as String),
       artistTag: _tagsArrayFromJson(json['tag_string_artist'] as String),
@@ -30,7 +30,8 @@ _$_Post _$$_PostFromJson(Map<String, dynamic> json) => _$_Post(
       video: json['video'] as String?,
     );
 
-Map<String, dynamic> _$$_PostToJson(_$_Post instance) => <String, dynamic>{
+Map<String, dynamic> _$$PostImplToJson(_$PostImpl instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'tag_string_general': instance.tags,
       'tag_string_artist': instance.artistTag,

@@ -1,12 +1,12 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:BooruPocket/blocs/danbooru_auth_cubit/danbooru_auth_cubit.dart';
 import 'package:BooruPocket/models/api/user/user.dart';
-
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+@RoutePage()
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -26,10 +26,11 @@ class _LoginScreenState extends State<LoginScreen> {
           appBar: AppBar(
             title: const Text('Danbooru Log in'),
             leading: IconButton(
-                onPressed: () => {
-                      AutoRouter.of(context).pop(),
-                    },
-                icon: const Icon(Icons.arrow_back)),
+              onPressed: () => {
+                AutoRouter.of(context).pop(),
+              },
+              icon: const Icon(Icons.arrow_back),
+            ),
           ),
           body: Center(
             child: SizedBox(
@@ -39,7 +40,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 shrinkWrap: true,
                 children: [
                   MediaQuery(
-                    data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
+                    data: MediaQuery.of(context)
+                        .copyWith(textScaler: const TextScaler.linear(1)),
                     child: const Text(
                       'Log in to Danbooru',
                       style: TextStyle(

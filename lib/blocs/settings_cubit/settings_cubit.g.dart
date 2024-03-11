@@ -6,8 +6,8 @@ part of 'settings_cubit.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_SettingsState _$$_SettingsStateFromJson(Map<String, dynamic> json) =>
-    _$_SettingsState(
+_$SettingsStateImpl _$$SettingsStateImplFromJson(Map<String, dynamic> json) =>
+    _$SettingsStateImpl(
       themeMode: $enumDecodeNullable(_$ThemeModeEnumMap, json['themeMode']) ??
           ThemeMode.system,
       defaultDownloadPath: json['defaultDownloadPath'] as String? ?? null,
@@ -29,7 +29,7 @@ _$_SettingsState _$$_SettingsStateFromJson(Map<String, dynamic> json) =>
       pageLimit: json['pageLimit'] as int? ?? 20,
     );
 
-Map<String, dynamic> _$$_SettingsStateToJson(_$_SettingsState instance) =>
+Map<String, dynamic> _$$SettingsStateImplToJson(_$SettingsStateImpl instance) =>
     <String, dynamic>{
       'themeMode': _$ThemeModeEnumMap[instance.themeMode]!,
       'defaultDownloadPath': instance.defaultDownloadPath,

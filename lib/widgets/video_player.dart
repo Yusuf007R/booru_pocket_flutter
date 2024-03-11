@@ -7,8 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoPlayerWrapper extends StatefulWidget {
-  const VideoPlayerWrapper({Key? key, required this.post}) : super(key: key);
   final Post post;
+  const VideoPlayerWrapper({super.key, required this.post});
 
   @override
   State<VideoPlayerWrapper> createState() => _VideoPlayerWrapperState();
@@ -20,19 +20,28 @@ class _VideoPlayerWrapperState extends State<VideoPlayerWrapper> {
   Chewie? playerWidget;
 
   @override
-  void initState() {
-    final postDetailCubit = context.read<PostDetailScreenCubitCubit>();
-    final authCubit = context.read<DanbooruAuthCubit>();
-    initPlayer(postDetailCubit, authCubit);
-    super.initState();
+  Widget build(BuildContext context) {
+    return BlocBuilder<PostDetailScreenCubitCubit, PostDetailScreenCubitState>(
+      builder: (context, state) {
+        if (state.loading) return Container();
+        return playerWidget ?? Container();
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    videoPlayerController.dispose();
+    chewieController?.dispose();
+    super.dispose();
   }
 
   void initPlayer(
     PostDetailScreenCubitCubit postDetailCubit,
     DanbooruAuthCubit authCubit,
   ) async {
-    videoPlayerController = VideoPlayerController.network(
-      widget.post.fileUrl,
+    videoPlayerController = VideoPlayerController.networkUrl(
+      Uri.parse(widget.post.fileUrl),
       httpHeaders: {
         'user-agent': authCubit.userAgentHeader(),
       },
@@ -54,19 +63,10 @@ class _VideoPlayerWrapperState extends State<VideoPlayerWrapper> {
   }
 
   @override
-  void dispose() {
-    videoPlayerController.dispose();
-    chewieController?.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<PostDetailScreenCubitCubit, PostDetailScreenCubitState>(
-      builder: (context, state) {
-        if (state.loading) return Container();
-        return playerWidget ?? Container();
-      },
-    );
+  void initState() {
+    final postDetailCubit = context.read<PostDetailScreenCubitCubit>();
+    final authCubit = context.read<DanbooruAuthCubit>();
+    initPlayer(postDetailCubit, authCubit);
+    super.initState();
   }
 }

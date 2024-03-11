@@ -6,12 +6,13 @@ part of 'queryparams.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$PostParams _$$PostParamsFromJson(Map<String, dynamic> json) => _$PostParams(
+_$PostParamsImpl _$$PostParamsImplFromJson(Map<String, dynamic> json) =>
+    _$PostParamsImpl(
       page: json['page'] as int? ?? 1,
       tags: json['tags'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$PostParamsToJson(_$PostParams instance) =>
+Map<String, dynamic> _$$PostParamsImplToJson(_$PostParamsImpl instance) =>
     <String, dynamic>{
       'page': instance.page,
       'tags': instance.tags,
