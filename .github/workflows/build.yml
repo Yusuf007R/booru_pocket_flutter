@@ -11,9 +11,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: generate files from secret
+        working-directory: android
         run: |
-          jq -n --arg SENTRY_DSN "$SENTRY_DSN" --arg DANBOORU_URL "$DANBOORU_URL" --arg STAGE "$STAGE" '{"SENTRY_DSN":$SENTRY_DSN,"DANBOORU_URL":$DANBOORU_URL,"STAGE":$STAGE}' > env.json
-          cd android
           echo "$PLAY_STORE_UPLOAD_KEY" | base64 --decode > app/keystore.jks
           echo "storeFile=keystore.jks" >> key.properties
           echo "keyAlias=$KEYSTORE_KEY_ALIAS" >> key.properties
@@ -24,21 +23,18 @@ jobs:
           KEYSTORE_KEY_ALIAS: ${{ secrets.KEYSTORE_KEY_ALIAS }}
           KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
           KEYSTORE_STORE_PASSWORD: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
-          SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
-          DANBOORU_URL: ${{ secrets.DANBOORU_URL }}
-          STAGE: ${{ secrets.STAGE }}
       - uses: subosito/flutter-action@v2
         with:
           channel: "stable"
           flutter-version: "3.19.3"
           cache: true
       - run: flutter pub get
-      - run: flutter build appbundle --dart-define-from-file=env.json
+      - run: flutter build appbundle --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }} --dart-define=DANBOORU_URL=${{ secrets.DANBOORU_URL }} --dart-define=STAGE=${{ secrets.STAGE }}
       - name: Convert aab to apk
         id: convert_aab
         uses: mukeshsolanki/bundletool-action@v1.0.0
         with:
-          aabFile: app/build/outputs/bundle/release/app-release.aab
+          aabFile: build/app/outputs/bundle/release/app-release.aab
           base64Keystore: ${{ secrets.BOORU_POCKET_KEY }}
           keystorePassword: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
           keystoreAlias: ${{ secrets.KEYSTORE_KEY_ALIAS }}
