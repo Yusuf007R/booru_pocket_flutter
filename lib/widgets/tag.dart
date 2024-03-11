@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 class Tag extends StatelessWidget {
-  const Tag(
-      {Key? key,
-      this.onLongPress,
-      this.onPressed,
-      required this.value,
-      this.color,
-      this.padding,
-      this.disabled = false})
-      : super(key: key);
+  const Tag({
+    super.key,
+    this.onLongPress,
+    this.onPressed,
+    required this.value,
+    this.color,
+    this.padding,
+    this.disabled = false,
+  });
 
   final void Function()? onLongPress;
   final void Function()? onPressed;
@@ -29,11 +29,11 @@ class Tag extends StatelessWidget {
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
             padding: padding,
+            backgroundColor: color ?? Theme.of(context).colorScheme.primary,
             minimumSize: const Size(1, 1),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
             ),
-            primary: color ?? Theme.of(context).colorScheme.primary,
           ),
           child: Text(
             value,

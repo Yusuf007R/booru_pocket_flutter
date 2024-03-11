@@ -1,8 +1,6 @@
-import 'dart:ui';
-
-import 'package:auto_route/auto_route.dart';
 import 'package:BooruPocket/blocs/danbooru_auth_cubit/danbooru_auth_cubit.dart';
 import 'package:BooruPocket/services/image_downloader_service.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
@@ -14,13 +12,12 @@ import '../router/router.gr.dart';
 import '../services/locator_service.dart';
 
 class PostScreenFAB extends StatelessWidget {
-  const PostScreenFAB({
-    Key? key,
-    required ScrollController scrollController,
-  })  : _scrollController = scrollController,
-        super(key: key);
-
   final ScrollController _scrollController;
+
+  const PostScreenFAB({
+    super.key,
+    required ScrollController scrollController,
+  }) : _scrollController = scrollController;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +32,7 @@ class PostScreenFAB extends StatelessWidget {
               duration: const Duration(milliseconds: 200),
               padding: !value && isSelectedMode
                   ? EdgeInsets.only(
-                      bottom: MediaQueryData.fromWindow(window).padding.bottom,
+                      bottom: View.of(context).padding.bottom,
                     )
                   : EdgeInsets.zero,
               child: SpeedDial(
@@ -51,12 +48,14 @@ class PostScreenFAB extends StatelessWidget {
                           },
                         ),
                         SpeedDialChild(
-                          child: const Icon(MdiIcons.heart),
+                          child: Icon(MdiIcons.heart),
                           label: 'Favorite',
                           onTap: () {
                             final posts = state.posts
-                                .where((element) =>
-                                    state.selectedPosts.contains(element.id))
+                                .where(
+                                  (element) =>
+                                      state.selectedPosts.contains(element.id),
+                                )
                                 .toSet()
                                 .toList();
                             for (var post in posts) {
@@ -73,8 +72,10 @@ class PostScreenFAB extends StatelessWidget {
                             locator<ImageDownloaderService>()
                                 .downloadShareImage(
                               state.posts
-                                  .where((element) =>
-                                      state.selectedPosts.contains(element.id))
+                                  .where(
+                                    (element) => state.selectedPosts
+                                        .contains(element.id),
+                                  )
                                   .toSet()
                                   .toList(),
                             );
@@ -86,8 +87,10 @@ class PostScreenFAB extends StatelessWidget {
                           onTap: () {
                             locator<ImageDownloaderService>().downloadImages(
                               state.posts
-                                  .where((element) =>
-                                      state.selectedPosts.contains(element.id))
+                                  .where(
+                                    (element) => state.selectedPosts
+                                        .contains(element.id),
+                                  )
                                   .toSet()
                                   .toList(),
                             );

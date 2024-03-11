@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:BooruPocket/blocs/danbooru_auth_cubit/danbooru_auth_cubit.dart';
 import 'package:BooruPocket/blocs/gallery_grid_bloc/gallery_grid_bloc.dart';
 import 'package:BooruPocket/blocs/post_detail_screen_cubit/post_detail_screen_cubit_cubit.dart';
@@ -9,14 +8,15 @@ import 'package:BooruPocket/services/locator_service.dart';
 import 'package:BooruPocket/utils/launch_url.dart';
 import 'package:BooruPocket/widgets/pop_up_item.dart';
 import 'package:BooruPocket/widgets/post_detail_bottom_sheets.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-class PostDetailAppBar extends StatelessWidget with PreferredSizeWidget {
+class PostDetailAppBar extends StatelessWidget implements PreferredSizeWidget {
   const PostDetailAppBar({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
@@ -35,12 +35,13 @@ class PostDetailAppBar extends StatelessWidget with PreferredSizeWidget {
                 elevation: 20,
                 shadowColor: Colors.black.withOpacity(0.6),
                 title: Text("Post #${post.id}"),
+                surfaceTintColor: Colors.transparent,
                 backgroundColor: Colors.transparent,
                 leading: IconButton(
                   onPressed: () => {
                     AutoRouter.of(context).pop(),
                   },
-                  icon: const Icon(Icons.arrow_back),
+                  icon: const Icon(Icons.arrow_back, color: Colors.white),
                 ),
                 actions: [
                   PopupMenuButton(
@@ -48,7 +49,7 @@ class PostDetailAppBar extends StatelessWidget with PreferredSizeWidget {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     tooltip: 'More options',
-                    icon: const Icon(Icons.more_vert),
+                    icon: const Icon(Icons.more_vert, color: Colors.white),
                     itemBuilder: (BuildContext context) => [
                       popUpItem(
                         icon: Icons.save_alt_outlined,
@@ -73,7 +74,8 @@ class PostDetailAppBar extends StatelessWidget with PreferredSizeWidget {
                         text: 'Open in browser',
                         onTap: () async {
                           launchStringUrl(
-                              'https://danbooru.donmai.us/posts/${post.id}');
+                            'https://danbooru.donmai.us/posts/${post.id}',
+                          );
                         },
                       ),
                     ],
@@ -89,7 +91,7 @@ class PostDetailAppBar extends StatelessWidget with PreferredSizeWidget {
 }
 
 class PostDetailBottomBar extends StatelessWidget {
-  const PostDetailBottomBar({Key? key}) : super(key: key);
+  const PostDetailBottomBar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -127,62 +129,67 @@ class PostDetailBottomBar extends StatelessWidget {
                             if (settingsState.detailPageQuality !=
                                 ImageQuality.max)
                               IconButton(
-                                  tooltip: 'Toggle quality',
-                                  icon: Icon(
-                                    maxQuality == true
-                                        ? Icons.high_quality
-                                        : Icons.high_quality_outlined,
-                                    color: Colors.white,
-                                  ),
-                                  onPressed: () {
-                                    context
-                                        .read<PostDetailScreenCubitCubit>()
-                                        .toggleMaxQuality(
-                                            state.currentPostIndex);
-                                  }),
-                            IconButton(
-                                tooltip: 'Show info',
-                                icon: const Icon(
-                                  Icons.info_outline,
+                                tooltip: 'Toggle quality',
+                                icon: Icon(
+                                  maxQuality == true
+                                      ? Icons.high_quality
+                                      : Icons.high_quality_outlined,
                                   color: Colors.white,
                                 ),
-                                onPressed: () async {
-                                  showModalBottomSheet(
-                                    context: context,
-                                    isScrollControlled: true,
-                                    backgroundColor: Colors.transparent,
-                                    builder: (context) {
-                                      return InfoBottomSheet(
-                                        post: post,
+                                onPressed: () {
+                                  context
+                                      .read<PostDetailScreenCubitCubit>()
+                                      .toggleMaxQuality(
+                                        state.currentPostIndex,
                                       );
-                                    },
-                                  );
-                                }),
+                                },
+                              ),
                             IconButton(
-                                tooltip: 'Show tags',
-                                icon: const Icon(
-                                  MdiIcons.tag,
-                                  color: Colors.white,
-                                ),
-                                onPressed: () async {
-                                  final detailCubit = context
-                                      .read<PostDetailScreenCubitCubit>();
-                                  showModalBottomSheet(
-                                      context: context,
-                                      isScrollControlled: true,
-                                      backgroundColor: Colors.transparent,
-                                      builder: (context) {
-                                        return BlocProvider.value(
-                                          value: detailCubit,
-                                          child: TagBottomSheet(post: post),
-                                        );
-                                      }).whenComplete(() async {
-                                    await Future.delayed(
-                                      const Duration(milliseconds: 20),
+                              tooltip: 'Show info',
+                              icon: const Icon(
+                                Icons.info_outline,
+                                color: Colors.white,
+                              ),
+                              onPressed: () async {
+                                showModalBottomSheet(
+                                  context: context,
+                                  isScrollControlled: true,
+                                  backgroundColor: Colors.transparent,
+                                  builder: (context) {
+                                    return InfoBottomSheet(
+                                      post: post,
                                     );
-                                    detailCubit.clearSelectedTags();
-                                  });
-                                }),
+                                  },
+                                );
+                              },
+                            ),
+                            IconButton(
+                              tooltip: 'Show tags',
+                              icon: Icon(
+                                MdiIcons.tag,
+                                color: Colors.white,
+                              ),
+                              onPressed: () async {
+                                final detailCubit =
+                                    context.read<PostDetailScreenCubitCubit>();
+                                showModalBottomSheet(
+                                  context: context,
+                                  isScrollControlled: true,
+                                  backgroundColor: Colors.transparent,
+                                  builder: (context) {
+                                    return BlocProvider.value(
+                                      value: detailCubit,
+                                      child: TagBottomSheet(post: post),
+                                    );
+                                  },
+                                ).whenComplete(() async {
+                                  await Future.delayed(
+                                    const Duration(milliseconds: 20),
+                                  );
+                                  detailCubit.clearSelectedTags();
+                                });
+                              },
+                            ),
                             IconButton(
                               tooltip: 'Add to favorites',
                               icon: Icon(

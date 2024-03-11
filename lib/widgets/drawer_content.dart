@@ -1,14 +1,14 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:BooruPocket/router/router.gr.dart';
 import 'package:BooruPocket/screens/post_screen.dart';
 import 'package:BooruPocket/utils/launch_url.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -43,8 +43,8 @@ class CustomDrawer extends StatelessWidget {
 
 class DrawerBottomList extends StatelessWidget {
   const DrawerBottomList({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -54,12 +54,13 @@ class DrawerBottomList extends StatelessWidget {
       physics: const BouncingScrollPhysics(),
       children: [
         DrawerTile(
-            icon: MdiIcons.github,
-            text: 'Github',
-            onTap: () async {
-              String url = 'https://github.com/Yusuf007R/booru_pocket_flutter';
-              launchStringUrl(url);
-            }),
+          icon: MdiIcons.github,
+          text: 'Github',
+          onTap: () async {
+            String url = 'https://github.com/Yusuf007R/booru_pocket_flutter';
+            launchStringUrl(url);
+          },
+        ),
         DrawerTile(
           icon: Icons.settings,
           text: 'Settings',
@@ -79,10 +80,40 @@ class DrawerBottomList extends StatelessWidget {
   }
 }
 
+class DrawerTile extends StatelessWidget {
+  final String text;
+  final IconData icon;
+  final VoidCallback onTap;
+  const DrawerTile({
+    super.key,
+    required this.text,
+    required this.icon,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      contentPadding: const EdgeInsets.only(left: 15, bottom: 4),
+      dense: true,
+      title: Row(
+        children: [
+          Icon(icon),
+          const SizedBox(
+            width: 20,
+          ),
+          Text(text, style: const TextStyle(fontSize: 15)),
+        ],
+      ),
+      onTap: onTap,
+    );
+  }
+}
+
 class DrawerTopList extends StatelessWidget {
   const DrawerTopList({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -102,10 +133,14 @@ class DrawerTopList extends StatelessWidget {
               },
             ),
             DrawerTile(
-                icon: MdiIcons.heart,
-                text: 'Favorites',
-                onTap: () => AutoRouter.of(context)
-                    .push(PostRoute(postScreenType: PostScreenType.favorites))),
+              icon: MdiIcons.heart,
+              text: 'Favorites',
+              onTap: () => AutoRouter.of(context).push(
+                PostRouteWrapper(
+                  postScreenType: PostScreenType.favorites,
+                ),
+              ),
+            ),
             DrawerTile(
               icon: MdiIcons.formatListBulleted,
               text: 'Saved Posts',
@@ -125,7 +160,7 @@ class DrawerTopList extends StatelessWidget {
               text: 'Curated',
               onTap: () {
                 AutoRouter.of(context).push(
-                  PostRoute(postScreenType: PostScreenType.curated),
+                  PostRouteWrapper(postScreenType: PostScreenType.curated),
                 );
               },
             ),
@@ -137,45 +172,16 @@ class DrawerTopList extends StatelessWidget {
                 final height = MediaQuery.of(context).size.height;
                 final ratio = width / height;
                 AutoRouter.of(context).push(
-                  PostRoute(
-                      strictTag:
-                          'ratio:${(ratio - 0.03).toStringAsFixed(2)}..${(ratio + 0.03).toStringAsFixed(2)}'),
+                  PostRouteWrapper(
+                    strictTag:
+                        'ratio:${(ratio - 0.03).toStringAsFixed(2)}..${(ratio + 0.03).toStringAsFixed(2)}',
+                  ),
                 );
               },
             ),
           ],
         ),
       ),
-    );
-  }
-}
-
-class DrawerTile extends StatelessWidget {
-  const DrawerTile({
-    Key? key,
-    required this.text,
-    required this.icon,
-    required this.onTap,
-  }) : super(key: key);
-  final String text;
-  final IconData icon;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      contentPadding: const EdgeInsets.only(left: 15, bottom: 4),
-      dense: true,
-      title: Row(
-        children: [
-          Icon(icon),
-          const SizedBox(
-            width: 20,
-          ),
-          Text(text, style: const TextStyle(fontSize: 15))
-        ],
-      ),
-      onTap: onTap,
     );
   }
 }

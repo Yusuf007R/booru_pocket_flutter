@@ -8,7 +8,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:BooruPocket/utils/string_extentions.dart';
 
 class DatePostScreenNavBar extends StatefulWidget {
-  const DatePostScreenNavBar({Key? key}) : super(key: key);
+  const DatePostScreenNavBar({super.key});
 
   @override
   DatePostScreenNavBarStateWidget createState() =>
@@ -63,10 +63,11 @@ class DatePostScreenNavBarStateWidget extends State<DatePostScreenNavBar> {
                 onTap: () async {
                   Feedback.forTap(context);
                   final DateTime? date = await showDatePicker(
-                      context: context,
-                      initialDate: state.date,
-                      firstDate: DateTime.fromMillisecondsSinceEpoch(0),
-                      lastDate: DateTime.now());
+                    context: context,
+                    initialDate: state.date,
+                    firstDate: DateTime.fromMillisecondsSinceEpoch(0),
+                    lastDate: DateTime.now(),
+                  );
                   if (date == null) return;
                   popularCubit.setDate(date);
                 },

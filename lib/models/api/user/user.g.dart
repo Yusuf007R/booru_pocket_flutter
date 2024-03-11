@@ -6,31 +6,9 @@ part of 'user.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$UserNoAuthenticated _$$UserNoAuthenticatedFromJson(
+_$UserAuthenticatedImpl _$$UserAuthenticatedImplFromJson(
         Map<String, dynamic> json) =>
-    _$UserNoAuthenticated(
-      $type: json['runtimeType'] as String?,
-    );
-
-Map<String, dynamic> _$$UserNoAuthenticatedToJson(
-        _$UserNoAuthenticated instance) =>
-    <String, dynamic>{
-      'runtimeType': instance.$type,
-    };
-
-_$UserAuthenticating _$$UserAuthenticatingFromJson(Map<String, dynamic> json) =>
-    _$UserAuthenticating(
-      $type: json['runtimeType'] as String?,
-    );
-
-Map<String, dynamic> _$$UserAuthenticatingToJson(
-        _$UserAuthenticating instance) =>
-    <String, dynamic>{
-      'runtimeType': instance.$type,
-    };
-
-_$UserAuthenticated _$$UserAuthenticatedFromJson(Map<String, dynamic> json) =>
-    _$UserAuthenticated(
+    _$UserAuthenticatedImpl(
       id: json['id'] as int,
       name: json['name'] as String,
       level: json['level'] as int,
@@ -40,7 +18,8 @@ _$UserAuthenticated _$$UserAuthenticatedFromJson(Map<String, dynamic> json) =>
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$UserAuthenticatedToJson(_$UserAuthenticated instance) =>
+Map<String, dynamic> _$$UserAuthenticatedImplToJson(
+        _$UserAuthenticatedImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
@@ -48,5 +27,29 @@ Map<String, dynamic> _$$UserAuthenticatedToJson(_$UserAuthenticated instance) =>
       'blacklisted_tags': instance.blackListedTags,
       'favorite_count': instance.favoriteCount,
       'tag_query_limit': instance.tagLimit,
+      'runtimeType': instance.$type,
+    };
+
+_$UserAuthenticatingImpl _$$UserAuthenticatingImplFromJson(
+        Map<String, dynamic> json) =>
+    _$UserAuthenticatingImpl(
+      $type: json['runtimeType'] as String?,
+    );
+
+Map<String, dynamic> _$$UserAuthenticatingImplToJson(
+        _$UserAuthenticatingImpl instance) =>
+    <String, dynamic>{
+      'runtimeType': instance.$type,
+    };
+
+_$UserNoAuthenticatedImpl _$$UserNoAuthenticatedImplFromJson(
+        Map<String, dynamic> json) =>
+    _$UserNoAuthenticatedImpl(
+      $type: json['runtimeType'] as String?,
+    );
+
+Map<String, dynamic> _$$UserNoAuthenticatedImplToJson(
+        _$UserNoAuthenticatedImpl instance) =>
+    <String, dynamic>{
       'runtimeType': instance.$type,
     };

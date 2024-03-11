@@ -10,21 +10,28 @@ part 'query_params_cubit.freezed.dart';
 class QueryParamsCubit extends Cubit<QueryParamsCubitState> {
   SettingsCubit settingsCubit;
 
-  QueryParamsCubit(
-      {String strictTag = '',
-      required QueryParams queryParams,
-      required this.settingsCubit})
-      : super(QueryParamsCubitState(
-            queryParams: queryParams, strictTag: strictTag));
+  QueryParamsCubit({
+    String strictTag = '',
+    required QueryParams queryParams,
+    required this.settingsCubit,
+  }) : super(
+          QueryParamsCubitState(
+            queryParams: queryParams,
+            strictTag: strictTag,
+          ),
+        );
 
   void updateQueryParams(QueryParams queryParams) {
     emit(state.copyWith(queryParams: queryParams));
   }
 
   void incrementPage() {
-    emit(state.copyWith(
+    emit(
+      state.copyWith(
         queryParams:
-            state.queryParams.copyWith(page: state.queryParams.page + 1)));
+            state.queryParams.copyWith(page: state.queryParams.page + 1),
+      ),
+    );
   }
 
   void resetPage() {

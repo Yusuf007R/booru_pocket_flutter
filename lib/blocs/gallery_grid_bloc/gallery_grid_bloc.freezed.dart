@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'gallery_grid_bloc.dart';
 
@@ -12,7 +12,7 @@ part of 'gallery_grid_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 GalleryGridState _$GalleryGridStateFromJson(Map<String, dynamic> json) {
   return _GalleryGridState.fromJson(json);
@@ -35,7 +35,8 @@ mixin _$GalleryGridState {
 abstract class $GalleryGridStateCopyWith<$Res> {
   factory $GalleryGridStateCopyWith(
           GalleryGridState value, $Res Function(GalleryGridState) then) =
-      _$GalleryGridStateCopyWithImpl<$Res>;
+      _$GalleryGridStateCopyWithImpl<$Res, GalleryGridState>;
+  @useResult
   $Res call(
       {List<Post> posts,
       GridStatus gridStatus,
@@ -44,49 +45,52 @@ abstract class $GalleryGridStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$GalleryGridStateCopyWithImpl<$Res>
+class _$GalleryGridStateCopyWithImpl<$Res, $Val extends GalleryGridState>
     implements $GalleryGridStateCopyWith<$Res> {
   _$GalleryGridStateCopyWithImpl(this._value, this._then);
 
-  final GalleryGridState _value;
   // ignore: unused_field
-  final $Res Function(GalleryGridState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? posts = freezed,
-    Object? gridStatus = freezed,
-    Object? uniqueKey = freezed,
-    Object? selectedPosts = freezed,
+    Object? posts = null,
+    Object? gridStatus = null,
+    Object? uniqueKey = null,
+    Object? selectedPosts = null,
   }) {
     return _then(_value.copyWith(
-      posts: posts == freezed
+      posts: null == posts
           ? _value.posts
           : posts // ignore: cast_nullable_to_non_nullable
               as List<Post>,
-      gridStatus: gridStatus == freezed
+      gridStatus: null == gridStatus
           ? _value.gridStatus
           : gridStatus // ignore: cast_nullable_to_non_nullable
               as GridStatus,
-      uniqueKey: uniqueKey == freezed
+      uniqueKey: null == uniqueKey
           ? _value.uniqueKey
           : uniqueKey // ignore: cast_nullable_to_non_nullable
               as String,
-      selectedPosts: selectedPosts == freezed
+      selectedPosts: null == selectedPosts
           ? _value.selectedPosts
           : selectedPosts // ignore: cast_nullable_to_non_nullable
               as List<int>,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_GalleryGridStateCopyWith<$Res>
+abstract class _$$GalleryGridStateImplCopyWith<$Res>
     implements $GalleryGridStateCopyWith<$Res> {
-  factory _$$_GalleryGridStateCopyWith(
-          _$_GalleryGridState value, $Res Function(_$_GalleryGridState) then) =
-      __$$_GalleryGridStateCopyWithImpl<$Res>;
+  factory _$$GalleryGridStateImplCopyWith(_$GalleryGridStateImpl value,
+          $Res Function(_$GalleryGridStateImpl) then) =
+      __$$GalleryGridStateImplCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {List<Post> posts,
       GridStatus gridStatus,
@@ -95,37 +99,35 @@ abstract class _$$_GalleryGridStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_GalleryGridStateCopyWithImpl<$Res>
-    extends _$GalleryGridStateCopyWithImpl<$Res>
-    implements _$$_GalleryGridStateCopyWith<$Res> {
-  __$$_GalleryGridStateCopyWithImpl(
-      _$_GalleryGridState _value, $Res Function(_$_GalleryGridState) _then)
-      : super(_value, (v) => _then(v as _$_GalleryGridState));
+class __$$GalleryGridStateImplCopyWithImpl<$Res>
+    extends _$GalleryGridStateCopyWithImpl<$Res, _$GalleryGridStateImpl>
+    implements _$$GalleryGridStateImplCopyWith<$Res> {
+  __$$GalleryGridStateImplCopyWithImpl(_$GalleryGridStateImpl _value,
+      $Res Function(_$GalleryGridStateImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$_GalleryGridState get _value => super._value as _$_GalleryGridState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? posts = freezed,
-    Object? gridStatus = freezed,
-    Object? uniqueKey = freezed,
-    Object? selectedPosts = freezed,
+    Object? posts = null,
+    Object? gridStatus = null,
+    Object? uniqueKey = null,
+    Object? selectedPosts = null,
   }) {
-    return _then(_$_GalleryGridState(
-      posts: posts == freezed
+    return _then(_$GalleryGridStateImpl(
+      posts: null == posts
           ? _value._posts
           : posts // ignore: cast_nullable_to_non_nullable
               as List<Post>,
-      gridStatus: gridStatus == freezed
+      gridStatus: null == gridStatus
           ? _value.gridStatus
           : gridStatus // ignore: cast_nullable_to_non_nullable
               as GridStatus,
-      uniqueKey: uniqueKey == freezed
+      uniqueKey: null == uniqueKey
           ? _value.uniqueKey
           : uniqueKey // ignore: cast_nullable_to_non_nullable
               as String,
-      selectedPosts: selectedPosts == freezed
+      selectedPosts: null == selectedPosts
           ? _value._selectedPosts
           : selectedPosts // ignore: cast_nullable_to_non_nullable
               as List<int>,
@@ -135,8 +137,8 @@ class __$$_GalleryGridStateCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_GalleryGridState implements _GalleryGridState {
-  _$_GalleryGridState(
+class _$GalleryGridStateImpl implements _GalleryGridState {
+  _$GalleryGridStateImpl(
       {final List<Post> posts = const [],
       this.gridStatus = GridStatus.idle,
       required this.uniqueKey,
@@ -144,13 +146,14 @@ class _$_GalleryGridState implements _GalleryGridState {
       : _posts = posts,
         _selectedPosts = selectedPosts;
 
-  factory _$_GalleryGridState.fromJson(Map<String, dynamic> json) =>
-      _$$_GalleryGridStateFromJson(json);
+  factory _$GalleryGridStateImpl.fromJson(Map<String, dynamic> json) =>
+      _$$GalleryGridStateImplFromJson(json);
 
   final List<Post> _posts;
   @override
   @JsonKey()
   List<Post> get posts {
+    if (_posts is EqualUnmodifiableListView) return _posts;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_posts);
   }
@@ -164,6 +167,7 @@ class _$_GalleryGridState implements _GalleryGridState {
   @override
   @JsonKey()
   List<int> get selectedPosts {
+    if (_selectedPosts is EqualUnmodifiableListView) return _selectedPosts;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_selectedPosts);
   }
@@ -174,14 +178,15 @@ class _$_GalleryGridState implements _GalleryGridState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_GalleryGridState &&
+            other is _$GalleryGridStateImpl &&
             const DeepCollectionEquality().equals(other._posts, _posts) &&
-            const DeepCollectionEquality()
-                .equals(other.gridStatus, gridStatus) &&
-            const DeepCollectionEquality().equals(other.uniqueKey, uniqueKey) &&
+            (identical(other.gridStatus, gridStatus) ||
+                other.gridStatus == gridStatus) &&
+            (identical(other.uniqueKey, uniqueKey) ||
+                other.uniqueKey == uniqueKey) &&
             const DeepCollectionEquality()
                 .equals(other._selectedPosts, _selectedPosts));
   }
@@ -191,18 +196,20 @@ class _$_GalleryGridState implements _GalleryGridState {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_posts),
-      const DeepCollectionEquality().hash(gridStatus),
-      const DeepCollectionEquality().hash(uniqueKey),
+      gridStatus,
+      uniqueKey,
       const DeepCollectionEquality().hash(_selectedPosts));
 
   @JsonKey(ignore: true)
   @override
-  _$$_GalleryGridStateCopyWith<_$_GalleryGridState> get copyWith =>
-      __$$_GalleryGridStateCopyWithImpl<_$_GalleryGridState>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$GalleryGridStateImplCopyWith<_$GalleryGridStateImpl> get copyWith =>
+      __$$GalleryGridStateImplCopyWithImpl<_$GalleryGridStateImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_GalleryGridStateToJson(
+    return _$$GalleryGridStateImplToJson(
       this,
     );
   }
@@ -213,10 +220,10 @@ abstract class _GalleryGridState implements GalleryGridState {
       {final List<Post> posts,
       final GridStatus gridStatus,
       required final String uniqueKey,
-      final List<int> selectedPosts}) = _$_GalleryGridState;
+      final List<int> selectedPosts}) = _$GalleryGridStateImpl;
 
   factory _GalleryGridState.fromJson(Map<String, dynamic> json) =
-      _$_GalleryGridState.fromJson;
+      _$GalleryGridStateImpl.fromJson;
 
   @override
   List<Post> get posts;
@@ -228,6 +235,6 @@ abstract class _GalleryGridState implements GalleryGridState {
   List<int> get selectedPosts;
   @override
   @JsonKey(ignore: true)
-  _$$_GalleryGridStateCopyWith<_$_GalleryGridState> get copyWith =>
+  _$$GalleryGridStateImplCopyWith<_$GalleryGridStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
