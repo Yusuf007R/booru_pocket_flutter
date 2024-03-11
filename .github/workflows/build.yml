@@ -27,7 +27,7 @@ jobs:
           SENTRY_DNS: ${{ secrets.SENTRY_DNS }}
           DANBOORU_URL: ${{ secrets.DANBOORU_URL }}
           STAGE: ${{ secrets.STAGE }}
-      - uses: subosito/flutter-action@@v2
+      - uses: subosito/flutter-action@v2
         with:
           channel: "stable"
           flutter-version: "3.19.3"
