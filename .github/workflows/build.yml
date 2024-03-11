@@ -11,30 +11,31 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: generate files from secret
+        working-directory: android
         run: |
-          echo '{"SENTRY_DSN":"$SENTRY_DNS","DANBOORU_URL":"$DANBOORU_URL","STAGE":"$STAGE"}' >> env.json
-          cd android
-          echo "$PLAY_STORE_UPLOAD_KEY" | base64 --decode > app/keystore.jks
+          echo "${{ secrets.BOORU_POCKET_KEY }}" | base64 --decode > app/keystore.jks
           echo "storeFile=keystore.jks" >> key.properties
-          echo "keyAlias=$KEYSTORE_KEY_ALIAS" >> key.properties
-          echo "storePassword=$KEYSTORE_STORE_PASSWORD" >> key.properties
-          echo "keyPassword=$KEYSTORE_KEY_PASSWORD" >> key.properties
-        env:
-          PLAY_STORE_UPLOAD_KEY: ${{ secrets.BOORU_POCKET_KEY }}
-          KEYSTORE_KEY_ALIAS: ${{ secrets.KEYSTORE_KEY_ALIAS }}
-          KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
-          KEYSTORE_STORE_PASSWORD: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
-          SENTRY_DNS: ${{ secrets.SENTRY_DNS }}
-          DANBOORU_URL: ${{ secrets.DANBOORU_URL }}
-          STAGE: ${{ secrets.STAGE }}
+          echo "keyAlias=${{ secrets.KEYSTORE_KEY_ALIAS }}" >> key.properties
+          echo "storePassword=${{ secrets.KEYSTORE_STORE_PASSWORD }}" >> key.properties
+          echo "keyPassword=${{ secrets.KEYSTORE_KEY_PASSWORD }}" >> key.properties
       - uses: subosito/flutter-action@v2
         with:
           channel: "stable"
           flutter-version: "3.19.3"
           cache: true
       - run: flutter pub get
-      - run: flutter build appbundle --dart-define-from-file=env.json
-      - uses: actions/upload-artifact@v1
+      - run: flutter build appbundle --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }} --dart-define=DANBOORU_URL=${{ secrets.DANBOORU_URL }} --dart-define=STAGE=${{ secrets.STAGE }}
+      - name: Convert aab to apk
+        id: convert_aab
+        uses: mukeshsolanki/bundletool-action@v1.0.0
         with:
-          name: release-aab
-          path: build/app/outputs/apk/release/app-release.aab
+          aabFile: build/app/outputs/bundle/release/app-release.aab
+          base64Keystore: ${{ secrets.BOORU_POCKET_KEY }}
+          keystorePassword: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
+          keystoreAlias: ${{ secrets.KEYSTORE_KEY_ALIAS }}
+          keyPassword: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
+          bundletoolVersion: "1.9.0"
+      - uses: actions/upload-artifact@v3
+        with:
+          name: release-apk
+          path: ${{ steps.convert_aab.outputs.apkPath }}
