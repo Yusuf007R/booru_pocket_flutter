@@ -1,11 +1,11 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:BooruPocket/blocs/date_post_screen_nav_bar/date_post_screen_nav_bar_cubit.dart';
+import 'package:BooruPocket/blocs/date_post_screen_nav_bar_cubit/date_post_screen_nav_bar_cubit.dart';
+import 'package:BooruPocket/utils/string_extentions.dart';
 import 'package:BooruPocket/widgets/nav_bar_skeleton.dart';
 import 'package:BooruPocket/widgets/pop_up_item.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:BooruPocket/utils/string_extentions.dart';
 
 class DatePostScreenNavBar extends StatefulWidget {
   const DatePostScreenNavBar({super.key});

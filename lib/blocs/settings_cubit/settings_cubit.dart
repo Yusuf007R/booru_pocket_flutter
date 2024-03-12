@@ -20,7 +20,7 @@ class SettingsCubit extends HydratedCubit<SettingsState> {
 
   Future<String?> openDefaultPathSelector() async {
     final context = locator<ContextService>().context;
-    if (!context.mounted) return null;
+    if (!(context != null)) return null;
     final rootPath = Directory('/storage/emulated/0/Pictures');
     String? selectedDirectory = await FilesystemPicker.open(
       title: 'Select folder to save posts',

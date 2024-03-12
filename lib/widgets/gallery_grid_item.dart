@@ -4,6 +4,7 @@ import 'package:BooruPocket/blocs/settings_cubit/settings_cubit.dart';
 import 'package:BooruPocket/models/api/post/post.dart';
 import 'package:BooruPocket/router/router.gr.dart';
 import 'package:BooruPocket/services/locator_service.dart';
+import 'package:BooruPocket/widgets/danbooru_image.dart';
 import 'package:BooruPocket/widgets/pop_up_item.dart';
 import 'package:BooruPocket/widgets/shimmer.dart';
 import 'package:auto_route/auto_route.dart';
@@ -176,15 +177,10 @@ class _GalleryGridItemState extends State<GalleryGridItem> {
                                     width: isSelected ? 6 : 0,
                                   ),
                                 ),
-                                child: ExtendedImage.network(
-                                  post.getImage(settingState.gridImageQuality),
-                                  headers: {
-                                    'user-agent': context
-                                        .read<DanbooruAuthCubit>()
-                                        .userAgentHeader(),
-                                  },
+                                child: DanbooruImage(
+                                  imageUrl: post
+                                      .getImage(settingState.gridImageQuality),
                                   fit: BoxFit.cover,
-                                  cache: true,
                                   loadStateChanged: (ExtendedImageState state) {
                                     switch (state.extendedImageLoadState) {
                                       case LoadState.loading:

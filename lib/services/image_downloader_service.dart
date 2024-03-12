@@ -10,17 +10,15 @@ import 'package:BooruPocket/services/notification_service.dart';
 import 'package:BooruPocket/utils/sentry_utils.dart';
 import 'package:dio/dio.dart';
 import 'package:extended_image/extended_image.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 
 class ImageDownloaderService {
-  BuildContext context = locator<ContextService>().context;
   AlertService snackBarService = locator<AlertService>();
-  late SettingsCubit settingsCubit = context.read<SettingsCubit>();
 
   Future<List<File?>> downloadImages(List<Post> posts) async {
+    SettingsCubit? settingsCubit = locator<ContextService>().settingsCubit;
+    if (settingsCubit == null) return [null];
     try {
       String path;
 

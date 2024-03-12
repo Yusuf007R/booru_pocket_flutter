@@ -22,26 +22,26 @@ QueryParams _$QueryParamsFromJson(Map<String, dynamic> json) {
 mixin _$QueryParams {
   int get page => throw _privateConstructorUsedError;
   String get tags => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false)
   QueryParamsPostType get type => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int page, String tags,
-            @JsonKey(ignore: true) QueryParamsPostType type)
+            @JsonKey(includeFromJson: false) QueryParamsPostType type)
         post,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int page, String tags,
-            @JsonKey(ignore: true) QueryParamsPostType type)?
+            @JsonKey(includeFromJson: false) QueryParamsPostType type)?
         post,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int page, String tags,
-            @JsonKey(ignore: true) QueryParamsPostType type)?
+            @JsonKey(includeFromJson: false) QueryParamsPostType type)?
         post,
     required TResult orElse(),
   }) =>
@@ -75,7 +75,9 @@ abstract class $QueryParamsCopyWith<$Res> {
       _$QueryParamsCopyWithImpl<$Res, QueryParams>;
   @useResult
   $Res call(
-      {int page, String tags, @JsonKey(ignore: true) QueryParamsPostType type});
+      {int page,
+      String tags,
+      @JsonKey(includeFromJson: false) QueryParamsPostType type});
 }
 
 /// @nodoc
@@ -121,7 +123,9 @@ abstract class _$$PostParamsImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int page, String tags, @JsonKey(ignore: true) QueryParamsPostType type});
+      {int page,
+      String tags,
+      @JsonKey(includeFromJson: false) QueryParamsPostType type});
 }
 
 /// @nodoc
@@ -162,7 +166,7 @@ class _$PostParamsImpl implements PostParams {
   const _$PostParamsImpl(
       {this.page = 1,
       this.tags = '',
-      @JsonKey(ignore: true) this.type = QueryParamsPostType.post});
+      @JsonKey(includeFromJson: false) this.type = QueryParamsPostType.post});
 
   factory _$PostParamsImpl.fromJson(Map<String, dynamic> json) =>
       _$$PostParamsImplFromJson(json);
@@ -174,7 +178,7 @@ class _$PostParamsImpl implements PostParams {
   @JsonKey()
   final String tags;
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false)
   final QueryParamsPostType type;
 
   @override
@@ -206,7 +210,7 @@ class _$PostParamsImpl implements PostParams {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int page, String tags,
-            @JsonKey(ignore: true) QueryParamsPostType type)
+            @JsonKey(includeFromJson: false) QueryParamsPostType type)
         post,
   }) {
     return post(page, tags, type);
@@ -216,7 +220,7 @@ class _$PostParamsImpl implements PostParams {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int page, String tags,
-            @JsonKey(ignore: true) QueryParamsPostType type)?
+            @JsonKey(includeFromJson: false) QueryParamsPostType type)?
         post,
   }) {
     return post?.call(page, tags, type);
@@ -226,7 +230,7 @@ class _$PostParamsImpl implements PostParams {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int page, String tags,
-            @JsonKey(ignore: true) QueryParamsPostType type)?
+            @JsonKey(includeFromJson: false) QueryParamsPostType type)?
         post,
     required TResult orElse(),
   }) {
@@ -276,7 +280,7 @@ abstract class PostParams implements QueryParams {
   const factory PostParams(
           {final int page,
           final String tags,
-          @JsonKey(ignore: true) final QueryParamsPostType type}) =
+          @JsonKey(includeFromJson: false) final QueryParamsPostType type}) =
       _$PostParamsImpl;
 
   factory PostParams.fromJson(Map<String, dynamic> json) =
@@ -287,7 +291,7 @@ abstract class PostParams implements QueryParams {
   @override
   String get tags;
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false)
   QueryParamsPostType get type;
   @override
   @JsonKey(ignore: true)

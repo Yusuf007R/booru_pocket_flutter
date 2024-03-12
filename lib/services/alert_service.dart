@@ -6,13 +6,14 @@ import 'package:flutter/material.dart';
 import 'context_service.dart';
 
 class AlertService {
-  BuildContext context = locator<ContextService>().context;
-
   void showSnackBar({
     required String text,
     SnackbarType type = SnackbarType.info,
     Icon? customIcon,
   }) {
+    BuildContext? context = locator<ContextService>().context;
+    if (context == null) return;
+
     final flushBar = Flushbar(
       icon: Padding(
         padding: const EdgeInsets.only(left: 5),

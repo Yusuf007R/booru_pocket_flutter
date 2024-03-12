@@ -12,21 +12,19 @@ class AuthGuard extends AutoRouteGuard {
     StackRouter router,
   ) async {
     final context = router.navigatorKey.currentContext;
-
-    if (context != null) {
-      if (resolver.route.name == 'PostRoute') {
-        if ([
-          PostScreenType.gallery,
-          PostScreenType.curated,
-          PostScreenType.popular,
-        ].any((element) => element == resolver.route.args.postScreenType)) {
-          return resolver.next(true);
-        }
+    if (context == null) return;
+    if (resolver.route.name == PostRouteWrapper.name) {
+      if ([
+        PostScreenType.gallery,
+        PostScreenType.curated,
+        PostScreenType.popular,
+      ].any((element) => element == resolver.route.args.postScreenType)) {
+        return resolver.next(true);
       }
-      final danbooruAuthCubit = context.read<DanbooruAuthCubit>();
-      final user = danbooruAuthCubit.state.user;
-      if (user is UserAuthenticated) return resolver.next(true);
-      router.navigate(const LoginRoute());
     }
+    final danbooruAuthCubit = context.read<DanbooruAuthCubit>();
+    final user = danbooruAuthCubit.state.user;
+    if (user is UserAuthenticated) return resolver.next(true);
+    router.navigate(const LoginRoute());
   }
 }
