@@ -37,7 +37,7 @@ void main() async {
       ..environment = Environments.stageEnum.name,
     appRunner: () async {
       HydratedBloc.storage = await HydratedStorage.build(
-        storageDirectory: await getTemporaryDirectory(),
+        storageDirectory: await getApplicationDocumentsDirectory(),
       );
       return runApp(const MyApp());
     },

@@ -1,9 +1,9 @@
-import 'package:BooruPocket/blocs/danbooru_auth_cubit/danbooru_auth_cubit.dart';
 import 'package:BooruPocket/blocs/gallery_grid_bloc/gallery_grid_bloc.dart';
 import 'package:BooruPocket/blocs/post_detail_screen_cubit/post_detail_screen_cubit_cubit.dart';
 import 'package:BooruPocket/blocs/settings_cubit/settings_cubit.dart';
 import 'package:BooruPocket/router/router.dart';
 import 'package:BooruPocket/services/locator_service.dart';
+import 'package:BooruPocket/widgets/danbooru_image.dart';
 import 'package:BooruPocket/widgets/post_detail_menu.dart';
 import 'package:BooruPocket/widgets/video_player.dart';
 import 'package:auto_route/auto_route.dart';
@@ -132,36 +132,26 @@ class _PostDetailScreenState extends State<_PostDetailScreen> {
                                               settingsState.gridImageQuality !=
                                                   settingsState
                                                       .detailPageQuality)
-                                            ExtendedImage.network(
-                                              post.getImage(
+                                            DanbooruImage(
+                                              imageUrl: post.getImage(
                                                 settingsState.gridImageQuality,
                                               ),
                                               fit: BoxFit.contain,
                                               loadStateChanged:
                                                   loadStateChanged,
                                             ),
-                                          ExtendedImage.network(
-                                            post.getImage(
+                                          DanbooruImage(
+                                            imageUrl: post.getImage(
                                               settingsState.detailPageQuality,
                                             ),
-                                            headers: {
-                                              'user-agent': context
-                                                  .read<DanbooruAuthCubit>()
-                                                  .userAgentHeader(),
-                                            },
                                             fit: BoxFit.contain,
                                             loadStateChanged: loadStateChanged,
                                           ),
                                           if (isFocus &&
                                               isMaxQuality &&
                                               !state.willPop)
-                                            ExtendedImage.network(
-                                              post.maxQuality,
-                                              headers: {
-                                                'user-agent': context
-                                                    .read<DanbooruAuthCubit>()
-                                                    .userAgentHeader(),
-                                              },
+                                            DanbooruImage(
+                                              imageUrl: post.maxQuality,
                                               fit: BoxFit.contain,
                                               loadStateChanged:
                                                   loadStateChanged,

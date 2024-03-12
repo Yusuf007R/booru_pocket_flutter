@@ -1,7 +1,7 @@
 import 'package:BooruPocket/blocs/danbooru_auth_cubit/danbooru_auth_cubit.dart';
-import 'package:BooruPocket/blocs/date_post_screen_nav_bar/date_post_screen_nav_bar_cubit.dart';
+import 'package:BooruPocket/blocs/date_post_screen_nav_bar_cubit/date_post_screen_nav_bar_cubit.dart';
 import 'package:BooruPocket/blocs/gallery_grid_bloc/gallery_grid_bloc.dart';
-import 'package:BooruPocket/blocs/post_screen_nav_bar/post_screen_nav_bar_cubit.dart';
+import 'package:BooruPocket/blocs/post_screen_nav_bar_cubit/post_screen_nav_bar_cubit.dart';
 import 'package:BooruPocket/blocs/query_params_cubit/query_params_cubit.dart';
 import 'package:BooruPocket/blocs/settings_cubit/settings_cubit.dart';
 import 'package:BooruPocket/models/api/queryparams/queryparams.dart';

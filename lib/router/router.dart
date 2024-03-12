@@ -53,8 +53,7 @@ class AppRouter extends $AppRouter {
           guards: [AuthGuard()],
           page: UserProfileRoute.page,
         ),
-        CustomRoute(
-          transitionsBuilder: TransitionsBuilders.fadeIn,
+        AutoRoute(
           page: PostDetailRoute.page,
         ),
       ];
