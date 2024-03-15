@@ -9,7 +9,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i8;
-import 'package:BooruPocket/blocs/gallery_grid_bloc/gallery_grid_bloc.dart'
+import 'package:BooruPocket/blocs/gallery_grid_cubit/gallery_grid_cubit.dart'
     as _i10;
 import 'package:BooruPocket/router/route_wrappers/post_route_wrapper.dart'
     as _i4;
@@ -44,7 +44,7 @@ abstract class $AppRouter extends _i8.RootStackRouter {
         routeData: routeData,
         child: _i3.PostDetailScreen(
           key: args.key,
-          galleryGridBloc: args.galleryGridBloc,
+          galleryGridCubit: args.galleryGridCubit,
           initialIndex: args.initialIndex,
         ),
       );
@@ -116,14 +116,14 @@ class LoginRoute extends _i8.PageRouteInfo<void> {
 class PostDetailRoute extends _i8.PageRouteInfo<PostDetailRouteArgs> {
   PostDetailRoute({
     _i9.Key? key,
-    required _i10.GalleryGridBloc galleryGridBloc,
+    required _i10.GalleryGridCubit galleryGridCubit,
     required int initialIndex,
     List<_i8.PageRouteInfo>? children,
   }) : super(
           PostDetailRoute.name,
           args: PostDetailRouteArgs(
             key: key,
-            galleryGridBloc: galleryGridBloc,
+            galleryGridCubit: galleryGridCubit,
             initialIndex: initialIndex,
           ),
           initialChildren: children,
@@ -138,19 +138,19 @@ class PostDetailRoute extends _i8.PageRouteInfo<PostDetailRouteArgs> {
 class PostDetailRouteArgs {
   const PostDetailRouteArgs({
     this.key,
-    required this.galleryGridBloc,
+    required this.galleryGridCubit,
     required this.initialIndex,
   });
 
   final _i9.Key? key;
 
-  final _i10.GalleryGridBloc galleryGridBloc;
+  final _i10.GalleryGridCubit galleryGridCubit;
 
   final int initialIndex;
 
   @override
   String toString() {
-    return 'PostDetailRouteArgs{key: $key, galleryGridBloc: $galleryGridBloc, initialIndex: $initialIndex}';
+    return 'PostDetailRouteArgs{key: $key, galleryGridCubit: $galleryGridCubit, initialIndex: $initialIndex}';
   }
 }
 

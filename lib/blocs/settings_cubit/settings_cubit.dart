@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:BooruPocket/models/api/post/post.dart';
-import 'package:BooruPocket/services/context_service.dart';
+import 'package:BooruPocket/services/app_context_service.dart';
 import 'package:BooruPocket/services/locator_service.dart';
 import 'package:filesystem_picker/filesystem_picker.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +19,7 @@ class SettingsCubit extends HydratedCubit<SettingsState> {
       SettingsState.fromJson(json);
 
   Future<String?> openDefaultPathSelector() async {
-    final context = locator<ContextService>().context;
+    final context = locator<AppContextService>().context;
     if (!(context != null)) return null;
     final rootPath = Directory('/storage/emulated/0/Pictures');
     String? selectedDirectory = await FilesystemPicker.open(

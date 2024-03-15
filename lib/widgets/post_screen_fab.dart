@@ -1,4 +1,5 @@
 import 'package:BooruPocket/blocs/danbooru_auth_cubit/danbooru_auth_cubit.dart';
+import 'package:BooruPocket/blocs/gallery_grid_cubit/gallery_grid_cubit.dart';
 import 'package:BooruPocket/services/image_downloader_service.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,6 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
 
-import '../blocs/gallery_grid_bloc/gallery_grid_bloc.dart';
 import '../router/router.gr.dart';
 import '../services/locator_service.dart';
 
@@ -21,10 +21,10 @@ class PostScreenFAB extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<GalleryGridBloc, GalleryGridState>(
+    return BlocBuilder<GalleryGridCubit, GalleryGridState>(
       builder: (context, state) {
         final isSelectedMode = state.selectedPosts.isNotEmpty;
-        final bloc = context.read<GalleryGridBloc>();
+        final cubit = context.read<GalleryGridCubit>();
         return ValueListenableBuilder(
           valueListenable: Provider.of<ValueNotifier<bool>>(context),
           builder: (context, bool value, child) {
@@ -44,7 +44,7 @@ class PostScreenFAB extends StatelessWidget {
                           child: const Icon(Icons.clear_all_rounded),
                           label: 'Clear Selected Post',
                           onTap: () {
-                            bloc.add(SetPostSelected(selectedPosts: const []));
+                            cubit.setPostSelected([]);
                           },
                         ),
                         SpeedDialChild(

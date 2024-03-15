@@ -1,5 +1,5 @@
 import 'package:BooruPocket/blocs/danbooru_auth_cubit/danbooru_auth_cubit.dart';
-import 'package:BooruPocket/blocs/gallery_grid_bloc/gallery_grid_bloc.dart';
+import 'package:BooruPocket/blocs/gallery_grid_cubit/gallery_grid_cubit.dart';
 import 'package:BooruPocket/blocs/settings_cubit/settings_cubit.dart';
 import 'package:BooruPocket/models/api/post/post.dart';
 import 'package:BooruPocket/router/router.gr.dart';
@@ -44,9 +44,9 @@ class _GalleryGridItemState extends State<GalleryGridItem> {
         return false;
       },
       builder: (context, settingState) {
-        return BlocBuilder<GalleryGridBloc, GalleryGridState>(
+        return BlocBuilder<GalleryGridCubit, GalleryGridState>(
           builder: (context, state) {
-            final bloc = BlocProvider.of<GalleryGridBloc>(context);
+            final galleryGridCubit = BlocProvider.of<GalleryGridCubit>(context);
             Post post = state.posts[widget.index];
 
             double aspectRatio = post.imageWidth / post.imageHeight;
@@ -86,7 +86,7 @@ class _GalleryGridItemState extends State<GalleryGridItem> {
                               ? Icons.check_box
                               : Icons.check_box_outlined,
                           onTap: () {
-                            bloc.add(PostSelectedToggled(postId: post.id));
+                            galleryGridCubit.selectPost(post.id);
                           },
                         ),
                         popUpItem(
@@ -149,13 +149,13 @@ class _GalleryGridItemState extends State<GalleryGridItem> {
                       Feedback.forTap(context);
                       if (state.selectedPosts.isNotEmpty) {
                         Feedback.forLongPress(context);
-                        bloc.add(PostSelectedToggled(postId: post.id));
+                        galleryGridCubit.selectPost(post.id);
                         return;
                       }
                       AutoRouter.of(context).push(
                         PostDetailRoute(
                           initialIndex: widget.index,
-                          galleryGridBloc: bloc,
+                          galleryGridCubit: galleryGridCubit,
                         ),
                       );
                     },

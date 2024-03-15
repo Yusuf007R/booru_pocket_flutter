@@ -6,82 +6,30 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'post.freezed.dart';
 part 'post.g.dart';
 
-enum PostRating { general, sensitive, questionable, explicit, all, unknown }
-
-@freezed
-class Post with _$Post {
-  const Post._();
-
-  factory Post({
-    required int id,
-    @JsonKey(name: 'tag_string_general', fromJson: _tagsArrayFromJson)
-    required List<String> tags,
-    @JsonKey(name: 'tag_string_artist', fromJson: _tagsArrayFromJson)
-    required List<String> artistTag,
-    @JsonKey(name: 'tag_string_character', fromJson: _tagsArrayFromJson)
-    required List<String> characterTag,
-    @JsonKey(name: 'tag_string_copyright', fromJson: _tagsArrayFromJson)
-    required List<String> seriesTag,
-    @JsonKey(fromJson: _ratingFromJson) required PostRating rating,
-    required String source,
-    @JsonKey(name: 'preview_file_url') required String previewFileUrl,
-    @JsonKey(name: 'large_file_url') required String largeFileUrl,
-    @JsonKey(name: 'file_url') required String fileUrl,
-    @JsonKey(name: 'file_ext') required String fileExt,
-    @JsonKey(name: 'image_width') required double imageWidth,
-    @JsonKey(name: 'image_height') required double imageHeight,
-    @JsonKey(name: 'file_size') required double size,
-    required int score,
-    @JsonKey(name: 'fav_count') required int favoriteCount,
-    @JsonKey(name: 'uploader_id') required int uploaderId,
-    @JsonKey(name: 'created_at') required DateTime createdAt,
-    @JsonKey(name: 'updated_at') required DateTime updatedAt,
-    @JsonKey(name: 'tag_string_meta', fromJson: _tagsArrayFromJson)
-    required List<String> meta,
-    String? video,
-  }) = _Post;
-
-  bool get isVideo {
-    switch (fileExt) {
-      case 'mp4':
-        return true;
-      case 'webm':
-        return true;
-      case 'zip':
-        return true;
-      default:
-        return false;
-    }
-  }
-
-  bool get haveAudio => isVideo && meta.contains('sound');
-
-  String get maxQuality => isVideo ? previewFileUrl : fileUrl;
-
-  String get highQuality => isVideo ? previewFileUrl : largeFileUrl;
-
-  String get lowQuality => previewFileUrl;
-
-  String getImage(ImageQuality quality) {
-    switch (quality) {
-      case ImageQuality.high:
-        return highQuality;
-      case ImageQuality.low:
-        return lowQuality;
-      case ImageQuality.max:
-        return maxQuality;
-      default:
-        return lowQuality;
-    }
-  }
-
-  factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
+List<PostVariants> _postVariantsFromJson(
+  Map<String, dynamic> json,
+) {
+  return (json['variants'] as List)
+      .map((e) => PostVariants.fromJson(e as Map<String, dynamic>))
+      .toList();
 }
 
-List<String> _tagsArrayFromJson(
-  String tags,
+PostVariantType _postVariantTypeFromJson(
+  String type,
 ) {
-  return tags.split(' ');
+  switch (type) {
+    case '180x180':
+      return PostVariantType.x180;
+    case '360x360':
+      return PostVariantType.x360;
+    case '720x720':
+      return PostVariantType.x720;
+    case 'original':
+      return PostVariantType.original;
+
+    default:
+      return PostVariantType.original;
+  }
 }
 
 PostRating _ratingFromJson(
@@ -98,5 +46,110 @@ PostRating _ratingFromJson(
       return PostRating.explicit;
     default:
       return PostRating.unknown;
+  }
+}
+
+List<String> _tagsArrayFromJson(
+  String tags,
+) {
+  return tags.split(' ');
+}
+
+@freezed
+class Post with _$Post {
+  late final bool isVideo = ['mp4', 'webm', 'zip'].contains(fileExt);
+
+  late final bool haveAudio = isVideo && meta.contains('sound');
+
+  factory Post({
+    required int id,
+    @JsonKey(name: 'tag_string_general', fromJson: _tagsArrayFromJson)
+    required List<String> tags,
+    @JsonKey(name: 'tag_string_artist', fromJson: _tagsArrayFromJson)
+    required List<String> artistTag,
+    @JsonKey(name: 'tag_string_character', fromJson: _tagsArrayFromJson)
+    required List<String> characterTag,
+    @JsonKey(name: 'tag_string_copyright', fromJson: _tagsArrayFromJson)
+    required List<String> seriesTag,
+    @JsonKey(fromJson: _ratingFromJson) required PostRating rating,
+    required String source,
+    @JsonKey(name: 'file_ext') required String fileExt,
+    @JsonKey(name: 'image_width') required double imageWidth,
+    @JsonKey(name: 'image_height') required double imageHeight,
+    @JsonKey(name: 'file_size') required double size,
+    required int score,
+    @JsonKey(name: 'fav_count') required int favoriteCount,
+    @JsonKey(name: 'uploader_id') required int uploaderId,
+    @JsonKey(name: 'created_at') required DateTime createdAt,
+    @JsonKey(name: 'updated_at') required DateTime updatedAt,
+    @JsonKey(name: 'tag_string_meta', fromJson: _tagsArrayFromJson)
+    required List<String> meta,
+    @JsonKey(name: 'media_asset', fromJson: _postVariantsFromJson)
+    required List<PostVariants> postVariants,
+    String? video,
+  }) = _Post;
+
+  factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
+
+  Post._();
+}
+
+enum PostRating { general, sensitive, questionable, explicit, all, unknown }
+
+@freezed
+class PostVariants with _$PostVariants {
+  factory PostVariants({
+    @JsonKey(fromJson: _postVariantTypeFromJson) required PostVariantType type,
+    required String url,
+    required int width,
+    required int height,
+    @JsonKey(name: 'file_ext') required String fileExt,
+  }) = _PostVariants;
+
+  factory PostVariants.fromJson(Map<String, dynamic> json) =>
+      _$PostVariantsFromJson(json);
+
+  PostVariants._();
+}
+
+enum PostVariantType { x180, x360, x720, original }
+
+extension PostExtension on Post {
+  static Map<String, dynamic> memo = {};
+
+  String getImage(ImageQuality quality) {
+    final cacheKey = '$id-${quality.toString()}';
+    final cachedUrl = memo[cacheKey] as String?;
+
+    if (cachedUrl != null) {
+      return cachedUrl;
+    }
+
+    late final String url;
+    switch (quality) {
+      case ImageQuality.high:
+        url = getVariantUrl(PostVariantType.x720);
+        break;
+      case ImageQuality.low:
+        url = getVariantUrl(PostVariantType.x360);
+        break;
+      case ImageQuality.max:
+        url = getVariantUrl(PostVariantType.original);
+        break;
+      default:
+        url = getVariantUrl(PostVariantType.x360);
+        break;
+    }
+    memo[cacheKey] = url;
+    return url;
+  }
+
+  String getVariantUrl(PostVariantType type) {
+    final variant = postVariants.firstWhere(
+      (element) => element.type == type,
+      orElse: () => postVariants.first,
+    );
+    final variantUrl = variant.url;
+    return variantUrl;
   }
 }
