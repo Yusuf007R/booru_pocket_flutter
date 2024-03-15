@@ -32,12 +32,6 @@ mixin _$Post {
   @JsonKey(fromJson: _ratingFromJson)
   PostRating get rating => throw _privateConstructorUsedError;
   String get source => throw _privateConstructorUsedError;
-  @JsonKey(name: 'preview_file_url')
-  String get previewFileUrl => throw _privateConstructorUsedError;
-  @JsonKey(name: 'large_file_url')
-  String get largeFileUrl => throw _privateConstructorUsedError;
-  @JsonKey(name: 'file_url')
-  String get fileUrl => throw _privateConstructorUsedError;
   @JsonKey(name: 'file_ext')
   String get fileExt => throw _privateConstructorUsedError;
   @JsonKey(name: 'image_width')
@@ -57,6 +51,8 @@ mixin _$Post {
   DateTime get updatedAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'tag_string_meta', fromJson: _tagsArrayFromJson)
   List<String> get meta => throw _privateConstructorUsedError;
+  @JsonKey(name: 'media_asset', fromJson: _postVariantsFromJson)
+  List<PostVariants> get postVariants => throw _privateConstructorUsedError;
   String? get video => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -81,9 +77,6 @@ abstract class $PostCopyWith<$Res> {
       List<String> seriesTag,
       @JsonKey(fromJson: _ratingFromJson) PostRating rating,
       String source,
-      @JsonKey(name: 'preview_file_url') String previewFileUrl,
-      @JsonKey(name: 'large_file_url') String largeFileUrl,
-      @JsonKey(name: 'file_url') String fileUrl,
       @JsonKey(name: 'file_ext') String fileExt,
       @JsonKey(name: 'image_width') double imageWidth,
       @JsonKey(name: 'image_height') double imageHeight,
@@ -95,6 +88,8 @@ abstract class $PostCopyWith<$Res> {
       @JsonKey(name: 'updated_at') DateTime updatedAt,
       @JsonKey(name: 'tag_string_meta', fromJson: _tagsArrayFromJson)
       List<String> meta,
+      @JsonKey(name: 'media_asset', fromJson: _postVariantsFromJson)
+      List<PostVariants> postVariants,
       String? video});
 }
 
@@ -118,9 +113,6 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
     Object? seriesTag = null,
     Object? rating = null,
     Object? source = null,
-    Object? previewFileUrl = null,
-    Object? largeFileUrl = null,
-    Object? fileUrl = null,
     Object? fileExt = null,
     Object? imageWidth = null,
     Object? imageHeight = null,
@@ -131,6 +123,7 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
     Object? createdAt = null,
     Object? updatedAt = null,
     Object? meta = null,
+    Object? postVariants = null,
     Object? video = freezed,
   }) {
     return _then(_value.copyWith(
@@ -161,18 +154,6 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
       source: null == source
           ? _value.source
           : source // ignore: cast_nullable_to_non_nullable
-              as String,
-      previewFileUrl: null == previewFileUrl
-          ? _value.previewFileUrl
-          : previewFileUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      largeFileUrl: null == largeFileUrl
-          ? _value.largeFileUrl
-          : largeFileUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      fileUrl: null == fileUrl
-          ? _value.fileUrl
-          : fileUrl // ignore: cast_nullable_to_non_nullable
               as String,
       fileExt: null == fileExt
           ? _value.fileExt
@@ -214,6 +195,10 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
           ? _value.meta
           : meta // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      postVariants: null == postVariants
+          ? _value.postVariants
+          : postVariants // ignore: cast_nullable_to_non_nullable
+              as List<PostVariants>,
       video: freezed == video
           ? _value.video
           : video // ignore: cast_nullable_to_non_nullable
@@ -241,9 +226,6 @@ abstract class _$$PostImplCopyWith<$Res> implements $PostCopyWith<$Res> {
       List<String> seriesTag,
       @JsonKey(fromJson: _ratingFromJson) PostRating rating,
       String source,
-      @JsonKey(name: 'preview_file_url') String previewFileUrl,
-      @JsonKey(name: 'large_file_url') String largeFileUrl,
-      @JsonKey(name: 'file_url') String fileUrl,
       @JsonKey(name: 'file_ext') String fileExt,
       @JsonKey(name: 'image_width') double imageWidth,
       @JsonKey(name: 'image_height') double imageHeight,
@@ -255,6 +237,8 @@ abstract class _$$PostImplCopyWith<$Res> implements $PostCopyWith<$Res> {
       @JsonKey(name: 'updated_at') DateTime updatedAt,
       @JsonKey(name: 'tag_string_meta', fromJson: _tagsArrayFromJson)
       List<String> meta,
+      @JsonKey(name: 'media_asset', fromJson: _postVariantsFromJson)
+      List<PostVariants> postVariants,
       String? video});
 }
 
@@ -275,9 +259,6 @@ class __$$PostImplCopyWithImpl<$Res>
     Object? seriesTag = null,
     Object? rating = null,
     Object? source = null,
-    Object? previewFileUrl = null,
-    Object? largeFileUrl = null,
-    Object? fileUrl = null,
     Object? fileExt = null,
     Object? imageWidth = null,
     Object? imageHeight = null,
@@ -288,6 +269,7 @@ class __$$PostImplCopyWithImpl<$Res>
     Object? createdAt = null,
     Object? updatedAt = null,
     Object? meta = null,
+    Object? postVariants = null,
     Object? video = freezed,
   }) {
     return _then(_$PostImpl(
@@ -318,18 +300,6 @@ class __$$PostImplCopyWithImpl<$Res>
       source: null == source
           ? _value.source
           : source // ignore: cast_nullable_to_non_nullable
-              as String,
-      previewFileUrl: null == previewFileUrl
-          ? _value.previewFileUrl
-          : previewFileUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      largeFileUrl: null == largeFileUrl
-          ? _value.largeFileUrl
-          : largeFileUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      fileUrl: null == fileUrl
-          ? _value.fileUrl
-          : fileUrl // ignore: cast_nullable_to_non_nullable
               as String,
       fileExt: null == fileExt
           ? _value.fileExt
@@ -371,6 +341,10 @@ class __$$PostImplCopyWithImpl<$Res>
           ? _value._meta
           : meta // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      postVariants: null == postVariants
+          ? _value._postVariants
+          : postVariants // ignore: cast_nullable_to_non_nullable
+              as List<PostVariants>,
       video: freezed == video
           ? _value.video
           : video // ignore: cast_nullable_to_non_nullable
@@ -394,9 +368,6 @@ class _$PostImpl extends _Post {
       required final List<String> seriesTag,
       @JsonKey(fromJson: _ratingFromJson) required this.rating,
       required this.source,
-      @JsonKey(name: 'preview_file_url') required this.previewFileUrl,
-      @JsonKey(name: 'large_file_url') required this.largeFileUrl,
-      @JsonKey(name: 'file_url') required this.fileUrl,
       @JsonKey(name: 'file_ext') required this.fileExt,
       @JsonKey(name: 'image_width') required this.imageWidth,
       @JsonKey(name: 'image_height') required this.imageHeight,
@@ -408,12 +379,15 @@ class _$PostImpl extends _Post {
       @JsonKey(name: 'updated_at') required this.updatedAt,
       @JsonKey(name: 'tag_string_meta', fromJson: _tagsArrayFromJson)
       required final List<String> meta,
+      @JsonKey(name: 'media_asset', fromJson: _postVariantsFromJson)
+      required final List<PostVariants> postVariants,
       this.video})
       : _tags = tags,
         _artistTag = artistTag,
         _characterTag = characterTag,
         _seriesTag = seriesTag,
         _meta = meta,
+        _postVariants = postVariants,
         super._();
 
   factory _$PostImpl.fromJson(Map<String, dynamic> json) =>
@@ -463,15 +437,6 @@ class _$PostImpl extends _Post {
   @override
   final String source;
   @override
-  @JsonKey(name: 'preview_file_url')
-  final String previewFileUrl;
-  @override
-  @JsonKey(name: 'large_file_url')
-  final String largeFileUrl;
-  @override
-  @JsonKey(name: 'file_url')
-  final String fileUrl;
-  @override
   @JsonKey(name: 'file_ext')
   final String fileExt;
   @override
@@ -506,12 +471,21 @@ class _$PostImpl extends _Post {
     return EqualUnmodifiableListView(_meta);
   }
 
+  final List<PostVariants> _postVariants;
+  @override
+  @JsonKey(name: 'media_asset', fromJson: _postVariantsFromJson)
+  List<PostVariants> get postVariants {
+    if (_postVariants is EqualUnmodifiableListView) return _postVariants;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_postVariants);
+  }
+
   @override
   final String? video;
 
   @override
   String toString() {
-    return 'Post(id: $id, tags: $tags, artistTag: $artistTag, characterTag: $characterTag, seriesTag: $seriesTag, rating: $rating, source: $source, previewFileUrl: $previewFileUrl, largeFileUrl: $largeFileUrl, fileUrl: $fileUrl, fileExt: $fileExt, imageWidth: $imageWidth, imageHeight: $imageHeight, size: $size, score: $score, favoriteCount: $favoriteCount, uploaderId: $uploaderId, createdAt: $createdAt, updatedAt: $updatedAt, meta: $meta, video: $video)';
+    return 'Post(id: $id, tags: $tags, artistTag: $artistTag, characterTag: $characterTag, seriesTag: $seriesTag, rating: $rating, source: $source, fileExt: $fileExt, imageWidth: $imageWidth, imageHeight: $imageHeight, size: $size, score: $score, favoriteCount: $favoriteCount, uploaderId: $uploaderId, createdAt: $createdAt, updatedAt: $updatedAt, meta: $meta, postVariants: $postVariants, video: $video)';
   }
 
   @override
@@ -529,11 +503,6 @@ class _$PostImpl extends _Post {
                 .equals(other._seriesTag, _seriesTag) &&
             (identical(other.rating, rating) || other.rating == rating) &&
             (identical(other.source, source) || other.source == source) &&
-            (identical(other.previewFileUrl, previewFileUrl) ||
-                other.previewFileUrl == previewFileUrl) &&
-            (identical(other.largeFileUrl, largeFileUrl) ||
-                other.largeFileUrl == largeFileUrl) &&
-            (identical(other.fileUrl, fileUrl) || other.fileUrl == fileUrl) &&
             (identical(other.fileExt, fileExt) || other.fileExt == fileExt) &&
             (identical(other.imageWidth, imageWidth) ||
                 other.imageWidth == imageWidth) &&
@@ -550,6 +519,8 @@ class _$PostImpl extends _Post {
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
             const DeepCollectionEquality().equals(other._meta, _meta) &&
+            const DeepCollectionEquality()
+                .equals(other._postVariants, _postVariants) &&
             (identical(other.video, video) || other.video == video));
   }
 
@@ -564,9 +535,6 @@ class _$PostImpl extends _Post {
         const DeepCollectionEquality().hash(_seriesTag),
         rating,
         source,
-        previewFileUrl,
-        largeFileUrl,
-        fileUrl,
         fileExt,
         imageWidth,
         imageHeight,
@@ -577,6 +545,7 @@ class _$PostImpl extends _Post {
         createdAt,
         updatedAt,
         const DeepCollectionEquality().hash(_meta),
+        const DeepCollectionEquality().hash(_postVariants),
         video
       ]);
 
@@ -607,9 +576,6 @@ abstract class _Post extends Post {
       required final List<String> seriesTag,
       @JsonKey(fromJson: _ratingFromJson) required final PostRating rating,
       required final String source,
-      @JsonKey(name: 'preview_file_url') required final String previewFileUrl,
-      @JsonKey(name: 'large_file_url') required final String largeFileUrl,
-      @JsonKey(name: 'file_url') required final String fileUrl,
       @JsonKey(name: 'file_ext') required final String fileExt,
       @JsonKey(name: 'image_width') required final double imageWidth,
       @JsonKey(name: 'image_height') required final double imageHeight,
@@ -621,6 +587,8 @@ abstract class _Post extends Post {
       @JsonKey(name: 'updated_at') required final DateTime updatedAt,
       @JsonKey(name: 'tag_string_meta', fromJson: _tagsArrayFromJson)
       required final List<String> meta,
+      @JsonKey(name: 'media_asset', fromJson: _postVariantsFromJson)
+      required final List<PostVariants> postVariants,
       final String? video}) = _$PostImpl;
   _Post._() : super._();
 
@@ -645,15 +613,6 @@ abstract class _Post extends Post {
   PostRating get rating;
   @override
   String get source;
-  @override
-  @JsonKey(name: 'preview_file_url')
-  String get previewFileUrl;
-  @override
-  @JsonKey(name: 'large_file_url')
-  String get largeFileUrl;
-  @override
-  @JsonKey(name: 'file_url')
-  String get fileUrl;
   @override
   @JsonKey(name: 'file_ext')
   String get fileExt;
@@ -684,9 +643,243 @@ abstract class _Post extends Post {
   @JsonKey(name: 'tag_string_meta', fromJson: _tagsArrayFromJson)
   List<String> get meta;
   @override
+  @JsonKey(name: 'media_asset', fromJson: _postVariantsFromJson)
+  List<PostVariants> get postVariants;
+  @override
   String? get video;
   @override
   @JsonKey(ignore: true)
   _$$PostImplCopyWith<_$PostImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+PostVariants _$PostVariantsFromJson(Map<String, dynamic> json) {
+  return _PostVariants.fromJson(json);
+}
+
+/// @nodoc
+mixin _$PostVariants {
+  @JsonKey(fromJson: _postVariantTypeFromJson)
+  PostVariantType get type => throw _privateConstructorUsedError;
+  String get url => throw _privateConstructorUsedError;
+  int get width => throw _privateConstructorUsedError;
+  int get height => throw _privateConstructorUsedError;
+  @JsonKey(name: 'file_ext')
+  String get fileExt => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $PostVariantsCopyWith<PostVariants> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $PostVariantsCopyWith<$Res> {
+  factory $PostVariantsCopyWith(
+          PostVariants value, $Res Function(PostVariants) then) =
+      _$PostVariantsCopyWithImpl<$Res, PostVariants>;
+  @useResult
+  $Res call(
+      {@JsonKey(fromJson: _postVariantTypeFromJson) PostVariantType type,
+      String url,
+      int width,
+      int height,
+      @JsonKey(name: 'file_ext') String fileExt});
+}
+
+/// @nodoc
+class _$PostVariantsCopyWithImpl<$Res, $Val extends PostVariants>
+    implements $PostVariantsCopyWith<$Res> {
+  _$PostVariantsCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? type = null,
+    Object? url = null,
+    Object? width = null,
+    Object? height = null,
+    Object? fileExt = null,
+  }) {
+    return _then(_value.copyWith(
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as PostVariantType,
+      url: null == url
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String,
+      width: null == width
+          ? _value.width
+          : width // ignore: cast_nullable_to_non_nullable
+              as int,
+      height: null == height
+          ? _value.height
+          : height // ignore: cast_nullable_to_non_nullable
+              as int,
+      fileExt: null == fileExt
+          ? _value.fileExt
+          : fileExt // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$PostVariantsImplCopyWith<$Res>
+    implements $PostVariantsCopyWith<$Res> {
+  factory _$$PostVariantsImplCopyWith(
+          _$PostVariantsImpl value, $Res Function(_$PostVariantsImpl) then) =
+      __$$PostVariantsImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(fromJson: _postVariantTypeFromJson) PostVariantType type,
+      String url,
+      int width,
+      int height,
+      @JsonKey(name: 'file_ext') String fileExt});
+}
+
+/// @nodoc
+class __$$PostVariantsImplCopyWithImpl<$Res>
+    extends _$PostVariantsCopyWithImpl<$Res, _$PostVariantsImpl>
+    implements _$$PostVariantsImplCopyWith<$Res> {
+  __$$PostVariantsImplCopyWithImpl(
+      _$PostVariantsImpl _value, $Res Function(_$PostVariantsImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? type = null,
+    Object? url = null,
+    Object? width = null,
+    Object? height = null,
+    Object? fileExt = null,
+  }) {
+    return _then(_$PostVariantsImpl(
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as PostVariantType,
+      url: null == url
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String,
+      width: null == width
+          ? _value.width
+          : width // ignore: cast_nullable_to_non_nullable
+              as int,
+      height: null == height
+          ? _value.height
+          : height // ignore: cast_nullable_to_non_nullable
+              as int,
+      fileExt: null == fileExt
+          ? _value.fileExt
+          : fileExt // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$PostVariantsImpl extends _PostVariants {
+  _$PostVariantsImpl(
+      {@JsonKey(fromJson: _postVariantTypeFromJson) required this.type,
+      required this.url,
+      required this.width,
+      required this.height,
+      @JsonKey(name: 'file_ext') required this.fileExt})
+      : super._();
+
+  factory _$PostVariantsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PostVariantsImplFromJson(json);
+
+  @override
+  @JsonKey(fromJson: _postVariantTypeFromJson)
+  final PostVariantType type;
+  @override
+  final String url;
+  @override
+  final int width;
+  @override
+  final int height;
+  @override
+  @JsonKey(name: 'file_ext')
+  final String fileExt;
+
+  @override
+  String toString() {
+    return 'PostVariants(type: $type, url: $url, width: $width, height: $height, fileExt: $fileExt)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$PostVariantsImpl &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.url, url) || other.url == url) &&
+            (identical(other.width, width) || other.width == width) &&
+            (identical(other.height, height) || other.height == height) &&
+            (identical(other.fileExt, fileExt) || other.fileExt == fileExt));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, type, url, width, height, fileExt);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$PostVariantsImplCopyWith<_$PostVariantsImpl> get copyWith =>
+      __$$PostVariantsImplCopyWithImpl<_$PostVariantsImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$PostVariantsImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _PostVariants extends PostVariants {
+  factory _PostVariants(
+          {@JsonKey(fromJson: _postVariantTypeFromJson)
+          required final PostVariantType type,
+          required final String url,
+          required final int width,
+          required final int height,
+          @JsonKey(name: 'file_ext') required final String fileExt}) =
+      _$PostVariantsImpl;
+  _PostVariants._() : super._();
+
+  factory _PostVariants.fromJson(Map<String, dynamic> json) =
+      _$PostVariantsImpl.fromJson;
+
+  @override
+  @JsonKey(fromJson: _postVariantTypeFromJson)
+  PostVariantType get type;
+  @override
+  String get url;
+  @override
+  int get width;
+  @override
+  int get height;
+  @override
+  @JsonKey(name: 'file_ext')
+  String get fileExt;
+  @override
+  @JsonKey(ignore: true)
+  _$$PostVariantsImplCopyWith<_$PostVariantsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

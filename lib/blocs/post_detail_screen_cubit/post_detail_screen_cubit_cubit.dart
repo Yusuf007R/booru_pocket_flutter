@@ -39,5 +39,5 @@ class PostDetailScreenCubitCubit extends Cubit<PostDetailScreenCubitState> {
 
   void toggleShowMenu() => emit(state.copyWith(showMenu: !state.showMenu));
 
-  void willPop() => emit(state.copyWith(showMenu: false, willPop: true));
+  // void willPop() => emit(state.copyWith(showMenu: false, willPop: true));
 }

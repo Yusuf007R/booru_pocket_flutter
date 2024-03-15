@@ -1,7 +1,7 @@
 import 'package:BooruPocket/repositories/danbooru.dart';
 import 'package:BooruPocket/router/router.dart';
 import 'package:BooruPocket/services/alert_service.dart';
-import 'package:BooruPocket/services/context_service.dart';
+import 'package:BooruPocket/services/app_context_service.dart';
 import 'package:BooruPocket/services/image_downloader_service.dart';
 import 'package:BooruPocket/services/notification_service.dart';
 import 'package:BooruPocket/services/permission_service.dart';
@@ -19,7 +19,7 @@ Future<void> setupLocator() async {
     () async => await PermissionService.init(),
     dependsOn: [NotificationService],
   );
-  locator.registerLazySingleton(() => (ContextService()));
+  locator.registerLazySingleton(() => (AppContextService()));
   locator.registerLazySingleton(() => (DanbooruRepository()));
   locator.registerLazySingleton(() => (ImageDownloaderService()));
   locator.registerLazySingleton(() => (AlertService()));

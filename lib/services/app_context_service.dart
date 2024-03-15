@@ -2,7 +2,7 @@ import 'package:BooruPocket/blocs/danbooru_auth_cubit/danbooru_auth_cubit.dart';
 import 'package:BooruPocket/blocs/settings_cubit/settings_cubit.dart';
 import 'package:flutter/material.dart';
 
-class ContextService {
+class AppContextService {
   BuildContext? _context;
   DanbooruAuthCubit? _danbooruAuthCubit;
   SettingsCubit? _settingsCubit;

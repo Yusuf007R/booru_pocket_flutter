@@ -1,4 +1,4 @@
-import 'package:BooruPocket/blocs/gallery_grid_bloc/gallery_grid_bloc.dart';
+import 'package:BooruPocket/blocs/gallery_grid_cubit/gallery_grid_cubit.dart';
 import 'package:BooruPocket/blocs/query_params_cubit/query_params_cubit.dart';
 import 'package:BooruPocket/models/api/autocomplete/autocomplete.dart';
 import 'package:BooruPocket/models/api/queryparams/queryparams.dart';
@@ -14,10 +14,10 @@ part 'post_screen_nav_bar_state.dart';
 class PostScreenNavbarCubit extends Cubit<PostScreenNavBarState> {
   final DanbooruRepository repository = locator<DanbooruRepository>();
   final QueryParamsCubit queryParamsCubit;
-  final GalleryGridBloc galleryGridBloc;
+  final GalleryGridCubit galleryGridCubit;
   PostScreenNavbarCubit({
     required this.queryParamsCubit,
-    required this.galleryGridBloc,
+    required this.galleryGridCubit,
   }) : super(
           PostScreenNavBarState(),
         );
@@ -44,7 +44,7 @@ class PostScreenNavbarCubit extends Cubit<PostScreenNavBarState> {
   }
 
   void onTextFieldSubmitted() {
-    galleryGridBloc.add(PostsFetched(shouldReset: true));
+    galleryGridCubit.fetchPosts(shouldReset: true);
   }
 
   void onTextFieldUpdated(String value) {

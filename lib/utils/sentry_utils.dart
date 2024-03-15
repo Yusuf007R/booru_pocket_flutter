@@ -1,14 +1,22 @@
-import 'package:BooruPocket/blocs/danbooru_auth_cubit/danbooru_auth_cubit.dart';
 import 'package:BooruPocket/models/api/user/user.dart';
-import 'package:BooruPocket/services/context_service.dart';
+import 'package:BooruPocket/services/app_context_service.dart';
 import 'package:BooruPocket/services/locator_service.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
+import 'package:stack_trace/stack_trace.dart';
 
-loadWithScope(Scope scope, Map<String, String>? extras) {
+loadGenericScope(
+  Scope scope,
+  Map<String, String>? extras,
+  String? transaction,
+) {
   extras?.forEach((key, value) {
     scope.setExtra(key, value);
   });
-  DanbooruAuthCubit? authCubit = locator<ContextService>().danbooruAuthCubit;
+  final calledFrom = Trace.current().frames.elementAt(2);
+
+  scope.transaction = calledFrom.member;
+
+  final authCubit = locator<AppContextService>().danbooruAuthCubit;
 
   final user = authCubit?.state.user;
   if (user is UserAuthenticated) {
@@ -22,17 +30,18 @@ loadWithScope(Scope scope, Map<String, String>? extras) {
 }
 
 reportException(
-  String name, {
-  Object? originalError,
+  String name,
+  Object originalError, {
   StackTrace? stackTrace,
   Map<String, String>? extras,
+  String? transaction,
 }) {
   Sentry.captureException(
-    originalError ?? Exception(name),
+    originalError,
     stackTrace: stackTrace,
     withScope: (scope) {
       scope.setTag('name', name);
-      loadWithScope(scope, extras);
+      loadGenericScope(scope, extras, transaction);
     },
   );
 }
@@ -41,12 +50,13 @@ reportMessage(
   String message, {
   SentryLevel? level,
   Map<String, String>? extras,
+  String? transaction,
 }) {
   Sentry.captureMessage(
     message,
     level: level,
     withScope: (scope) {
-      loadWithScope(scope, extras);
+      loadGenericScope(scope, extras, transaction);
     },
   );
 }

@@ -14,9 +14,6 @@ _$PostImpl _$$PostImplFromJson(Map<String, dynamic> json) => _$PostImpl(
       seriesTag: _tagsArrayFromJson(json['tag_string_copyright'] as String),
       rating: _ratingFromJson(json['rating'] as String),
       source: json['source'] as String,
-      previewFileUrl: json['preview_file_url'] as String,
-      largeFileUrl: json['large_file_url'] as String,
-      fileUrl: json['file_url'] as String,
       fileExt: json['file_ext'] as String,
       imageWidth: (json['image_width'] as num).toDouble(),
       imageHeight: (json['image_height'] as num).toDouble(),
@@ -27,6 +24,8 @@ _$PostImpl _$$PostImplFromJson(Map<String, dynamic> json) => _$PostImpl(
       createdAt: DateTime.parse(json['created_at'] as String),
       updatedAt: DateTime.parse(json['updated_at'] as String),
       meta: _tagsArrayFromJson(json['tag_string_meta'] as String),
+      postVariants:
+          _postVariantsFromJson(json['media_asset'] as Map<String, dynamic>),
       video: json['video'] as String?,
     );
 
@@ -39,9 +38,6 @@ Map<String, dynamic> _$$PostImplToJson(_$PostImpl instance) =>
       'tag_string_copyright': instance.seriesTag,
       'rating': _$PostRatingEnumMap[instance.rating]!,
       'source': instance.source,
-      'preview_file_url': instance.previewFileUrl,
-      'large_file_url': instance.largeFileUrl,
-      'file_url': instance.fileUrl,
       'file_ext': instance.fileExt,
       'image_width': instance.imageWidth,
       'image_height': instance.imageHeight,
@@ -52,6 +48,7 @@ Map<String, dynamic> _$$PostImplToJson(_$PostImpl instance) =>
       'created_at': instance.createdAt.toIso8601String(),
       'updated_at': instance.updatedAt.toIso8601String(),
       'tag_string_meta': instance.meta,
+      'media_asset': instance.postVariants,
       'video': instance.video,
     };
 
@@ -62,4 +59,29 @@ const _$PostRatingEnumMap = {
   PostRating.explicit: 'explicit',
   PostRating.all: 'all',
   PostRating.unknown: 'unknown',
+};
+
+_$PostVariantsImpl _$$PostVariantsImplFromJson(Map<String, dynamic> json) =>
+    _$PostVariantsImpl(
+      type: _postVariantTypeFromJson(json['type'] as String),
+      url: json['url'] as String,
+      width: json['width'] as int,
+      height: json['height'] as int,
+      fileExt: json['file_ext'] as String,
+    );
+
+Map<String, dynamic> _$$PostVariantsImplToJson(_$PostVariantsImpl instance) =>
+    <String, dynamic>{
+      'type': _$PostVariantTypeEnumMap[instance.type]!,
+      'url': instance.url,
+      'width': instance.width,
+      'height': instance.height,
+      'file_ext': instance.fileExt,
+    };
+
+const _$PostVariantTypeEnumMap = {
+  PostVariantType.x180: 'x180',
+  PostVariantType.x360: 'x360',
+  PostVariantType.x720: 'x720',
+  PostVariantType.original: 'original',
 };

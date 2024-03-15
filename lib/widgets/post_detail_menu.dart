@@ -1,5 +1,5 @@
 import 'package:BooruPocket/blocs/danbooru_auth_cubit/danbooru_auth_cubit.dart';
-import 'package:BooruPocket/blocs/gallery_grid_bloc/gallery_grid_bloc.dart';
+import 'package:BooruPocket/blocs/gallery_grid_cubit/gallery_grid_cubit.dart';
 import 'package:BooruPocket/blocs/post_detail_screen_cubit/post_detail_screen_cubit_cubit.dart';
 import 'package:BooruPocket/blocs/settings_cubit/settings_cubit.dart';
 import 'package:BooruPocket/models/api/post/post.dart';
@@ -23,7 +23,7 @@ class PostDetailAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<GalleryGridBloc, GalleryGridState>(
+    return BlocBuilder<GalleryGridCubit, GalleryGridState>(
       builder: (context, galleryState) {
         return BlocBuilder<PostDetailScreenCubitCubit,
             PostDetailScreenCubitState>(
@@ -109,7 +109,7 @@ class PostDetailBottomBar extends StatelessWidget {
               builder: (context, state) {
                 final maxQuality = state.maxQuality[state.currentPostIndex];
                 final post = context
-                    .read<GalleryGridBloc>()
+                    .read<GalleryGridCubit>()
                     .state
                     .posts[state.currentPostIndex];
                 final isFavorite = authCubit.isPostFavorite(post);

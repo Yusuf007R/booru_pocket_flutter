@@ -1,14 +1,24 @@
 import 'package:BooruPocket/blocs/danbooru_auth_cubit/danbooru_auth_cubit.dart';
 import 'package:BooruPocket/blocs/post_detail_screen_cubit/post_detail_screen_cubit_cubit.dart';
+import 'package:BooruPocket/blocs/settings_cubit/settings_cubit.dart';
 import 'package:BooruPocket/models/api/post/post.dart';
-import 'package:chewie/chewie.dart';
+import 'package:appinio_video_player/appinio_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:video_player/video_player.dart';
 
 class VideoPlayerWrapper extends StatefulWidget {
   final Post post;
-  const VideoPlayerWrapper({super.key, required this.post});
+  final DanbooruAuthCubit authCubit;
+  final PostDetailScreenCubitCubit postDetailCubit;
+
+  final Function? onVideoStart;
+  const VideoPlayerWrapper({
+    super.key,
+    required this.post,
+    required this.authCubit,
+    required this.postDetailCubit,
+    this.onVideoStart,
+  });
 
   @override
   State<VideoPlayerWrapper> createState() => _VideoPlayerWrapperState();
@@ -16,15 +26,18 @@ class VideoPlayerWrapper extends StatefulWidget {
 
 class _VideoPlayerWrapperState extends State<VideoPlayerWrapper> {
   late VideoPlayerController videoPlayerController;
-  ChewieController? chewieController;
-  Chewie? playerWidget;
+
+  late CustomVideoPlayerController _customVideoPlayerController;
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PostDetailScreenCubitCubit, PostDetailScreenCubitState>(
+      bloc: widget.postDetailCubit,
       builder: (context, state) {
-        if (state.loading) return Container();
-        return playerWidget ?? Container();
+        // final thumbnailUrl = widget.thumbnailUrl;
+        return CustomVideoPlayer(
+          customVideoPlayerController: _customVideoPlayerController,
+        );
       },
     );
   }
@@ -32,41 +45,44 @@ class _VideoPlayerWrapperState extends State<VideoPlayerWrapper> {
   @override
   void dispose() {
     videoPlayerController.dispose();
-    chewieController?.dispose();
+
     super.dispose();
   }
 
-  void initPlayer(
-    PostDetailScreenCubitCubit postDetailCubit,
-    DanbooruAuthCubit authCubit,
-  ) async {
+  void initPlayer() async {
     videoPlayerController = VideoPlayerController.networkUrl(
-      Uri.parse(widget.post.fileUrl),
+      Uri.parse(widget.post.getImage(ImageQuality.max)),
       httpHeaders: {
-        'user-agent': authCubit.userAgentHeader(),
+        'user-agent': widget.authCubit.userAgentHeader(),
       },
     );
-    postDetailCubit.setLoading(true);
-    await videoPlayerController.initialize();
-    postDetailCubit.setLoading(false);
-    chewieController = ChewieController(
+    widget.postDetailCubit.setLoading(true);
+    videoPlayerController.initialize().then(
+      (value) {
+        widget.postDetailCubit.setLoading(false);
+        videoPlayerController.play();
+        if (widget.onVideoStart != null) {
+          widget.onVideoStart!();
+        }
+      },
+    );
+
+    _customVideoPlayerController = CustomVideoPlayerController(
+      context: context,
       videoPlayerController: videoPlayerController,
-      autoPlay: true,
-      looping: true,
-      showOptions: false,
-      showControls: true,
-      aspectRatio: widget.post.imageWidth / widget.post.imageHeight,
+      customVideoPlayerSettings: const CustomVideoPlayerSettings(
+        autoFadeOutControls: false,
+        settingsButtonAvailable: false,
+        showFullscreenButton: false,
+      ),
     );
-    playerWidget = Chewie(
-      controller: chewieController!,
-    );
+    await videoPlayerController.setLooping(true);
   }
 
   @override
   void initState() {
-    final postDetailCubit = context.read<PostDetailScreenCubitCubit>();
-    final authCubit = context.read<DanbooruAuthCubit>();
-    initPlayer(postDetailCubit, authCubit);
+    initPlayer();
+
     super.initState();
   }
 }
