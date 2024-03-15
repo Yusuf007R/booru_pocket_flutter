@@ -2,11 +2,11 @@ import 'package:BooruPocket/blocs/danbooru_auth_cubit/danbooru_auth_cubit.dart';
 import 'package:BooruPocket/blocs/settings_cubit/settings_cubit.dart';
 import 'package:BooruPocket/environment/environment.dart';
 import 'package:BooruPocket/router/router.dart';
-import 'package:BooruPocket/services/context_service.dart';
+import 'package:BooruPocket/services/app_context_service.dart';
 import 'package:BooruPocket/services/locator_service.dart';
+import 'package:BooruPocket/services/system_ui_service.dart';
 import 'package:BooruPocket/theme/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -18,18 +18,9 @@ void main() async {
   await setupLocator();
 
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(
-      systemNavigationBarColor: Colors.transparent,
-    ),
-  );
-  SystemChrome.setEnabledSystemUIMode(
-    SystemUiMode.edgeToEdge,
-    overlays: [SystemUiOverlay.top],
-  );
 
   PackageInfo packageInfo = await PackageInfo.fromPlatform();
-
+  SystemUiService.initDefaultSystemUI();
   SentryFlutter.init(
     (options) => options
       ..dsn = Environments.sentryDsn
@@ -37,7 +28,7 @@ void main() async {
       ..environment = Environments.stageEnum.name,
     appRunner: () async {
       HydratedBloc.storage = await HydratedStorage.build(
-        storageDirectory: await getTemporaryDirectory(),
+        storageDirectory: await getApplicationDocumentsDirectory(),
       );
       return runApp(const MyApp());
     },
@@ -52,6 +43,8 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final router = locator<AppRouter>();
+  final settingsCubit = SettingsCubit();
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -61,7 +54,7 @@ class _MyAppState extends State<MyApp> {
           lazy: false,
         ),
         BlocProvider(
-          create: (context) => SettingsCubit(),
+          create: (context) => settingsCubit,
         ),
       ],
       child: ListenableProvider(
@@ -87,7 +80,7 @@ class _MyAppState extends State<MyApp> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final context = router.navigatorKey.currentState?.context;
       if (context != null) {
-        locator<ContextService>().setContext(context);
+        locator<AppContextService>().setContext(context);
       }
     });
 

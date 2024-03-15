@@ -1,15 +1,15 @@
 import 'package:BooruPocket/blocs/danbooru_auth_cubit/danbooru_auth_cubit.dart';
-import 'package:BooruPocket/blocs/gallery_grid_bloc/gallery_grid_bloc.dart';
+import 'package:BooruPocket/blocs/gallery_grid_cubit/gallery_grid_cubit.dart';
 import 'package:BooruPocket/blocs/post_detail_screen_cubit/post_detail_screen_cubit_cubit.dart';
 import 'package:BooruPocket/blocs/settings_cubit/settings_cubit.dart';
-import 'package:BooruPocket/router/router.dart';
-import 'package:BooruPocket/services/locator_service.dart';
+import 'package:BooruPocket/models/api/post/post.dart';
+import 'package:BooruPocket/services/system_ui_service.dart';
+import 'package:BooruPocket/widgets/danbooru_image.dart';
 import 'package:BooruPocket/widgets/post_detail_menu.dart';
 import 'package:BooruPocket/widgets/video_player.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:interactiveviewer_gallery/interactiveviewer_gallery.dart';
 
@@ -17,10 +17,10 @@ import 'package:interactiveviewer_gallery/interactiveviewer_gallery.dart';
 class PostDetailScreen extends StatelessWidget {
   final int initialIndex;
 
-  final GalleryGridBloc galleryGridBloc;
+  final GalleryGridCubit galleryGridCubit;
   const PostDetailScreen({
     super.key,
-    required this.galleryGridBloc,
+    required this.galleryGridCubit,
     required this.initialIndex,
   });
   @override
@@ -33,7 +33,7 @@ class PostDetailScreen extends StatelessWidget {
           ),
         ),
         BlocProvider.value(
-          value: galleryGridBloc,
+          value: galleryGridCubit,
         ),
       ],
       child: const _PostDetailScreen(),
@@ -56,131 +56,112 @@ class _PostDetailScreenState extends State<_PostDetailScreen> {
   Widget build(BuildContext context) {
     return BlocBuilder<SettingsCubit, SettingsState>(
       builder: (context, settingsState) {
-        return BlocBuilder<PostDetailScreenCubitCubit,
-            PostDetailScreenCubitState>(
-          builder: (context, state) {
-            return BlocBuilder<GalleryGridBloc, GalleryGridState>(
-              buildWhen: (previous, current) =>
-                  (previous.posts.length != current.posts.length),
-              builder: (context, gridBlocState) {
+        return BlocBuilder<GalleryGridCubit, GalleryGridState>(
+          buildWhen: (previous, current) =>
+              (previous.posts.length != current.posts.length),
+          builder: (context, gridBlocState) {
+            return BlocBuilder<PostDetailScreenCubitCubit,
+                PostDetailScreenCubitState>(
+              builder: (context, state) {
                 final postInfo = gridBlocState.posts[state.currentPostIndex];
-                if (!state.willPop) {
-                  if (state.showMenu) {
-                    SystemChrome.setEnabledSystemUIMode(
-                      SystemUiMode.edgeToEdge,
-                      overlays: SystemUiOverlay.values,
-                    );
-                  } else if (!postInfo.isVideo) {
-                    SystemChrome.setEnabledSystemUIMode(
-                      SystemUiMode.manual,
-                      overlays: [],
-                    );
-                  }
+
+                if (state.showMenu || postInfo.isVideo) {
+                  SystemUiService.showSystemUI();
+                } else {
+                  SystemUiService.hideSystemUI();
                 }
-                return PopScope(
-                  canPop: false,
-                  onPopInvoked: (didPop) async {
-                    detailCubit.willPop();
-                    await SystemChrome.setEnabledSystemUIMode(
-                      SystemUiMode.edgeToEdge,
-                      overlays: SystemUiOverlay.values,
-                    );
-                    locator<AppRouter>().popForced();
-                  },
-                  child: Scaffold(
-                    backgroundColor: Colors.black,
-                    extendBody: !postInfo.isVideo,
-                    extendBodyBehindAppBar: !postInfo.isVideo,
-                    appBar: const PostDetailAppBar(),
-                    bottomNavigationBar: const PostDetailBottomBar(),
-                    body: Stack(
-                      children: [
-                        GestureDetector(
-                          onTap: () => detailCubit.toggleShowMenu(),
-                          child: InteractiveviewerGallery(
-                            disableDismissable: true,
-                            sources: gridBlocState.posts,
-                            doubleTapScale: 0.3,
-                            initIndex: state.currentPostIndex,
-                            maxScale: 8.0,
-                            itemBuilder: (context, index, isFocus) {
-                              final post = gridBlocState.posts[index];
-                              final isMaxQuality =
-                                  settingsState.detailPageQuality ==
-                                          ImageQuality.max ||
-                                      (state.maxQuality[index] ?? false);
 
-                              final tag = index == state.currentPostIndex &&
-                                      !post.isVideo
-                                  ? "${gridBlocState.uniqueKey}-${post.id}"
-                                  : UniqueKey().toString();
+                return Scaffold(
+                  backgroundColor: Colors.black,
+                  extendBody: !postInfo.isVideo,
+                  extendBodyBehindAppBar: !postInfo.isVideo,
+                  appBar: const PostDetailAppBar(),
+                  bottomNavigationBar: const PostDetailBottomBar(),
+                  body: Stack(
+                    children: [
+                      GestureDetector(
+                        onTap: detailCubit.toggleShowMenu,
+                        child: InteractiveviewerGallery(
+                          disableDismissable: true,
+                          sources: gridBlocState.posts,
+                          doubleTapScale: 0.3,
+                          initIndex: state.currentPostIndex,
+                          maxScale: 8.0,
+                          itemBuilder: (context, index, isFocus) {
+                            final post = gridBlocState.posts[index];
+                            final isMaxQuality =
+                                settingsState.detailPageQuality ==
+                                        ImageQuality.max ||
+                                    (state.maxQuality[index] ?? false);
 
-                              return Hero(
-                                tag: tag,
-                                child: Stack(
-                                  alignment: Alignment.center,
-                                  fit: StackFit.expand,
-                                  children: post.isVideo
-                                      ? [
-                                          if (isFocus)
-                                            VideoPlayerWrapper(
-                                              post: post,
-                                            ),
-                                        ]
-                                      : [
-                                          if (isFocus &&
-                                              settingsState.gridImageQuality !=
-                                                  settingsState
-                                                      .detailPageQuality)
-                                            ExtendedImage.network(
-                                              post.getImage(
-                                                settingsState.gridImageQuality,
-                                              ),
-                                              fit: BoxFit.contain,
-                                              loadStateChanged:
-                                                  loadStateChanged,
-                                            ),
-                                          ExtendedImage.network(
-                                            post.getImage(
-                                              settingsState.detailPageQuality,
-                                            ),
-                                            headers: {
-                                              'user-agent': context
-                                                  .read<DanbooruAuthCubit>()
-                                                  .userAgentHeader(),
-                                            },
-                                            fit: BoxFit.contain,
-                                            loadStateChanged: loadStateChanged,
-                                          ),
-                                          if (isFocus &&
-                                              isMaxQuality &&
-                                              !state.willPop)
-                                            ExtendedImage.network(
-                                              post.maxQuality,
-                                              headers: {
-                                                'user-agent': context
-                                                    .read<DanbooruAuthCubit>()
-                                                    .userAgentHeader(),
-                                              },
-                                              fit: BoxFit.contain,
-                                              loadStateChanged:
-                                                  loadStateChanged,
-                                            ),
-                                        ],
+                            final tag = index == state.currentPostIndex
+                                ? "${gridBlocState.uniqueKey}-${post.id}"
+                                : UniqueKey().toString();
+
+                            final stackChildren = [
+                              // this is the default image for the hero animation
+                              if (isFocus &&
+                                  (settingsState.gridImageQuality !=
+                                          settingsState.detailPageQuality ||
+                                      post.isVideo))
+                                DanbooruImage(
+                                  imageUrl: post.getImage(
+                                    settingsState.gridImageQuality,
+                                  ),
+                                  fit: BoxFit.contain,
+                                  loadStateChanged: loadStateChanged,
                                 ),
-                              );
-                            },
-                            onPageChanged: (int pageIndex) {
-                              detailCubit.setCurrentPostIndex(pageIndex);
-                            },
-                          ),
+                              ...post.isVideo
+                                  ? [
+                                      if (isFocus)
+                                        VideoPlayerWrapper(
+                                          post: post,
+                                          postDetailCubit: detailCubit,
+                                          authCubit:
+                                              context.read<DanbooruAuthCubit>(),
+
+                                          // if we do not do this, the video will render under the image
+                                          onVideoStart: () => setState(() {}),
+                                        ),
+                                    ]
+                                  : [
+                                      DanbooruImage(
+                                        imageUrl: post.getImage(
+                                          settingsState.detailPageQuality,
+                                        ),
+                                        fit: BoxFit.contain,
+                                        loadStateChanged: loadStateChanged,
+                                      ),
+                                      if (isFocus && isMaxQuality)
+                                        DanbooruImage(
+                                          imageUrl: post.getImage(
+                                            ImageQuality.max,
+                                          ),
+                                          fit: BoxFit.contain,
+                                          loadStateChanged: loadStateChanged,
+                                        ),
+                                    ],
+                            ];
+
+                            return Hero(
+                              tag: tag,
+                              child: Stack(
+                                alignment: Alignment.center,
+                                fit: StackFit.expand,
+                                children: stackChildren,
+                              ),
+                            );
+                          },
+                          onPageChanged: (int pageIndex) {
+                            detailCubit.setCurrentPostIndex(pageIndex);
+                          },
                         ),
-                        if (state.loading)
-                          const Center(
-                            child: CircularProgressIndicator(),
-                          ),
-                      ],
-                    ),
+                      ),
+                      if (state.loading)
+                        const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                    ],
                   ),
                 );
               },

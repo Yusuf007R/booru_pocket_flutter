@@ -34,7 +34,6 @@ jobs:
           keystorePassword: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
           keystoreAlias: ${{ secrets.KEYSTORE_KEY_ALIAS }}
           keyPassword: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
-          bundletoolVersion: "1.9.0"
       - uses: actions/upload-artifact@v3
         with:
           name: release-apk

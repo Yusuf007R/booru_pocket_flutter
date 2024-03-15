@@ -3,16 +3,21 @@ import 'package:BooruPocket/services/locator_service.dart';
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 
-import 'context_service.dart';
+import 'app_context_service.dart';
 
 class AlertService {
-  BuildContext context = locator<ContextService>().context;
-
   void showSnackBar({
     required String text,
     SnackbarType type = SnackbarType.info,
     Icon? customIcon,
   }) {
+    final context = locator<AppContextService>().context;
+
+    if (context == null) {
+      // reportMessage('Context is null', )
+      return;
+    }
+
     final flushBar = Flushbar(
       icon: Padding(
         padding: const EdgeInsets.only(left: 5),

@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:BooruPocket/blocs/gallery_grid_bloc/gallery_grid_bloc.dart';
+import 'package:BooruPocket/blocs/gallery_grid_cubit/gallery_grid_cubit.dart';
 import 'package:BooruPocket/blocs/settings_cubit/settings_cubit.dart';
 import 'package:BooruPocket/widgets/date_post_screen_nav_bar.dart';
 import 'package:BooruPocket/widgets/gallery_grid.dart';
@@ -43,13 +43,13 @@ class _PostScreenState extends State<PostScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<SettingsCubit, SettingsState>(
-      listenWhen: (previous, current) =>
-          previous.rating != current.rating ||
-          previous.pageLimit != current.pageLimit,
+      // listenWhen: (previous, current) =>
+      //     previous.rating != current.rating ||
+      //     previous.pageLimit != current.pageLimit,
       listener: (context, state) {
-        context.read<GalleryGridBloc>().add(PostsFetched(shouldReset: true));
+        context.read<GalleryGridCubit>().fetchPosts(shouldReset: true);
       },
-      child: BlocBuilder<GalleryGridBloc, GalleryGridState>(
+      child: BlocBuilder<GalleryGridCubit, GalleryGridState>(
         builder: (context, state) {
           final postScreenType = context.read<PostScreenType>();
           final isDatePostScreen = postScreenType == PostScreenType.curated ||
@@ -104,14 +104,14 @@ class _PostScreenState extends State<PostScreen> {
   void initState() {
     super.initState();
     _scrollController.addListener(onScroll);
-    context.read<GalleryGridBloc>().add(PostsFetched());
+    context.read<GalleryGridCubit>().fetchPosts(shouldReset: true);
     visible = context.read<ValueNotifier<bool>>();
   }
 
   Future<GalleryGridState> onRefresh() {
-    GalleryGridBloc bloc = context.read<GalleryGridBloc>();
-    bloc.add(PostsRefreshed());
-    return bloc.stream
+    final cubit = context.read<GalleryGridCubit>();
+    cubit.refreshPosts();
+    return cubit.stream
         .firstWhere((element) => element.gridStatus != GridStatus.refreshing);
   }
 
@@ -133,7 +133,7 @@ class _PostScreenState extends State<PostScreen> {
         position.extentBefore != 0 || position.extentAfter != 0;
 
     if (!isScreenFilled || (isNotAtStart && isAtOrNearEdge)) {
-      context.read<GalleryGridBloc>().add(PostsFetched());
+      context.read<GalleryGridCubit>().fetchPosts();
     }
   }
 }

@@ -8,7 +8,7 @@ import 'package:BooruPocket/models/api/post/post.dart';
 import 'package:BooruPocket/models/api/user/user.dart';
 import 'package:BooruPocket/utils/compute_json_decode.dart';
 import 'package:BooruPocket/utils/sentry_utils.dart';
-import 'package:BooruPocket/utils/transform_favorite_response.dart';
+import 'package:BooruPocket/utils/transform_danbooru_responses.dart';
 import 'package:dio/dio.dart';
 
 class DanbooruRepository {
@@ -65,7 +65,7 @@ class DanbooruRepository {
         } catch (error, stackTrace) {
           reportException(
             "Error while parsing AutoComplete",
-            originalError: error,
+            error,
             stackTrace: stackTrace,
             extras: {"AutoComplete": element.toString()},
           );
@@ -76,11 +76,10 @@ class DanbooruRepository {
   }
 
   Future<Map<int, bool>> getFavorites(String username, int page) async {
-    List<Response<dynamic>> responses = [];
-
+    late final futures = <Future<Response<dynamic>>>[];
     for (var i = 1; i <= page; i++) {
-      responses.add(
-        await dio.get(
+      futures.add(
+        dio.get(
           '/favorites.json',
           queryParameters: {
             'search[user_name]': username,
@@ -88,53 +87,21 @@ class DanbooruRepository {
             'limit': 1000,
             'page': i,
           },
+          options: Options(responseType: ResponseType.plain),
         ),
       );
     }
-    return await transformFavoriteResponse(responses);
+    return await transformFavoriteResponse(await Future.wait(futures));
   }
 
   Future<List<Post>> getPosts(Map<String, dynamic> query, User user) async {
     Response response = await dio.get(
       '/posts.json',
       queryParameters: query,
+      options: Options(responseType: ResponseType.plain),
     );
 
-    return List<Post?>.from(
-      response.data.where(
-        ((element) {
-          if (element['id'] == null ||
-              [element['is_deleted'], element['is_banned']].contains(true)) {
-            return false;
-          }
-          // here we filter out posts that are not visible to the user
-          final isGoldOrHigher = user.map(
-            noAuthenticated: (_) => false,
-            authenticating: (_) => false,
-            authenticated: (value) => value.level > 10,
-          );
-          if (!isGoldOrHigher &&
-              ['loli', 'shota']
-                  .any((tag) => element['tag_string'].contains(tag))) {
-            return false;
-          }
-          return true;
-        }),
-      ).map((element) {
-        try {
-          return Post.fromJson(element);
-        } catch (error, stackTrace) {
-          reportException(
-            "Error while parsing Post",
-            originalError: error,
-            stackTrace: stackTrace,
-            extras: {"Post Id": element['id'].toString()},
-          );
-
-          return null;
-        }
-      }),
-    ).whereType<Post>().toList();
+    return await transformPostsResponse(response.data, user);
   }
 
   Future<User> getUserProfile() async {
@@ -144,8 +111,8 @@ class DanbooruRepository {
 
   Future<User> setBasicAuthHeader(String username, String password) async {
     Codec<String, String> stringToBase64 = utf8.fuse(base64);
-    String enconded = stringToBase64.encode('$username:$password');
-    dio.options.headers[HttpHeaders.authorizationHeader] = 'Basic $enconded';
+    String encoded = stringToBase64.encode('$username:$password');
+    dio.options.headers[HttpHeaders.authorizationHeader] = 'Basic $encoded';
 
     try {
       return await getUserProfile();

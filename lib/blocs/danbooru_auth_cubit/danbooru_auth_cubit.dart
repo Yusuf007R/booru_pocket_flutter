@@ -97,7 +97,7 @@ class DanbooruAuthCubit extends Cubit<DanbooruAuthState> {
     } catch (error, stackTrace) {
       reportException(
         "Error while authenticating",
-        originalError: error,
+        error,
         stackTrace: stackTrace,
       );
 
@@ -121,7 +121,7 @@ class DanbooruAuthCubit extends Cubit<DanbooruAuthState> {
     } on DioException catch (error, stackTrace) {
       reportException(
         "Couldn't change favorite status",
-        originalError: error,
+        error,
         stackTrace: stackTrace,
         extras: {
           "post-id": post.id.toString(),
@@ -148,7 +148,7 @@ class DanbooruAuthCubit extends Cubit<DanbooruAuthState> {
     } on DioException catch (error, stackTrace) {
       reportException(
         "Couldn't change favorite status",
-        originalError: error,
+        error,
         stackTrace: stackTrace,
         extras: {
           "post-id": post.id.toString(),

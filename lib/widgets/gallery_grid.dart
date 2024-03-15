@@ -1,4 +1,4 @@
-import 'package:BooruPocket/blocs/gallery_grid_bloc/gallery_grid_bloc.dart';
+import 'package:BooruPocket/blocs/gallery_grid_cubit/gallery_grid_cubit.dart';
 import 'package:BooruPocket/blocs/settings_cubit/settings_cubit.dart';
 import 'package:BooruPocket/widgets/gallery_grid_item.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +29,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 //         addAutomaticKeepAlives: false,
 //       ),
 //     );
-//   }
+//   }/
 // }
 
 class GalleryGrid extends StatelessWidget {
@@ -43,7 +43,7 @@ class GalleryGrid extends StatelessWidget {
       builder: (context, settingsState) {
         double width =
             MediaQuery.of(context).size.width / settingsState.gridColumns;
-        return BlocBuilder<GalleryGridBloc, GalleryGridState>(
+        return BlocBuilder<GalleryGridCubit, GalleryGridState>(
           builder: (context, state) {
             return state.posts.isEmpty &&
                     state.gridStatus != GridStatus.refreshing

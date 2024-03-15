@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$PostDetailScreenCubitState {
-  bool get willPop => throw _privateConstructorUsedError;
+// @Default(false) bool willPop,
   Map<int, bool> get maxQuality => throw _privateConstructorUsedError;
   bool get loading => throw _privateConstructorUsedError;
   List<String> get selectedTags => throw _privateConstructorUsedError;
@@ -36,8 +36,7 @@ abstract class $PostDetailScreenCubitStateCopyWith<$Res> {
           PostDetailScreenCubitState>;
   @useResult
   $Res call(
-      {bool willPop,
-      Map<int, bool> maxQuality,
+      {Map<int, bool> maxQuality,
       bool loading,
       List<String> selectedTags,
       int currentPostIndex,
@@ -58,7 +57,6 @@ class _$PostDetailScreenCubitStateCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? willPop = null,
     Object? maxQuality = null,
     Object? loading = null,
     Object? selectedTags = null,
@@ -66,10 +64,6 @@ class _$PostDetailScreenCubitStateCopyWithImpl<$Res,
     Object? showMenu = null,
   }) {
     return _then(_value.copyWith(
-      willPop: null == willPop
-          ? _value.willPop
-          : willPop // ignore: cast_nullable_to_non_nullable
-              as bool,
       maxQuality: null == maxQuality
           ? _value.maxQuality
           : maxQuality // ignore: cast_nullable_to_non_nullable
@@ -104,8 +98,7 @@ abstract class _$$PostDetailScreenCubitStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {bool willPop,
-      Map<int, bool> maxQuality,
+      {Map<int, bool> maxQuality,
       bool loading,
       List<String> selectedTags,
       int currentPostIndex,
@@ -125,7 +118,6 @@ class __$$PostDetailScreenCubitStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? willPop = null,
     Object? maxQuality = null,
     Object? loading = null,
     Object? selectedTags = null,
@@ -133,10 +125,6 @@ class __$$PostDetailScreenCubitStateImplCopyWithImpl<$Res>
     Object? showMenu = null,
   }) {
     return _then(_$PostDetailScreenCubitStateImpl(
-      willPop: null == willPop
-          ? _value.willPop
-          : willPop // ignore: cast_nullable_to_non_nullable
-              as bool,
       maxQuality: null == maxQuality
           ? _value._maxQuality
           : maxQuality // ignore: cast_nullable_to_non_nullable
@@ -165,8 +153,7 @@ class __$$PostDetailScreenCubitStateImplCopyWithImpl<$Res>
 
 class _$PostDetailScreenCubitStateImpl implements _PostDetailScreenCubitState {
   _$PostDetailScreenCubitStateImpl(
-      {this.willPop = false,
-      final Map<int, bool> maxQuality = const {},
+      {final Map<int, bool> maxQuality = const {},
       this.loading = false,
       final List<String> selectedTags = const [],
       required this.currentPostIndex,
@@ -174,10 +161,9 @@ class _$PostDetailScreenCubitStateImpl implements _PostDetailScreenCubitState {
       : _maxQuality = maxQuality,
         _selectedTags = selectedTags;
 
-  @override
-  @JsonKey()
-  final bool willPop;
+// @Default(false) bool willPop,
   final Map<int, bool> _maxQuality;
+// @Default(false) bool willPop,
   @override
   @JsonKey()
   Map<int, bool> get maxQuality {
@@ -206,7 +192,7 @@ class _$PostDetailScreenCubitStateImpl implements _PostDetailScreenCubitState {
 
   @override
   String toString() {
-    return 'PostDetailScreenCubitState(willPop: $willPop, maxQuality: $maxQuality, loading: $loading, selectedTags: $selectedTags, currentPostIndex: $currentPostIndex, showMenu: $showMenu)';
+    return 'PostDetailScreenCubitState(maxQuality: $maxQuality, loading: $loading, selectedTags: $selectedTags, currentPostIndex: $currentPostIndex, showMenu: $showMenu)';
   }
 
   @override
@@ -214,7 +200,6 @@ class _$PostDetailScreenCubitStateImpl implements _PostDetailScreenCubitState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PostDetailScreenCubitStateImpl &&
-            (identical(other.willPop, willPop) || other.willPop == willPop) &&
             const DeepCollectionEquality()
                 .equals(other._maxQuality, _maxQuality) &&
             (identical(other.loading, loading) || other.loading == loading) &&
@@ -229,7 +214,6 @@ class _$PostDetailScreenCubitStateImpl implements _PostDetailScreenCubitState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      willPop,
       const DeepCollectionEquality().hash(_maxQuality),
       loading,
       const DeepCollectionEquality().hash(_selectedTags),
@@ -247,16 +231,13 @@ class _$PostDetailScreenCubitStateImpl implements _PostDetailScreenCubitState {
 abstract class _PostDetailScreenCubitState
     implements PostDetailScreenCubitState {
   factory _PostDetailScreenCubitState(
-      {final bool willPop,
-      final Map<int, bool> maxQuality,
+      {final Map<int, bool> maxQuality,
       final bool loading,
       final List<String> selectedTags,
       required final int currentPostIndex,
       final bool showMenu}) = _$PostDetailScreenCubitStateImpl;
 
-  @override
-  bool get willPop;
-  @override
+  @override // @Default(false) bool willPop,
   Map<int, bool> get maxQuality;
   @override
   bool get loading;

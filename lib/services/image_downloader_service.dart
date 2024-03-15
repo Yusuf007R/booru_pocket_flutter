@@ -4,23 +4,21 @@ import 'dart:typed_data';
 import 'package:BooruPocket/blocs/settings_cubit/settings_cubit.dart';
 import 'package:BooruPocket/models/api/post/post.dart';
 import 'package:BooruPocket/services/alert_service.dart';
-import 'package:BooruPocket/services/context_service.dart';
+import 'package:BooruPocket/services/app_context_service.dart';
 import 'package:BooruPocket/services/locator_service.dart';
 import 'package:BooruPocket/services/notification_service.dart';
 import 'package:BooruPocket/utils/sentry_utils.dart';
 import 'package:dio/dio.dart';
 import 'package:extended_image/extended_image.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 
 class ImageDownloaderService {
-  BuildContext context = locator<ContextService>().context;
   AlertService snackBarService = locator<AlertService>();
-  late SettingsCubit settingsCubit = context.read<SettingsCubit>();
 
   Future<List<File?>> downloadImages(List<Post> posts) async {
+    SettingsCubit? settingsCubit = locator<AppContextService>().settingsCubit;
+    if (settingsCubit == null) return [null];
     try {
       String path;
 
@@ -48,22 +46,28 @@ class ImageDownloaderService {
         final notifyService = locator<NotificationService>();
         try {
           notifyService.showProgressDownloadNotify(post.id);
-          final bytes = await getImageData(post.maxQuality);
+          final bytes = await getImageData(post.getImage(ImageQuality.max));
           if (bytes == null) {
             files.add(null);
             continue;
           }
 
           await file.writeAsBytes(bytes);
-          notifyService.showDownloadCompletedNotify(post.id, post.highQuality);
+          notifyService.showDownloadCompletedNotify(
+            post.id,
+            post.getImage(ImageQuality.low),
+          );
           files.add(file);
           continue;
         } catch (error, stacktrace) {
           reportException(
             "Error while downloading image",
-            originalError: error,
+            error,
             stackTrace: stacktrace,
-            extras: {"url": post.highQuality},
+            extras: {
+              "url": post.getImage(ImageQuality.max),
+              "postId": post.id.toString(),
+            },
           );
           files.add(null);
           continue;
@@ -73,7 +77,7 @@ class ImageDownloaderService {
     } catch (error, stacktrace) {
       reportException(
         'Error while requesting permission',
-        originalError: error,
+        error,
         stackTrace: stacktrace,
       );
       return [null];
@@ -102,7 +106,7 @@ class ImageDownloaderService {
     } catch (error, stacktrace) {
       reportException(
         "Error while getting image data",
-        originalError: error,
+        error,
         stackTrace: stacktrace,
         extras: {"url": url},
       );
@@ -115,7 +119,7 @@ class ImageDownloaderService {
       posts.map((post) async {
         final tempDir = await getTemporaryDirectory();
         final file = File('${tempDir.path}/${post.id}-temp.jpg');
-        final image = await getImageData(post.highQuality);
+        final image = await getImageData(post.getImage(ImageQuality.max));
         if (image == null) return null;
         await file.writeAsBytes(image);
 

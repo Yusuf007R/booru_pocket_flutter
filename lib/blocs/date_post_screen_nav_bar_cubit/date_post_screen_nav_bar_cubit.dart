@@ -1,8 +1,8 @@
-import 'package:bloc/bloc.dart';
-import 'package:BooruPocket/blocs/gallery_grid_bloc/gallery_grid_bloc.dart';
+import 'package:BooruPocket/blocs/gallery_grid_cubit/gallery_grid_cubit.dart';
 import 'package:BooruPocket/blocs/query_params_cubit/query_params_cubit.dart';
 import 'package:BooruPocket/models/api/queryparams/queryparams.dart';
 import 'package:BooruPocket/utils/date_extensions.dart';
+import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'date_post_screen_nav_bar_cubit.freezed.dart';
@@ -11,10 +11,10 @@ part 'date_post_screen_nav_bar_state.dart';
 
 class DatePostScreenNavbarCubit extends Cubit<DatePostScreenNavbarState> {
   QueryParamsCubit queryParamsCubit;
-  GalleryGridBloc galleryGridBloc;
+  GalleryGridCubit galleryGridCubit;
   DatePostScreenNavbarCubit({
     required this.queryParamsCubit,
-    required this.galleryGridBloc,
+    required this.galleryGridCubit,
     required DatePostType type,
   }) : super(
           DatePostScreenNavbarState(
@@ -23,18 +23,6 @@ class DatePostScreenNavbarCubit extends Cubit<DatePostScreenNavbarState> {
             type: type,
           ),
         );
-
-  void setDate(DateTime date) => emit(state.copyWith(date: date));
-
-  void setScale(ScaleType scale) => emit(state.copyWith(scale: scale));
-
-  @override
-  void onChange(Change<DatePostScreenNavbarState> change) {
-    super.onChange(change);
-    if (change.currentState == change.nextState) return;
-    galleryGridBloc.add(PostsFetched(shouldReset: true));
-    loadQueryParams(customState: change.nextState);
-  }
 
   void loadQueryParams({DatePostScreenNavbarState? customState}) {
     final currentState = customState ?? state;
@@ -47,6 +35,18 @@ class DatePostScreenNavbarCubit extends Cubit<DatePostScreenNavbarState> {
     String tags = "$dateTag $filterTag";
     queryParamsCubit.updateQueryParams(params.copyWith(tags: tags));
   }
+
+  @override
+  void onChange(Change<DatePostScreenNavbarState> change) {
+    super.onChange(change);
+    if (change.currentState == change.nextState) return;
+    galleryGridCubit.fetchPosts(shouldReset: true);
+    loadQueryParams(customState: change.nextState);
+  }
+
+  void setDate(DateTime date) => emit(state.copyWith(date: date));
+
+  void setScale(ScaleType scale) => emit(state.copyWith(scale: scale));
 
   String _getDateTag(ScaleType scale, DateTime date) {
     if (scale == ScaleType.day) return "date:${date.yyyyMMdd()}";
