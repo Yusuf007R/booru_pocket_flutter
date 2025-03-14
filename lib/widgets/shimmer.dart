@@ -8,11 +8,11 @@ Shimmer getShimmer(double height, double width) {
       begin: Alignment.centerLeft,
       end: Alignment.centerRight,
       colors: <Color>[
-        baseColor,
-        baseColor,
-        highlightColor,
-        baseColor,
-        baseColor,
+        shimmerBaseColor,
+        shimmerBaseColor,
+        shimmerHighlightColor,
+        shimmerBaseColor,
+        shimmerBaseColor,
       ],
       stops: const <double>[
         0.0,

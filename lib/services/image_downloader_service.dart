@@ -46,7 +46,7 @@ class ImageDownloaderService {
         final notifyService = locator<NotificationService>();
         try {
           notifyService.showProgressDownloadNotify(post.id);
-          final bytes = await getImageData(post.getImage(ImageQuality.max));
+          final bytes = await getImageData(post.imgOriginal);
           if (bytes == null) {
             files.add(null);
             continue;
@@ -55,7 +55,7 @@ class ImageDownloaderService {
           await file.writeAsBytes(bytes);
           notifyService.showDownloadCompletedNotify(
             post.id,
-            post.getImage(ImageQuality.low),
+            post.imgLow,
           );
           files.add(file);
           continue;
@@ -65,7 +65,7 @@ class ImageDownloaderService {
             error,
             stackTrace: stacktrace,
             extras: {
-              "url": post.getImage(ImageQuality.max),
+              "url": post.imgOriginal,
               "postId": post.id.toString(),
             },
           );
@@ -119,7 +119,7 @@ class ImageDownloaderService {
       posts.map((post) async {
         final tempDir = await getTemporaryDirectory();
         final file = File('${tempDir.path}/${post.id}-temp.jpg');
-        final image = await getImageData(post.getImage(ImageQuality.max));
+        final image = await getImageData(post.imgOriginal);
         if (image == null) return null;
         await file.writeAsBytes(image);
 

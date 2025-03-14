@@ -1,7 +1,7 @@
 import 'package:BooruPocket/blocs/gallery_grid_cubit/gallery_grid_cubit.dart';
 import 'package:BooruPocket/blocs/query_params_cubit/query_params_cubit.dart';
 import 'package:BooruPocket/models/api/autocomplete/autocomplete.dart';
-import 'package:BooruPocket/models/api/queryparams/queryparams.dart';
+import 'package:BooruPocket/models/api/query_params/query_params.dart';
 import 'package:BooruPocket/repositories/danbooru.dart';
 import 'package:BooruPocket/services/locator_service.dart';
 import 'package:bloc/bloc.dart';

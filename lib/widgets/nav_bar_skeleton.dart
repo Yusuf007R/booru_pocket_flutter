@@ -2,18 +2,18 @@ import 'package:BooruPocket/constants/constants.dart';
 import 'package:flutter/material.dart';
 
 class NavBarSkeleton extends StatelessWidget {
+  final List<Widget> leftSideWidgets;
+
+  final List<Widget> rightSideWidgets;
+
+  final Widget backgroundWidget;
+
   const NavBarSkeleton({
     super.key,
     this.leftSideWidgets = const [],
     this.rightSideWidgets = const [],
     this.backgroundWidget = const SizedBox.shrink(),
   });
-
-  final List<Widget> leftSideWidgets;
-
-  final List<Widget> rightSideWidgets;
-
-  final Widget backgroundWidget;
 
   @override
   Widget build(BuildContext context) {

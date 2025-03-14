@@ -2,7 +2,6 @@ import 'package:BooruPocket/blocs/danbooru_auth_cubit/danbooru_auth_cubit.dart';
 import 'package:BooruPocket/blocs/gallery_grid_cubit/gallery_grid_cubit.dart';
 import 'package:BooruPocket/blocs/post_detail_screen_cubit/post_detail_screen_cubit_cubit.dart';
 import 'package:BooruPocket/blocs/settings_cubit/settings_cubit.dart';
-import 'package:BooruPocket/models/api/post/post.dart';
 import 'package:BooruPocket/services/system_ui_service.dart';
 import 'package:BooruPocket/widgets/danbooru_image.dart';
 import 'package:BooruPocket/widgets/post_detail_menu.dart';
@@ -100,16 +99,14 @@ class _PostDetailScreenState extends State<_PostDetailScreen> {
 
                             final stackChildren = [
                               // this is the default image for the hero animation
-                              if (isFocus &&
-                                  (settingsState.gridImageQuality !=
-                                          settingsState.detailPageQuality ||
-                                      post.isVideo))
+                              if (isFocus)
                                 DanbooruImage(
                                   imageUrl: post.getImage(
                                     settingsState.gridImageQuality,
                                   ),
                                   fit: BoxFit.contain,
                                   loadStateChanged: loadStateChanged,
+                                  compressionRatio: 0.9,
                                 ),
                               ...post.isVideo
                                   ? [
@@ -125,13 +122,13 @@ class _PostDetailScreenState extends State<_PostDetailScreen> {
                                         ),
                                     ]
                                   : [
-                                      DanbooruImage(
-                                        imageUrl: post.getImage(
-                                          settingsState.detailPageQuality,
+                                      if (!isMaxQuality)
+                                        DanbooruImage(
+                                          imageUrl: post.getImage(
+                                            settingsState.detailPageQuality,
+                                          ),
+                                          fit: BoxFit.contain,
                                         ),
-                                        fit: BoxFit.contain,
-                                        loadStateChanged: loadStateChanged,
-                                      ),
                                       if (isFocus && isMaxQuality)
                                         DanbooruImage(
                                           imageUrl: post.getImage(
@@ -190,6 +187,7 @@ class _PostDetailScreenState extends State<_PostDetailScreen> {
         return const SizedBox();
       case LoadState.completed:
         detailCubit.setLoading(false);
+
         return null;
       default:
         return const SizedBox();

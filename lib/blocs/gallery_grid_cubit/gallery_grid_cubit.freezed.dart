@@ -21,7 +21,9 @@ mixin _$GalleryGridState {
   GridStatus get gridStatus => throw _privateConstructorUsedError;
   List<int> get selectedPosts => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GalleryGridState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $GalleryGridStateCopyWith<GalleryGridState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -49,6 +51,8 @@ class _$GalleryGridStateCopyWithImpl<$Res, $Val extends GalleryGridState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of GalleryGridState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -101,6 +105,8 @@ class __$$GalleryGridStateImplCopyWithImpl<$Res>
       $Res Function(_$GalleryGridStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GalleryGridState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -191,7 +197,9 @@ class _$GalleryGridStateImpl implements _GalleryGridState {
       gridStatus,
       const DeepCollectionEquality().hash(_selectedPosts));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GalleryGridState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GalleryGridStateImplCopyWith<_$GalleryGridStateImpl> get copyWith =>
@@ -214,8 +222,11 @@ abstract class _GalleryGridState implements GalleryGridState {
   GridStatus get gridStatus;
   @override
   List<int> get selectedPosts;
+
+  /// Create a copy of GalleryGridState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GalleryGridStateImplCopyWith<_$GalleryGridStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

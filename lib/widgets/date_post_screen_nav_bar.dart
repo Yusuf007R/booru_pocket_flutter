@@ -32,7 +32,7 @@ class DatePostScreenNavBarStateWidget extends State<DatePostScreenNavBar> {
                 onTap: () {
                   Feedback.forTap(context);
                   if (isPushedScreen) {
-                    AutoRouter.of(context).pop();
+                    AutoRouter.of(context).maybePop();
                     return;
                   }
                   context.read<ScaffoldState>().openDrawer();

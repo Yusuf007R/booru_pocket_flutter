@@ -19,7 +19,9 @@ mixin _$QueryParamsCubitState {
   QueryParams get queryParams => throw _privateConstructorUsedError;
   String get strictTag => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of QueryParamsCubitState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $QueryParamsCubitStateCopyWith<QueryParamsCubitState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -46,6 +48,8 @@ class _$QueryParamsCubitStateCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of QueryParamsCubitState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -64,6 +68,8 @@ class _$QueryParamsCubitStateCopyWithImpl<$Res,
     ) as $Val);
   }
 
+  /// Create a copy of QueryParamsCubitState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $QueryParamsCopyWith<$Res> get queryParams {
@@ -97,6 +103,8 @@ class __$$QueryParamsCubitStateImplCopyWithImpl<$Res>
       $Res Function(_$QueryParamsCubitStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of QueryParamsCubitState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -147,7 +155,9 @@ class _$QueryParamsCubitStateImpl implements _QueryParamsCubitState {
   @override
   int get hashCode => Object.hash(runtimeType, queryParams, strictTag);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of QueryParamsCubitState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$QueryParamsCubitStateImplCopyWith<_$QueryParamsCubitStateImpl>
@@ -164,8 +174,11 @@ abstract class _QueryParamsCubitState implements QueryParamsCubitState {
   QueryParams get queryParams;
   @override
   String get strictTag;
+
+  /// Create a copy of QueryParamsCubitState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$QueryParamsCubitStateImplCopyWith<_$QueryParamsCubitStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

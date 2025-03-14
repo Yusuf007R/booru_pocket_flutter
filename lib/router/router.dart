@@ -11,7 +11,7 @@ import 'package:auto_route/auto_route.dart';
 // class $AppRouter {}
 
 @AutoRouterConfig(replaceInRouteName: 'Screen,Route')
-class AppRouter extends $AppRouter {
+class AppRouter extends RootStackRouter {
   @override
   RouteType get defaultRouteType => const RouteType.material();
 
@@ -34,6 +34,9 @@ class AppRouter extends $AppRouter {
           ],
         ),
         AutoRoute(
+          meta: const {
+            'isPushedScreen': true,
+          },
           page: PostRouteWrapper.page,
           guards: [AuthGuard()],
           children: [

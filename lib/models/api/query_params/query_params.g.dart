@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'queryparams.dart';
+part of 'query_params.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -8,7 +8,7 @@ part of 'queryparams.dart';
 
 _$PostParamsImpl _$$PostParamsImplFromJson(Map<String, dynamic> json) =>
     _$PostParamsImpl(
-      page: json['page'] as int? ?? 1,
+      page: (json['page'] as num?)?.toInt() ?? 1,
       tags: json['tags'] as String? ?? '',
     );
 

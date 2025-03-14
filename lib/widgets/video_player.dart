@@ -1,6 +1,5 @@
 import 'package:BooruPocket/blocs/danbooru_auth_cubit/danbooru_auth_cubit.dart';
 import 'package:BooruPocket/blocs/post_detail_screen_cubit/post_detail_screen_cubit_cubit.dart';
-import 'package:BooruPocket/blocs/settings_cubit/settings_cubit.dart';
 import 'package:BooruPocket/models/api/post/post.dart';
 import 'package:appinio_video_player/appinio_video_player.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +24,7 @@ class VideoPlayerWrapper extends StatefulWidget {
 }
 
 class _VideoPlayerWrapperState extends State<VideoPlayerWrapper> {
-  late VideoPlayerController videoPlayerController;
+  late CachedVideoPlayerController videoPlayerController;
 
   late CustomVideoPlayerController _customVideoPlayerController;
 
@@ -50,8 +49,8 @@ class _VideoPlayerWrapperState extends State<VideoPlayerWrapper> {
   }
 
   void initPlayer() async {
-    videoPlayerController = VideoPlayerController.networkUrl(
-      Uri.parse(widget.post.getImage(ImageQuality.max)),
+    videoPlayerController = CachedVideoPlayerController.network(
+      widget.post.imgOriginal,
       httpHeaders: {
         'user-agent': widget.authCubit.userAgentHeader(),
       },

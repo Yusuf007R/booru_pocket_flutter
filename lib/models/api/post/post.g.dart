@@ -7,7 +7,7 @@ part of 'post.dart';
 // **************************************************************************
 
 _$PostImpl _$$PostImplFromJson(Map<String, dynamic> json) => _$PostImpl(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       tags: _tagsArrayFromJson(json['tag_string_general'] as String),
       artistTag: _tagsArrayFromJson(json['tag_string_artist'] as String),
       characterTag: _tagsArrayFromJson(json['tag_string_character'] as String),
@@ -18,9 +18,9 @@ _$PostImpl _$$PostImplFromJson(Map<String, dynamic> json) => _$PostImpl(
       imageWidth: (json['image_width'] as num).toDouble(),
       imageHeight: (json['image_height'] as num).toDouble(),
       size: (json['file_size'] as num).toDouble(),
-      score: json['score'] as int,
-      favoriteCount: json['fav_count'] as int,
-      uploaderId: json['uploader_id'] as int,
+      score: (json['score'] as num).toInt(),
+      favoriteCount: (json['fav_count'] as num).toInt(),
+      uploaderId: (json['uploader_id'] as num).toInt(),
       createdAt: DateTime.parse(json['created_at'] as String),
       updatedAt: DateTime.parse(json['updated_at'] as String),
       meta: _tagsArrayFromJson(json['tag_string_meta'] as String),
@@ -65,8 +65,8 @@ _$PostVariantsImpl _$$PostVariantsImplFromJson(Map<String, dynamic> json) =>
     _$PostVariantsImpl(
       type: _postVariantTypeFromJson(json['type'] as String),
       url: json['url'] as String,
-      width: json['width'] as int,
-      height: json['height'] as int,
+      width: (json['width'] as num).toInt(),
+      height: (json['height'] as num).toInt(),
       fileExt: json['file_ext'] as String,
     );
 
@@ -84,4 +84,5 @@ const _$PostVariantTypeEnumMap = {
   PostVariantType.x360: 'x360',
   PostVariantType.x720: 'x720',
   PostVariantType.original: 'original',
+  PostVariantType.sample: 'sample',
 };

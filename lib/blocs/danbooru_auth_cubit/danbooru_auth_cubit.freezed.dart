@@ -22,7 +22,9 @@ mixin _$DanbooruAuthState {
   Map<int, bool> get favoritePostIds => throw _privateConstructorUsedError;
   User get user => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DanbooruAuthState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DanbooruAuthStateCopyWith<DanbooruAuthState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -53,6 +55,8 @@ class _$DanbooruAuthStateCopyWithImpl<$Res, $Val extends DanbooruAuthState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DanbooruAuthState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -86,6 +90,8 @@ class _$DanbooruAuthStateCopyWithImpl<$Res, $Val extends DanbooruAuthState>
     ) as $Val);
   }
 
+  /// Create a copy of DanbooruAuthState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $UserCopyWith<$Res> get user {
@@ -122,6 +128,8 @@ class __$$DanbooruAuthStateImplCopyWithImpl<$Res>
       $Res Function(_$DanbooruAuthStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DanbooruAuthState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -217,7 +225,9 @@ class _$DanbooruAuthStateImpl implements _DanbooruAuthState {
       const DeepCollectionEquality().hash(_favoritePostIds),
       user);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DanbooruAuthState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DanbooruAuthStateImplCopyWith<_$DanbooruAuthStateImpl> get copyWith =>
@@ -243,8 +253,11 @@ abstract class _DanbooruAuthState implements DanbooruAuthState {
   Map<int, bool> get favoritePostIds;
   @override
   User get user;
+
+  /// Create a copy of DanbooruAuthState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DanbooruAuthStateImplCopyWith<_$DanbooruAuthStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

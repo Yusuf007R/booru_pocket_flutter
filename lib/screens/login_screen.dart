@@ -27,7 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
             title: const Text('Danbooru Log in'),
             leading: IconButton(
               onPressed: () => {
-                AutoRouter.of(context).pop(),
+                AutoRouter.of(context).maybePop(),
               },
               icon: const Icon(Icons.arrow_back),
             ),

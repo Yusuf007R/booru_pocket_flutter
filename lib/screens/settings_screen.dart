@@ -72,7 +72,7 @@ class SettingsScreen extends StatelessWidget {
             title: const Text('Settings'),
             leading: IconButton(
               onPressed: () => {
-                AutoRouter.of(context).pop(),
+                AutoRouter.of(context).maybePop(),
               },
               icon: const Icon(Icons.arrow_back),
             ),

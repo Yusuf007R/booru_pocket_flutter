@@ -37,6 +37,7 @@ class PostScreenFAB extends StatelessWidget {
                   : EdgeInsets.zero,
               child: SpeedDial(
                 icon: Icons.menu,
+                iconTheme: Theme.of(context).iconTheme,
                 visible: isSelectedMode || value,
                 children: isSelectedMode
                     ? [

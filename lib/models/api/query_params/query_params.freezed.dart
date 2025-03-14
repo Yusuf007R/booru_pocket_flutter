@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'queryparams.dart';
+part of 'query_params.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -62,8 +62,13 @@ mixin _$QueryParams {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  /// Serializes this QueryParams to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of QueryParams
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $QueryParamsCopyWith<QueryParams> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -90,6 +95,8 @@ class _$QueryParamsCopyWithImpl<$Res, $Val extends QueryParams>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of QueryParams
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -136,6 +143,8 @@ class __$$PostParamsImplCopyWithImpl<$Res>
       _$PostParamsImpl _value, $Res Function(_$PostParamsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of QueryParams
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -196,11 +205,13 @@ class _$PostParamsImpl implements PostParams {
             (identical(other.type, type) || other.type == type));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, page, tags, type);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of QueryParams
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PostParamsImplCopyWith<_$PostParamsImpl> get copyWith =>
@@ -293,8 +304,11 @@ abstract class PostParams implements QueryParams {
   @override
   @JsonKey(includeFromJson: false)
   QueryParamsPostType get type;
+
+  /// Create a copy of QueryParams
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PostParamsImplCopyWith<_$PostParamsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

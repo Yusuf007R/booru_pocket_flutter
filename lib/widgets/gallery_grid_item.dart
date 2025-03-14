@@ -48,197 +48,193 @@ class _GalleryGridItemState extends State<GalleryGridItem> {
           builder: (context, state) {
             final galleryGridCubit = BlocProvider.of<GalleryGridCubit>(context);
             Post post = state.posts[widget.index];
+            final isSelected = state.selectedPosts.contains(post.id);
 
-            double aspectRatio = post.imageWidth / post.imageHeight;
+            final aspectRatio = post.imageWidth / post.imageHeight;
 
-            double height = settingState.gridType == GridType.square
+            final height = settingState.gridType == GridType.square
                 ? widget.width
                 : widget.width / aspectRatio;
+            final isFavorite =
+                context.read<DanbooruAuthCubit>().isPostFavorite(post);
 
-            bool isSelected = state.selectedPosts.contains(post.id);
+            return SizedBox(
+              height: height,
+              width: widget.width,
+              child: GestureDetector(
+                onLongPress: () {
+                  Feedback.forTap(context);
+                  Feedback.forLongPress(context);
 
-            return BlocBuilder<DanbooruAuthCubit, DanbooruAuthState>(
-              builder: (context, danbooruAuthState) {
-                final isFavorite =
-                    context.read<DanbooruAuthCubit>().isPostFavorite(post);
-                return SizedBox(
-                  height: height,
-                  width: widget.width,
-                  child: GestureDetector(
-                    onLongPress: () {
-                      Feedback.forTap(context);
-                      Feedback.forLongPress(context);
-
-                      final itemsList = [
-                        popUpItem(
-                          text: 'Favorite',
-                          icon: MdiIcons.heart,
-                          iconColor: isFavorite ? Colors.pinkAccent : null,
-                          onTap: () {
-                            context
-                                .read<DanbooruAuthCubit>()
-                                .toggleFavoritePost(post);
-                          },
-                        ),
-                        popUpItem(
-                          text: 'Select',
-                          icon: isSelected
-                              ? Icons.check_box
-                              : Icons.check_box_outlined,
-                          onTap: () {
-                            galleryGridCubit.selectPost(post.id);
-                          },
-                        ),
-                        popUpItem(
-                          text: 'Share',
-                          icon: Icons.share_outlined,
-                          onTap: () {
-                            locator<ImageDownloaderService>()
-                                .downloadShareImage([post]);
-                          },
-                        ),
-                        popUpItem(
-                          text: 'Download',
-                          icon: Icons.save_alt_outlined,
-                          onTap: () {
-                            locator<ImageDownloaderService>()
-                                .downloadImages([post]);
-                          },
-                        ),
-                      ];
-
-                      final menuHeight = itemsList.fold(
-                        0.0,
-                        (previousValue, element) =>
-                            (previousValue) + element.height,
-                      );
-
-                      final height = MediaQuery.of(context).size.height;
-                      final bottomPadding = View.of(context).padding.bottom;
-
-                      final RenderBox renderBox =
-                          context.findRenderObject() as RenderBox;
-
-                      final biggerBottomPadding = bottomPadding + menuHeight;
-                      final top = (height - _position.dy) >= biggerBottomPadding
-                          ? _position.dy
-                          : _position.dy -
-                              (biggerBottomPadding - bottomPadding);
-
-                      final left = _position.dx;
-                      final right = _position.dx + renderBox.size.width;
-
-                      showMenu(
-                        context: context,
-                        position: RelativeRect.fromLTRB(
-                          left,
-                          top,
-                          right,
-                          0,
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        items: itemsList,
-                      );
-                    },
-                    onTapDown: (details) => setState(() {
-                      _position = details.globalPosition;
-                    }),
-                    onTap: () {
-                      Feedback.forTap(context);
-                      if (state.selectedPosts.isNotEmpty) {
-                        Feedback.forLongPress(context);
+                  final itemsList = [
+                    popUpItem(
+                      text: 'Favorite',
+                      icon: MdiIcons.heart,
+                      iconColor: isFavorite ? Colors.pinkAccent : null,
+                      onTap: () {
+                        context
+                            .read<DanbooruAuthCubit>()
+                            .toggleFavoritePost(post);
+                      },
+                    ),
+                    popUpItem(
+                      text: 'Select',
+                      icon: isSelected
+                          ? Icons.check_box
+                          : Icons.check_box_outlined,
+                      onTap: () {
                         galleryGridCubit.selectPost(post.id);
-                        return;
-                      }
-                      AutoRouter.of(context).push(
-                        PostDetailRoute(
-                          initialIndex: widget.index,
-                          galleryGridCubit: galleryGridCubit,
-                        ),
-                      );
-                    },
-                    child: Hero(
-                      tag: "${state.uniqueKey}-${post.id}",
-                      child: Padding(
-                        padding: const EdgeInsets.all(5),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(
-                            settingState.gridRoundedCorners ? 10 : 0,
+                      },
+                    ),
+                    popUpItem(
+                      text: 'Share',
+                      icon: Icons.share_outlined,
+                      onTap: () {
+                        locator<ImageDownloaderService>()
+                            .downloadShareImage([post]);
+                      },
+                    ),
+                    popUpItem(
+                      text: 'Download',
+                      icon: Icons.save_alt_outlined,
+                      onTap: () {
+                        locator<ImageDownloaderService>()
+                            .downloadImages([post]);
+                      },
+                    ),
+                  ];
+
+                  final menuHeight = itemsList.fold(
+                    0.0,
+                    (previousValue, element) =>
+                        (previousValue) + element.height,
+                  );
+                  final height = MediaQuery.of(context).size.height;
+                  final bottomPadding = View.of(context).padding.bottom;
+
+                  final RenderBox renderBox =
+                      context.findRenderObject() as RenderBox;
+
+                  final biggerBottomPadding = bottomPadding + menuHeight;
+                  final top = (height - _position.dy) >= biggerBottomPadding
+                      ? _position.dy
+                      : _position.dy - (biggerBottomPadding - bottomPadding);
+
+                  final left = _position.dx;
+                  final right = _position.dx + renderBox.size.width;
+
+                  showMenu(
+                    context: context,
+                    position: RelativeRect.fromLTRB(
+                      left,
+                      top,
+                      right,
+                      0,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    items: itemsList,
+                  );
+                },
+                onTapDown: (details) => setState(() {
+                  _position = details.globalPosition;
+                }),
+                onTap: () {
+                  Feedback.forTap(context);
+                  if (state.selectedPosts.isNotEmpty) {
+                    Feedback.forLongPress(context);
+                    galleryGridCubit.selectPost(post.id);
+                    return;
+                  }
+                  AutoRouter.of(context).push(
+                    PostDetailRoute(
+                      initialIndex: widget.index,
+                      galleryGridCubit: galleryGridCubit,
+                    ),
+                  );
+                },
+                child: Hero(
+                  tag: "${state.uniqueKey}-${post.id}",
+                  child: Padding(
+                    padding: const EdgeInsets.all(5),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(
+                        settingState.gridRoundedCorners ? 10 : 0,
+                      ),
+                      child: Stack(
+                        fit: StackFit.expand,
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Theme.of(context).primaryColor,
+                                width: isSelected ? 6 : 0,
+                              ),
+                            ),
+                            child: DanbooruImage(
+                              width: widget.width,
+                              height: height,
+                              compressionRatio: 0.9,
+                              imageUrl:
+                                  post.getImage(settingState.gridImageQuality),
+                              fit: BoxFit.cover,
+                              loadStateChanged: (ExtendedImageState state) {
+                                switch (state.extendedImageLoadState) {
+                                  case LoadState.loading:
+                                    return getShimmer(height, widget.width);
+                                  case LoadState.completed:
+                                    return null;
+                                  case LoadState.failed:
+                                    return const Icon(Icons.error);
+                                }
+                              },
+                            ),
                           ),
-                          child: Stack(
-                            fit: StackFit.expand,
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: Theme.of(context).primaryColor,
-                                    width: isSelected ? 6 : 0,
-                                  ),
-                                ),
-                                child: DanbooruImage(
-                                  imageUrl: post
-                                      .getImage(settingState.gridImageQuality),
-                                  fit: BoxFit.cover,
-                                  loadStateChanged: (ExtendedImageState state) {
-                                    switch (state.extendedImageLoadState) {
-                                      case LoadState.loading:
-                                        return getShimmer(height, widget.width);
-                                      case LoadState.completed:
-                                        return null;
-                                      case LoadState.failed:
-                                        return const Icon(Icons.error);
-                                    }
-                                  },
+                          Positioned(
+                            bottom: 0,
+                            right: 0,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.black.withOpacity(0.6),
+                                borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(5),
                                 ),
                               ),
-                              Positioned(
-                                bottom: 0,
-                                right: 0,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.black.withOpacity(0.6),
-                                    borderRadius: const BorderRadius.only(
-                                      topLeft: Radius.circular(5),
+                              padding: const EdgeInsets.all(1),
+                              child: Center(
+                                child: Row(
+                                  children: [
+                                    if (isFavorite)
+                                      Icon(
+                                        MdiIcons.heart,
+                                        size: 16,
+                                        color: Colors.pinkAccent,
+                                      ),
+                                    Icon(
+                                      post.isVideo
+                                          ? Icons.play_arrow_rounded
+                                          : Icons.image,
+                                      size: 18,
+                                      color: Colors.white,
                                     ),
-                                  ),
-                                  padding: const EdgeInsets.all(1),
-                                  child: Center(
-                                    child: Row(
-                                      children: [
-                                        if (isFavorite)
-                                          Icon(
-                                            MdiIcons.heart,
-                                            size: 16,
-                                            color: Colors.pinkAccent,
-                                          ),
-                                        Icon(
-                                          post.isVideo
-                                              ? Icons.play_arrow_rounded
-                                              : Icons.image,
-                                          size: 18,
-                                          color: Colors.white,
-                                        ),
-                                        if (post.haveAudio)
-                                          const Icon(
-                                            Icons.volume_up,
-                                            size: 15,
-                                            color: Colors.white,
-                                          ),
-                                      ],
-                                    ),
-                                  ),
+                                    if (post.haveAudio)
+                                      const Icon(
+                                        Icons.volume_up,
+                                        size: 15,
+                                        color: Colors.white,
+                                      ),
+                                  ],
                                 ),
                               ),
-                            ],
+                            ),
                           ),
-                        ),
+                        ],
                       ),
                     ),
                   ),
-                );
-              },
+                ),
+              ),
             );
           },
         );

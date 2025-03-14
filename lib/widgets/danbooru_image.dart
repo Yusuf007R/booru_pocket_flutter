@@ -8,6 +8,9 @@ class DanbooruImage extends StatelessWidget {
   final bool cache;
   final Widget? Function(ExtendedImageState)? loadStateChanged;
   final BoxFit? fit;
+  final double? width;
+  final double? height;
+  final double compressionRatio;
 
   const DanbooruImage({
     super.key,
@@ -15,6 +18,9 @@ class DanbooruImage extends StatelessWidget {
     this.cache = true,
     this.loadStateChanged,
     this.fit,
+    this.width,
+    this.height,
+    this.compressionRatio = 1.0,
   });
 
   @override
@@ -25,8 +31,13 @@ class DanbooruImage extends StatelessWidget {
         'user-agent': context.read<DanbooruAuthCubit>().userAgentHeader(),
       },
       cache: cache,
-      loadStateChanged: loadStateChanged,
+      loadStateChanged: loadStateChanged ?? (state) => const SizedBox(),
       fit: fit,
+      compressionRatio: compressionRatio,
+      cacheHeight: height?.toInt(),
+      cacheWidth: width?.toInt(),
+      width: width,
+      height: height,
     );
   }
 }

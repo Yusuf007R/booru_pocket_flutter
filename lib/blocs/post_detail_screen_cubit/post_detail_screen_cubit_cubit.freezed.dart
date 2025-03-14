@@ -23,7 +23,9 @@ mixin _$PostDetailScreenCubitState {
   int get currentPostIndex => throw _privateConstructorUsedError;
   bool get showMenu => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PostDetailScreenCubitState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PostDetailScreenCubitStateCopyWith<PostDetailScreenCubitState>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -54,6 +56,8 @@ class _$PostDetailScreenCubitStateCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PostDetailScreenCubitState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -115,6 +119,8 @@ class __$$PostDetailScreenCubitStateImplCopyWithImpl<$Res>
       $Res Function(_$PostDetailScreenCubitStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PostDetailScreenCubitState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -220,7 +226,9 @@ class _$PostDetailScreenCubitStateImpl implements _PostDetailScreenCubitState {
       currentPostIndex,
       showMenu);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PostDetailScreenCubitState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PostDetailScreenCubitStateImplCopyWith<_$PostDetailScreenCubitStateImpl>
@@ -237,7 +245,8 @@ abstract class _PostDetailScreenCubitState
       required final int currentPostIndex,
       final bool showMenu}) = _$PostDetailScreenCubitStateImpl;
 
-  @override // @Default(false) bool willPop,
+// @Default(false) bool willPop,
+  @override
   Map<int, bool> get maxQuality;
   @override
   bool get loading;
@@ -247,8 +256,11 @@ abstract class _PostDetailScreenCubitState
   int get currentPostIndex;
   @override
   bool get showMenu;
+
+  /// Create a copy of PostDetailScreenCubitState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PostDetailScreenCubitStateImplCopyWith<_$PostDetailScreenCubitStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

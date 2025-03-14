@@ -26,8 +26,12 @@ mixin _$DatePostScreenNavbarState {
   DateTime get date => throw _privateConstructorUsedError;
   DatePostType get type => throw _privateConstructorUsedError;
 
+  /// Serializes this DatePostScreenNavbarState to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of DatePostScreenNavbarState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DatePostScreenNavbarStateCopyWith<DatePostScreenNavbarState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -58,6 +62,8 @@ class _$DatePostScreenNavbarStateCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DatePostScreenNavbarState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -86,6 +92,8 @@ class _$DatePostScreenNavbarStateCopyWithImpl<$Res,
     ) as $Val);
   }
 
+  /// Create a copy of DatePostScreenNavbarState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $QueryParamsCopyWith<$Res> get queryParams {
@@ -124,6 +132,8 @@ class __$$DatePostScreenNavbarStateImplCopyWithImpl<$Res>
       $Res Function(_$DatePostScreenNavbarStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DatePostScreenNavbarState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -192,11 +202,13 @@ class _$DatePostScreenNavbarStateImpl implements _DatePostScreenNavbarState {
             (identical(other.type, type) || other.type == type));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, queryParams, scale, date, type);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DatePostScreenNavbarState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DatePostScreenNavbarStateImplCopyWith<_$DatePostScreenNavbarStateImpl>
@@ -229,8 +241,11 @@ abstract class _DatePostScreenNavbarState implements DatePostScreenNavbarState {
   DateTime get date;
   @override
   DatePostType get type;
+
+  /// Create a copy of DatePostScreenNavbarState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DatePostScreenNavbarStateImplCopyWith<_$DatePostScreenNavbarStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

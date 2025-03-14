@@ -1,11 +1,11 @@
-import 'package:bloc/bloc.dart';
 import 'package:BooruPocket/blocs/settings_cubit/settings_cubit.dart';
 import 'package:BooruPocket/models/api/post/post.dart';
-import 'package:BooruPocket/models/api/queryparams/queryparams.dart';
+import 'package:BooruPocket/models/api/query_params/query_params.dart';
+import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'query_params_cubit_state.dart';
 part 'query_params_cubit.freezed.dart';
+part 'query_params_cubit_state.dart';
 
 class QueryParamsCubit extends Cubit<QueryParamsCubitState> {
   SettingsCubit settingsCubit;

@@ -21,68 +21,6 @@ import 'package:BooruPocket/screens/settings_screen.dart' as _i6;
 import 'package:BooruPocket/screens/user_profile_screen.dart' as _i7;
 import 'package:flutter/material.dart' as _i9;
 
-abstract class $AppRouter extends _i8.RootStackRouter {
-  $AppRouter({super.navigatorKey});
-
-  @override
-  final Map<String, _i8.PageFactory> pagesMap = {
-    HomeRoute.name: (routeData) {
-      return _i8.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i1.HomeScreen(),
-      );
-    },
-    LoginRoute.name: (routeData) {
-      return _i8.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i2.LoginScreen(),
-      );
-    },
-    PostDetailRoute.name: (routeData) {
-      final args = routeData.argsAs<PostDetailRouteArgs>();
-      return _i8.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i3.PostDetailScreen(
-          key: args.key,
-          galleryGridCubit: args.galleryGridCubit,
-          initialIndex: args.initialIndex,
-        ),
-      );
-    },
-    PostRouteWrapper.name: (routeData) {
-      final args = routeData.argsAs<PostRouteWrapperArgs>(
-          orElse: () => const PostRouteWrapperArgs());
-      return _i8.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i4.PostRouteWrapper(
-          key: args.key,
-          inputTextValue: args.inputTextValue,
-          postScreenType: args.postScreenType,
-          strictTag: args.strictTag,
-        ),
-      );
-    },
-    PostRoute.name: (routeData) {
-      return _i8.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i5.PostScreen(),
-      );
-    },
-    SettingsRoute.name: (routeData) {
-      return _i8.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i6.SettingsScreen(),
-      );
-    },
-    UserProfileRoute.name: (routeData) {
-      return _i8.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i7.UserProfileScreen(),
-      );
-    },
-  };
-}
-
 /// generated route for
 /// [_i1.HomeScreen]
 class HomeRoute extends _i8.PageRouteInfo<void> {
@@ -94,7 +32,12 @@ class HomeRoute extends _i8.PageRouteInfo<void> {
 
   static const String name = 'HomeRoute';
 
-  static const _i8.PageInfo<void> page = _i8.PageInfo<void>(name);
+  static _i8.PageInfo page = _i8.PageInfo(
+    name,
+    builder: (data) {
+      return const _i1.HomeScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -108,7 +51,12 @@ class LoginRoute extends _i8.PageRouteInfo<void> {
 
   static const String name = 'LoginRoute';
 
-  static const _i8.PageInfo<void> page = _i8.PageInfo<void>(name);
+  static _i8.PageInfo page = _i8.PageInfo(
+    name,
+    builder: (data) {
+      return const _i2.LoginScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -131,8 +79,17 @@ class PostDetailRoute extends _i8.PageRouteInfo<PostDetailRouteArgs> {
 
   static const String name = 'PostDetailRoute';
 
-  static const _i8.PageInfo<PostDetailRouteArgs> page =
-      _i8.PageInfo<PostDetailRouteArgs>(name);
+  static _i8.PageInfo page = _i8.PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<PostDetailRouteArgs>();
+      return _i3.PostDetailScreen(
+        key: args.key,
+        galleryGridCubit: args.galleryGridCubit,
+        initialIndex: args.initialIndex,
+      );
+    },
+  );
 }
 
 class PostDetailRouteArgs {
@@ -176,8 +133,19 @@ class PostRouteWrapper extends _i8.PageRouteInfo<PostRouteWrapperArgs> {
 
   static const String name = 'PostRouteWrapper';
 
-  static const _i8.PageInfo<PostRouteWrapperArgs> page =
-      _i8.PageInfo<PostRouteWrapperArgs>(name);
+  static _i8.PageInfo page = _i8.PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<PostRouteWrapperArgs>(
+          orElse: () => const PostRouteWrapperArgs());
+      return _i4.PostRouteWrapper(
+        key: args.key,
+        inputTextValue: args.inputTextValue,
+        postScreenType: args.postScreenType,
+        strictTag: args.strictTag,
+      );
+    },
+  );
 }
 
 class PostRouteWrapperArgs {
@@ -213,7 +181,12 @@ class PostRoute extends _i8.PageRouteInfo<void> {
 
   static const String name = 'PostRoute';
 
-  static const _i8.PageInfo<void> page = _i8.PageInfo<void>(name);
+  static _i8.PageInfo page = _i8.PageInfo(
+    name,
+    builder: (data) {
+      return const _i5.PostScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -227,7 +200,12 @@ class SettingsRoute extends _i8.PageRouteInfo<void> {
 
   static const String name = 'SettingsRoute';
 
-  static const _i8.PageInfo<void> page = _i8.PageInfo<void>(name);
+  static _i8.PageInfo page = _i8.PageInfo(
+    name,
+    builder: (data) {
+      return const _i6.SettingsScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -241,5 +219,10 @@ class UserProfileRoute extends _i8.PageRouteInfo<void> {
 
   static const String name = 'UserProfileRoute';
 
-  static const _i8.PageInfo<void> page = _i8.PageInfo<void>(name);
+  static _i8.PageInfo page = _i8.PageInfo(
+    name,
+    builder: (data) {
+      return const _i7.UserProfileScreen();
+    },
+  );
 }

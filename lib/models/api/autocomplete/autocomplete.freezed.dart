@@ -25,8 +25,12 @@ mixin _$AutoComplete {
   @JsonKey(name: 'post_count')
   int get postCount => throw _privateConstructorUsedError;
 
+  /// Serializes this AutoComplete to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AutoComplete
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AutoCompleteCopyWith<AutoComplete> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -51,6 +55,8 @@ class _$AutoCompleteCopyWithImpl<$Res, $Val extends AutoComplete>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AutoComplete
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -95,6 +101,8 @@ class __$$AutoCompleteImplCopyWithImpl<$Res>
       _$AutoCompleteImpl _value, $Res Function(_$AutoCompleteImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AutoComplete
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -155,11 +163,13 @@ class _$AutoCompleteImpl extends _AutoComplete {
                 other.postCount == postCount));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, label, value, postCount);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AutoComplete
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AutoCompleteImplCopyWith<_$AutoCompleteImpl> get copyWith =>
@@ -190,8 +200,11 @@ abstract class _AutoComplete extends AutoComplete {
   @override
   @JsonKey(name: 'post_count')
   int get postCount;
+
+  /// Create a copy of AutoComplete
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AutoCompleteImplCopyWith<_$AutoCompleteImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

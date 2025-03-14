@@ -39,7 +39,7 @@ class PostDetailAppBar extends StatelessWidget implements PreferredSizeWidget {
                 backgroundColor: Colors.transparent,
                 leading: IconButton(
                   onPressed: () => {
-                    AutoRouter.of(context).pop(),
+                    AutoRouter.of(context).maybePop(),
                   },
                   icon: const Icon(Icons.arrow_back, color: Colors.white),
                 ),

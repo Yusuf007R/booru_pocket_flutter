@@ -55,8 +55,12 @@ mixin _$Post {
   List<PostVariants> get postVariants => throw _privateConstructorUsedError;
   String? get video => throw _privateConstructorUsedError;
 
+  /// Serializes this Post to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Post
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PostCopyWith<Post> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -103,6 +107,8 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Post
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -249,6 +255,8 @@ class __$$PostImplCopyWithImpl<$Res>
   __$$PostImplCopyWithImpl(_$PostImpl _value, $Res Function(_$PostImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Post
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -524,7 +532,7 @@ class _$PostImpl extends _Post {
             (identical(other.video, video) || other.video == video));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
@@ -549,7 +557,9 @@ class _$PostImpl extends _Post {
         video
       ]);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Post
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PostImplCopyWith<_$PostImpl> get copyWith =>
@@ -647,8 +657,11 @@ abstract class _Post extends Post {
   List<PostVariants> get postVariants;
   @override
   String? get video;
+
+  /// Create a copy of Post
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PostImplCopyWith<_$PostImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -667,8 +680,12 @@ mixin _$PostVariants {
   @JsonKey(name: 'file_ext')
   String get fileExt => throw _privateConstructorUsedError;
 
+  /// Serializes this PostVariants to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PostVariants
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PostVariantsCopyWith<PostVariants> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -697,6 +714,8 @@ class _$PostVariantsCopyWithImpl<$Res, $Val extends PostVariants>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PostVariants
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -755,6 +774,8 @@ class __$$PostVariantsImplCopyWithImpl<$Res>
       _$PostVariantsImpl _value, $Res Function(_$PostVariantsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PostVariants
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -833,12 +854,14 @@ class _$PostVariantsImpl extends _PostVariants {
             (identical(other.fileExt, fileExt) || other.fileExt == fileExt));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, type, url, width, height, fileExt);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PostVariants
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PostVariantsImplCopyWith<_$PostVariantsImpl> get copyWith =>
@@ -878,8 +901,11 @@ abstract class _PostVariants extends PostVariants {
   @override
   @JsonKey(name: 'file_ext')
   String get fileExt;
+
+  /// Create a copy of PostVariants
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PostVariantsImplCopyWith<_$PostVariantsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

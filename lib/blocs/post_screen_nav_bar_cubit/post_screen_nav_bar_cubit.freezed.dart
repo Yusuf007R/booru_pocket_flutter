@@ -24,8 +24,12 @@ mixin _$PostScreenNavBarState {
   List<AutoComplete> get autoCompletes => throw _privateConstructorUsedError;
   QueryParams get queryParams => throw _privateConstructorUsedError;
 
+  /// Serializes this PostScreenNavBarState to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PostScreenNavBarState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PostScreenNavBarStateCopyWith<PostScreenNavBarState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -52,6 +56,8 @@ class _$PostScreenNavBarStateCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PostScreenNavBarState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -70,6 +76,8 @@ class _$PostScreenNavBarStateCopyWithImpl<$Res,
     ) as $Val);
   }
 
+  /// Create a copy of PostScreenNavBarState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $QueryParamsCopyWith<$Res> get queryParams {
@@ -103,6 +111,8 @@ class __$$PostScreenNavBarStateImplCopyWithImpl<$Res>
       $Res Function(_$PostScreenNavBarStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PostScreenNavBarState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -162,12 +172,14 @@ class _$PostScreenNavBarStateImpl implements _PostScreenNavBarState {
                 other.queryParams == queryParams));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType,
       const DeepCollectionEquality().hash(_autoCompletes), queryParams);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PostScreenNavBarState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PostScreenNavBarStateImplCopyWith<_$PostScreenNavBarStateImpl>
@@ -194,8 +206,11 @@ abstract class _PostScreenNavBarState implements PostScreenNavBarState {
   List<AutoComplete> get autoCompletes;
   @override
   QueryParams get queryParams;
+
+  /// Create a copy of PostScreenNavBarState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PostScreenNavBarStateImplCopyWith<_$PostScreenNavBarStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

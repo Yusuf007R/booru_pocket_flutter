@@ -64,7 +64,7 @@ class UserProfileScreen extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             leading: IconButton(
-              onPressed: () => AutoRouter.of(context).pop(),
+              onPressed: () => AutoRouter.of(context).maybePop(),
               icon: const Icon(Icons.arrow_back),
             ),
             title: const Text('User Profile'),

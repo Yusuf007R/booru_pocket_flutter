@@ -9,12 +9,12 @@ part of 'user.dart';
 _$UserAuthenticatedImpl _$$UserAuthenticatedImplFromJson(
         Map<String, dynamic> json) =>
     _$UserAuthenticatedImpl(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       name: json['name'] as String,
-      level: json['level'] as int,
+      level: (json['level'] as num).toInt(),
       blackListedTags: _fromJson(json['blacklisted_tags'] as String),
-      favoriteCount: json['favorite_count'] as int,
-      tagLimit: json['tag_query_limit'] as int? ?? 2,
+      favoriteCount: (json['favorite_count'] as num).toInt(),
+      tagLimit: (json['tag_query_limit'] as num?)?.toInt() ?? 2,
       $type: json['runtimeType'] as String?,
     );
 

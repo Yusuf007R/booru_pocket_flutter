@@ -99,6 +99,8 @@ mixin _$User {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  /// Serializes this User to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 }
 
@@ -117,6 +119,9 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of User
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -143,6 +148,8 @@ class __$$UserAuthenticatedImplCopyWithImpl<$Res>
       $Res Function(_$UserAuthenticatedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of User
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -247,7 +254,7 @@ class _$UserAuthenticatedImpl extends UserAuthenticated {
                 other.tagLimit == tagLimit));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -258,7 +265,9 @@ class _$UserAuthenticatedImpl extends UserAuthenticated {
       favoriteCount,
       tagLimit);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of User
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UserAuthenticatedImplCopyWith<_$UserAuthenticatedImpl> get copyWith =>
@@ -392,7 +401,10 @@ abstract class UserAuthenticated extends User {
   int get favoriteCount;
   @JsonKey(name: 'tag_query_limit', defaultValue: 2)
   int get tagLimit;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of User
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UserAuthenticatedImplCopyWith<_$UserAuthenticatedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -411,6 +423,9 @@ class __$$UserAuthenticatingImplCopyWithImpl<$Res>
   __$$UserAuthenticatingImplCopyWithImpl(_$UserAuthenticatingImpl _value,
       $Res Function(_$UserAuthenticatingImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of User
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -437,7 +452,7 @@ class _$UserAuthenticatingImpl extends UserAuthenticating {
         (other.runtimeType == runtimeType && other is _$UserAuthenticatingImpl);
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => runtimeType.hashCode;
 
@@ -563,6 +578,9 @@ class __$$UserNoAuthenticatedImplCopyWithImpl<$Res>
   __$$UserNoAuthenticatedImplCopyWithImpl(_$UserNoAuthenticatedImpl _value,
       $Res Function(_$UserNoAuthenticatedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of User
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -590,7 +608,7 @@ class _$UserNoAuthenticatedImpl extends UserNoAuthenticated {
             other is _$UserNoAuthenticatedImpl);
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => runtimeType.hashCode;
 

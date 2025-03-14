@@ -24,6 +24,8 @@ PostVariantType _postVariantTypeFromJson(
       return PostVariantType.x360;
     case '720x720':
       return PostVariantType.x720;
+    case 'sample':
+      return PostVariantType.sample;
     case 'original':
       return PostVariantType.original;
 
@@ -61,6 +63,16 @@ class Post with _$Post {
 
   late final bool haveAudio = isVideo && meta.contains('sound');
 
+  final Map<String, String> memo = {};
+
+  late final String imgHigh = getVariantUrl(PostVariantType.sample);
+
+  late final String imgLow = getVariantUrl(PostVariantType.x360);
+
+  late final String imgMid = getVariantUrl(PostVariantType.x720);
+
+  late final String imgOriginal = getVariantUrl(PostVariantType.original);
+
   factory Post({
     required int id,
     @JsonKey(name: 'tag_string_general', fromJson: _tagsArrayFromJson)
@@ -92,6 +104,43 @@ class Post with _$Post {
   factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
 
   Post._();
+
+  String getImage(ImageQuality quality) {
+    final cacheKey = '$id-$quality';
+
+    return memo.putIfAbsent(cacheKey, () {
+      switch (quality) {
+        case ImageQuality.low:
+          return imgLow;
+        case ImageQuality.mid:
+          return imgMid;
+        case ImageQuality.high:
+          return imgHigh;
+        case ImageQuality.max:
+          return imgOriginal;
+        default:
+          return imgOriginal;
+      }
+    });
+  }
+
+  String getVariantUrl(PostVariantType type) {
+    final cacheKey = '$id-$type';
+    return memo.putIfAbsent(
+      cacheKey,
+      () {
+        final variant = postVariants.firstWhere(
+          (element) => element.type == type,
+          orElse: () => postVariants.firstWhere(
+            (element) => element.type == PostVariantType.x720,
+            orElse: () => postVariants.last,
+          ),
+        );
+
+        return variant.url;
+      },
+    );
+  }
 }
 
 enum PostRating { general, sensitive, questionable, explicit, all, unknown }
@@ -109,47 +158,7 @@ class PostVariants with _$PostVariants {
   factory PostVariants.fromJson(Map<String, dynamic> json) =>
       _$PostVariantsFromJson(json);
 
-  PostVariants._();
+  const PostVariants._();
 }
 
-enum PostVariantType { x180, x360, x720, original }
-
-extension PostExtension on Post {
-  static Map<String, dynamic> memo = {};
-
-  String getImage(ImageQuality quality) {
-    final cacheKey = '$id-${quality.toString()}';
-    final cachedUrl = memo[cacheKey] as String?;
-
-    if (cachedUrl != null) {
-      return cachedUrl;
-    }
-
-    late final String url;
-    switch (quality) {
-      case ImageQuality.high:
-        url = getVariantUrl(PostVariantType.x720);
-        break;
-      case ImageQuality.low:
-        url = getVariantUrl(PostVariantType.x360);
-        break;
-      case ImageQuality.max:
-        url = getVariantUrl(PostVariantType.original);
-        break;
-      default:
-        url = getVariantUrl(PostVariantType.x360);
-        break;
-    }
-    memo[cacheKey] = url;
-    return url;
-  }
-
-  String getVariantUrl(PostVariantType type) {
-    final variant = postVariants.firstWhere(
-      (element) => element.type == type,
-      orElse: () => postVariants.first,
-    );
-    final variantUrl = variant.url;
-    return variantUrl;
-  }
-}
+enum PostVariantType { x180, x360, x720, original, sample }

@@ -25,8 +25,8 @@ _$SettingsStateImpl _$$SettingsStateImplFromJson(Map<String, dynamic> json) =>
           ImageQuality.high,
       gridType: $enumDecodeNullable(_$GridTypeEnumMap, json['gridType']) ??
           GridType.waterFall,
-      gridColumns: json['gridColumns'] as int? ?? 2,
-      pageLimit: json['pageLimit'] as int? ?? 20,
+      gridColumns: (json['gridColumns'] as num?)?.toInt() ?? 2,
+      pageLimit: (json['pageLimit'] as num?)?.toInt() ?? 20,
     );
 
 Map<String, dynamic> _$$SettingsStateImplToJson(_$SettingsStateImpl instance) =>
@@ -60,6 +60,7 @@ const _$PostRatingEnumMap = {
 
 const _$ImageQualityEnumMap = {
   ImageQuality.low: 'low',
+  ImageQuality.mid: 'mid',
   ImageQuality.high: 'high',
   ImageQuality.max: 'max',
 };

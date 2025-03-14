@@ -43,9 +43,9 @@ class _PostScreenState extends State<PostScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<SettingsCubit, SettingsState>(
-      // listenWhen: (previous, current) =>
-      //     previous.rating != current.rating ||
-      //     previous.pageLimit != current.pageLimit,
+      listenWhen: (previous, current) =>
+          previous.rating != current.rating ||
+          previous.pageLimit != current.pageLimit,
       listener: (context, state) {
         context.read<GalleryGridCubit>().fetchPosts(shouldReset: true);
       },

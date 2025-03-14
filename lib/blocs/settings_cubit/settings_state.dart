@@ -1,8 +1,8 @@
 part of 'settings_cubit.dart';
 
-enum ImageQuality { low, high, max }
-
 enum GridType { square, waterFall }
+
+enum ImageQuality { low, mid, high, max }
 
 @freezed
 class SettingsState with _$SettingsState {

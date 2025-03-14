@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:BooruPocket/blocs/post_screen_nav_bar_cubit/post_screen_nav_bar_cubit.dart';
 import 'package:BooruPocket/blocs/query_params_cubit/query_params_cubit.dart';
 import 'package:BooruPocket/models/api/autocomplete/autocomplete.dart';
-import 'package:BooruPocket/models/api/queryparams/queryparams.dart';
+import 'package:BooruPocket/models/api/query_params/query_params.dart';
 import 'package:BooruPocket/utils/string_extentions.dart';
 import 'package:BooruPocket/widgets/nav_bar_skeleton.dart';
 import 'package:BooruPocket/widgets/tag.dart';
@@ -51,6 +51,7 @@ class SearchInputState extends State<SearchInput> {
       cursorColor: Colors.white,
       decoration: const InputDecoration(
         hintText: 'Search for tags...',
+        contentPadding: EdgeInsets.fromLTRB(2, 0, 0, 3),
         hintStyle: TextStyle(
           color: Colors.white,
           fontSize: 16,
@@ -104,6 +105,7 @@ class SearchInputState extends State<SearchInput> {
       builder: (context) =>
           BlocBuilder<PostScreenNavbarCubit, PostScreenNavBarState>(
         builder: (context, state) {
+          if (state.autoCompletes.isEmpty) return const SizedBox.shrink();
           return Positioned(
             left: 10,
             top: offset.dy + size.height,
@@ -161,8 +163,8 @@ class _PostScreenNavBarState extends State<PostScreenNavBar> {
 
   @override
   Widget build(BuildContext context) {
-    final bool isPushedScreen =
-        AutoRouter.of(context).routeData.name == 'PostRoute';
+    final router = AutoRouter.of(context);
+    final isPushedScreen = router.routeData.meta['isPushedScreen'] == true;
 
     return NavBarSkeleton(
       leftSideWidgets: [
@@ -172,7 +174,7 @@ class _PostScreenNavBarState extends State<PostScreenNavBar> {
             onTap: () {
               Feedback.forTap(context);
               if (isPushedScreen) {
-                AutoRouter.of(context).pop();
+                AutoRouter.of(context).maybePop();
                 return;
               }
               context.read<ScaffoldState>().openDrawer();
@@ -236,7 +238,7 @@ class _PostScreenNavBarState extends State<PostScreenNavBar> {
                   },
                   value: expandTag
                       ? state.strictTag
-                      : state.strictTag.overFlowElipsis(10),
+                      : state.strictTag.overflowEllipsis(10),
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                 ),
               );
